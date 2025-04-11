@@ -1,0 +1,190 @@
+// data/roContent.ts
+
+export interface ROContentItem {
+  id: number;
+  slug: string;
+  title: string;
+  button: {
+    text: string;
+    link: string;
+  };
+  sections: {
+    heading: string;
+    paragraphs: string[];
+    highlightedLink: {
+      url: string;
+      text: string;
+    };
+    image: {
+      src: string;
+      alt: string;
+    };
+  }[];
+}
+
+export const roContent: ROContentItem[] = [
+  {
+    id: 1,
+    slug: "ro-services",
+    title: "Classic RO Services",
+    button: {
+      text: "Contact Us",
+      link: "/contact-us",
+    },
+    sections: [
+      {
+        heading: "Best RO Services Near Me in Greater Noida West",
+        paragraphs: [
+          "One of the most essential aspects of our health is pure and sustainable water. For that",
+          "As the human body is about 60-70% water, clean water is crucial.",
+        ],
+        highlightedLink: {
+          url: "https://classicrosolutions.com/",
+          text: "Classic RO Solutions",
+        },
+        image: {
+          src: "https://classicrosolutions.com/wp-content/uploads/2024/04/ro-service-example.jpg",
+          alt: "Classic RO Services",
+        },
+      },
+      {
+        heading: "Why Choose Classic RO?",
+        paragraphs: [
+          "We are committed to delivering clean, purified water through innovative technology and prompt service.",
+          "Thousands of families rely on us for daily healthy hydration.",
+        ],
+        highlightedLink: {
+          url: "https://classicrosolutions.com/about",
+          text: "Learn More About Us",
+        },
+        image: {
+          src: "https://classicrosolutions.com/wp-content/uploads/2024/04/ro-about.jpg",
+          alt: "RO Team at Work",
+        },
+      },
+    ],
+  },
+  {
+    id: 2,
+    slug: "ro-repair",
+    title: "RO Repair Services",
+    button: {
+      text: "Book a Technician",
+      link: "/book-repair",
+    },
+    sections: [
+      {
+        heading: "Instant RO Repair Near You",
+        paragraphs: [
+          "Facing issues with your RO system? Classic RO offers fast and reliable repair services at your doorstep.",
+          "We repair all major RO brands with genuine parts and expert hands.",
+        ],
+        highlightedLink: {
+          url: "https://classicrosolutions.com/ro-repair",
+          text: "Schedule Repair",
+        },
+        image: {
+          src: "https://classicrosolutions.com/wp-content/uploads/2024/04/ro-repair.jpg",
+          alt: "RO Technician Repairing Unit",
+        },
+      },
+      {
+        heading: "Experienced RO Experts",
+        paragraphs: [
+          "Our technicians are highly trained and experienced in diagnosing and fixing RO issues quickly.",
+          "We provide quality service with a warranty on repairs.",
+        ],
+        highlightedLink: {
+          url: "https://classicrosolutions.com/testimonials",
+          text: "See What Customers Say",
+        },
+        image: {
+          src: "https://classicrosolutions.com/wp-content/uploads/2024/04/ro-service-man.jpg",
+          alt: "RO Repair in Progress",
+        },
+      },
+    ],
+  },
+  {
+    id: 3,
+    slug: "amc-plans",
+    title: "AMC Plans for RO",
+    button: {
+      text: "Explore AMC Plans",
+      link: "/amc-plans",
+    },
+    sections: [
+      {
+        heading: "Affordable AMC Plans",
+        paragraphs: [
+          "With Classic RO’s Annual Maintenance Contracts, enjoy peace of mind all year round.",
+          "We ensure timely service, filter changes, and free repairs under your plan.",
+        ],
+        highlightedLink: {
+          url: "https://classicrosolutions.com/amc",
+          text: "Know More",
+        },
+        image: {
+          src: "https://classicrosolutions.com/wp-content/uploads/2024/04/ro-amc.jpg",
+          alt: "AMC Plan Coverage",
+        },
+      },
+      {
+        heading: "Why Opt for AMC?",
+        paragraphs: [
+          "Save money and avoid emergencies with our value-packed AMC options.",
+          "Choose from basic to premium plans tailored to your usage.",
+        ],
+        highlightedLink: {
+          url: "https://classicrosolutions.com/pricing",
+          text: "Check Plan Pricing",
+        },
+        image: {
+          src: "https://classicrosolutions.com/wp-content/uploads/2024/04/amc-benefits.jpg",
+          alt: "AMC Comparison Chart",
+        },
+      },
+    ],
+  },
+  {
+    id: 4,
+    slug: "livpure-service",
+    title: "Livpure RO Service",
+    button: {
+      text: "Service Your Livpure",
+      link: "/livpure-service",
+    },
+    sections: [
+      {
+        heading: "Dedicated Livpure RO Support",
+        paragraphs: [
+          "Our team specializes in servicing Livpure RO systems using genuine parts and trained professionals.",
+          "We maintain your system for clean, fresh water at all times.",
+        ],
+        highlightedLink: {
+          url: "https://classicrosolutions.com/livpure",
+          text: "Livpure RO Services",
+        },
+        image: {
+          src: "https://classicrosolutions.com/wp-content/uploads/2024/04/livpure-ro.jpg",
+          alt: "Livpure RO Maintenance",
+        },
+      },
+      {
+        heading: "Trust Classic RO for Livpure",
+        paragraphs: [
+          "From filter replacements to full system checks, we’ve got Livpure covered.",
+          "Quick response, honest pricing, and top service quality guaranteed.",
+        ],
+        highlightedLink: {
+          url: "https://classicrosolutions.com/contact-us",
+          text: "Contact for Livpure Help",
+        },
+        image: {
+          src: "https://classicrosolutions.com/wp-content/uploads/2024/04/livpure-support.jpg",
+          alt: "Livpure RO Technician",
+        },
+      },
+    ],
+  },
+];
