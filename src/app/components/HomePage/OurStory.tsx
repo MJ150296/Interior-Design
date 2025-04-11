@@ -7,7 +7,7 @@ const OurStory: React.FC = () => {
       {/* Text Section */}
       <div className="md:w-1/2 text-center md:text-left mb-6 md:mb-0 md:border-r-2 border-gray-700">
         <h2 className="text-4xl font-bold mb-4 text-blue-500 hover:text-blue-600">
-          Our Story:{" "}<br />
+          Our Story: <br />
           <span className="text-2xl text-green-500 hover:text-green-600">
             Pure Water, Pure Peace
           </span>
@@ -26,13 +26,14 @@ const OurStory: React.FC = () => {
             RO installation, repair, filter replacement, and annual maintenance
             contracts (AMC)
           </strong>
-          . Whether it's a <strong>domestic or commercial RO system</strong>, we
-          ensure top-quality service for uninterrupted pure water supply.
+          . Whether it&apos;s a{" "}
+          <strong>domestic or commercial RO system</strong>, we ensure
+          top-quality service for uninterrupted pure water supply.
           <br />
           <br />
           <em>
-            "Reliable RO services in Greater Noida West - because every drop
-            matters!"
+            &quot;Reliable RO services in Greater Noida West - because every
+            drop matters!&quot;
           </em>
         </p>
         <button className="px-6 py-2 bg-blue-600 text-white rounded tracking-wide font-medium hover:bg-blue-700 transition">

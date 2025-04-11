@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ROContentItem } from "@/app/data/roContent";
 import Wave from "../Wave";
+import Image from "next/image";
 
 interface Props {
   data: ROContentItem[];
@@ -65,9 +66,11 @@ const SinglaROSection: React.FC<Props> = ({ data }) => {
 
                 {/* Image */}
                 <div className="w-full md:w-1/2">
-                  <img
+                  <Image
                     src={section.image.src}
                     alt={section.image.alt}
+                    width={500}
+                    height={500}
                     className="rounded-xl shadow-lg w-full h-auto object-cover"
                   />
                 </div>

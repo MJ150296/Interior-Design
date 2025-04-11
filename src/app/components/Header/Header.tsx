@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import { Sun, Moon, Phone, Mail } from "lucide-react";
-import Navbar from "./Navbar";
 import {
   FaFacebookF,
   FaInstagram,

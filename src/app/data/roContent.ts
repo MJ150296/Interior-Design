@@ -40,15 +40,15 @@ export const roContent: ROContentItem[] = [
         ],
         highlightedLink: {
           url: "https://classicrosolutions.com/",
-          text: "Classic RO Solutions",
+          text: "Singla RO Solutions",
         },
         image: {
-          src: "https://classicrosolutions.com/wp-content/uploads/2024/04/ro-service-example.jpg",
-          alt: "Classic RO Services",
+          src: "/homepage/storeImage.png",
+          alt: "Singla RO Services",
         },
       },
       {
-        heading: "Why Choose Classic RO?",
+        heading: "Why Choose Singla RO?",
         paragraphs: [
           "We are committed to delivering clean, purified water through innovative technology and prompt service.",
           "Thousands of families rely on us for daily healthy hydration.",
@@ -58,7 +58,7 @@ export const roContent: ROContentItem[] = [
           text: "Learn More About Us",
         },
         image: {
-          src: "https://classicrosolutions.com/wp-content/uploads/2024/04/ro-about.jpg",
+          src: "/homepage/storeImage.png",
           alt: "RO Team at Work",
         },
       },
@@ -84,7 +84,7 @@ export const roContent: ROContentItem[] = [
           text: "Schedule Repair",
         },
         image: {
-          src: "https://classicrosolutions.com/wp-content/uploads/2024/04/ro-repair.jpg",
+          src: "/homepage/storeImage.png",
           alt: "RO Technician Repairing Unit",
         },
       },
@@ -99,7 +99,7 @@ export const roContent: ROContentItem[] = [
           text: "See What Customers Say",
         },
         image: {
-          src: "https://classicrosolutions.com/wp-content/uploads/2024/04/ro-service-man.jpg",
+          src: "/homepage/storeImage.png",
           alt: "RO Repair in Progress",
         },
       },
@@ -117,7 +117,7 @@ export const roContent: ROContentItem[] = [
       {
         heading: "Affordable AMC Plans",
         paragraphs: [
-          "With Classic RO’s Annual Maintenance Contracts, enjoy peace of mind all year round.",
+          "With Classic RO&apos;s Annual Maintenance Contracts, enjoy peace of mind all year round.",
           "We ensure timely service, filter changes, and free repairs under your plan.",
         ],
         highlightedLink: {
@@ -125,7 +125,7 @@ export const roContent: ROContentItem[] = [
           text: "Know More",
         },
         image: {
-          src: "https://classicrosolutions.com/wp-content/uploads/2024/04/ro-amc.jpg",
+          src: "/homepage/storeImage.png",
           alt: "AMC Plan Coverage",
         },
       },
@@ -140,7 +140,7 @@ export const roContent: ROContentItem[] = [
           text: "Check Plan Pricing",
         },
         image: {
-          src: "https://classicrosolutions.com/wp-content/uploads/2024/04/amc-benefits.jpg",
+          src: "/homepage/storeImage.png",
           alt: "AMC Comparison Chart",
         },
       },
@@ -166,14 +166,14 @@ export const roContent: ROContentItem[] = [
           text: "Livpure RO Services",
         },
         image: {
-          src: "https://classicrosolutions.com/wp-content/uploads/2024/04/livpure-ro.jpg",
+          src: "/homepage/storeImage.png",
           alt: "Livpure RO Maintenance",
         },
       },
       {
         heading: "Trust Classic RO for Livpure",
         paragraphs: [
-          "From filter replacements to full system checks, we’ve got Livpure covered.",
+          "From filter replacements to full system checks, we&apos;ve got Livpure covered.",
           "Quick response, honest pricing, and top service quality guaranteed.",
         ],
         highlightedLink: {
@@ -181,7 +181,7 @@ export const roContent: ROContentItem[] = [
           text: "Contact for Livpure Help",
         },
         image: {
-          src: "https://classicrosolutions.com/wp-content/uploads/2024/04/livpure-support.jpg",
+          src: "/homepage/storeImage.png",
           alt: "Livpure RO Technician",
         },
       },

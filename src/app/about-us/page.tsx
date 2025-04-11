@@ -38,7 +38,7 @@ const AboutUs: React.FC = () => {
             Our dedicated team of water purification experts brings years of
             industry experience in <strong>RO water purifier sales</strong>,{" "}
             <strong>RO service and repair</strong>, and reliable{" "}
-            <strong>Annual Maintenance Contracts (AMC)</strong>. Whether you're
+            <strong>Annual Maintenance Contracts (AMC)</strong>. Whether you&apos;re
             looking for new RO systems, regular servicing, or AMC plans, Singla
             RO Mart ensures you receive high-quality solutions and personalized
             customer care.

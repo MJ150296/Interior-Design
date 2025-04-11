@@ -91,7 +91,7 @@ const Testimonial: React.FC = () => {
                 </CardHeader>
                 <CardContent className="flex-grow px-4 pb-6">
                   <p className="text-sm sm:text-base italic text-center text-muted-foreground leading-relaxed">
-                    "{testimonial.feedback}"
+                    &quot;{testimonial.feedback}&quot;
                   </p>
                 </CardContent>
               </Card>
