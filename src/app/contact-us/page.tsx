@@ -152,7 +152,7 @@ const ContactUs: React.FC = () => {
           </h2>{" "}
           <p className="text-gray-600 mb-5">
             We would love to hear from you! Please fill out the form below and
-            we'll get back to you shortly.
+            we&apos;ll get back to you shortly.
           </p>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
             {/* Name */}

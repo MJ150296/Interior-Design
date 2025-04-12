@@ -33,7 +33,7 @@ const PlacePage: React.FC = () => {
   return (
     <div className="">
       {/* Hero Section */}
-      <section className="bg-blue-50 py-16 px-4">
+      <section className="py-16 px-4">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-4xl font-bold mb-4">
             RO Water Purifier Repair in {place}
@@ -128,7 +128,7 @@ const PlacePage: React.FC = () => {
       </section>
 
       {/* Price List Section */}
-      <section className="py-16 px-4 bg-gray-50">
+      <section className="py-16 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4 font-bold">
             <div>#</div>
@@ -180,7 +180,7 @@ const PlacePage: React.FC = () => {
       </section>
 
       {/* Brands Section */}
-      <section className="py-16 px-4 bg-gray-50">
+      <section className="py-16 px-4">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold mb-8 text-center">
             We Provide Services to These Brands
