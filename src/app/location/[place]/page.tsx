@@ -8,7 +8,7 @@ import { Typewriter } from "react-simple-typewriter";
 const PlacePage: React.FC = () => {
   const params = useParams();
   const place = decodeURIComponent(params.place as string);
-  const [currentService, setCurrentService] = useState(0);
+  // const [currentService, setCurrentService] = useState(0);
 
   const services = [
     "RO Services",
@@ -23,12 +23,12 @@ const PlacePage: React.FC = () => {
     // ... rest of the brand list
   ];
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentService((prev) => (prev + 1) % services.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setCurrentService((prev) => (prev + 1) % services.length);
+  //   }, 3000);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   return (
     <div className="">
@@ -160,7 +160,7 @@ const PlacePage: React.FC = () => {
             </h2>
             <p className="mb-4">
               At Classic RO Solutions, we believe everyone deserves access to
-              clean water. That's why we offer our services at competitive
+              clean water. That&apos;s why we offer our services at competitive
               prices in {place}.
             </p>
             <button className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition">
