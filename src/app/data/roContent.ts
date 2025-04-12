@@ -26,7 +26,7 @@ export const roContent: ROContentItem[] = [
   {
     id: 1,
     slug: "ro-services",
-    title: "Classic RO Services",
+    title: "Singla RO Services",
     button: {
       text: "Contact Us",
       link: "/contact-us",
