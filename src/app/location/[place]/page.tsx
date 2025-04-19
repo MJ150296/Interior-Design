@@ -51,8 +51,9 @@ const PlacePage: React.FC = () => {
             </h2>
             <p className="mb-4">
               One of the basic needs of a human being is pure water. For that,
-              we at Classic RO Solutions provide RO water purifier repair in{" "}
-              {place}.
+              we at Classic RO Solutions provide reliable RO water purifier
+              repair in {place}, ensuring your family enjoys uninterrupted
+              access to clean and safe water.
             </p>
 
             <h3 className="text-2xl font-bold mt-8 mb-4">
@@ -62,15 +63,38 @@ const PlacePage: React.FC = () => {
               <li>Reverse Osmosis Membrane issues</li>
               <li>Carbon filter issues</li>
               <li>Sediment Pre-Filter issues</li>
+              <li>Water leakage or low water pressure problems</li>
+              <li>Electrical and motor-related faults</li>
+              <li>Tank not filling or slow water output</li>
             </ul>
+
+            <h3 className="text-2xl font-bold mt-8 mb-4">
+              Why Choose Us in {place}?
+            </h3>
+            <ul className="list-disc pl-6 mb-4">
+              <li>Experienced technicians with brand expertise</li>
+              <li>Affordable and transparent pricing</li>
+              <li>Original spare parts and filters used</li>
+              <li>Same-day service available in most areas</li>
+              <li>
+                Support for all major brands including Kent, Aquaguard, Pureit,
+                Livpure, and more
+              </li>
+            </ul>
+
+            <p className="mt-4">
+              Whether it's a minor filter change or a major repair, trust
+              Singla RO Mart in {place} to get it done right. Call us
+              today to book a visit or request a free quote!
+            </p>
           </div>
 
           <div className="md:w-1/2">
             <Image
-              src="/RO/ro1.png"
+              src="/homepage/storeImage2.png"
               alt="RO Service"
               width={450}
-              height={300}
+              height={400}
               className="rounded-lg shadow-lg"
             />
           </div>
@@ -145,7 +169,7 @@ const PlacePage: React.FC = () => {
               <div>
                 {service} {place}
               </div>
-              <div>+91 8273827328</div>
+              <div>+91-97115 69405</div>
             </div>
           ))}
         </div>

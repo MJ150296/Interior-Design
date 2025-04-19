@@ -39,11 +39,11 @@ export const roContent: ROContentItem[] = [
           "As the human body is about 60-70% water, clean water is crucial.",
         ],
         highlightedLink: {
-          url: "https://classicrosolutions.com/",
-          text: "Singla RO Solutions",
+          url: "https://g.co/kgs/9yNuqBd",
+          text: "Singla RO Mart, Gaur Chowk, Greater Noida (W)",
         },
         image: {
-          src: "/homepage/storeImage.png",
+          src: "/homepage/storeImage1.png",
           alt: "Singla RO Services",
         },
       },
@@ -54,7 +54,7 @@ export const roContent: ROContentItem[] = [
           "Thousands of families rely on us for daily healthy hydration.",
         ],
         highlightedLink: {
-          url: "https://classicrosolutions.com/about",
+          url: "https://singlaromart.in/about-us",
           text: "Learn More About Us",
         },
         image: {
@@ -70,7 +70,7 @@ export const roContent: ROContentItem[] = [
     title: "RO Repair Services",
     button: {
       text: "Book a Technician",
-      link: "/book-repair",
+      link: "/contact-us",
     },
     sections: [
       {
@@ -80,11 +80,11 @@ export const roContent: ROContentItem[] = [
           "We repair all major RO brands with genuine parts and expert hands.",
         ],
         highlightedLink: {
-          url: "https://classicrosolutions.com/ro-repair",
+          url: "https://singlaromart.in/contact-us",
           text: "Schedule Repair",
         },
         image: {
-          src: "/homepage/storeImage.png",
+          src: "/homepage/storeImage1.png",
           alt: "RO Technician Repairing Unit",
         },
       },
@@ -95,7 +95,7 @@ export const roContent: ROContentItem[] = [
           "We provide quality service with a warranty on repairs.",
         ],
         highlightedLink: {
-          url: "https://classicrosolutions.com/testimonials",
+          url: "https://g.page/r/CR6TUrVHWmaYEAE/review",
           text: "See What Customers Say",
         },
         image: {
@@ -121,11 +121,11 @@ export const roContent: ROContentItem[] = [
           "We ensure timely service, filter changes, and free repairs under your plan.",
         ],
         highlightedLink: {
-          url: "https://classicrosolutions.com/amc",
+          url: "https://singlaromart.in/amc-plans",
           text: "Know More",
         },
         image: {
-          src: "/homepage/storeImage.png",
+          src: "/homepage/storeImage1.png",
           alt: "AMC Plan Coverage",
         },
       },
@@ -136,7 +136,7 @@ export const roContent: ROContentItem[] = [
           "Choose from basic to premium plans tailored to your usage.",
         ],
         highlightedLink: {
-          url: "https://classicrosolutions.com/pricing",
+          url: "https://singlaromart.in/amc-plans",
           text: "Check Plan Pricing",
         },
         image: {
@@ -152,7 +152,7 @@ export const roContent: ROContentItem[] = [
     title: "Livpure RO Service",
     button: {
       text: "Service Your Livpure",
-      link: "/livpure-service",
+      link: "/contact-us",
     },
     sections: [
       {
@@ -162,11 +162,12 @@ export const roContent: ROContentItem[] = [
           "We maintain your system for clean, fresh water at all times.",
         ],
         highlightedLink: {
-          url: "https://classicrosolutions.com/livpure",
-          text: "Livpure RO Services",
+          url: "https://singlaromart.in/contact-us",
+          text: "Contact for Livpure Help",
         },
+
         image: {
-          src: "/homepage/storeImage.png",
+          src: "/homepage/storeImage1.png",
           alt: "Livpure RO Maintenance",
         },
       },
@@ -177,8 +178,8 @@ export const roContent: ROContentItem[] = [
           "Quick response, honest pricing, and top service quality guaranteed.",
         ],
         highlightedLink: {
-          url: "https://classicrosolutions.com/contact-us",
-          text: "Contact for Livpure Help",
+          url: "",
+          text: "",
         },
         image: {
           src: "/homepage/storeImage.png",

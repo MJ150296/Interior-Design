@@ -11,7 +11,6 @@ export default function Home() {
     <div className="p-4 space-y-5 w-full flex flex-col justify-center items-center">
       <HomePageCarousel />
       <OurStory />
-      <div className="hidden md:flex w-1/2 h-1 bg-gray-700 dark:bg-foreground rounded-4xl"></div>
       <ServiceSection />
       <CustomerSupport />
       <OurGallery />

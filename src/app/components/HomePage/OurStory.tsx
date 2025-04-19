@@ -5,7 +5,7 @@ const OurStory: React.FC = () => {
   return (
     <div className="flex flex-col md:flex-row items-center justify-between p-6 md:p-12">
       {/* Text Section */}
-      <div className="md:w-1/2 text-center md:text-left mb-6 md:mb-0 md:border-r-2 border-gray-700">
+      <div className="md:w-1/2 text-center md:text-left mb-6 md:mb-0">
         <h2 className="text-4xl font-bold mb-4 text-blue-500 hover:text-blue-600">
           Our Story: <br />
           <span className="text-2xl text-green-500 hover:text-green-600">

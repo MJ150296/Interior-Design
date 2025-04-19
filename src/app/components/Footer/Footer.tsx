@@ -2,11 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import {
-  FaFacebookF,
-  FaTwitter,
-  FaInstagram,
-} from "react-icons/fa";
+import { FaFacebookF, FaTwitter, FaInstagram } from "react-icons/fa";
 import Image from "next/image";
 
 const Footer: React.FC = () => {
@@ -60,23 +56,20 @@ const Footer: React.FC = () => {
         <div>
           <h4 className="text-lg font-semibold mb-3">Our Services</h4>
           <ul className="space-y-2 text-sm text-gray-300">
-            {[
-              "RO Services",
-              "RO Repair",
-              "AMC Plans",
-              "Livpure Service",
-            ].map((service) => (
-              <li key={service}>
-                <Link
-                  href={`/services/${service
-                    .toLowerCase()
-                    .replace(/\s+/g, "-")}`}
-                  className="hover:text-white"
-                >
-                  {service}
-                </Link>
-              </li>
-            ))}
+            {["RO Services", "RO Repair", "AMC Plans", "Livpure Service"].map(
+              (service) => (
+                <li key={service}>
+                  <Link
+                    href={`/services/${service
+                      .toLowerCase()
+                      .replace(/\s+/g, "-")}`}
+                    className="hover:text-white"
+                  >
+                    {service}
+                  </Link>
+                </li>
+              )
+            )}
           </ul>
         </div>
 
@@ -85,7 +78,7 @@ const Footer: React.FC = () => {
           <h4 className="text-lg font-semibold mb-3">Contact Us</h4>
           <ul className="space-y-2 text-sm text-gray-300">
             <li>
-              <a href="tel:+918273827328" className="hover:text-white">
+              <a href="tel:+919711569405" className="hover:text-white">
                 +91-97115 69405
               </a>
             </li>
@@ -132,6 +125,16 @@ const Footer: React.FC = () => {
             >
               <FaInstagram />
             </a>
+          </div>
+
+          {/* Image Credits  */}
+          <div className="mt-2">
+            <Link
+              href="/credits"
+              className="text-sm text-gray-400 hover:underline"
+            >
+              Image Credits
+            </Link>
           </div>
         </div>
       </div>

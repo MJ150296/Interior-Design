@@ -46,13 +46,13 @@ const Header: React.FC = () => {
 
           {/* Email */}
           <a
-            href="mailto:singlaromart@gmail.com?subject=Service%20Enquiry&body=Hello,%0D%0A%0D%0AThanks%20%26%20Regards"
+            href="mailto:singlaromart@gmail.in?subject=Service%20Enquiry&body=Hello,%0D%0A%0D%0AThanks%20%26%20Regards"
             className="hidden md:block"
           >
             <div className="flex items-center space-x-2 hover:opacity-80 transition-opacity duration-200">
               <Mail className="w-5 h-5 text-green-400 dark:text-green-300" />
               <span className="text-sm text-white font-semibold">
-                singlaromart@gmail.com
+                singlaromart@gmail.in
               </span>
             </div>
           </a>
