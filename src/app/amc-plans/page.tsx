@@ -2,7 +2,6 @@ import React from "react";
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import Wave from "../components/Wave";
 
 const AMCPlanPage = () => {
   return (
