@@ -3,7 +3,6 @@ import React from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import { FaTools, FaSyncAlt, FaTint, FaHandHolding } from "react-icons/fa";
-import { Typewriter } from "react-simple-typewriter";
 import Wave from "@/app/components/Wave";
 import Link from "next/link";
 import AnimatedService from "@/app/components/HomePage/AnimatedService";
