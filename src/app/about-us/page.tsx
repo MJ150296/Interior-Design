@@ -52,7 +52,7 @@ const AboutUs: React.FC = () => {
 
           <div className="flex flex-wrap gap-4 mt-6">
             <a
-              href="/contact"
+              href="/contact-us"
               className="px-6 py-3 bg-blue-600 text-white font-medium rounded-xl shadow hover:bg-blue-700 transition"
             >
               Contact RO Experts

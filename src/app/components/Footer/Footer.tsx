@@ -34,7 +34,6 @@ const Footer: React.FC = () => {
             {[
               "Home",
               "About Us",
-              "Our Services",
               "Gallery",
               "Location",
               "Blogs",

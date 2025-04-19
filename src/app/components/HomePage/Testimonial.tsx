@@ -30,10 +30,10 @@ const testimonials = [
     image: "/testimonials/Esha.jpeg",
   },
   {
-    name: "Emily Johnson",
+    name: "Siddharth",
     feedback:
       "I got my RO system installed from Singla RO Mart at my Ajnara home. The product quality is amazing, and their annual maintenance service is hassle-free. Best water purifier service in Greater Noida West!",
-    image: "/testimonials/pushpa.jpeg",
+    image: "/testimonials/sid.jpeg",
   },
   {
     name: "Dr. Sumit Dinkar",
@@ -42,10 +42,10 @@ const testimonials = [
     image: "/testimonials/sumit.png",
   },
   {
-    name: "Sophia Davis",
+    name: "Maya Joshi",
     feedback:
       "From installation to regular servicing, Singla RO Mart in Gaur City has delivered top-tier RO solutions. Their technicians are knowledgeable and courteous. A trusted choice for clean and safe drinking water in Noida Extension.",
-    image: "/testimonials/pushpa.jpeg",
+    image: "/testimonials/maya.jpeg",
   },
 ];
 

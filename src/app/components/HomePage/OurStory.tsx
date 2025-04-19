@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const OurStory: React.FC = () => {
@@ -36,13 +37,15 @@ const OurStory: React.FC = () => {
             drop matters!&quot;
           </em>
         </p>
-        <button className="px-6 py-2 bg-blue-600 text-white rounded tracking-wide font-medium hover:bg-blue-700 transition">
-          GALLERY
-        </button>
+        <Link href="/gallery">
+          <button className="cursor-pointer px-6 py-2 bg-blue-600 text-white rounded tracking-wide font-medium hover:bg-blue-700 transition">
+            GALLERY
+          </button>
+        </Link>
       </div>
 
       {/* Image Section */}
-      <div className="md:w-1/2 flex justify-end items-center">
+      <div className="md:w-1/2 flex justify-center items-center">
         <Image
           src="/homepage/OurStory.jpg"
           alt="Technician Repairing water purifier"

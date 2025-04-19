@@ -1,3 +1,6 @@
+"use client";
+
+import AnimatedService from "./components/HomePage/AnimatedService";
 import CustomerSupport from "./components/HomePage/CustomerSupport";
 import HomePageCarousel from "./components/HomePage/HomePageCarousel";
 import BlogCarousel from "./components/HomePage/MyBlogs";
@@ -15,6 +18,7 @@ export default function Home() {
       <CustomerSupport />
       <OurGallery />
       <Testimonial />
+      <AnimatedService />
       <BlogCarousel />
     </div>
   );

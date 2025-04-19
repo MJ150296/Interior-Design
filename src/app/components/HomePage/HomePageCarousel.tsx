@@ -65,7 +65,7 @@ export default function HomePageCarousel() {
                     className="relative bg-cover bg-bottom h-[450px] rounded-lg hover:scale-105 transition duration-500 animate-[pulse_6s_ease-in_infinite]"
                   >
                     <CardContent className="h-full flex flex-col items-center justify-center bg-black/50 rounded-lg z-20">
-                      <h1>
+                      <h1 className="hidden md:block">
                         <span className="text-6xl font-bold text-center text-white">
                           {item.title}
                         </span>
@@ -74,7 +74,7 @@ export default function HomePageCarousel() {
                           {item.message}
                         </span>
                       </h1>
-                      <div className="flex items-center gap-2 text-white mt-10">
+                      <div className="flex items-center gap-2 text-white mt-40 md:mt-10">
                         {item.icon}
                         <span className="text-lg">{item.description}</span>
                       </div>
