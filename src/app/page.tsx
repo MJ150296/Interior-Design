@@ -1,5 +1,4 @@
 "use client";
-
 import AnimatedService from "./components/HomePage/AnimatedService";
 import CustomerSupport from "./components/HomePage/CustomerSupport";
 import HomePageCarousel from "./components/HomePage/HomePageCarousel";
@@ -11,7 +10,7 @@ import Testimonial from "./components/HomePage/Testimonial";
 
 export default function Home() {
   return (
-    <div className="p-4 space-y-5 w-full flex flex-col justify-center items-center">
+    <div className="p-4 space-y-5 w-full flex flex-col justify-center items-center relative">
       <HomePageCarousel />
       <OurStory />
       <ServiceSection />
