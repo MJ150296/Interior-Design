@@ -18,31 +18,29 @@ const SinglaROMartAd: React.FC<SinglaROMartAdProps> = ({
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (containerRef.current) {
-      containerRef.current.animate(
-        [
-          { transform: "scale(0.5)", opacity: 0 },
-          { transform: "scale(1.05)", opacity: 1 },
-          { transform: "scale(1)", opacity: 1 },
-        ],
-        {
-          duration: 600,
-          easing: "ease-out",
-          fill: "forwards",
-        }
-      );
-    }
+    containerRef.current?.animate(
+      [
+        { transform: "scale(0.5)", opacity: 0 },
+        { transform: "scale(1.05)", opacity: 1 },
+        { transform: "scale(1)", opacity: 1 },
+      ],
+      {
+        duration: 600,
+        easing: "ease-out",
+        fill: "forwards",
+      }
+    );
   }, []);
 
   return (
     <div
       ref={containerRef}
-      className="relative w-[320px] bg-white rounded-2xl shadow-2xl p-4 border border-gray-200 flex flex-col items-center text-center space-y-4"
+      className="relative w-[320px] bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-2xl p-4 flex flex-col items-center text-center space-y-4"
     >
       {/* Close Button */}
       <button
         onClick={onClose}
-        className="absolute top-2 right-2 text-gray-500 hover:text-red-500 transition"
+        className="absolute top-2 right-2 text-gray-500 dark:text-gray-300 hover:text-red-500 transition"
         aria-label="Close"
       >
         <X className="w-5 h-5" />
@@ -58,10 +56,12 @@ const SinglaROMartAd: React.FC<SinglaROMartAdProps> = ({
       />
 
       {/* Heading */}
-      <h2 className="text-xl font-bold text-blue-600">Singla RO Mart</h2>
+      <h2 className="text-xl font-bold text-blue-600 dark:text-blue-400">
+        Singla RO Mart
+      </h2>
 
       {/* Description */}
-      <p className="text-sm text-gray-600">{description}</p>
+      <p className="text-sm text-gray-600 dark:text-gray-300">{description}</p>
 
       {/* CTA Button */}
       <a
