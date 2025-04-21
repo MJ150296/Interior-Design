@@ -75,7 +75,7 @@ const PlacePage: React.FC = () => {
         <div className="relative">
           <Wave />
           <div className="absolute inset-0 z-10 w-full h-full flex flex-col items-center justify-center">
-            <h2 className="text-4xl font-bold mb-4">
+            <h2 className="text-xl md:text-4xl font-bold">
               RO Water Purifier Repair in {place}
             </h2>
             <div className="h-1 w-24 bg-blue-500 mx-auto mb-8"></div>

@@ -19,7 +19,7 @@ const BlogCarousel: React.FC = () => {
 
   return (
     <section className="w-full py-10 px-4 md:px-8 lg:px-12 rounded-xl">
-      <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 text-gray-800 dark:text-white">
+      <h2 className="text-3xl font-bold text-center mb-8 text-gray-800 dark:text-white">
         Latest Blog Articles
       </h2>
 
@@ -34,11 +34,11 @@ const BlogCarousel: React.FC = () => {
           {blogs.map((blog, index) => (
             <CarouselItem
               key={index}
-              className="px-2 basis-full md:basis-1/2 lg:basis-1/3"
+              className="basis-full md:basis-1/2 lg:basis-1/3"
             >
               <Link href={`/blogs/${blog.id}`} className="block">
                 <Card className="h-full shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col overflow-hidden cursor-pointer">
-                  <div className="relative w-full h-48 sm:h-56 md:h-48 lg:h-40">
+                  <div className="relative w-full h-56 md:h-48 lg:h-40">
                     <Image
                       src={blog.image}
                       alt={blog.title}

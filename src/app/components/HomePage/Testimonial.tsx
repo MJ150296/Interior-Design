@@ -55,7 +55,7 @@ const Testimonial: React.FC = () => {
   );
 
   return (
-    <section className="w-full py-10 px-4 md:px-8 lg:px-12 bg-muted rounded-xl">
+    <section className="w-full py-10 px-2 md:px-8 lg:px-12 bg-muted rounded-xl">
       <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 text-gray-800 dark:text-white">
         What Our Customers Say
       </h2>
@@ -74,27 +74,29 @@ const Testimonial: React.FC = () => {
           {testimonials.map((testimonial, index) => (
             <CarouselItem
               key={index}
-              className="px-2 basis-full md:basis-1/2 lg:basis-1/3"
+              className="basis-full md:basis-1/2 lg:basis-1/3"
             >
-              <Card className="h-full shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between">
-                <CardHeader className="flex flex-col items-center pt-6">
-                  <Image
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    width={80}
-                    height={80}
-                    className="w-20 h-20 rounded-full object-cover mb-4 border-2 border-primary dark:border-green-500"
-                  />
-                  <CardTitle className="text-center text-base sm:text-lg font-semibold text-gray-800 dark:text-white">
-                    {testimonial.name}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="flex-grow px-4 pb-6">
-                  <p className="text-sm sm:text-base italic text-center text-muted-foreground leading-relaxed">
-                    &quot;{testimonial.feedback}&quot;
-                  </p>
-                </CardContent>
-              </Card>
+              <a href="https://g.page/r/CR6TUrVHWmaYEAE/review" target="_blank">
+                <Card className="h-full shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between">
+                  <CardHeader className="flex flex-col items-center pt-6">
+                    <Image
+                      src={testimonial.image}
+                      alt={testimonial.name}
+                      width={80}
+                      height={80}
+                      className="w-20 h-20 rounded-full object-cover mb-4 border-2 border-primary dark:border-green-500"
+                    />
+                    <CardTitle className="text-center text-base sm:text-lg font-semibold text-gray-800 dark:text-white">
+                      {testimonial.name}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="flex-grow px-4 pb-6">
+                    <p className="text-sm sm:text-base italic text-center text-muted-foreground leading-relaxed">
+                      &quot;{testimonial.feedback}&quot;
+                    </p>
+                  </CardContent>
+                </Card>
+              </a>
             </CarouselItem>
           ))}
         </CarouselContent>

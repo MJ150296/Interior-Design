@@ -57,9 +57,9 @@ const ContactUs: React.FC = () => {
         >
           <div className="absolute inset-0 bg-black/10 backdrop-blur-sm z-0" />
           <div className="relative z-10 text-center text-white">
-            <h1 className="text-5xl font-bold mb-10">Contact Us</h1>
+            <h1 className="text-3xl md:text-5xl font-bold mb-10">Contact Us</h1>
 
-            <div className="flex justify-center items-center gap-x-10">
+            <div className="flex justify-center items-center gap-x-5 md:gap-x-10">
               {[
                 {
                   href: "https://www.instagram.com/romartgaurcity/?hl=en",
@@ -96,14 +96,14 @@ const ContactUs: React.FC = () => {
           </div>
         </div>
 
-        <div className="w-full flex flex-col justify-center items-center mt-2">
+        <div className="w-full flex flex-col justify-center items-center my-2">
           <div className="w-full flex justify-center items-center gap-x-1 md:gap-x-2">
             <div>
-              <p className="text-9xl font-sans text-blue-600">5</p>
+              <p className="text-7xl md:text-9xl font-sans text-blue-600">5</p>
             </div>
-            <div className="flex flex-col items-center justify-center font-sans">
-              <span className="text-4xl text-blue-600">star rated</span>
-              <span className="text-4xl text-green-600">on Google</span>
+            <div className="flex flex-col items-center justify-center font-sans text-xl md:text-4xl">
+              <span className="text-blue-600">star rated</span>
+              <span className="text-green-600">on Google</span>
             </div>
           </div>
           <div>
@@ -129,7 +129,7 @@ const ContactUs: React.FC = () => {
 
       {/* Form Section */}
       <div className="mt-10 flex flex-col-reverse md:flex-row justify-around items-start">
-        <div className="w-1/2 flex justify-center items-center py-10">
+        <div className="w-full md:w-1/2 flex justify-center items-center py-10">
           <a
             href="https://maps.app.goo.gl/HeTEZm253shoiSfv6"
             target="_blank"
@@ -244,7 +244,7 @@ const ContactUs: React.FC = () => {
       </div>
 
       {/* Google Map */}
-      <div className="m-10 rounded-3xl overflow-hidden shadow-2xl px-5 md:px-20">
+      <div className="py-5 md:py-10 rounded-3xl overflow-hidden shadow-2xl px-2 md:px-20">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.803276386607!2d77.42460267934571!3d28.605677900000014!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cef143d84a553%3A0x98665a47b552931e!2sSingla%20RO%20Mart%20-%20RO%20Services%2C%20Sales%2C%20Repairs!5e0!3m2!1sen!2sin!4v1744102786830!5m2!1sen!2sin"
           loading="lazy"

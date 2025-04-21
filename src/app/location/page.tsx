@@ -11,7 +11,7 @@ const LocationPage: React.FC = () => {
           backgroundImage: `url('/KitchenRO1.jpg')`, // Replace with your actual image path
         }}
       >
-        <h1 className="px-10 rounded-2xl text-5xl bg-linear-to-r from-blue-400 via-blue-600 to-blue-400 font-bold text-white drop-shadow-lg">
+        <h1 className="px-10 rounded-2xl text-3xl md:text-5xl text-center bg-linear-to-r from-blue-400 via-blue-600 to-blue-400 font-bold text-white drop-shadow-lg">
           Our Location
         </h1>
       </div>
