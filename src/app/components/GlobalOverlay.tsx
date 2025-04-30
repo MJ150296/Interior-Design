@@ -29,7 +29,7 @@ export default function GlobalOverlay() {
   const [showAd, setShowAd] = useState(false);
 
   useEffect(() => {
-    const formTimer = setTimeout(() => setShowAppointmentForm(true), 3000);
+    const formTimer = setTimeout(() => setShowAppointmentForm(true), 5000);
     const adTimer = setTimeout(() => setShowAd(true), 10000);
     const adCycleTimer = setInterval(() => {
       setAdIndex((prevIndex) => (prevIndex + 1) % ads.length);

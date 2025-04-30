@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import Image from "next/image";
+import FiveStar from "../components/FiveStar";
 
 // Zod schema
 const contactFormSchema = z.object({
@@ -98,13 +99,14 @@ const ContactUs: React.FC = () => {
 
         <div className="w-full flex flex-col justify-center items-center my-2">
           <div className="w-full flex justify-center items-center gap-x-1 md:gap-x-2">
-            <div>
+            <FiveStar />
+            {/* <div>
               <p className="text-7xl md:text-9xl font-sans text-blue-600">5</p>
             </div>
             <div className="flex flex-col items-center justify-center font-sans text-xl md:text-4xl">
               <span className="text-blue-600">star rated</span>
               <span className="text-green-600">on Google</span>
-            </div>
+            </div> */}
           </div>
           <div>
             <a href="tel:+919711569405" className="block text-green-600">
@@ -117,14 +119,6 @@ const ContactUs: React.FC = () => {
             </a>
           </div>
         </div>
-
-        {/* <a
-          href="https://search.google.com/local/writereview?placeid=ChIJU6WEPRTvDDkRHpNStUdaZpg"
-          target="_blank"
-          className="cursor-pointer"
-        >
-          Review Link
-        </a> */}
       </div>
 
       {/* Form Section */}
