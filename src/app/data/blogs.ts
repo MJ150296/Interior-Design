@@ -160,7 +160,7 @@ export const blogs: Blog[] = [
       "Signs Your RO Filter Needs Replacement | Expert Tips from Singla RO Mart",
     excerpt:
       "Is your RO water starting to taste odd or flowing slower than usual? Discover key signs your RO filter might need urgent replacement, and how Singla RO Mart can help ensure your purifier runs smoothly year-round.",
-    image: "/RO/ro1.png",
+    image: "/blogs/filter-replacement/filter-replacement.png",
     subheading: "Time for a Filter Change - A Guide by Singla RO Mart",
     content: `<p>Regular maintenance is the key to safe drinking water, and at <strong>Singla RO Mart</strong>, we often see RO systems underperforming simply due to overdue filter changes. Whether you're using <strong>Kent, Aquaguard, Pureit, or AO Smith</strong>, knowing when to replace your RO filters is essential for keeping your purifier efficient and your water clean.</p>
   
@@ -200,8 +200,8 @@ export const blogs: Blog[] = [
     content2:
       "Singla RO Mart&apos;s AMC packages include scheduled filter replacements, free checkups, and on-call support—ideal for busy families in Gaur City and nearby sectors. Don&apos;t let bad water quality go unchecked.",
     additionalImages: [
-      "/blogs/filter-replacement-1.jpg",
-      "/blogs/filter-replacement-2.jpg",
+      "/blogs/filter-replacement/filter-replacement1.png",
+      "/blogs/filter-replacement/filter-replacement2.jpeg",
     ],
   },
   {
@@ -210,7 +210,7 @@ export const blogs: Blog[] = [
       "How Safe is Your Drinking Water? | Know the Hidden Contaminants in Noida Extension",
     excerpt:
       "TDS, bacteria, and heavy metals are common in untreated tap water. Discover how RO purifiers protect your family and why regular water testing matters.",
-    image: "/RO/ro1.png",
+    image: "/blogs/how-safe/how-safe3.jpeg",
     subheading: "Understanding Water Quality - A Guide by Singla RO Mart",
     content: `<p>Most people assume their drinking water is safe, but at <strong>Singla RO Mart</strong>, we often test water samples from <strong>Noida Extension, Gaur City, and Sector 4</strong> that reveal high levels of <strong>TDS, heavy metals, and microbial contamination</strong>.</p>
   
@@ -240,8 +240,8 @@ export const blogs: Blog[] = [
     content2:
       "Our technicians frequently detect harmful elements during local water tests. That&apos;s why we recommend routine testing and quality filtration for every household.",
     additionalImages: [
-      "/blogs/water-safety-1.jpg",
-      "/blogs/water-safety-2.jpg",
+      "/blogs/how-safe/how-safe2.jpeg",
+      "/blogs/how-safe/how-safe1.jpeg",
     ],
   },
   {
@@ -250,7 +250,7 @@ export const blogs: Blog[] = [
       "Benefits of UV + UF + RO Combo Purifiers | Best Protection for Noida Extension Homes",
     excerpt:
       "UV, UF, and RO technologies together offer the best defense against high TDS, microbes, and chemical contaminants in your water supply.",
-    image: "/blogs/uv-uf-ro-combo.jpg",
+    image: "/blogs/uv-uf/uv-uf.jpg",
     subheading:
       "Triple Technology for Cleaner Water - Recommended by Singla RO Mart",
     content: `<p>Water purification isn't just about removing dirt — it&apos;s about removing invisible threats. At <strong>Singla RO Mart</strong>, we recommend <strong>UV + UF + RO combo purifiers</strong> for homes in <strong>Noida Extension</strong> because they offer layered protection suited for complex water sources like borewell and tank water.</p>
@@ -285,7 +285,7 @@ export const blogs: Blog[] = [
       "A combo purifier handles Noida Extension's complex water profile better than basic RO. You get triple protection from TDS, microbes, and suspended particles.",
     content2:
       "Models with UV+UF+RO are ideal for health-conscious families and ensure long-term reliability. Get yours from Singla RO Mart today.",
-    additionalImages: ["/blogs/uv-uf-ro-1.jpg", "/blogs/uv-uf-ro-2.jpg"],
+    additionalImages: ["/blogs/uv-uf/uv-uf1.jpeg", "/blogs/uv-uf/uv-uf2.jpeg"],
   },
   {
     id: "how-to-save-water-ro-systems",
@@ -293,7 +293,7 @@ export const blogs: Blog[] = [
       "How to Save Water While Using RO Systems | Tips by Singla RO Mart, Noida Extension",
     excerpt:
       "RO systems can waste up to 75% of water. Discover smart tips to reuse reject water and choose efficient models to reduce your water footprint.",
-    image: "/blogs/ro-water-saving.jpg",
+    image: "/blogs/save-water/save-water1.jpeg",
     subheading:
       "Eco-Friendly Purification Practices - Smart Living with Singla RO Mart",
     content: `<p>Did you know that conventional RO systems can waste 2 to 3 liters of water for every liter they purify? In water-scarce areas like <strong>Noida Extension</strong>, this adds up quickly, especially for families relying on tankers or borewells.</p>
@@ -322,8 +322,8 @@ export const blogs: Blog[] = [
     content2:
       "Singla RO Mart helps you set up water-saving practices with the right model and expert advice - because pure water shouldn't cost the planet.",
     additionalImages: [
-      "/blogs/ro-saving-tip1.jpg",
-      "/blogs/ro-saving-tip2.jpg",
+      "/blogs/save-water/save-water2.jpeg",
+      "/blogs/save-water/save-water3.jpeg",
     ],
   },
 ];

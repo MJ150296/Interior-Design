@@ -1,4 +1,5 @@
 "use client";
+import FiveStar from "./components/FiveStar";
 import AnimatedService from "./components/HomePage/AnimatedService";
 import CustomerSupport from "./components/HomePage/CustomerSupport";
 import HomePageCarousel from "./components/HomePage/HomePageCarousel";
@@ -17,6 +18,7 @@ export default function Home() {
       <CustomerSupport />
       <OurGallery />
       <Testimonial />
+      <FiveStar />
       <AnimatedService />
       <BlogCarousel />
     </div>

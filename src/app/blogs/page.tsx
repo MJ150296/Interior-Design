@@ -4,13 +4,19 @@ import Link from "next/link";
 import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { blogs } from "../data/blogs";
+import Wave from "../components/Wave";
 
 const BlogList: React.FC = () => {
   return (
-    <section className="py-10 px-4 md:px-8 lg:px-12">
-      <h2 className="text-3xl font-bold text-center mb-8 text-gray-800 dark:text-white">
-        Our Blog
-      </h2>
+    <section className="space-y-5">
+      <div className="relative">
+        <Wave />
+        <div className="absolute inset-0 z-10 w-full h-full flex items-center justify-center">
+          <h2 className="text-3xl md:text-4xl font-semibold text-center text-gray-800 dark:text-white mb-8">
+            Our Blogs
+          </h2>
+        </div>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {blogs.map((blog) => (
           <Link key={blog.id} href={`/blogs/${blog.id}`}>

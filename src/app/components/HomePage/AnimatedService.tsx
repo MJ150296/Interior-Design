@@ -14,7 +14,7 @@ const AnimatedService: React.FC = () => {
       <section className="rounded-lg bg-blue-500 text-white py-16 px-4 hover:bg-green-500 duration-400">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-4">
-            Classic RO Customer Support{" "}
+            Singla RO Customer Support{" "}
             <span className="border-b-2 border-white inline-block">
               <Typewriter
                 words={services}
