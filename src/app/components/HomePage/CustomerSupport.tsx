@@ -52,10 +52,9 @@ const CustomerSupport: React.FC = () => {
         </div>
       </div>
       <div
-        className="relative bg-cover bg-fixed bg-center w-full rounded-2xl"
+        className="relative bg-cover bg-fixed bg-center w-full rounded-2xl h-[800px] md:h-[500px]"
         style={{
           backgroundImage: "url('/Riddhi Interior Design/why-choose-us.jpg')",
-          height: "500px",
         }}
       >
         <div className="text-center py-14">
