@@ -67,7 +67,7 @@ export default function Navbar() {
             <Link href="/" className="nav-link">
               Home
             </Link>
-            <Link href="/about-us" className="nav-link">
+            <Link href="/" className="nav-link">
               About Us
             </Link>
 
@@ -115,7 +115,7 @@ export default function Navbar() {
             {/* Social Icons */}
             <div className="hidden h-full md:flex items-center space-x-4 text-gray-400">
               <a
-                href="https://www.facebook.com/profile.php?id=61570484670946"
+                href="#"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-blue-600"
@@ -123,7 +123,7 @@ export default function Navbar() {
                 <FaFacebookF />
               </a>
               <a
-                href="https://x.com/singlaromart"
+                href="#"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-blue-400"
@@ -131,7 +131,7 @@ export default function Navbar() {
                 <FaTwitter />
               </a>
               <a
-                href="https://www.instagram.com/romartgaurcity/?hl=en"
+                href="#"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-pink-500"

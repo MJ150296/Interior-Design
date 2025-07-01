@@ -92,7 +92,7 @@ export default function GlobalOverlay() {
           href="tel:+917895927366"
         >
           <Image
-            src="/icons/phone.png"
+            src="/icons/phoneB.png"
             alt="Phone Logo"
             width={100}
             height={100}
