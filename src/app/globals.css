@@ -13,7 +13,7 @@ body {
 }
 
 :root {
-  --primary: #02a1eb; /* Example primary color - Blue */
+  --primary: #8B4513; /* Example primary color - Blue */
   --secondary: #22e45c; /* Example secondary color - Purple */
   --radius: 0.625rem;
   --background: oklch(1 0 0);
@@ -138,7 +138,7 @@ body {
 }
 
 .nav-link {
-  @apply text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition;
+  @apply text-amber-950 dark:text-white hover:text-amber-500 dark:hover:text-amber-50 transition;
 }
 
 .dropdown-link {

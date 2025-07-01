@@ -15,7 +15,7 @@ const BlogDetail: React.FC = () => {
   if (!blog) return <p className="text-center p-10">Blog not found.</p>;
 
   return (
-    <div className="max-w-4xl mx-auto py-10 px-4">
+    <div className="max-w-7xl mx-auto py-10 px-4">
       <Link
         href="/blogs"
         className="text-blue-600 hover:underline mb-4 inline-block"
@@ -26,7 +26,7 @@ const BlogDetail: React.FC = () => {
         {/* Background logo */}
         <div className="absolute inset-0 z-0 opacity-40 flex justify-center items-center pointer-events-none">
           <Image
-            src="/logo.png" // your logo path
+            src="/Riddhi Interior Design/Logo.png" // your logo path
             alt="Background Logo"
             width={400} // adjust size as needed
             height={400}
@@ -36,7 +36,7 @@ const BlogDetail: React.FC = () => {
 
         {/* Foreground Content */}
         <div className="relative z-10">
-          <div className="relative w-full h-80">
+          <div className="relative w-full h-96">
             <Image
               src={blog.image}
               alt={blog.title}
@@ -47,7 +47,7 @@ const BlogDetail: React.FC = () => {
           </div>
 
           <CardHeader className="px-4 pt-4">
-            <CardTitle className="text-2xl font-bold text-gray-800 dark:text-white">
+            <CardTitle className="text-3xl font-bold text-amber-800 dark:text-white">
               {blog.title}
             </CardTitle>
             {blog.subheading && (
@@ -64,24 +64,6 @@ const BlogDetail: React.FC = () => {
             />
 
             {/* Additional Content/Images */}
-            {blog.additionalImages[0] && (
-              <div className="w-full flex flex-col md:flex-row md:justify-between mt-5">
-                <div className="relative w-full md:w-1/2 h-64 my-4">
-                  <Image
-                    src={blog.additionalImages[0]}
-                    alt={`${blog.title} extra image 1`}
-                    layout="fill"
-                    objectFit="cover"
-                    className="rounded-lg"
-                  />
-                </div>
-                <div className="w-full md:w-1/2 p-5 md:pl-10">
-                  <p className="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
-                    {blog.content1}
-                  </p>
-                </div>
-              </div>
-            )}
 
             {blog.additionalImages[1] && (
               <div className="w-full flex flex-col md:flex-row md:justify-between mt-10">
@@ -90,7 +72,7 @@ const BlogDetail: React.FC = () => {
                     {blog.content2}
                   </p>
                 </div>
-                <div className="relative w-full md:w-1/2 h-64 my-4">
+                <div className="relative w-full md:w-1/2 h-80 my-4">
                   <Image
                     src={blog.additionalImages[1]}
                     alt={`${blog.title} extra image 2`}
@@ -98,6 +80,24 @@ const BlogDetail: React.FC = () => {
                     objectFit="cover"
                     className="rounded-lg"
                   />
+                </div>
+              </div>
+            )}
+            {blog.additionalImages[0] && (
+              <div className="w-full flex flex-col md:flex-row md:justify-between mt-5">
+                <div className="relative w-full md:w-1/2 h-80 my-4">
+                  <Image
+                    src={blog.additionalImages[0]}
+                    alt={`${blog.title} extra image 1`}
+                    layout="fill"
+                    objectFit="cover"
+                    className="rounded-lg "
+                  />
+                </div>
+                <div className="w-full md:w-1/2 p-5 md:pl-10">
+                  <p className="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
+                    {blog.content1}
+                  </p>
                 </div>
               </div>
             )}

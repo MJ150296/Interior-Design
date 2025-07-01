@@ -1,25 +1,23 @@
 "use client";
-import FiveStar from "./components/FiveStar";
-import AnimatedService from "./components/HomePage/AnimatedService";
+import About from "./components/HomePage/About";
 import CustomerSupport from "./components/HomePage/CustomerSupport";
 import HomePageCarousel from "./components/HomePage/HomePageCarousel";
+import Masonry from "./components/HomePage/Masonry";
 import BlogCarousel from "./components/HomePage/MyBlogs";
-import OurGallery from "./components/HomePage/OurGallery";
 import OurStory from "./components/HomePage/OurStory";
-import ServiceSection from "./components/HomePage/ServiceSection";
-import Testimonial from "./components/HomePage/Testimonial";
+import Owner from "./components/HomePage/Owner";
+import QuoteSection from "./components/HomePage/QuoteSection";
 
 export default function Home() {
   return (
     <div className="p-4 space-y-5 w-full flex flex-col justify-center items-center relative">
       <HomePageCarousel />
       <OurStory />
-      <ServiceSection />
+      <About />
+      <Masonry />
+      <Owner />
       <CustomerSupport />
-      <OurGallery />
-      <Testimonial />
-      <FiveStar />
-      <AnimatedService />
+      <QuoteSection />
       <BlogCarousel />
     </div>
   );

@@ -7,23 +7,17 @@ import Image from "next/image";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-gray-900 text-white pt-10 pb-6 px-6 md:px-12 lg:px-20">
+    <footer className="bg-amber-950 text-white pt-10 pb-6 px-6 md:px-12 lg:px-20">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {/* About Section */}
         <div>
-          <Image
-            src="/logo.png"
-            alt="Singla RO Mart- RO repair, sales, maintanance"
-            width={150}
-            height={150}
-            className="mb-4"
-          />
-          <h3 className="text-lg font-semibold mb-4">
-            Singla RO Mart, Char Murti Chowk, Greater Noida (W)
+          <h3 className="text-lg font-semibold mb-4 text-amber-500">
+            Riddhi Interiors, Tilak Road, Dehradun
           </h3>
           <p className="text-sm text-gray-400">
-            Your trusted source for RO service, sales, and AMC. Serving Greater
-            Noida West. Quality water, always within reach.
+            Elevating living spaces with bespoke interior design and modular
+            solutions. Proudly serving Tilak Road, Dehradun with timeless
+            craftsmanship and refined aesthetics.
           </p>
         </div>
 
@@ -31,23 +25,18 @@ const Footer: React.FC = () => {
         <div>
           <h4 className="text-lg font-semibold mb-3">Quick Links</h4>
           <ul className="space-y-2 text-sm text-gray-300">
-            {[
-              "Home",
-              "About Us",
-              "Gallery",
-              "Location",
-              "Blogs",
-              "Contact Us",
-            ].map((item) => (
-              <li key={item}>
-                <Link
-                  href={`/${item.toLowerCase().replace(/\s+/g, "-")}`}
-                  className="hover:text-white"
-                >
-                  {item}
-                </Link>
-              </li>
-            ))}
+            {["Home", "About Us", "Our Projects", "Services", "Gallery"].map(
+              (item) => (
+                <li key={item}>
+                  <Link
+                    href={`/${item.toLowerCase().replace(/\s+/g, "-")}`}
+                    className="hover:text-white"
+                  >
+                    {item}
+                  </Link>
+                </li>
+              )
+            )}
           </ul>
         </div>
 
@@ -55,20 +44,23 @@ const Footer: React.FC = () => {
         <div>
           <h4 className="text-lg font-semibold mb-3">Our Services</h4>
           <ul className="space-y-2 text-sm text-gray-300">
-            {["RO Services", "RO Repair", "AMC Plans", "Livpure Service"].map(
-              (service) => (
-                <li key={service}>
-                  <Link
-                    href={`/services/${service
-                      .toLowerCase()
-                      .replace(/\s+/g, "-")}`}
-                    className="hover:text-white"
-                  >
-                    {service}
-                  </Link>
-                </li>
-              )
-            )}
+            {[
+              "Full Home Interior",
+              "Modular Kitchen",
+              "Living Room Interior",
+              "Wardrobe",
+            ].map((service) => (
+              <li key={service}>
+                <Link
+                  href={`/services/${service
+                    .toLowerCase()
+                    .replace(/\s+/g, "-")}`}
+                  className="hover:text-white"
+                >
+                  {service}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
 
@@ -77,8 +69,8 @@ const Footer: React.FC = () => {
           <h4 className="text-lg font-semibold mb-3">Contact Us</h4>
           <ul className="space-y-2 text-sm text-gray-300">
             <li>
-              <a href="tel:+919711569405" className="hover:text-white">
-                +91-97115 69405
+              <a href="tel:+917895927366" className="hover:text-white">
+                +91-78959 27366
               </a>
             </li>
             <li>
@@ -86,15 +78,15 @@ const Footer: React.FC = () => {
                 href="mailto:singlaromart@gmail.com"
                 className="hover:text-white"
               >
-                singlaromart@gmail.com
+                riddhiinteriors@gmail.com
               </a>
             </li>
             <li>
-              LG-144, Lower Ground Floor,
+              Riddhi Interiors
               <br />
-              Gaur city center, Char Murti Chowk,
+              Tilak Road, Dehradun
               <br />
-              Greater Noida (W), Uttar Pradesh 201318
+              Uttarakhand - 248001
             </li>
           </ul>
 
@@ -127,24 +119,24 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Image Credits  */}
-          <div className="mt-2">
+          {/* <div className="mt-2">
             <Link
               href="/credits"
               className="text-sm text-gray-400 hover:underline"
             >
               Image Credits
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
 
       {/* Divider */}
       <div className="border-t border-gray-700 mt-10 pt-6 text-sm text-center text-gray-400">
-        <p>© 2025 Singla RO Mart. All rights reserved.</p>
+        <p>© 2025 Riddhi Interiors. All rights reserved.</p>
         <p className="mt-2">
           Designed by{" "}
           <span>
-            Avaco Technologies - Website | Mobile Apps | Digital Marketing
+            Mayank Joshi - Website | Mobile Apps | Digital Marketing
           </span>
         </p>
       </div>

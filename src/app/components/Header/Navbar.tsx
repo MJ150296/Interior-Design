@@ -13,6 +13,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Image from "next/image";
+import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 
 export default function Navbar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -44,25 +45,25 @@ export default function Navbar() {
   return (
     <nav className="bg-white dark:bg-gray-900 shadow-md w-full z-50">
       <div className="w-full px-4 sm:px-6 lg:px-8">
-        <div className="w-full flex justify-between h-16 items-center">
+        <div className="w-full flex justify-between h-24 items-center">
           {/* Brand Logo */}
-          <div className="w-1/3">
+          <div className="flex items-center">
             <Link
               href="/"
               className="text-xl font-bold text-gray-900 dark:text-white"
             >
               <Image
-                src="/logo.png"
+                src="/Riddhi Interior Design/Logo.png"
                 alt="Singla RO Mart"
                 width={150}
                 height={60}
-                className="h-14 w-auto"
+                className="h-20 w-auto"
               />
             </Link>
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex w-2/3 justify-end space-x-6 items-center">
+          <div className="hidden md:flex justify-end space-x-8 items-center font-medium text-lg tracking-wide font-serif">
             <Link href="/" className="nav-link">
               Home
             </Link>
@@ -71,7 +72,7 @@ export default function Navbar() {
             </Link>
 
             {/* Services Dropdown */}
-            <div className="relative" ref={dropdownRef}>
+            {/* <div className="relative" ref={dropdownRef}>
               <button
                 className="nav-link flex items-center gap-1"
                 onClick={() => setIsDropdownOpen((prev) => !prev)}
@@ -97,20 +98,47 @@ export default function Navbar() {
                   </Link>
                 </div>
               )}
-            </div>
+            </div> */}
 
-            <Link href="/gallery" className="nav-link">
-              Gallery
+            <Link href="/" className="nav-link">
+              Our Projects
             </Link>
-            <Link href="/location" className="nav-link">
-              Location
+            <Link href="/" className="nav-link">
+              Services
             </Link>
-            <Link href="/blogs" className="nav-link">
+            <Link href="/" className="nav-link">
               Blogs
             </Link>
-            <Link href="/contact-us" className="nav-link">
-              Contact Us
-            </Link>
+          </div>
+
+          <div className="md:flex items-center space-x-8 hidden">
+            {/* Social Icons */}
+            <div className="hidden h-full md:flex items-center space-x-4 text-gray-400">
+              <a
+                href="https://www.facebook.com/profile.php?id=61570484670946"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-blue-600"
+              >
+                <FaFacebookF />
+              </a>
+              <a
+                href="https://x.com/singlaromart"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-blue-400"
+              >
+                <FaTwitter />
+              </a>
+              <a
+                href="https://www.instagram.com/romartgaurcity/?hl=en"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-pink-500"
+              >
+                <FaInstagram />
+              </a>
+            </div>
           </div>
 
           {/* Mobile Menu */}

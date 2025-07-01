@@ -1,58 +1,108 @@
+import useInView from "@/app/hooks/useInView";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
+const testimonials = [
+  {
+    name: "Modular Interiors",
+    feedback:
+      "Elevate your space with our custom modular interiors, designed to maximize functionality and style.",
+    image: "/Riddhi Interior Design/modular-interior.jpg",
+  },
+  {
+    name: "Full Home Interiors",
+    feedback:
+      "From living rooms to bedrooms, we create cohesive designs that reflect your style.",
+    image: "/Riddhi Interior Design/full-home.jpg",
+  },
+  {
+    name: "Luxury Interiors",
+    feedback:
+      "Experience the epitome of luxury with our bespoke interior solutions, designed to elevate your living spaces.",
+    image: "/Riddhi Interior Design/luxury.jpg",
+  },
+  {
+    name: "Renovations",
+    feedback:
+      "Transform your space with our expert renovation services, blending modern aesthetics with functionality.",
+    image: "/Riddhi Interior Design/renovations.jpg",
+  },
+];
+
 const OurStory: React.FC = () => {
+  const plugin = React.useRef(
+    Autoplay({ delay: 5000, stopOnInteraction: false })
+  );
+  const { ref, isVisible } = useInView();
   return (
-    <div className="flex flex-col md:flex-row items-center justify-between p-6 md:p-12">
+    <div
+      ref={ref}
+      className={`w-full flex flex-col items-center justify-center p-2 mt-5 transition-all duration-700 ease-in-out transform ${
+        isVisible ? "translate-y-0" : "translate-y-20"
+      }`}
+    >
       {/* Text Section */}
-      <div className="md:w-1/2 text-center md:text-left mb-6 md:mb-0">
-        <h2 className="text-4xl font-bold mb-4 text-blue-500 hover:text-blue-600">
-          Our Story: <br />
-          <span className="text-2xl text-green-500 hover:text-green-600">
-            Pure Water, Pure Peace
-          </span>
+      <div className="w-full flex flex-col items-center text-center mb-6 md:mb-0">
+        <h2 className="text-4xl mb-1 font-bold text-orange-900 font-serif">
+          One-stop shop for all interiors
         </h2>
-        <p className="text-gray-700 dark:text-gray-200 mb-6 tracking-wide leading-6">
-          Welcome to <strong>Singla RO Mart - Chaar Murti Chowk</strong>, your
-          go-to expert for{" "}
-          <strong>RO water purifier sales, service, and AMC</strong> in{" "}
-          <strong>Greater Noida West</strong>. Our mission is simple: to provide
-          every home with{" "}
-          <strong>clean, safe, and great-tasting drinking water</strong>.
-          <br />
-          <br />
-          With years of experience, we specialize in{" "}
-          <strong>
-            RO installation, repair, filter replacement, and annual maintenance
-            contracts (AMC)
-          </strong>
-          . Whether it&apos;s a{" "}
-          <strong>domestic or commercial RO system</strong>, we ensure
-          top-quality service for uninterrupted pure water supply.
-          <br />
-          <br />
-          <em>
-            &quot;Reliable RO services in Greater Noida West - because every
-            drop matters!&quot;
-          </em>
+        <p className="w-3/4 italic text-base text-gray-800 dark:text-gray-200 leading-5">
+          From end-to-end interior design and renovation to smart modular
+          solutions, we provide everything you need to transform your home or
+          office. Explore our extensive range of premium furniture and decor —
+          we're here to guide and support you at every stage of your journey.
         </p>
-        <Link href="/gallery">
-          <button className="cursor-pointer px-6 py-2 bg-blue-600 text-white rounded tracking-wide font-medium hover:bg-blue-700 transition">
-            GALLERY
-          </button>
-        </Link>
       </div>
 
       {/* Image Section */}
-      <div className="md:w-1/2 flex justify-center items-center">
-        <Image
-          src="/homepage/OurStory.jpg"
-          alt="Technician Repairing water purifier"
-          width={450}
-          height={450}
-          className="h-[450px] w-[450px] rounded-lg shadow-lg object-cover transition-transform duration-300 hover:scale-105"
-        />
+      <div className="flex justify-center items-center mt-10">
+        <Carousel
+          plugins={[plugin.current]}
+          opts={{
+            align: "start",
+            loop: true,
+          }}
+          className="w-full"
+          onMouseEnter={() => plugin.current.stop()}
+          onMouseLeave={() => plugin.current.play()}
+        >
+          <CarouselContent>
+            {testimonials.map((testimonial, index) => (
+              <CarouselItem
+                key={index}
+                className="basis-full md:basis-1/2 lg:basis-1/3"
+              >
+                <Card className="h-full shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between">
+                  <CardHeader className="flex flex-col items-center">
+                    <Image
+                      src={testimonial.image}
+                      alt={testimonial.name}
+                      width={500}
+                      height={500}
+                      className="w-full h-60 rounded-t-xl object-cover"
+                    />
+                    <CardTitle className="text-center text-lg sm:text-lg font-semibold text-gray-800 dark:text-white">
+                      {testimonial.name}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="flex-grow p-2">
+                    <p className="italic text-base sm:text-base text-center text-muted-foreground leading-relaxed">
+                      &quot;{testimonial.feedback}&quot;
+                    </p>
+                  </CardContent>
+                </Card>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
       </div>
     </div>
   );

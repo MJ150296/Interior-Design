@@ -19,8 +19,8 @@ const BlogCarousel: React.FC = () => {
 
   return (
     <section className="w-full py-10 px-4 md:px-8 lg:px-12 rounded-xl">
-      <h2 className="text-3xl font-bold text-center mb-8 text-gray-800 dark:text-white">
-        Latest Blog Articles
+      <h2 className="text-3xl font-bold text-center mb-8 text-amber-950 dark:text-white">
+        Talk of the Tiles
       </h2>
 
       <Carousel

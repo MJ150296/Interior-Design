@@ -52,7 +52,7 @@ const BookAppointmentForm: React.FC<BookAppointmentFormProps> = ({
     `;
 
     const encodedMessage = encodeURIComponent(message);
-    const phoneNumber = "919711569405";
+    const phoneNumber = "917895927366";
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 
     window.open(whatsappUrl, "_blank");
@@ -82,89 +82,190 @@ const BookAppointmentForm: React.FC<BookAppointmentFormProps> = ({
   return (
     <div
       ref={containerRef}
-      className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white p-6 rounded-xl shadow-2xl w-full max-w-md relative"
+      className="bg-amber-200 dark:bg-[#1a1a1a] text-[#3a3632] dark:text-[#e8e6e3] p-8 rounded-xl shadow-lg w-full max-w-md relative border border-[#e8e2d9] dark:border-[#2d2a26]"
+      style={{
+        backgroundImage: "radial-gradient(#e8e2d9 1px, transparent 1px)",
+        backgroundSize: "20px 20px",
+      }}
     >
       <button
         onClick={onClose}
-        className="absolute top-2 right-3 text-xl font-bold text-gray-600 dark:text-gray-300 hover:text-red-500"
+        className="absolute top-10 right-4 text-xl font-light text-[#8a8379] dark:text-[#8a8379] hover:text-[#c8a97e] dark:hover:text-[#c8a97e] transition-colors duration-300"
       >
         ✕
       </button>
 
-      <h2 className="text-2xl font-semibold mb-4 text-center">
-        Book Appointment
-      </h2>
+      <div className="text-center mb-6">
+        <div className="mx-auto w-16 h-1 bg-[#c8a97e] mb-3 rounded-full"></div>
+        <h2 className="text-2xl font-medium tracking-wide font-serif">
+          Book Consultation
+        </h2>
+        <p className="text-sm text-[#8a8379] dark:text-[#8a8379] mt-1">
+          Let's create your dream space together
+        </p>
+      </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+        {/* Name Field */}
         <div>
-          <Label htmlFor="name">Name</Label>
-          <Input id="name" {...register("name")} placeholder="Your Name" />
+          <Label
+            htmlFor="name"
+            className="font-medium text-[#3a3632] dark:text-[#e8e6e3] mb-1 block pl-1"
+          >
+            Name
+          </Label>
+          <Input
+            id="name"
+            className="bg-white dark:bg-[#23201c] border-[#d9d2c5] dark:border-[#3a3632] focus:border-[#c8a97e] focus:ring-1 focus:ring-[#c8a97e] rounded-lg py-5 px-4 transition-all duration-300 placeholder-[#a0988c]"
+            {...register("name")}
+            placeholder="Your full name"
+          />
           {errors.name && (
-            <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
+            <p className="text-[#d4af7a] text-sm mt-1 pl-1">
+              {errors.name.message}
+            </p>
           )}
         </div>
 
+        {/* Email Field */}
         <div>
-          <Label htmlFor="email">Email</Label>
+          <Label
+            htmlFor="email"
+            className="font-medium text-[#3a3632] dark:text-[#e8e6e3] mb-1 block pl-1"
+          >
+            Email
+          </Label>
           <Input
             id="email"
             type="email"
+            className="bg-white dark:bg-[#23201c] border-[#d9d2c5] dark:border-[#3a3632] focus:border-[#c8a97e] focus:ring-1 focus:ring-[#c8a97e] rounded-lg py-5 px-4 transition-all duration-300 placeholder-[#a0988c]"
             {...register("email")}
-            placeholder="Your Email"
+            placeholder="your.email@example.com"
           />
           {errors.email && (
-            <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+            <p className="text-[#d4af7a] text-sm mt-1 pl-1">
+              {errors.email.message}
+            </p>
           )}
         </div>
 
+        {/* Contact Number Field */}
         <div>
-          <Label htmlFor="contactNumber">Contact Number</Label>
+          <Label
+            htmlFor="contactNumber"
+            className="font-medium text-[#3a3632] dark:text-[#e8e6e3] mb-1 block pl-1"
+          >
+            Contact Number
+          </Label>
           <Input
             id="contactNumber"
             type="tel"
+            className="bg-white dark:bg-[#23201c] border-[#d9d2c5] dark:border-[#3a3632] focus:border-[#c8a97e] focus:ring-1 focus:ring-[#c8a97e] rounded-lg py-5 px-4 transition-all duration-300 placeholder-[#a0988c]"
             {...register("contactNumber")}
-            placeholder="Your Contact Number"
+            placeholder="+91 123 456 7890"
           />
           {errors.contactNumber && (
-            <p className="text-red-500 text-sm mt-1">
+            <p className="text-[#d4af7a] text-sm mt-1 pl-1">
               {errors.contactNumber.message}
             </p>
           )}
         </div>
 
+        {/* Subject Field */}
         <div>
-          <Label htmlFor="subject">Subject</Label>
-          <Input id="subject" {...register("subject")} placeholder="Subject" />
+          <Label
+            htmlFor="subject"
+            className="font-medium text-[#3a3632] dark:text-[#e8e6e3] mb-1 block pl-1"
+          >
+            Subject
+          </Label>
+          <Input
+            id="subject"
+            className="bg-white dark:bg-[#23201c] border-[#d9d2c5] dark:border-[#3a3632] focus:border-[#c8a97e] focus:ring-1 focus:ring-[#c8a97e] rounded-lg py-5 px-4 transition-all duration-300 placeholder-[#a0988c]"
+            {...register("subject")}
+            placeholder="Project type"
+          />
           {errors.subject && (
-            <p className="text-red-500 text-sm mt-1">
+            <p className="text-[#d4af7a] text-sm mt-1 pl-1">
               {errors.subject.message}
             </p>
           )}
         </div>
 
+        {/* Message Field */}
         <div>
-          <Label htmlFor="message">Message</Label>
+          <Label
+            htmlFor="message"
+            className="font-medium text-[#3a3632] dark:text-[#e8e6e3] mb-1 block pl-1"
+          >
+            Message
+          </Label>
           <Textarea
             id="message"
             rows={5}
+            className="bg-white dark:bg-[#23201c] border-[#d9d2c5] dark:border-[#3a3632] focus:border-[#c8a97e] focus:ring-1 focus:ring-[#c8a97e] rounded-lg py-4 px-4 transition-all duration-300 placeholder-[#a0988c] min-h-[120px]"
             {...register("message")}
-            placeholder="Your Message"
+            placeholder="Tell us about your project..."
           />
           {errors.message && (
-            <p className="text-red-500 text-sm mt-1">
+            <p className="text-[#d4af7a] text-sm mt-1 pl-1">
               {errors.message.message}
             </p>
           )}
         </div>
 
-        <Button type="submit" className="w-full" disabled={isSubmitting}>
-          {isSubmitting ? "Sending..." : "Submit"}
+        <Button
+          type="submit"
+          className="w-full bg-[#c8a97e] hover:bg-[#b8976d] text-white font-medium tracking-wide py-5 rounded-lg transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#c8a97e] focus:ring-opacity-50"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? (
+            <span className="flex items-center justify-center">
+              <svg
+                className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                ></circle>
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+              </svg>
+              Processing...
+            </span>
+          ) : (
+            "Request Appointment"
+          )}
         </Button>
 
         {isSubmitSuccessful && (
-          <p className="text-green-500 text-center mt-3">
-            Thank you! Your appointment request has been sent.
-          </p>
+          <div className="bg-[#f0ede8] dark:bg-[#23201c] border border-[#d9d2c5] dark:border-[#3a3632] p-3 rounded-lg mt-4 flex items-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 text-[#c8a97e] mr-2"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                clipRule="evenodd"
+              />
+            </svg>
+            <span className="text-[#8a8379] dark:text-[#8a8379]">
+              Thank you! We'll contact you shortly to confirm.
+            </span>
+          </div>
         )}
       </form>
     </div>
