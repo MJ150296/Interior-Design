@@ -152,18 +152,18 @@ export default function Navbar() {
               <SheetContent side="left" className="bg-white dark:bg-gray-900">
                 <SheetHeader>
                   <SheetTitle>Menu</SheetTitle>
-                  <SheetDescription>Singla RO Mart</SheetDescription>
+                  <SheetDescription>Riddhi Interiors</SheetDescription>
                 </SheetHeader>
 
                 <div className="flex flex-col space-y-4 mt-5 ml-4">
                   <Link href="/" className="mobile-link">
                     Home
                   </Link>
-                  <Link href="/about-us" className="mobile-link">
+                  <Link href="/" className="mobile-link">
                     About Us
                   </Link>
 
-                  <details className="group">
+                  {/* <details className="group">
                     <summary className="flex items-center justify-between mobile-link cursor-pointer">
                       Our Services
                       <ChevronDown
@@ -197,18 +197,18 @@ export default function Navbar() {
                         Livpure Service
                       </Link>
                     </div>
-                  </details>
+                  </details> */}
 
-                  <Link href="/gallery" className="mobile-link">
+                  <Link href="/" className="mobile-link">
                     Gallery
                   </Link>
-                  <Link href="/location" className="mobile-link">
+                  {/* <Link href="/location" className="mobile-link">
                     Location
-                  </Link>
-                  <Link href="/blogs" className="mobile-link">
+                  </Link> */}
+                  <Link href="/" className="mobile-link">
                     Blogs
                   </Link>
-                  <Link href="/contact-us" className="mobile-link">
+                  <Link href="/" className="mobile-link">
                     Contact Us
                   </Link>
                 </div>

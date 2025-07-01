@@ -54,7 +54,7 @@ export default function GlobalOverlay() {
       )}
 
       {showAd && (
-        <div className="fixed bottom-12 right-1/2 translate-x-1/2 z-50">
+        <div className="fixed bottom-12 right-1/2 translate-x-1/2 z-50 p-2 md:p-0">
           <RiddhiInteriorsAd
             adImage={ads[adIndex].image}
             description={ads[adIndex].description}
