@@ -30,7 +30,7 @@ const About: React.FC = () => {
             <strong>modular kitchen setups</strong> to elegant{" "}
             <strong>furniture and décor curation</strong>, our expert team
             combines creativity with craftsmanship to turn your vision into
-            reality. Whether you're renovating, building new, or simply
+            reality. Whether you&apos;re renovating, building new, or simply
             upgrading a room, we ensure a seamless and stylish transformation.
           </p>
 

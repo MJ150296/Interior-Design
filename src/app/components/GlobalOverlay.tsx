@@ -4,7 +4,6 @@
 import { useEffect, useState } from "react";
 import BookAppointmentForm from "./HomePage/ads/BookAppointmentForm";
 import RiddhiInteriorsAd from "./HomePage/ads/RiddhiInteriorsAd";
-import Link from "next/link";
 import Image from "next/image";
 
 const ads = [

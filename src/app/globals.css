@@ -3,13 +3,16 @@
 
 @custom-variant dark (&:is(.dark *));
 
-body::-webkit-scrollbar {
-  display: none;
+html,
+body {
+  overflow: auto; /* or scroll, if you prefer */
+  -ms-overflow-style: none;  /* IE 10+ */
+  scrollbar-width: none;     /* Firefox */
 }
 
-body {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 :root {

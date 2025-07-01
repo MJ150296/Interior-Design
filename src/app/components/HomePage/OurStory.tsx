@@ -7,7 +7,6 @@ import {
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 
 const testimonials = [
@@ -58,7 +57,7 @@ const OurStory: React.FC = () => {
           From end-to-end interior design and renovation to smart modular
           solutions, we provide everything you need to transform your home or
           office. Explore our extensive range of premium furniture and decor —
-          we're here to guide and support you at every stage of your journey.
+          we&apos;re here to guide and support you at every stage of your journey.
         </p>
       </div>
 

@@ -6,15 +6,12 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
-import { MapPin, Wrench, Cog } from "lucide-react"; // Lucide Icons
 import { Button } from "@/components/ui/button";
 
 export default function HomePageCarousel() {
-  const autoplay = React.useRef(Autoplay({ delay: 6000 }));
+  // const autoplay = React.useRef(Autoplay({ delay: 6000 }));
 
   const carouselItems = [
     {

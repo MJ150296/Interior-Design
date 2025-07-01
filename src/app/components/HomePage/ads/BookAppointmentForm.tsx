@@ -101,7 +101,7 @@ const BookAppointmentForm: React.FC<BookAppointmentFormProps> = ({
           Book Consultation
         </h2>
         <p className="text-sm text-[#8a8379] dark:text-[#8a8379] mt-1">
-          Let's create your dream space together
+          Let&apos;s create your dream space together
         </p>
       </div>
 
@@ -263,7 +263,7 @@ const BookAppointmentForm: React.FC<BookAppointmentFormProps> = ({
               />
             </svg>
             <span className="text-[#8a8379] dark:text-[#8a8379]">
-              Thank you! We'll contact you shortly to confirm.
+              Thank you! We&apos;ll contact you shortly to confirm.
             </span>
           </div>
         )}

@@ -6,6 +6,8 @@ export default function useInView(threshold = 0.1) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    const currentRef = ref.current; // ✅ Store ref snapshot
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) setIsVisible(true);
@@ -13,9 +15,10 @@ export default function useInView(threshold = 0.1) {
       { threshold }
     );
 
-    if (ref.current) observer.observe(ref.current);
+    if (currentRef) observer.observe(currentRef);
+
     return () => {
-      if (ref.current) observer.unobserve(ref.current);
+      if (currentRef) observer.unobserve(currentRef); // ✅ Use the stored value
     };
   }, [threshold]);
 

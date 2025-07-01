@@ -1,5 +1,4 @@
 import React from "react";
-import { Wrench, Cog, ShieldCheck, Hammer } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   AiOutlineFileDone,
@@ -7,6 +6,7 @@ import {
   AiFillShop,
 } from "react-icons/ai";
 import useInView from "@/app/hooks/useInView";
+import { ShieldCheck } from "lucide-react";
 
 const serviceCards = [
   {

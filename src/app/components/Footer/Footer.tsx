@@ -3,7 +3,6 @@
 import React from "react";
 import Link from "next/link";
 import { FaFacebookF, FaTwitter, FaInstagram } from "react-icons/fa";
-import Image from "next/image";
 
 const Footer: React.FC = () => {
   return (
@@ -25,7 +24,7 @@ const Footer: React.FC = () => {
         <div>
           <h4 className="text-lg font-semibold mb-3">Quick Links</h4>
           <ul className="space-y-2 text-sm text-gray-300">
-            {["Home", "About Us", "Our Projects", "Services", "Gallery"].map(
+            {["Home", "About Us", "Our Projects", "Services", "Our Gallery"].map(
               (item) => (
                 <li key={item}>
                   <Link
