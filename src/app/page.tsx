@@ -10,7 +10,7 @@ import QuoteSection from "./components/HomePage/QuoteSection";
 
 export default function Home() {
   return (
-    <div className="p-4 space-y-5 w-full flex flex-col justify-center items-center relative">
+    <div className="space-y-5 w-full flex flex-col justify-center items-center relative">
       <HomePageCarousel />
       <OurStory />
       <About />

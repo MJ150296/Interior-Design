@@ -35,7 +35,7 @@ const RiddhiInteriorsAd: React.FC<RiddhiInteriorsAdProps> = ({
   return (
     <div
       ref={containerRef}
-      className="relative w-[300px] md:w-[500px] bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-2xl p-4 flex flex-col items-center text-center space-y-4"
+      className="relative w-[300px] md:w-[500px] bg-gray-100 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-2xl p-4 flex flex-col items-center text-center space-y-4"
     >
       {/* Close Button */}
       <button

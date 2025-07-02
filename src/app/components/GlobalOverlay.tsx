@@ -32,11 +32,11 @@ export default function GlobalOverlay() {
   const [showAd, setShowAd] = useState(false);
 
   useEffect(() => {
-    const formTimer = setTimeout(() => setShowAppointmentForm(true), 5000);
-    const adTimer = setTimeout(() => setShowAd(true), 20000);
+    const formTimer = setTimeout(() => setShowAppointmentForm(true), 15000);
+    const adTimer = setTimeout(() => setShowAd(true), 22000);
     const adCycleTimer = setInterval(() => {
       setAdIndex((prevIndex) => (prevIndex + 1) % ads.length);
-    }, 30000);
+    }, 10000);
 
     return () => {
       clearTimeout(formTimer);
@@ -87,7 +87,7 @@ export default function GlobalOverlay() {
           />
         </a>
       </div>
-      <div className="fixed bottom-14 left-0 z-40">
+      <div className="fixed bottom-1/2 left-0 z-40">
         <a
           href="tel:+917895927366"
         >

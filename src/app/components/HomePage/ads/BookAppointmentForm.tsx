@@ -82,7 +82,7 @@ const BookAppointmentForm: React.FC<BookAppointmentFormProps> = ({
   return (
     <div
       ref={containerRef}
-      className="bg-amber-200 dark:bg-[#1a1a1a] text-[#3a3632] dark:text-[#e8e6e3] p-8 rounded-xl shadow-lg w-full max-w-md relative border border-[#e8e2d9] dark:border-[#2d2a26]"
+      className="bg-amber-100 dark:bg-[#1a1a1a] text-[#3a3632] dark:text-[#e8e6e3] p-8 rounded-xl shadow-lg w-full max-w-md relative border border-[#e8e2d9] dark:border-[#2d2a26]"
       style={{
         backgroundImage: "radial-gradient(#e8e2d9 1px, transparent 1px)",
         backgroundSize: "20px 20px",

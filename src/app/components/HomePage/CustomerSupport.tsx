@@ -59,7 +59,7 @@ const CustomerSupport: React.FC = () => {
       >
         <div className="text-center py-14">
           <h1 className="text-5xl font-bold text-amber-950 py-2 px-10 md:px-32 rounded-lg inline-block">
-            Why Choose Us
+            What Sets Us Apart
           </h1>
         </div>
 

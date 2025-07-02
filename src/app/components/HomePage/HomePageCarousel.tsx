@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-// import Autoplay from "embla-carousel-autoplay";
 import {
   Carousel,
   CarouselContent,
@@ -11,16 +10,14 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 export default function HomePageCarousel() {
-  // const autoplay = React.useRef(Autoplay({ delay: 6000 }));
-
   const carouselItems = [
     {
       id: 1,
-      imgURL: "/carousel2.jpg",
+      imgURL: "/Riddhi Interior Design/Home/carousel_video.jpeg",
+      videoURL: "/Riddhi Interior Design/videos/video1.mp4",
       title: "Transform Your Living Space",
       message:
-        "Your living environment profoundly impacts your well-being, and a thoughtfully designed space can significantly enhance your quality of life. From the colors you choose to the furniture layout, every detail contributes to your mood.",
-
+        "Your living environment profoundly impacts your well-being, and a thoughtfully designed space can significantly enhance your quality of life.",
       description1: "Our Recent Projects",
       description2:
         "Explore our projects to see how we can transform your space and boost your well-being.",
@@ -30,23 +27,38 @@ export default function HomePageCarousel() {
 
   return (
     <div className="relative w-full">
-      <Carousel
-        // plugins={[autoplay.current]}
-        className="w-full"
-        // onMouseEnter={() => autoplay.current.stop()} // Pause on hover
-        // onMouseLeave={() => autoplay.current.play()} // Resume autoplay properly
-        // opts={{ loop: true }} // ✅ Enables looping
-      >
+      <Carousel className="w-full">
         <CarouselContent>
           {carouselItems.map((item) => (
             <CarouselItem key={item.id}>
-              <div className="">
-                <Card>
-                  <div
-                    style={{ backgroundImage: `url(${item.imgURL})` }}
-                    className="relative bg-cover bg-center h-[500px] rounded-lg"
-                  >
-                    <CardContent className="h-full flex items-start justify-center bg-black/30 rounded-lg z-20">
+              <div className="relative">
+                <Card className="overflow-hidden rounded-none border-none">
+                  {/* Background video or image */}
+                  <div className="relative h-[550px] w-full">
+                    {item.videoURL ? (
+                      <video
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        preload="auto"
+                        poster={item.imgURL}
+                        className="absolute inset-0 w-full h-full object-cover z-0"
+                      >
+                        <source src={item.videoURL} type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
+                    ) : (
+                      <div
+                        style={{
+                          backgroundImage: `url(${item.imgURL})`,
+                        }}
+                        className="absolute inset-0 bg-cover bg-center z-0"
+                      />
+                    )}
+
+                    {/* Overlay Content */}
+                    <CardContent className="relative z-10 h-full flex items-start justify-center">
                       <div className="hidden md:flex md:flex-col w-3/4 py-14 h-full justify-between items-start">
                         <p className="text-base text-white w-1/2 font-serif">
                           {item.message}
@@ -78,10 +90,6 @@ export default function HomePageCarousel() {
             </CarouselItem>
           ))}
         </CarouselContent>
-
-        {/* Next and Prev buttons are now children of <Carousel /> */}
-        {/* <CarouselPrevious className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 bg-white rounded-full shadow p-2 hover:bg-gray-100" /> */}
-        {/* <CarouselNext className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 bg-white rounded-full shadow p-2 hover:bg-gray-100" /> */}
       </Carousel>
     </div>
   );
