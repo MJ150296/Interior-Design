@@ -16,8 +16,6 @@ export default function HomePageCarousel() {
       imgURL: "/Riddhi Interior Design/Home/carousel_video.jpeg",
       videoURL: "/Riddhi Interior Design/videos/video1.mp4",
       title: "Transform Your Living Space",
-      message:
-        "Your living environment profoundly impacts your well-being, and a thoughtfully designed space can significantly enhance your quality of life.",
       description1: "Our Recent Projects",
       description2:
         "Explore our projects to see how we can transform your space and boost your well-being.",
@@ -34,7 +32,7 @@ export default function HomePageCarousel() {
               <div className="relative">
                 <Card className="overflow-hidden rounded-none border-none">
                   {/* Background video or image */}
-                  <div className="relative h-[550px] w-full">
+                  <div className="relative h-screen w-full">
                     {item.videoURL ? (
                       <video
                         autoPlay
@@ -59,10 +57,7 @@ export default function HomePageCarousel() {
 
                     {/* Overlay Content */}
                     <CardContent className="relative z-10 h-full flex items-start justify-center">
-                      <div className="hidden md:flex md:flex-col w-3/4 py-14 h-full justify-between items-start">
-                        <p className="text-base text-white w-1/2 font-serif">
-                          {item.message}
-                        </p>
+                      <div className="hidden md:flex md:flex-col w-3/4 pt-14 pb-32 pl-10 h-full justify-center items-start">
                         <h1 className="text-7xl font-serif font-semibold text-white w-2/3">
                           {item.title}
                         </h1>
