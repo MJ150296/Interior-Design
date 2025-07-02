@@ -75,7 +75,7 @@ export default function HomePageCarousel() {
                           <p className="text-base font-serif mt-2">
                             {item.description2}
                           </p>
-                          <Button className="mt-5">{item.buttonText}</Button>
+                          <Button variant="default" className="mt-5">{item.buttonText}</Button>
                         </div>
                       </div>
                     </CardContent>

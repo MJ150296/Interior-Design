@@ -63,7 +63,7 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex justify-end space-x-8 items-center font-medium text-lg tracking-wide font-serif">
+          <div className="hidden md:flex justify-end space-x-8 items-center font-medium text-base tracking-wide font-serif">
             <Link href="/" className="nav-link">
               Home
             </Link>
