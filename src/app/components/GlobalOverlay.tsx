@@ -79,7 +79,7 @@ export default function GlobalOverlay() {
           rel="noopener noreferrer"
         >
           <Image
-            src="/icons/WhatsApp.png"
+            src="/Riddhi Interior Design/icons/WhatsApp.png"
             alt="Whatsapp Logo"
             width={100}
             height={100}
@@ -92,7 +92,7 @@ export default function GlobalOverlay() {
           href="tel:+917895927366"
         >
           <Image
-            src="/icons/phoneB.png"
+            src="/Riddhi Interior Design/icons/phoneB.png"
             alt="Phone Logo"
             width={100}
             height={100}
