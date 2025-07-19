@@ -1,91 +1,82 @@
 "use client";
 
 import * as React from "react";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel";
-import { Card, CardContent } from "@/components/ui/card";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 
 export default function HomePageCarousel() {
-  const carouselItems = [
-    {
-      id: 1,
-      imgURL: "/Riddhi Interior Design/Home/carousel_video.jpeg",
-      videoURL: "/Riddhi Interior Design/videos/video1.mp4",
-      title: "Transform Your Living Space",
-      description1: "Our Recent Projects",
-      description2:
-        "Explore our projects to see how we can transform your space and boost your well-being.",
-      buttonText: "Our Projects",
-    },
-  ];
-
   return (
-    <div className="relative w-full">
-      <Carousel className="w-full">
-        <CarouselContent>
-          {carouselItems.map((item) => (
-            <CarouselItem key={item.id}>
-              <div className="relative">
-                <Card className="overflow-hidden rounded-none border-none">
-                  {/* Background video or image */}
-                  <div className="relative h-screen w-full">
-                    {item.videoURL ? (
-                      <video
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        preload="auto"
-                        poster={item.imgURL}
-                        className="absolute inset-0 w-full h-full object-cover z-0"
-                      >
-                        <source src={item.videoURL} type="video/mp4" />
-                        Your browser does not support the video tag.
-                      </video>
-                    ) : (
-                      <div
-                        style={{
-                          backgroundImage: `url(${item.imgURL})`,
-                        }}
-                        className="absolute inset-0 bg-cover bg-center z-0"
-                      />
-                    )}
+    <div className="relative w-full h-screen">
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-amber-900/80 to-transparent z-10" />
 
-                    {/* Overlay Content */}
-                    <CardContent className="relative z-10 h-full flex items-start justify-center">
-                      <div className="hidden md:flex md:flex-col w-3/4 pt-14 pb-32 pl-10 h-full justify-center items-start">
-                        <h1 className="text-7xl font-serif font-semibold text-white w-2/3">
-                          {item.title}
-                        </h1>
-                      </div>
+      {/* Pattern background */}
+      {/* <div className="absolute inset-0 bg-[url('/pattern.svg')] bg-repeat opacity-10 z-0" /> */}
 
-                      <div className="flex items-center gap-2 w-full md:w-1/4 text-white mt-40 md:mt-10">
-                        <div
-                          style={{ background: "rgba(0, 0, 0, 0.4)" }}
-                          className="p-4 mt-20 rounded-lg"
-                        >
-                          <p className="text-base font-serif">
-                            {item.description1}
-                          </p>
-                          <hr className="w-full h-4 my-3" />
-                          <p className="text-base font-serif mt-2">
-                            {item.description2}
-                          </p>
-                          <Button variant="default" className="mt-5">{item.buttonText}</Button>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </div>
-                </Card>
-              </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-      </Carousel>
+      {/* Video background */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        poster="/Riddhi Interior Design/Home/carousel_video.jpeg"
+        className="absolute inset-0 w-full h-full object-cover"
+      >
+        <source
+          src="/Riddhi Interior Design/videos/video1.mp4"
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+      </video>
+
+      {/* Content */}
+      <div className="content relative z-20 max-w-7xl h-full flex justify-center items-center px-8 md:px-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="w-full flex items-end justify-center"
+        >
+          <div className="w-2/3 px-10 mb-10 flex">
+            <motion.h1
+              className="text-4xl md:text-7xl font-serif font-bold text-white italic tracking-wider mb-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.8 }}
+            >
+              Transform Your <span className="text-amber-500">Living </span>
+              Space
+            </motion.h1>
+          </div>
+
+          <div className="flex justify-start items-center">
+            <motion.div
+              className="w-96 bg-black/40 p-6 rounded-lg backdrop-blur-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4, duration: 0.7 }}
+            >
+              <p className="text-xl font-serif italic text-amber-200 mb-3">
+                Our Recent Projects
+              </p>
+              <div className="w-16 h-1 bg-amber-500 mb-4" />
+              <p className="text-lg text-white mb-6">
+                Explore our projects to see how we can transform your space and
+                boost your well-being.
+              </p>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button className="bg-amber-600 hover:bg-amber-700 text-white font-bold py-6 px-8 text-lg">
+                  View Our Projects
+                </Button>
+              </motion.div>
+            </motion.div>
+          </div>
+        </motion.div>
+      </div>
     </div>
   );
 }

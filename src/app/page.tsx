@@ -1,24 +1,37 @@
 "use client";
-import About from "./components/HomePage/About";
-import CustomerSupport from "./components/HomePage/CustomerSupport";
-import HomePageCarousel from "./components/HomePage/HomePageCarousel";
-import Masonry from "./components/HomePage/Masonry";
-import BlogCarousel from "./components/HomePage/MyBlogs";
+import React from "react";
 import OurStory from "./components/HomePage/OurStory";
+import About from "./components/HomePage/About";
+import MasonryGallery from "./components/HomePage/Masonry";
 import Owner from "./components/HomePage/Owner";
 import QuoteSection from "./components/HomePage/QuoteSection";
+import BlogCarousel from "./components/HomePage/MyBlogs";
+import CallToAction from "./components/HomePage/CTA";
+import HomePageCarousel from "./components/HomePage/HomePageCarousel";
+import WhyChooseUs from "./components/HomePage/WhyChooseUs";
 
-export default function Home() {
+const Home = () => {
   return (
-    <div className="space-y-5 w-full flex flex-col justify-center items-center relative">
+    <div className="w-full flex flex-col items-center relative bg-gradient-to-b from-amber-50 to-white">
       <HomePageCarousel />
+
       <OurStory />
+
       <About />
-      <Masonry />
+
+      <MasonryGallery />
+
       <Owner />
-      <CustomerSupport />
+
+      <WhyChooseUs />
+
       <QuoteSection />
+
       <BlogCarousel />
+
+      <CallToAction />
     </div>
   );
-}
+};
+
+export default Home;

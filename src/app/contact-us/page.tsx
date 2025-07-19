@@ -1,252 +1,418 @@
 "use client";
-import React from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+
+import React, { useState, useEffect } from "react";
+import "animate.css";
+import { motion } from "framer-motion";
+import { Card, CardContent } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import Image from "next/image";
-import FiveStar from "../components/FiveStar";
+import {
+  CalendarIcon,
+  HomeIcon,
+  AwardIcon,
+  PaletteIcon,
+  PhoneIcon,
+  MapPinIcon,
+} from "lucide-react";
+import BookAppointmentForm from "../components/contactUs/BookAppointmentForm";
 
-// Zod schema
-const contactFormSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.string().email("Enter a valid email address"),
-  contactNumber: z
-    .string()
-    .min(10, "Contact number must be at least 10 digits")
-    .max(15, "Contact number is too long"),
-  subject: z.string().min(3, "Subject must be at least 3 characters"),
-  message: z.string().min(10, "Message must be at least 10 characters"),
-});
+const AppointmentPage: React.FC = () => {
+  const [activeTab, setActiveTab] = useState("consultation");
+  const [currentHighlight, setCurrentHighlight] = useState(0);
 
-// Infer the form type
-type ContactFormData = z.infer<typeof contactFormSchema>;
+  const highlights = [
+    {
+      title: "Expert Design Consultation",
+      description:
+        "Our experienced designers will work with you to create spaces that reflect your personality and lifestyle.",
+      icon: <PaletteIcon className="w-8 h-8 text-amber-600" />,
+    },
+    {
+      title: "Premium Quality Materials",
+      description:
+        "We source only the finest materials to ensure your interiors are both beautiful and durable.",
+      icon: <AwardIcon className="w-8 h-8 text-amber-600" />,
+    },
+    {
+      title: "End-to-End Project Management",
+      description:
+        "From concept to completion, we handle every detail so you can relax and enjoy the transformation.",
+      icon: <HomeIcon className="w-8 h-8 text-amber-600" />,
+    },
+    {
+      title: "Personalized Solutions",
+      description:
+        "Every space is unique - we create custom solutions tailored to your specific needs and preferences.",
+      icon: <CalendarIcon className="w-8 h-8 text-amber-600" />,
+    },
+  ];
 
-const ContactUs: React.FC = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting, isSubmitSuccessful },
-    reset,
-  } = useForm<ContactFormData>({
-    resolver: zodResolver(contactFormSchema),
-  });
-
-  const onSubmit = async (data: ContactFormData) => {
-    const { name, email, contactNumber, subject, message } = data;
-
-    const text = `New Contact Form Submission:%0A%0A Name: ${name}%0A Email: ${email}%0A Contact Number: ${contactNumber}%0A Subject: ${subject}%0A Message: ${message}`;
-
-    const whatsappUrl = `https://wa.me/918700051152?text=${text}`;
-
-    window.open(whatsappUrl, "_blank");
-
-    reset(); // Clear form after submit
-  };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentHighlight((prev) => (prev + 1) % highlights.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <div className="p-6">
-      {/* Top Section */}
-      <div className="relative w-full rounded-2xl shadow-lg overflow-hidden">
-        <div className="absolute inset-0" />
-        <div
-          className="relative w-full py-20 px-6 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url('/ContactUsBackground.jpg')` }}
-        >
-          <div className="absolute inset-0 bg-black/10 backdrop-blur-sm z-0" />
-          <div className="relative z-10 text-center text-white">
-            <h1 className="text-3xl md:text-5xl font-bold mb-10">Contact Us</h1>
-
-            <div className="flex justify-center items-center gap-x-5 md:gap-x-10">
-              {[
-                {
-                  href: "https://www.instagram.com/romartgaurcity/?hl=en",
-                  src: "/icons/Instagram.png",
-                  alt: "Instagram",
-                },
-                {
-                  href: "https://www.facebook.com/profile.php?id=61570484670946",
-                  src: "/icons/Facebook.png",
-                  alt: "Facebook",
-                },
-                {
-                  href: "https://wa.me/+919711569405",
-                  src: "/icons/WhatsApp.png",
-                  alt: "WhatsApp",
-                },
-                {
-                  href: "mailto:singlaromart@gmail.in",
-                  src: "/icons/Gmail.png",
-                  alt: "Gmail",
-                },
-              ].map((icon, index) => (
-                <a
-                  key={index}
-                  href={icon.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="transition-transform duration-300 ease-in-out hover:scale-105"
-                >
-                  <Image src={icon.src} alt={icon.alt} width={50} height={50} />
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="w-full flex flex-col justify-center items-center my-2">
-          <div className="w-full flex justify-center items-center gap-x-1 md:gap-x-2">
-            <FiveStar />
-            {/* <div>
-              <p className="text-7xl md:text-9xl font-sans text-blue-600">5</p>
-            </div>
-            <div className="flex flex-col items-center justify-center font-sans text-xl md:text-4xl">
-              <span className="text-blue-600">star rated</span>
-              <span className="text-green-600">on Google</span>
-            </div> */}
-          </div>
-          <div>
-            <a href="tel:+919711569405" className="block text-green-600">
-              <div className="flex items-center text-2xl font-semibold space-x-2 hover:opacity-80 transition-opacity duration-200">
-                <span className="text-blue-600">Call us at - </span>
-                <span className="text-green-600 font-semibold">
-                  +91-97115 69405
-                </span>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* Form Section */}
-      <div className="mt-10 flex flex-col-reverse md:flex-row justify-around items-start">
-        <div className="w-full md:w-1/2 flex justify-center items-center py-10">
-          <a
-            href="https://maps.app.goo.gl/HeTEZm253shoiSfv6"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="min-h-screen pt-24 bg-gradient-to-br from-gray-50 to-amber-50">
+      {/* Hero Section */}
+      <motion.header
+        className="relative bg-gradient-to-r from-amber-900 via-amber-700 to-amber-600 text-white p-8 md:p-16 text-center shadow-xl overflow-hidden"
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+      >
+        {/* <div className="absolute inset-0 bg-[url('/pattern.svg')] bg-repeat opacity-10"></div> */}
+        <div className="relative z-10">
+          <motion.h1
+            className="text-4xl md:text-5xl font-extrabold tracking-wide"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
           >
-            <Image
-              src="/store-image.jpg"
-              alt="Store/ Shop Image, Gaur City Center, Greater Noida"
-              priority
-              width={400}
-              height={300}
-              className="rounded-lg shadow-lg hover:scale-105 transition-transform duration-500"
-            />
-          </a>
-        </div>
-
-        <div className="w-full md:w-1/2 p-0 md:p-5">
-          <h2 className="text-3xl font-semibold mb-3">
-            10% OFF when you book online - Only at Singla RO Mart! <br />
-          </h2>{" "}
-          <p className="text-gray-600 mb-5">
-            We would love to hear from you! Please fill out the form below and
-            we&apos;ll get back to you shortly.
-          </p>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-            {/* Name */}
-            <div>
-              <Label htmlFor="name">Name</Label>
-              <Input id="name" placeholder="Your Name" {...register("name")} />
-              {errors.name && (
-                <p className="text-red-600 text-sm mt-1">
-                  {errors.name.message}
-                </p>
-              )}
-            </div>
-
-            {/* Email */}
-            <div>
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="Your Email"
-                {...register("email")}
-              />
-              {errors.email && (
-                <p className="text-red-600 text-sm mt-1">
-                  {errors.email.message}
-                </p>
-              )}
-            </div>
-
-            {/* Contact Number */}
-            <div>
-              <Label htmlFor="contactNumber">Contact Number</Label>
-              <Input
-                id="contactNumber"
-                type="tel"
-                placeholder="Your Contact Number"
-                {...register("contactNumber")}
-              />
-              {errors.contactNumber && (
-                <p className="text-red-600 text-sm mt-1">
-                  {errors.contactNumber.message}
-                </p>
-              )}
-            </div>
-
-            {/* Subject */}
-            <div>
-              <Label htmlFor="subject">Subject</Label>
-              <Input
-                id="subject"
-                placeholder="Subject"
-                {...register("subject")}
-              />
-              {errors.subject && (
-                <p className="text-red-600 text-sm mt-1">
-                  {errors.subject.message}
-                </p>
-              )}
-            </div>
-
-            {/* Message */}
-            <div>
-              <Label htmlFor="message">Message</Label>
-              <Textarea
-                id="message"
-                placeholder="Your Message"
-                rows={5}
-                {...register("message")}
-              />
-              {errors.message && (
-                <p className="text-red-600 text-sm mt-1">
-                  {errors.message.message}
-                </p>
-              )}
-            </div>
-
-            {/* Submit */}
-            <Button type="submit" className="w-full" disabled={isSubmitting}>
-              {isSubmitting ? "Sending..." : "Submit"}
+            Design Your Dream Space
+          </motion.h1>
+          <motion.p
+            className="mt-4 text-lg font-medium max-w-2xl mx-auto"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+          >
+            Schedule a consultation with our expert interior designers to
+            transform your home or office
+          </motion.p>
+          <motion.div
+            className="mt-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
+          >
+            <Button
+              size="lg"
+              className="bg-amber-500 hover:bg-amber-400 text-amber-900 font-bold text-lg px-8 py-6 rounded-full shadow-lg transform hover:scale-105 transition-transform duration-300"
+              onClick={() =>
+                document
+                  .getElementById("appointment-form")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
+            >
+              Book Free Consultation
             </Button>
-
-            {isSubmitSuccessful && (
-              <p className="text-green-600 text-center mt-3">
-                Thank you! Your message has been sent.
-              </p>
-            )}
-          </form>
+          </motion.div>
         </div>
-      </div>
+      </motion.header>
 
-      {/* Google Map */}
-      <div className="py-5 md:py-10 rounded-3xl overflow-hidden shadow-2xl px-2 md:px-20">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.803276386607!2d77.42460267934571!3d28.605677900000014!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cef143d84a553%3A0x98665a47b552931e!2sSingla%20RO%20Mart%20-%20RO%20Services%2C%20Sales%2C%20Repairs!5e0!3m2!1sen!2sin!4v1744102786830!5m2!1sen!2sin"
-          loading="lazy"
-          className="w-full h-80"
-        ></iframe>
-      </div>
+      {/* Highlights Section */}
+      <section className="py-12 px-4 max-w-7xl mx-auto">
+        <motion.div
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-amber-900">
+            Why Choose Riddhi Interiors?
+          </h2>
+          <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
+            We combine creativity, expertise, and attention to detail to deliver
+            exceptional interior solutions
+          </p>
+        </motion.div>
+
+        {/* Interactive Tabs */}
+        <Tabs
+          value={activeTab}
+          onValueChange={setActiveTab}
+          className="max-w-4xl mx-auto mb-12"
+        >
+          <TabsList className="grid grid-cols-2 md:grid-cols-4 bg-transparent p-2 rounded-xl">
+            <TabsTrigger value="consultation" className="rounded-lg">
+              Consultation
+            </TabsTrigger>
+            <TabsTrigger value="design" className="rounded-lg">
+              Design Process
+            </TabsTrigger>
+            <TabsTrigger value="materials" className="rounded-lg">
+              Materials
+            </TabsTrigger>
+            <TabsTrigger value="execution" className="rounded-lg">
+              Execution
+            </TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="consultation">
+            <Card className="border-amber-500 border-2">
+              <CardContent className="p-6">
+                <div className="flex flex-col md:flex-row gap-6 items-center">
+                  <div className="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16 flex items-center justify-center">
+                    <PhoneIcon className="text-amber-600" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-amber-900">
+                      Personalized Consultation
+                    </h3>
+                    <p className="mt-2 text-gray-600">
+                      Our process begins with understanding your vision,
+                      preferences, and requirements through an in-depth
+                      consultation.
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="design">
+            <Card className="border-amber-500 border-2">
+              <CardContent className="p-6">
+                <div className="flex flex-col md:flex-row gap-6 items-center">
+                  <div className="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16 flex items-center justify-center">
+                    <PaletteIcon className="text-amber-600" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-amber-900">
+                      Creative Design Process
+                    </h3>
+                    <p className="mt-2 text-gray-600">
+                      Our designers create mood boards, 3D renderings, and
+                      detailed plans to bring your vision to life.
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="materials">
+            <Card className="border-amber-500 border-2">
+              <CardContent className="p-6">
+                <div className="flex flex-col md:flex-row gap-6 items-center">
+                  <div className="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16 flex items-center justify-center">
+                    <AwardIcon className="text-amber-600" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-amber-900">
+                      Quality Materials
+                    </h3>
+                    <p className="mt-2 text-gray-600">
+                      We source premium, sustainable materials from trusted
+                      suppliers to ensure longevity and aesthetic appeal.
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="execution">
+            <Card className="border-amber-500 border-2">
+              <CardContent className="p-6">
+                <div className="flex flex-col md:flex-row gap-6 items-center">
+                  <div className="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16 flex items-center justify-center">
+                    <HomeIcon className="text-amber-600" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-amber-900">
+                      Precision Execution
+                    </h3>
+                    <p className="mt-2 text-gray-600">
+                      Our skilled craftsmen execute the design with meticulous
+                      attention to detail and quality workmanship.
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
+
+        {/* Auto-rotating highlights */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+          {highlights.map((highlight, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{
+                opacity: index === currentHighlight ? 1 : 0.7,
+                y: 0,
+                scale: index === currentHighlight ? 1.05 : 1,
+              }}
+              transition={{ duration: 0.5 }}
+              className={`bg-gradient-to-br from-white to-amber-50 p-6 rounded-xl shadow-lg border ${
+                index === currentHighlight
+                  ? "border-amber-500 border-2 shadow-amber-100"
+                  : "border-gray-200"
+              }`}
+            >
+              <div className="flex flex-col items-center text-center">
+                <div className="mb-4 p-3 bg-amber-100 rounded-full">
+                  {highlight.icon}
+                </div>
+                <h3 className="text-xl font-bold text-amber-900">
+                  {highlight.title}
+                </h3>
+                <p className="mt-2 text-gray-600">{highlight.description}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Portfolio Preview */}
+      <section className="py-16 bg-gradient-to-b from-amber-50 to-gray-100">
+        <div className="max-w-7xl mx-auto px-4">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-amber-900">
+              Our Signature Designs
+            </h2>
+            <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
+              Explore some of our recent projects that showcase our design
+              philosophy
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[1, 2, 3, 4, 5, 6].map((item) => (
+              <motion.div
+                key={item}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: item * 0.1 }}
+                className="group"
+              >
+                <Card className="overflow-hidden border-0 shadow-lg h-full">
+                  <div className="relative h-64 bg-gradient-to-r from-amber-200 to-amber-300 rounded-t-xl overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-t from-amber-900/40 to-transparent"></div>
+                    <div className="absolute bottom-4 left-4">
+                      <h3 className="text-white font-bold text-xl">
+                        Project {item}
+                      </h3>
+                      <p className="text-amber-100">Residential Design</p>
+                    </div>
+                  </div>
+                  <CardContent className="p-6">
+                    <p className="text-gray-600">
+                      Modern living room design with custom furniture and warm
+                      lighting solutions.
+                    </p>
+                    <Button variant="link" className="text-amber-600 p-0 mt-4">
+                      View Project Details →
+                    </Button>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Appointment Form Section */}
+      <section
+        id="appointment-form"
+        className="relative py-16 bg-gradient-to-b from-gray-50 to-amber-50"
+      >
+        <div className="max-w-6xl mx-auto px-4">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-amber-900">
+              Schedule Your Design Consultation
+            </h2>
+            <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
+              Fill out the form below and our design team will contact you to
+              discuss your project
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="bg-white rounded-2xl shadow-xl p-6 md:p-8 border border-amber-200 max-w-4xl mx-auto"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <BookAppointmentForm />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Testimonial Slider */}
+      <section className="py-16 bg-amber-900 text-amber-50">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12">
+            What Our Clients Say
+          </h2>
+
+          <div className="relative">
+            <div className="bg-amber-800/50 p-8 rounded-2xl shadow-lg">
+              <p className="text-xl italic">
+                "Riddhi Interiors transformed our outdated home into a modern
+                sanctuary. Their attention to detail and creative solutions
+                exceeded our expectations!"
+              </p>
+              <div className="mt-6">
+                <div className="font-bold">Priya Sharma</div>
+                <div className="text-amber-200">
+                  Residential Project, Mumbai
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Info */}
+      <section className="py-12 bg-gradient-to-br from-amber-600 to-amber-800 text-white">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="flex flex-col items-center text-center">
+              <div className="bg-amber-500/20 p-4 rounded-full mb-4">
+                <PhoneIcon className="w-8 h-8" />
+              </div>
+              <h3 className="text-xl font-bold">Call Us</h3>
+              <p className="mt-2 text-amber-100">+91 78959 27366</p>
+            </div>
+
+            <div className="flex flex-col items-center text-center">
+              <div className="bg-amber-500/20 p-4 rounded-full mb-4">
+                <MapPinIcon className="w-8 h-8" />
+              </div>
+              <h3 className="text-xl font-bold">Visit Us</h3>
+              <p className="mt-2 text-amber-100">Tilak Road, Dehradun</p>
+            </div>
+
+            <div className="flex flex-col items-center text-center">
+              <div className="bg-amber-500/20 p-4 rounded-full mb-4">
+                <CalendarIcon className="w-8 h-8" />
+              </div>
+              <h3 className="text-xl font-bold">Working Hours</h3>
+              <p className="mt-2 text-amber-100">Mon-Sat: 10AM - 7PM</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer Section */}
+      <footer className="py-8 bg-amber-900 text-amber-100 text-center">
+        <div className="max-w-4xl mx-auto px-4">
+          <p className="text-lg font-sans font-semibold tracking-wide mb-4">
+            "Transform your space with our expertise - Enjoy 15% off your first
+            interior design project!"
+          </p>
+        </div>
+      </footer>
     </div>
   );
 };
 
-export default ContactUs;
+export default AppointmentPage;

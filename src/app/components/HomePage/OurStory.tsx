@@ -44,20 +44,38 @@ const OurStory: React.FC = () => {
   return (
     <div
       ref={ref}
-      className={`w-full flex flex-col items-center justify-center p-2 mt-5 transition-all duration-700 ease-in-out transform ${
+      className={`w-full flex flex-col items-center justify-center px-12 py-16 mt-5 transition-all duration-700 ease-in-out transform ${
         isVisible ? "translate-y-0" : "translate-y-20"
       }`}
     >
       {/* Text Section */}
       <div className="w-full flex flex-col items-center text-center mb-6 md:mb-0">
-        <h2 className="text-4xl mb-1 font-bold text-orange-900 font-serif">
-          One-stop shop for all interiors
-        </h2>
+        <div className="flex justify-center items-center gap-x-10 mb-5">
+          <Image
+            src="/Riddhi Interior Design/About/hang-lamp.png"
+            alt="hanging lamp"
+            width={50}
+            height={50}
+            className="mx-auto"
+          />
+          <h2 className="text-4xl mb-1 font-bold italic text-orange-900 font-serif">
+            One-stop shop for all interiors
+          </h2>
+          <Image
+            src="/Riddhi Interior Design/About/hang-lamp.png"
+            alt="hanging lamp"
+            width={50}
+            height={50}
+            className="mx-auto"
+          />
+        </div>
+
         <p className="w-3/4 italic text-base text-gray-800 dark:text-gray-200 leading-5">
           From end-to-end interior design and renovation to smart modular
           solutions, we provide everything you need to transform your home or
           office. Explore our extensive range of premium furniture and decor —
-          we&apos;re here to guide and support you at every stage of your journey.
+          we&apos;re here to guide and support you at every stage of your
+          journey.
         </p>
       </div>
 

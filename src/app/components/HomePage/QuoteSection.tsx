@@ -26,7 +26,7 @@ const services = [
 
 const QuoteSection: React.FC = () => {
   return (
-    <div className="w-full flex flex-col items-center justify-center mt-10 px-4">
+    <div className="w-full flex flex-col items-center justify-center mt-10 px-4 py-16">
       <AnimatedService />
       <p className="text-xl font-medium text-center mb-8">
         Calculate the approximate cost of doing up your home interiors
@@ -39,28 +39,33 @@ const QuoteSection: React.FC = () => {
             className="rounded-2xl shadow-md hover:shadow-lg transition duration-300 py-3"
           >
             <CardHeader>
-              <div className="flex justify-between p-2">
+              <div className="flex justify-between p-2 mb-6">
                 <Image
                   src={service.imageURL}
                   alt={service.title}
                   width={100}
                   height={100}
-                  className="w-16 h-16 rounded-full object-cover"
+                  className="w-16 h-16 object-cover"
                 />
                 <Image
                   src="/Riddhi Interior Design/calculator.png"
                   alt="Quote Icon"
                   width={50}
                   height={50}
-                  className="w-12 h-12 rounded-full object-cover"
+                  className="w-12 h-12 object-cover"
                 />
               </div>
             </CardHeader>
-            <CardTitle className="pl-6">{service.title}</CardTitle>
+            <CardTitle className="pl-6 text-amber-900 text-xl">
+              {service.title}
+            </CardTitle>
 
             <CardContent>
-              <p className="mb-4 text-gray-700">{service.description}</p>
-              <Button variant="default" className="w-full hover:bg-amber-500 cursor-pointer">
+              <p className="mb-4 text-gray-600">{service.description}</p>
+              <Button
+                variant="default"
+                className="w-full bg-amber-600 hover:bg-amber-700 cursor-pointer"
+              >
                 Get Estimate
               </Button>
             </CardContent>

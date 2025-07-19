@@ -4,6 +4,7 @@ export interface ROContentItem {
   id: number;
   slug: string;
   title: string;
+  backgroundImage?: string; // <- new optional field
   button: {
     text: string;
     link: string;
@@ -25,165 +26,168 @@ export interface ROContentItem {
 export const roContent: ROContentItem[] = [
   {
     id: 1,
-    slug: "ro-services",
-    title: "Singla RO Services",
+    slug: "full-home-interiors",
+    title: "Full Home Interiors",
+    backgroundImage: "/Riddhi Interior Design/masonry-3.jpg",
     button: {
-      text: "Contact Us",
+      text: "Get a Free Consultation",
       link: "/contact-us",
     },
     sections: [
       {
-        heading: "Best RO Services Near Me in Greater Noida West",
+        heading: "End-to-End Home Interior Solutions",
         paragraphs: [
-          "One of the most essential aspects of our health is pure and sustainable water. For that",
-          "As the human body is about 60-70% water, clean water is crucial.",
+          "Transform your entire home with Riddhi Interiors complete design and execution services.",
+          "From concept to creation, we bring luxurious comfort and functionality to every corner.",
         ],
         highlightedLink: {
-          url: "https://g.co/kgs/9yNuqBd",
-          text: "Singla RO Mart, Gaur Chowk, Greater Noida (W)",
+          url: "",
+          text: "Visit Our Office at Tilak Road, Dehradun",
         },
         image: {
-          src: "/homepage/storeImage1.png",
-          alt: "Singla RO Services",
+          src: "/Riddhi Interior Design/carousel-1.jpg",
+          alt: "Full Home Interior by Riddhi",
         },
       },
       {
-        heading: "Why Choose Singla RO?",
+        heading: "Why Choose Riddhi Interiors?",
         paragraphs: [
-          "We are committed to delivering clean, purified water through innovative technology and prompt service.",
-          "Thousands of families rely on us for daily healthy hydration.",
+          "We focus on creating timeless spaces that blend your personal style with modern trends.",
+          "Our in-house team ensures quality, transparency, and on-time project delivery.",
         ],
         highlightedLink: {
-          url: "https://singlaromart.in/about-us",
-          text: "Learn More About Us",
+          url: "/about-us",
+          text: "Know More About Us",
         },
         image: {
-          src: "/homepage/storeImage.png",
-          alt: "RO Team at Work",
+          src: "/Riddhi Interior Design/carousel-1.jpg",
+          alt: "Interior Design Team Discussion",
         },
       },
     ],
   },
   {
     id: 2,
-    slug: "ro-repair",
-    title: "RO Repair Services",
+    slug: "luxury-interiors",
+    title: "Luxury Interiors",
+    backgroundImage: "/Riddhi Interior Design/masonry-2.jpg",
     button: {
-      text: "Book a Technician",
+      text: "Book a Design Expert",
       link: "/contact-us",
     },
     sections: [
       {
-        heading: "Instant RO Repair Near You",
+        heading: "Redefining Luxury Living",
         paragraphs: [
-          "Facing issues with your RO system? Classic RO offers fast and reliable repair services at your doorstep.",
-          "We repair all major RO brands with genuine parts and expert hands.",
+          "From plush textures to bespoke furniture, our luxury interiors are tailored to perfection.",
+          "We infuse elegance in every detail, making your home a reflection of sophistication.",
         ],
         highlightedLink: {
-          url: "https://singlaromart.in/contact-us",
-          text: "Schedule Repair",
+          url: "/our-projects",
+          text: "View Our Luxury Projects",
         },
         image: {
-          src: "/homepage/storeImage1.png",
-          alt: "RO Technician Repairing Unit",
+          src: "/Riddhi Interior Design/carousel2.jpg",
+          alt: "Luxury Living Room Design",
         },
       },
       {
-        heading: "Experienced RO Experts",
+        heading: "Our Signature Touch",
         paragraphs: [
-          "Our technicians are highly trained and experienced in diagnosing and fixing RO issues quickly.",
-          "We provide quality service with a warranty on repairs.",
+          "We bring together global materials, curated designs, and exquisite craftsmanship.",
+          "Every space we design narrates a unique story — your story.",
         ],
         highlightedLink: {
           url: "https://g.page/r/CR6TUrVHWmaYEAE/review",
-          text: "See What Customers Say",
+          text: "What Our Clients Say",
         },
         image: {
-          src: "/homepage/storeImage.png",
-          alt: "RO Repair in Progress",
+          src: "/Riddhi Interior Design/carousel2.jpg",
+          alt: "Luxury Bedroom Design",
         },
       },
     ],
   },
   {
     id: 3,
-    slug: "amc-plans",
-    title: "AMC Plans for RO",
+    slug: "modular-interiors",
+    title: "Modular Interiors",
+    backgroundImage: "/Riddhi Interior Design/masonry-6.jpg",
     button: {
-      text: "Explore AMC Plans",
-      link: "/amc-plans",
+      text: "Explore Modular Options",
+      link: "/contact-us",
     },
     sections: [
       {
-        heading: "Affordable AMC Plans",
+        heading: "Smart & Sleek Modular Designs",
         paragraphs: [
-          "With Classic RO&apos;s Annual Maintenance Contracts, enjoy peace of mind all year round.",
-          "We ensure timely service, filter changes, and free repairs under your plan.",
+          "Riddhi Interiors delivers tailor-made modular kitchens and wardrobes for urban lifestyles.",
+          "Built with precision and top-grade materials, our modular units are both stylish and functional.",
         ],
         highlightedLink: {
-          url: "https://singlaromart.in/amc-plans",
-          text: "Know More",
+          url: "/our-projects#modular",
+          text: "See Modular Projects",
         },
         image: {
-          src: "/homepage/storeImage1.png",
-          alt: "AMC Plan Coverage",
+          src: "/Riddhi Interior Design/carousel2.jpg",
+          alt: "Modular Kitchen Design",
         },
       },
       {
-        heading: "Why Opt for AMC?",
+        heading: "Why Choose Modular Interiors?",
         paragraphs: [
-          "Save money and avoid emergencies with our value-packed AMC options.",
-          "Choose from basic to premium plans tailored to your usage.",
+          "Modular designs save space, improve organization, and add contemporary charm to your home.",
+          "Our solutions are custom-built to your needs with options for finishes, layouts, and accessories.",
         ],
         highlightedLink: {
-          url: "https://singlaromart.in/amc-plans",
-          text: "Check Plan Pricing",
+          url: "/contact-us",
+          text: "Schedule a Site Visit",
         },
         image: {
-          src: "/homepage/storeImage.png",
-          alt: "AMC Comparison Chart",
+          src: "/Riddhi Interior Design/carousel-1.jpg",
+          alt: "Modular Wardrobe Design",
         },
       },
     ],
   },
   {
     id: 4,
-    slug: "livpure-service",
-    title: "Livpure RO Service",
+    slug: "renovations",
+    title: "Renovations",
+    backgroundImage: "/Riddhi Interior Design/full-home.jpg",
     button: {
-      text: "Service Your Livpure",
+      text: "Start Your Renovation",
       link: "/contact-us",
     },
     sections: [
       {
-        heading: "Dedicated Livpure RO Support",
+        heading: "Give Your Space a Fresh Makeover",
         paragraphs: [
-          "Our team specializes in servicing Livpure RO systems using genuine parts and trained professionals.",
-          "We maintain your system for clean, fresh water at all times.",
+          "Whether it's a single room or the entire home, we specialize in seamless, aesthetic renovations.",
+          "Our renovation services revive old spaces with updated layouts, materials, and energy-efficient upgrades.",
         ],
         highlightedLink: {
-          url: "https://singlaromart.in/contact-us",
-          text: "Contact for Livpure Help",
+          url: "/services/renovation",
+          text: "Explore Renovation Services",
         },
-
         image: {
-          src: "/homepage/storeImage1.png",
-          alt: "Livpure RO Maintenance",
+          src: "/Riddhi Interior Design/renovations.jpg",
+          alt: "Living Room Renovation by Riddhi",
         },
       },
       {
-        heading: "Trust Classic RO for Livpure",
+        heading: "Stress-Free Renovation Process",
         paragraphs: [
-          "From filter replacements to full system checks, we&apos;ve got Livpure covered.",
-          "Quick response, honest pricing, and top service quality guaranteed.",
+          "From planning and budgeting to execution, we handle everything end-to-end.",
+          "Expect timely delivery, transparent pricing, and results that exceed expectations.",
         ],
         highlightedLink: {
-          url: "",
-          text: "",
+          url: "/testimonials",
+          text: "Hear From Happy Clients",
         },
         image: {
-          src: "/homepage/storeImage.png",
-          alt: "Livpure RO Technician",
+          src: "/Riddhi Interior Design/renovations.jpg",
+          alt: "Before and After Renovation",
         },
       },
     ],

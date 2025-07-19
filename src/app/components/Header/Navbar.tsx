@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { Menu } from "lucide-react";
+import { ChevronDown, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -14,10 +14,13 @@ import {
 } from "@/components/ui/sheet";
 import Image from "next/image";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
-  // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  // const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
+
+  const pathname = usePathname();
 
   // Check local storage on mount
   useEffect(() => {
@@ -28,117 +31,171 @@ export default function Navbar() {
   }, []);
 
   // Close dropdown on outside click
-  // useEffect(() => {
-  //   function handleClickOutside(event: MouseEvent) {
-  //     if (
-  //       dropdownRef.current &&
-  //       !dropdownRef.current.contains(event.target as Node)
-  //     ) {
-  //       setIsDropdownOpen(false);
-  //     }
-  //   }
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    }
 
-  //   document.addEventListener("mousedown", handleClickOutside);
-  //   return () => document.removeEventListener("mousedown", handleClickOutside);
-  // }, []);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <nav className="bg-white dark:bg-gray-900 shadow-md w-full z-50">
       <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="w-full flex justify-between h-24 items-center">
           {/* Brand Logo */}
-          <div className="flex items-center">
+          <div className="flex items-center gap-x-10">
             <Link
               href="/"
               className="text-xl font-bold text-gray-900 dark:text-white"
             >
               <Image
                 src="/Riddhi Interior Design/Logo.png"
-                alt="Singla RO Mart"
+                alt="Riddhi Interiors Logo"
                 width={150}
                 height={60}
                 className="h-20 w-auto"
               />
             </Link>
+            <div className="md:flex items-center space-x-8 hidden">
+              {/* Social Icons */}
+              <div className="hidden h-full md:flex items-center space-x-4 text-gray-400">
+                <a
+                  href="#"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-blue-600"
+                >
+                  <FaFacebookF />
+                </a>
+                <a
+                  href="#"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-blue-400"
+                >
+                  <FaTwitter />
+                </a>
+                <a
+                  href="#"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-pink-500"
+                >
+                  <FaInstagram />
+                </a>
+              </div>
+            </div>
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex justify-end space-x-8 items-center font-medium text-base tracking-wide font-serif">
-            <Link href="/" className="nav-link">
+          <div className="font-sans hidden md:flex justify-end space-x-8 items-center font-medium text-base tracking-wide">
+            <Link
+              href="/"
+              className={`nav-link ${
+                pathname === "/"
+                  ? "text-amber-500"
+                  : "text-amber-900 dark:text-white"
+              }`}
+            >
               Home
             </Link>
-            <Link href="/" className="nav-link">
+            <Link
+              href="/about-us"
+              className={`nav-link ${
+                pathname === "/about-us"
+                  ? "text-amber-500"
+                  : "text-amber-900 dark:text-white"
+              }`}
+            >
               About Us
             </Link>
 
+            <Link
+              href="/our-projects"
+              className={`nav-link ${
+                pathname === "/our-projects"
+                  ? "text-amber-500"
+                  : "text-amber-900 dark:text-white"
+              }`}
+            >
+              Portfolio
+            </Link>
+
             {/* Services Dropdown */}
-            {/* <div className="relative" ref={dropdownRef}>
+            <div className="relative" ref={dropdownRef}>
               <button
-                className="nav-link flex items-center gap-1"
+                className={`nav-link flex items-center gap-1 ${
+                  pathname.startsWith("/services")
+                    ? "text-amber-500"
+                    : "text-amber-900 dark:text-white"
+                }`}
                 onClick={() => setIsDropdownOpen((prev) => !prev)}
               >
-                Our Services <ChevronDown size={16} />
+                Services <ChevronDown size={16} />
               </button>
               {isDropdownOpen && (
                 <div className="absolute left-0 z-20 mt-2 w-48 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg">
-                  <Link href="/services/ro-services" className="dropdown-link">
-                    RO Services
-                  </Link>
-                  <Link href="/services/ro-repair" className="dropdown-link">
-                    RO Repair
-                  </Link>
-                  <Link href="/services/amc-plans" className="dropdown-link">
-                    AMC Plans
-                  </Link>
                   <Link
-                    href="/services/livpure-service"
+                    href="/services/full-home-interiors"
                     className="dropdown-link"
                   >
-                    Livpure Service
+                    Full Home Interiors
+                  </Link>
+                  <Link
+                    href="/services/luxury-interiors"
+                    className="dropdown-link"
+                  >
+                    Luxury Interiors
+                  </Link>
+                  <Link
+                    href="/services/modular-interiors"
+                    className="dropdown-link"
+                  >
+                    Modular Interiors
+                  </Link>
+                  <Link href="/services/renovations" className="dropdown-link">
+                    Renovations
                   </Link>
                 </div>
               )}
-            </div> */}
-
-            <Link href="/" className="nav-link">
-              Our Projects
+            </div>
+            <Link
+              href="/testimonials"
+              className={`nav-link ${
+                pathname === "/testimonials"
+                  ? "text-amber-500"
+                  : "text-amber-900 dark:text-white"
+              }`}
+            >
+              Testimonials
             </Link>
-            <Link href="/" className="nav-link">
-              Services
-            </Link>
-            <Link href="/" className="nav-link">
+            <Link
+              href="/blogs"
+              className={`nav-link ${
+                pathname === "/blogs"
+                  ? "text-amber-500"
+                  : "text-amber-900 dark:text-white"
+              }`}
+            >
               Blogs
             </Link>
-          </div>
-
-          <div className="md:flex items-center space-x-8 hidden">
-            {/* Social Icons */}
-            <div className="hidden h-full md:flex items-center space-x-4 text-gray-400">
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-blue-600"
-              >
-                <FaFacebookF />
-              </a>
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-blue-400"
-              >
-                <FaTwitter />
-              </a>
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-pink-500"
-              >
-                <FaInstagram />
-              </a>
-            </div>
+            <Link
+              href="/contact-us"
+              className={`nav-link ${
+                pathname === "/"
+                  ? "text-amber-500"
+                  : "text-amber-900 dark:text-white"
+              }`}
+            >
+              Contact Us
+            </Link>
           </div>
 
           {/* Mobile Menu */}
@@ -163,9 +220,9 @@ export default function Navbar() {
                     About Us
                   </Link>
 
-                  {/* <details className="group">
+                  <details className="group">
                     <summary className="flex items-center justify-between mobile-link cursor-pointer">
-                      Our Services
+                      Services
                       <ChevronDown
                         size={16}
                         className="group-open:rotate-180 transition-transform"
@@ -173,42 +230,42 @@ export default function Navbar() {
                     </summary>
                     <div className="ml-4 flex flex-col space-y-2 mt-2">
                       <Link
-                        href="/services/ro-services"
+                        href="/services/full-home-interiors"
                         className="mobile-dropdown-link"
                       >
-                        RO Services
+                        Full Home Interiors
                       </Link>
                       <Link
-                        href="/services/ro-repair"
+                        href="/services/luxury-interiors"
                         className="mobile-dropdown-link"
                       >
-                        RO Repair
+                        Luxury Interiors
                       </Link>
                       <Link
-                        href="/services/amc-plans"
+                        href="/services/modular-interiors"
                         className="mobile-dropdown-link"
                       >
-                        AMC Plans
+                        Modular Interiors
                       </Link>
                       <Link
-                        href="/services/livpure-service"
+                        href="/services/renovations"
                         className="mobile-dropdown-link"
                       >
-                        Livpure Service
+                        Renovations
                       </Link>
                     </div>
-                  </details> */}
+                  </details>
 
-                  <Link href="/" className="mobile-link">
-                    Gallery
+                  <Link href="/testimonials" className="mobile-link">
+                    Testimonials
                   </Link>
                   {/* <Link href="/location" className="mobile-link">
                     Location
                   </Link> */}
-                  <Link href="/" className="mobile-link">
+                  <Link href="/blogs" className="mobile-link">
                     Blogs
                   </Link>
-                  <Link href="/" className="mobile-link">
+                  <Link href="/contact-us" className="mobile-link">
                     Contact Us
                   </Link>
                 </div>

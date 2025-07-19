@@ -6,8 +6,8 @@
 html,
 body {
   overflow: auto; /* or scroll, if you prefer */
-  -ms-overflow-style: none;  /* IE 10+ */
-  scrollbar-width: none;     /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+  scrollbar-width: none; /* Firefox */
 }
 
 html::-webkit-scrollbar,
@@ -16,7 +16,7 @@ body::-webkit-scrollbar {
 }
 
 :root {
-  --primary: #8B4513; /* Example primary color - Blue */
+  --primary: #8b4513; /* Example primary color - Blue */
   --secondary: #22e45c; /* Example secondary color - Purple */
   --radius: 0.625rem;
   --background: oklch(1 0 0);
@@ -141,7 +141,23 @@ body::-webkit-scrollbar {
 }
 
 .nav-link {
-  @apply text-amber-950 dark:text-white hover:text-amber-500 dark:hover:text-amber-50 transition;
+  @apply relative hover:text-amber-500 dark:hover:text-amber-50 transition;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: theme("colors.amber.500"); /* Adjust if needed */
+  transition: all 0.3s ease-out;
+  transform: translateX(-50%);
+}
+
+.nav-link:focus::after {
+  width: 100%;
 }
 
 .dropdown-link {

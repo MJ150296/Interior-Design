@@ -1,20 +1,9 @@
 // src/app/layout.tsx
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Header/Navbar";
 import Footer from "./components/Footer/Footer";
 import GlobalOverlay from "./components/GlobalOverlay";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Riddhi Interiors - Dehradun",
@@ -28,9 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased text-foreground dark:bg-black dark:text-white transition-colors bg-amber-100`}
-      >
+      <body className="antialiased text-foreground dark:bg-black dark:text-white transition-colors bg-amber-100">
         <header className="w-full flex flex-col fixed z-30">
           {/* <Header /> */}
           <Navbar />
