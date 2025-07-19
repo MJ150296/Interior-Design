@@ -356,9 +356,9 @@ const AppointmentPage: React.FC = () => {
           <div className="relative">
             <div className="bg-amber-800/50 p-8 rounded-2xl shadow-lg">
               <p className="text-xl italic">
-                "Riddhi Interiors transformed our outdated home into a modern
+                &quot;Riddhi Interiors transformed our outdated home into a modern
                 sanctuary. Their attention to detail and creative solutions
-                exceeded our expectations!"
+                exceeded our expectations!&quot;
               </p>
               <div className="mt-6">
                 <div className="font-bold">Priya Sharma</div>
@@ -406,8 +406,8 @@ const AppointmentPage: React.FC = () => {
       <footer className="py-8 bg-amber-900 text-amber-100 text-center">
         <div className="max-w-4xl mx-auto px-4">
           <p className="text-lg font-sans font-semibold tracking-wide mb-4">
-            "Transform your space with our expertise - Enjoy 15% off your first
-            interior design project!"
+            &quot;Transform your space with our expertise - Enjoy 15% off your first
+            interior design project!&quot;
           </p>
         </div>
       </footer>

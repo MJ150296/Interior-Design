@@ -50,9 +50,9 @@ const Owner: React.FC = () => {
 
           <div className="my-8 p-6 bg-amber-50 rounded-xl border border-amber-200">
             <p className="text-lg text-gray-700 italic border-l-4 border-amber-600 pl-4">
-              “Design is not just about what you see. It's how you live in the
+              &quot;Design is not just about what you see. It&apos;s how you live in the
               space. My goal is to create interiors that feel as good as they
-              look.”
+              look.&quot;
             </p>
           </div>
 

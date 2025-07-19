@@ -1,9 +1,17 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
 import { motion } from "framer-motion";
+
+interface Project {
+  src: string;
+  alt: string;
+  title: string;
+  description: string;
+  category: string;
+  location: string;
+}
 
 const residentialImages = [
   {
@@ -167,7 +175,7 @@ const Projects = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const ProjectCard = ({ project }: { project: any }) => (
+  const ProjectCard = ({ project }: { project: Project }) => (
     <motion.div
       className="relative group overflow-hidden rounded-xl shadow-lg"
       whileHover={{ y: -10 }}

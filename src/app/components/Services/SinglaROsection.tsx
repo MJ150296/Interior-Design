@@ -15,7 +15,7 @@ const ServiceSection: React.FC<Props> = ({ data }) => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
       {/* Main Service Content */}
-      {data.map((item, index) => (
+      {data.map((item) => (
         <div key={item.id}>
           {/* Hero Section */}
           <div className="relative w-full h-[500px] flex flex-col items-center justify-center text-center overflow-hidden">

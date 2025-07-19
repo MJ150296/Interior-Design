@@ -177,7 +177,7 @@ const AboutUs: React.FC = () => {
 
             <p className="mb-6 text-lg text-gray-700 leading-relaxed">
               At <strong className="text-amber-700">Riddhi Interiors</strong>,
-              we believe every space tells a story — and we're here to help you
+              we believe every space tells a story — and we&apos;re here to help you
               tell yours. From timeless elegance to contemporary flair, our
               designs breathe life into your interiors with a touch of
               sophistication and functionality.
@@ -191,7 +191,7 @@ const AboutUs: React.FC = () => {
               <strong className="text-amber-700"> Mussoorie</strong>,{" "}
               <strong className="text-amber-700">Haridwar</strong>,
               <strong className="text-amber-700"> Rishikesh</strong>, and{" "}
-              <strong className="text-amber-700">Roorkee</strong>. Whether it's
+              <strong className="text-amber-700">Roorkee</strong>. Whether it&apos;s
               a cozy residence in the hills or a stylish commercial outlet in
               the plains, we bring innovation and expertise to every project.
             </p>
@@ -339,8 +339,8 @@ const AboutUs: React.FC = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.5 }}
             >
-              "Interior design is making the best possible use of the available
-              space."
+              &quot;Interior design is making the best possible use of the available
+              space.&quot;
             </motion.p>
           </div>
 

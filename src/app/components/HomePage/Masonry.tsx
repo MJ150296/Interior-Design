@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { title } from "process";
 import Link from "next/link";
 
 const masonryItems = [

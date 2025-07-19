@@ -3,7 +3,7 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { QuoteIcon } from "lucide-react";
 
 const clientTestimonials = [
@@ -255,7 +255,7 @@ const Testimonials = () => {
                   <QuoteIcon className="text-amber-400 w-8 h-8 mb-4" />
 
                   <p className="text-gray-700 italic mb-6">
-                    "{client.testimonial}"
+                    &quot;{client.testimonial}&quot;
                   </p>
 
                   <div className="flex items-center pt-4 border-t border-amber-100">

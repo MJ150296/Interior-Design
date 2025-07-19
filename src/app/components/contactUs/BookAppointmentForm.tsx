@@ -1,6 +1,6 @@
 "use client"; // Use this for client-side rendering
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "animate.css";
 
 type FormData = {
