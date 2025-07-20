@@ -38,9 +38,9 @@ export default function HomePageCarousel() {
           transition={{ duration: 0.7 }}
           className="w-full flex items-end justify-center"
         >
-          <div className="w-2/3 px-10 mb-10 flex">
+          <div className="w-full md:w-2/3 px-4 md:px-10 mb-10 flex">
             <motion.h1
-              className="text-4xl md:text-7xl font-serif font-bold text-white italic tracking-wider mb-6"
+              className="text-6xl md:text-7xl font-serif font-bold text-white italic tracking-wider mb-6"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.8 }}
@@ -50,7 +50,7 @@ export default function HomePageCarousel() {
             </motion.h1>
           </div>
 
-          <div className="flex justify-start items-center">
+          <div className="hidden md:flex justify-start items-center">
             <motion.div
               className="w-96 bg-black/40 p-6 rounded-lg backdrop-blur-sm"
               initial={{ opacity: 0 }}

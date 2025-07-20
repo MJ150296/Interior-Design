@@ -14,7 +14,7 @@ import {
   PhoneIcon,
   MapPinIcon,
 } from "lucide-react";
-import BookAppointmentForm from "../components/contactUs/BookAppointmentForm";
+import BookAppointmentForm from "../components/HomePage/ads/BookAppointmentForm";
 
 const AppointmentPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState("consultation");
@@ -335,39 +335,18 @@ const AppointmentPage: React.FC = () => {
           </motion.div>
 
           <motion.div
-            className="bg-white rounded-2xl shadow-xl p-6 md:p-8 border border-amber-200 max-w-4xl mx-auto"
+            className="bg-white flex justify-center rounded-2xl shadow-xl p-6 md:p-8 border border-amber-200 max-w-4xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <BookAppointmentForm />
+            <BookAppointmentForm
+              onClose={() => {
+                return;
+              }}
+            />
           </motion.div>
-        </div>
-      </section>
-
-      {/* Testimonial Slider */}
-      <section className="py-16 bg-amber-900 text-amber-50">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">
-            What Our Clients Say
-          </h2>
-
-          <div className="relative">
-            <div className="bg-amber-800/50 p-8 rounded-2xl shadow-lg">
-              <p className="text-xl italic">
-                &quot;Riddhi Interiors transformed our outdated home into a modern
-                sanctuary. Their attention to detail and creative solutions
-                exceeded our expectations!&quot;
-              </p>
-              <div className="mt-6">
-                <div className="font-bold">Priya Sharma</div>
-                <div className="text-amber-200">
-                  Residential Project, Mumbai
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -401,16 +380,6 @@ const AppointmentPage: React.FC = () => {
           </div>
         </div>
       </section>
-
-      {/* Footer Section */}
-      <footer className="py-8 bg-amber-900 text-amber-100 text-center">
-        <div className="max-w-4xl mx-auto px-4">
-          <p className="text-lg font-sans font-semibold tracking-wide mb-4">
-            &quot;Transform your space with our expertise - Enjoy 15% off your first
-            interior design project!&quot;
-          </p>
-        </div>
-      </footer>
     </div>
   );
 };

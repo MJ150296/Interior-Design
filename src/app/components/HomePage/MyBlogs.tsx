@@ -28,7 +28,7 @@ const BlogCarousel: React.FC = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="flex justify-center items-center gap-x-10">
+          <div className="flex justify-center items-center gap-x-2 md:gap-x-10 mb-5">
             <Image
               src="/Riddhi Interior Design/About/hang-lamp.png"
               alt="hanging lamp"
@@ -36,7 +36,7 @@ const BlogCarousel: React.FC = () => {
               height={50}
               className="mx-auto"
             />
-            <h2 className="text-4xl mb-1 font-bold italic text-orange-900 font-serif">
+            <h2 className="text-2xl md:text-4xl mb-1 font-bold italic text-orange-900 font-serif">
               Design Insights & Inspiration
             </h2>
             <Image

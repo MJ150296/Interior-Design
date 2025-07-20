@@ -84,7 +84,7 @@ export default function MasonryGallery() {
         </motion.p>
       </div>
 
-      <div className="columns-1 sm:columns-2 md:columns-3 gap-6">
+      <div className="columns-2 md:columns-3 gap-6">
         {masonryItems.map((item, index) => (
           <motion.div
             key={index}

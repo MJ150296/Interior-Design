@@ -17,7 +17,6 @@ const contactFormSchema = z.object({
     .string()
     .min(10, "Contact number must be at least 10 digits")
     .max(15, "Contact number is too long"),
-  subject: z.string().min(3, "Subject must be at least 3 characters"),
   message: z.string().min(10, "Message must be at least 10 characters"),
 });
 
@@ -47,7 +46,6 @@ const BookAppointmentForm: React.FC<BookAppointmentFormProps> = ({
       *Name:* ${data.name}
       *Email:* ${data.email}
       *Contact Number:* ${data.contactNumber}
-      *Subject:* ${data.subject}
       *Message:* ${data.message}
     `;
 
@@ -167,27 +165,6 @@ const BookAppointmentForm: React.FC<BookAppointmentFormProps> = ({
           {errors.contactNumber && (
             <p className="text-[#d4af7a] text-sm mt-1 pl-1">
               {errors.contactNumber.message}
-            </p>
-          )}
-        </div>
-
-        {/* Subject Field */}
-        <div>
-          <Label
-            htmlFor="subject"
-            className="font-medium text-[#3a3632] dark:text-[#e8e6e3] mb-1 block pl-1"
-          >
-            Subject
-          </Label>
-          <Input
-            id="subject"
-            className="bg-white dark:bg-[#23201c] border-[#d9d2c5] dark:border-[#3a3632] focus:border-[#c8a97e] focus:ring-1 focus:ring-[#c8a97e] rounded-lg py-5 px-4 transition-all duration-300 placeholder-[#a0988c]"
-            {...register("subject")}
-            placeholder="Project type"
-          />
-          {errors.subject && (
-            <p className="text-[#d4af7a] text-sm mt-1 pl-1">
-              {errors.subject.message}
             </p>
           )}
         </div>

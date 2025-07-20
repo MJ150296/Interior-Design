@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 const Owner: React.FC = () => {
   return (
     <section className="py-16 bg-gradient-to-b from-amber-50 to-white w-full">
-      <div className="max-w-7xl mx-auto px-12 flex flex-col md:flex-row gap-12 items-center">
+      <div className="max-w-7xl mx-auto px-12 flex flex-col-reverse md:flex-row gap-12 items-center">
         <motion.div
           className="w-full md:w-1/3 relative rounded-3xl overflow-hidden shadow-2xl h-[500px]"
           initial={{ opacity: 0, x: -30 }}

@@ -7,7 +7,7 @@ const CallToAction: React.FC = () => {
     <section className="py-16 bg-gradient-to-r from-amber-700 to-amber-900 text-white w-full">
       <div className="max-w-4xl mx-auto px-4 text-center">
         <motion.div
-          className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 md:p-12 shadow-xl"
+          className="bg-white/10 md:backdrop-blur-sm rounded-2xl p-8 md:p-12 shadow-xl"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}

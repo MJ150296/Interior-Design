@@ -216,8 +216,11 @@ export default function Navbar() {
                   <Link href="/" className="mobile-link">
                     Home
                   </Link>
-                  <Link href="/" className="mobile-link">
+                  <Link href="/about-us" className="mobile-link">
                     About Us
+                  </Link>
+                  <Link href="/our-projects" className="mobile-link">
+                    Portfolio
                   </Link>
 
                   <details className="group">
@@ -259,9 +262,6 @@ export default function Navbar() {
                   <Link href="/testimonials" className="mobile-link">
                     Testimonials
                   </Link>
-                  {/* <Link href="/location" className="mobile-link">
-                    Location
-                  </Link> */}
                   <Link href="/blogs" className="mobile-link">
                     Blogs
                   </Link>

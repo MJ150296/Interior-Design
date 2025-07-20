@@ -64,7 +64,7 @@ const About = () => {
         </motion.div>
 
         <motion.div
-          className="w-full md:w-1/3 relative rounded-3xl overflow-hidden shadow-2xl h-[500px]"
+          className="w-full md:w-1/3 relative rounded-3xl overflow-hidden shadow-2xl"
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7 }}
