@@ -3,7 +3,6 @@
 import * as React from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Inter } from "next/font/google";
 
 export default function HomePageCarousel() {
   return (

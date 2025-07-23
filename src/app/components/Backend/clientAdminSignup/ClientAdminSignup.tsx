@@ -106,8 +106,12 @@ const ClientAdminSignup = () => {
       if (response.status === 201) {
         router.push("/api/auth/signin");
       }
-    } catch (err: any) {
-      setError(err.message || "Signup failed. Please try again.");
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("Signup failed. Please try again.");
+      }
     } finally {
       setIsLoading(false);
     }

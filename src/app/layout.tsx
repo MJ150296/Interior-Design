@@ -1,7 +1,6 @@
 // src/app/layout.tsx
 import type { Metadata } from "next";
 import "./globals.css";
-import { Session } from "inspector/promises";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "./auth";
 
