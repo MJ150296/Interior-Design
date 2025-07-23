@@ -176,7 +176,7 @@ export default function Navbar() {
             >
               Testimonials
             </Link>
-            <Link
+            {/* <Link
               href="/iamadmin"
               className={`nav-link ${
                 pathname === "/iamadmin"
@@ -185,7 +185,7 @@ export default function Navbar() {
               }`}
             >
               Admin
-            </Link>
+            </Link> */}
             <Link
               href="/blogs"
               className={`nav-link ${
