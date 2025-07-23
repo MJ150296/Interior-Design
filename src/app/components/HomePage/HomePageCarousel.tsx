@@ -3,6 +3,7 @@
 import * as React from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { Inter } from "next/font/google";
 
 export default function HomePageCarousel() {
   return (
@@ -40,7 +41,7 @@ export default function HomePageCarousel() {
         >
           <div className="w-full md:w-2/3 px-4 md:px-10 mb-10 flex">
             <motion.h1
-              className="text-6xl md:text-7xl font-serif font-bold text-white italic tracking-wider mb-6"
+              className="text-6xl md:text-7xl font-inter font-bold text-white italic tracking-wide mb-6"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.8 }}

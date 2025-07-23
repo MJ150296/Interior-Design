@@ -14,7 +14,7 @@ import {
   PhoneIcon,
   MapPinIcon,
 } from "lucide-react";
-import BookAppointmentForm from "../components/HomePage/ads/BookAppointmentForm";
+import BookAppointmentForm from "../../components/HomePage/ads/BookAppointmentForm";
 
 const AppointmentPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState("consultation");

@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { blogs } from "../data/blogs";
+import { blogs } from "../../data/blogs";
 import { motion, AnimatePresence } from "framer-motion";
 
 const BlogList: React.FC = () => {
