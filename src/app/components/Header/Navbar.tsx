@@ -177,6 +177,16 @@ export default function Navbar() {
               Testimonials
             </Link>
             <Link
+              href="/iamadmin"
+              className={`nav-link ${
+                pathname === "/iamadmin"
+                  ? "text-amber-500"
+                  : "text-amber-900 dark:text-white"
+              }`}
+            >
+              Admin
+            </Link>
+            <Link
               href="/blogs"
               className={`nav-link ${
                 pathname === "/blogs"
