@@ -1,11 +1,19 @@
-import React from 'react';
+import React from "react";
+import DashboardLayoutClient from "../../client_side_layout/ClientSideDashboardLayout";
+import { redirect } from "next/navigation";
+import { auth } from "@/app/auth";
+import DashboardContent from "../../components/DashboardContent";
 
-const ClientAdminPage: React.FC = () => {
+const ClientAdminPage: React.FC = async () => {
+  const session = await auth();
+
+  if (!session?.user) {
+    redirect("/api/auth/signin");
+  }
   return (
-    <div>
-      <h1>Client Admin Dashboard</h1>
-      <p>Welcome to the client admin dashboard page.</p>
-    </div>
+    <DashboardLayoutClient>
+      <DashboardContent role={session.user.role} />
+    </DashboardLayoutClient>
   );
 };
 
