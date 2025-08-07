@@ -7,7 +7,6 @@ import { useAppDispatch, useAppSelector } from "@/app/redux/store/hooks";
 import {
   fetchAboutContent,
   selectAboutContent,
-  selectAboutError,
   selectAboutLoading,
 } from "@/app/redux/slices/aboutUsPageSlice";
 

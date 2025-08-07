@@ -7,7 +7,6 @@ import { useAppDispatch, useAppSelector } from "@/app/redux/store/hooks";
 import {
   fetchPortfolioContent,
   selectPortfolioContent,
-  selectPortfolioError,
   selectPortfolioLoading,
 } from "@/app/redux/slices/portfolioPageSlice";
 
