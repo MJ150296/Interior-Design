@@ -10,8 +10,8 @@ export default function LoadingSpinner({
 }) {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen space-y-4">
-      <FaSpinner className="text-amber-700 text-5xl animate-spin mb-4" />
-      <p className="text-amber-900 font-bold text-xl tracking-widest">{text}</p>
+      <FaSpinner className="text-lime-700 text-5xl animate-spin mb-4" />
+      <p className="text-lime-900 font-bold text-xl tracking-widest">{text}</p>
     </div>
   );
 }

@@ -13,7 +13,7 @@ interface Props {
 
 const ServiceSection: React.FC<Props> = ({ data }) => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-lime-50 to-white">
       {/* Main Service Content */}
       {data.map((item) => (
         <div key={item.id}>
@@ -27,7 +27,7 @@ const ServiceSection: React.FC<Props> = ({ data }) => {
                 objectFit="cover"
                 className="brightness-90"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-amber-900/80 to-amber-700/30" />
+              <div className="absolute inset-0 bg-gradient-to-t from-lime-900/50 to-transparent" />
               {/* <div className="absolute inset-0 bg-[url('/pattern.svg')] bg-repeat opacity-10" /> */}
             </div>
 
@@ -54,7 +54,7 @@ const ServiceSection: React.FC<Props> = ({ data }) => {
                 <Link href={item.button.link}>
                   <Button
                     size="lg"
-                    className="bg-amber-600 hover:bg-amber-700 text-white font-bold text-lg px-8 py-6 rounded-full shadow-lg transform hover:scale-105 transition-transform duration-300"
+                    className="bg-lime-600 hover:bg-lime-700 text-white font-bold text-lg px-8 py-6 rounded-full shadow-lg transform hover:scale-105 transition-transform duration-300"
                   >
                     {item.button.text}
                   </Button>
@@ -83,7 +83,7 @@ const ServiceSection: React.FC<Props> = ({ data }) => {
                 >
                   {/* Content */}
                   <div className="w-full md:w-1/2">
-                    <h3 className="text-2xl md:text-3xl font-serif font-bold mb-6 text-amber-900">
+                    <h3 className="text-2xl md:text-3xl font-serif font-bold mb-6 text-lime-900">
                       {section.heading}
                     </h3>
                     <div className="space-y-4 mb-6">
@@ -97,7 +97,7 @@ const ServiceSection: React.FC<Props> = ({ data }) => {
                       href={section.highlightedLink.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center text-amber-700 font-semibold hover:text-amber-900 transition-colors"
+                      className="inline-flex items-center text-lime-700 font-semibold hover:text-lime-900 transition-colors"
                     >
                       {section.highlightedLink.text}
                       <svg
@@ -130,7 +130,7 @@ const ServiceSection: React.FC<Props> = ({ data }) => {
                       <div className="absolute inset-0 border-8 border-white opacity-20 pointer-events-none"></div>
                     </div>
                     <div
-                      className={`absolute -z-10 w-full h-full rounded-xl bg-amber-200 ${
+                      className={`absolute -z-10 w-full h-full rounded-xl bg-lime-200 ${
                         isImageLeft ? "-left-6 -bottom-6" : "-right-6 -bottom-6"
                       }`}
                     ></div>
@@ -146,7 +146,7 @@ const ServiceSection: React.FC<Props> = ({ data }) => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6, duration: 0.5 }}
             >
-              <h3 className="text-2xl md:text-3xl font-serif font-bold mb-10 text-center text-amber-900">
+              <h3 className="text-2xl md:text-3xl font-serif font-bold mb-10 text-center text-lime-900">
                 Why Choose Our {item.title} Service
               </h3>
 
@@ -170,15 +170,15 @@ const ServiceSection: React.FC<Props> = ({ data }) => {
                 ].map((feature, idx) => (
                   <motion.div
                     key={idx}
-                    className="bg-white rounded-xl shadow-lg p-6 border border-amber-100 hover:shadow-xl transition-shadow"
+                    className="bg-white rounded-xl shadow-lg p-6 border border-lime-100 hover:shadow-xl transition-shadow"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: idx * 0.1 + 0.7, duration: 0.5 }}
                   >
-                    <div className="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center mb-4">
-                      <div className="w-6 h-6 rounded-full bg-amber-500"></div>
+                    <div className="w-12 h-12 rounded-full bg-lime-100 flex items-center justify-center mb-4">
+                      <div className="w-6 h-6 rounded-full bg-lime-500"></div>
                     </div>
-                    <h4 className="text-xl font-bold text-amber-900 mb-2">
+                    <h4 className="text-xl font-bold text-lime-900 mb-2">
                       {feature.title}
                     </h4>
                     <p className="text-gray-600">{feature.description}</p>
@@ -191,7 +191,7 @@ const ServiceSection: React.FC<Props> = ({ data }) => {
       ))}
 
       {/* Consultation CTA */}
-      <section className="py-16 bg-gradient-to-r from-amber-700 to-amber-900">
+      <section className="py-16 bg-gradient-to-r from-lime-700 to-lime-900">
         <div className="max-w-4xl mx-auto text-center px-4">
           <motion.div
             className="bg-white rounded-2xl shadow-xl p-8 md:p-12"
@@ -199,7 +199,7 @@ const ServiceSection: React.FC<Props> = ({ data }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h3 className="text-2xl md:text-3xl font-serif font-bold text-amber-900 mb-4">
+            <h3 className="text-2xl md:text-3xl font-serif font-bold text-lime-900 mb-4">
               Ready to Transform Your Space?
             </h3>
             <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
@@ -208,12 +208,12 @@ const ServiceSection: React.FC<Props> = ({ data }) => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact-us">
-                <Button className="bg-amber-600 hover:bg-amber-700 text-white font-bold py-6 px-8 rounded-full transition-colors shadow-lg text-lg">
+                <Button className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-6 px-8 rounded-full transition-colors shadow-lg text-lg">
                   Book a Free Consultation
                 </Button>
               </Link>
               <Link href="/our-projects">
-                <Button className="bg-white border-2 border-amber-600 text-amber-700 hover:bg-amber-50 font-bold py-6 px-8 rounded-full transition-colors text-lg">
+                <Button className="bg-white border-2 border-lime-600 text-lime-700 hover:bg-lime-50 font-bold py-6 px-8 rounded-full transition-colors text-lg">
                   View Our Projects
                 </Button>
               </Link>

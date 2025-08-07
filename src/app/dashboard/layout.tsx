@@ -1,6 +1,8 @@
 import { ReactNode } from "react";
 import { auth } from "../auth";
 import { redirect } from "next/navigation";
+import { SessionProvider } from "next-auth/react";
+import { ReduxProvider } from "../redux/providers";
 
 // src/app/dashboard/layout.tsx
 export default async function DashboardLayout({
@@ -14,5 +16,11 @@ export default async function DashboardLayout({
   if (!session) {
     redirect("/api/auth/signin"); // or "/auth/signin"
   }
-  return <>{children}</>;
+  return (
+    <>
+      <SessionProvider session={session}>
+        <ReduxProvider>{children}</ReduxProvider>
+      </SessionProvider>
+    </>
+  );
 }

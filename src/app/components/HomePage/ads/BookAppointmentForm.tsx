@@ -80,7 +80,7 @@ const BookAppointmentForm: React.FC<BookAppointmentFormProps> = ({
   return (
     <div
       ref={containerRef}
-      className="bg-amber-100 dark:bg-[#1a1a1a] text-[#3a3632] dark:text-[#e8e6e3] p-8 rounded-xl shadow-lg w-full max-w-md relative border border-[#e8e2d9] dark:border-[#2d2a26]"
+      className="bg-lime-100 dark:bg-[#1a1a1a] text-[#3a3632] dark:text-[#e8e6e3] p-8 rounded-xl shadow-lg w-full max-w-md relative border border-[#e8e2d9] dark:border-[#2d2a26]"
       style={{
         backgroundImage: "radial-gradient(#e8e2d9 1px, transparent 1px)",
         backgroundSize: "20px 20px",
@@ -94,11 +94,11 @@ const BookAppointmentForm: React.FC<BookAppointmentFormProps> = ({
       </button>
 
       <div className="text-center mb-6">
-        <div className="mx-auto w-16 h-1 bg-[#c8a97e] mb-3 rounded-full"></div>
-        <h2 className="text-2xl font-medium tracking-wide font-serif">
+        <div className="mx-auto w-16 h-1 bg-lime-700 mb-3 rounded-full"></div>
+        <h2 className="text-2xl text-lime-900 font-medium tracking-wide font-serif">
           Book Consultation
         </h2>
-        <p className="text-sm text-[#8a8379] dark:text-[#8a8379] mt-1">
+        <p className="text-sm font-serif italic tracking-wide text-gray-800 dark:text-[#8a8379] mt-1">
           Let&apos;s create your dream space together
         </p>
       </div>
@@ -108,18 +108,18 @@ const BookAppointmentForm: React.FC<BookAppointmentFormProps> = ({
         <div>
           <Label
             htmlFor="name"
-            className="font-medium text-[#3a3632] dark:text-[#e8e6e3] mb-1 block pl-1"
+            className="font-medium text-lime-900 dark:text-[#e8e6e3] mb-1 block pl-1"
           >
             Name
           </Label>
           <Input
             id="name"
-            className="bg-white dark:bg-[#23201c] border-[#d9d2c5] dark:border-[#3a3632] focus:border-[#c8a97e] focus:ring-1 focus:ring-[#c8a97e] rounded-lg py-5 px-4 transition-all duration-300 placeholder-[#a0988c]"
+            className="bg-lime-50 dark:bg-lime-50 border-[#d9d2c5] dark:border-[#3a3632] focus:border-[#c8a97e] focus:ring-1 focus:ring-[#c8a97e] rounded-lg py-5 px-4 transition-all duration-300 placeholder-[#a0988c]"
             {...register("name")}
             placeholder="Your full name"
           />
           {errors.name && (
-            <p className="text-[#d4af7a] text-sm mt-1 pl-1">
+            <p className="text-red-600 text-sm mt-1 pl-1">
               {errors.name.message}
             </p>
           )}
@@ -129,19 +129,19 @@ const BookAppointmentForm: React.FC<BookAppointmentFormProps> = ({
         <div>
           <Label
             htmlFor="email"
-            className="font-medium text-[#3a3632] dark:text-[#e8e6e3] mb-1 block pl-1"
+            className="font-medium text-lime-900 dark:text-[#e8e6e3] mb-1 block pl-1"
           >
             Email
           </Label>
           <Input
             id="email"
             type="email"
-            className="bg-white dark:bg-[#23201c] border-[#d9d2c5] dark:border-[#3a3632] focus:border-[#c8a97e] focus:ring-1 focus:ring-[#c8a97e] rounded-lg py-5 px-4 transition-all duration-300 placeholder-[#a0988c]"
+            className="bg-lime-50 dark:bg-lime-50 border-[#d9d2c5] dark:border-[#3a3632] focus:border-[#c8a97e] focus:ring-1 focus:ring-[#c8a97e] rounded-lg py-5 px-4 transition-all duration-300 placeholder-[#a0988c]"
             {...register("email")}
             placeholder="your.email@example.com"
           />
           {errors.email && (
-            <p className="text-[#d4af7a] text-sm mt-1 pl-1">
+            <p className="text-red-600 text-sm mt-1 pl-1">
               {errors.email.message}
             </p>
           )}
@@ -151,19 +151,19 @@ const BookAppointmentForm: React.FC<BookAppointmentFormProps> = ({
         <div>
           <Label
             htmlFor="contactNumber"
-            className="font-medium text-[#3a3632] dark:text-[#e8e6e3] mb-1 block pl-1"
+            className="font-medium text-lime-900 dark:text-[#e8e6e3] mb-1 block pl-1"
           >
             Contact Number
           </Label>
           <Input
             id="contactNumber"
             type="tel"
-            className="bg-white dark:bg-[#23201c] border-[#d9d2c5] dark:border-[#3a3632] focus:border-[#c8a97e] focus:ring-1 focus:ring-[#c8a97e] rounded-lg py-5 px-4 transition-all duration-300 placeholder-[#a0988c]"
+            className="bg-lime-50 dark:bg-[#23201c] border-[#d9d2c5] dark:border-[#3a3632] focus:border-[#c8a97e] focus:ring-1 focus:ring-[#c8a97e] rounded-lg py-5 px-4 transition-all duration-300 placeholder-[#a0988c]"
             {...register("contactNumber")}
             placeholder="+91 123 456 7890"
           />
           {errors.contactNumber && (
-            <p className="text-[#d4af7a] text-sm mt-1 pl-1">
+            <p className="text-red-600 text-sm mt-1 pl-1">
               {errors.contactNumber.message}
             </p>
           )}
@@ -173,19 +173,19 @@ const BookAppointmentForm: React.FC<BookAppointmentFormProps> = ({
         <div>
           <Label
             htmlFor="message"
-            className="font-medium text-[#3a3632] dark:text-[#e8e6e3] mb-1 block pl-1"
+            className="font-medium text-lime-900 dark:text-[#e8e6e3] mb-1 block pl-1"
           >
             Message
           </Label>
           <Textarea
             id="message"
             rows={5}
-            className="bg-white dark:bg-[#23201c] border-[#d9d2c5] dark:border-[#3a3632] focus:border-[#c8a97e] focus:ring-1 focus:ring-[#c8a97e] rounded-lg py-4 px-4 transition-all duration-300 placeholder-[#a0988c] min-h-[120px]"
+            className="bg-lime-50 dark:bg-[#23201c] border-[#d9d2c5] dark:border-[#3a3632] focus:border-[#c8a97e] focus:ring-1 focus:ring-[#c8a97e] rounded-lg py-4 px-4 transition-all duration-300 placeholder-[#a0988c] min-h-[120px]"
             {...register("message")}
             placeholder="Tell us about your project..."
           />
           {errors.message && (
-            <p className="text-[#d4af7a] text-sm mt-1 pl-1">
+            <p className="text-red-600 text-sm mt-1 pl-1">
               {errors.message.message}
             </p>
           )}
@@ -193,7 +193,7 @@ const BookAppointmentForm: React.FC<BookAppointmentFormProps> = ({
 
         <Button
           type="submit"
-          className="w-full bg-[#c8a97e] hover:bg-[#b8976d] text-white font-medium tracking-wide py-5 rounded-lg transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#c8a97e] focus:ring-opacity-50"
+          className="w-full bg-lime-600 hover:bg-lime-700 hover:cursor-pointer text-white font-medium tracking-wide py-5 rounded-lg transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#c8a97e] focus:ring-opacity-50"
           disabled={isSubmitting}
         >
           {isSubmitting ? (

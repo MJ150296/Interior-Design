@@ -30,7 +30,7 @@ export default function DashboardLayoutClient({
 
   return (
     <SidebarProvider>
-      <div className="flex w-full min-h-screen bg-amber-50">
+      <div className="flex w-full min-h-screen bg-lime-50">
         <AppSidebar />
         <main className="flex-1 px-1 md:px-2 w-full overflow-auto">
           <SidebarTrigger />

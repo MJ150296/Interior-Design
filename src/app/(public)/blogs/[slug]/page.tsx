@@ -26,10 +26,10 @@ const BlogDetail: React.FC = () => {
       <div className="absolute top-7 left-10 z-20">
         <Link
           href="/blogs"
-          className="text-amber-700 hover:text-amber-900 font-medium flex items-center group"
+          className="text-lime-700 hover:text-lime-900 font-medium flex items-center group"
         >
           <svg
-            className="w-8 h-8 bg-amber-50 p-2 rounded-full mr-2 group-hover:-translate-x-1 transition-transform"
+            className="w-8 h-8 bg-lime-50 p-2 rounded-full mr-2 group-hover:-translate-x-1 transition-transform"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -54,7 +54,7 @@ const BlogDetail: React.FC = () => {
           objectFit="cover"
           className="brightness-90"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-amber-900/70 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-lime-900/70 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-8">
           <motion.h1
             className="text-3xl md:text-5xl font-serif font-bold text-white mb-4"
@@ -66,7 +66,7 @@ const BlogDetail: React.FC = () => {
           </motion.h1>
           {blog.subheading && (
             <motion.p
-              className="text-xl text-amber-100 max-w-3xl"
+              className="text-xl text-lime-100 max-w-3xl"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.5 }}
@@ -80,23 +80,23 @@ const BlogDetail: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Main Content */}
         <div className="lg:col-span-2">
-          <Card className="shadow-lg rounded-xl overflow-hidden border border-amber-100">
+          <Card className="shadow-lg rounded-xl overflow-hidden border border-lime-100">
             <CardContent className="p-6 md:p-8">
               {/* Meta Information */}
-              <div className="flex flex-wrap gap-4 mb-8 pb-4 border-b border-amber-100">
-                <div className="flex items-center text-amber-700">
+              <div className="flex flex-wrap gap-4 mb-8 pb-4 border-b border-lime-100">
+                <div className="flex items-center text-lime-700">
                   <UserIcon className="w-4 h-4 mr-2" />
                   <span className="text-sm font-medium">{blog.author}</span>
                 </div>
-                <div className="flex items-center text-amber-700">
+                <div className="flex items-center text-lime-700">
                   <CalendarIcon className="w-4 h-4 mr-2" />
                   <span className="text-sm font-medium">{blog.date}</span>
                 </div>
-                <div className="flex items-center text-amber-700">
+                <div className="flex items-center text-lime-700">
                   <ClockIcon className="w-4 h-4 mr-2" />
                   <span className="text-sm font-medium">{blog.readTime}</span>
                 </div>
-                <div className="flex items-center text-amber-700">
+                <div className="flex items-center text-lime-700">
                   <LayoutGridIcon className="w-4 h-4 mr-2" />
                   <span className="text-sm font-medium">{blog.category}</span>
                 </div>
@@ -114,19 +114,19 @@ const BlogDetail: React.FC = () => {
               {/* Key Features */}
               {blog.keyFeatures && blog.keyFeatures.length > 0 && (
                 <motion.div
-                  className="mt-12 bg-amber-50 rounded-xl p-6 border border-amber-200"
+                  className="mt-12 bg-lime-50 rounded-xl p-6 border border-lime-200"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4, duration: 0.5 }}
                 >
-                  <h3 className="text-xl font-bold text-amber-900 mb-4">
+                  <h3 className="text-xl font-bold text-lime-900 mb-4">
                     Key Features
                   </h3>
                   <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {blog.keyFeatures.map((feature, index) => (
                       <li key={index} className="flex items-start">
                         <svg
-                          className="w-5 h-5 text-amber-600 mt-0.5 mr-2 flex-shrink-0"
+                          className="w-5 h-5 text-lime-600 mt-0.5 mr-2 flex-shrink-0"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -149,18 +149,18 @@ const BlogDetail: React.FC = () => {
               {/* Design Tips */}
               {blog.designTips && blog.designTips.length > 0 && (
                 <motion.div
-                  className="mt-8 bg-gradient-to-r from-amber-50 to-amber-100 rounded-xl p-6 border border-amber-200"
+                  className="mt-8 bg-gradient-to-r from-lime-50 to-lime-100 rounded-xl p-6 border border-lime-200"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5, duration: 0.5 }}
                 >
-                  <h3 className="text-xl font-bold text-amber-900 mb-4">
+                  <h3 className="text-xl font-bold text-lime-900 mb-4">
                     Design Tips from Our Experts
                   </h3>
                   <ul className="space-y-3">
                     {blog.designTips.map((tip, index) => (
                       <li key={index} className="flex items-start">
-                        <div className="bg-amber-500 rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">
+                        <div className="bg-lime-500 rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">
                           <span className="text-white text-sm font-bold">
                             {index + 1}
                           </span>
@@ -180,7 +180,7 @@ const BlogDetail: React.FC = () => {
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.6, duration: 0.5 }}
                 >
-                  <h3 className="text-xl font-bold text-amber-900 mb-6">
+                  <h3 className="text-xl font-bold text-lime-900 mb-6">
                     Project Gallery
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -208,9 +208,9 @@ const BlogDetail: React.FC = () => {
         {/* Sidebar */}
         <div>
           {/* Author Info */}
-          <Card className="shadow-lg rounded-xl overflow-hidden border border-amber-100 mb-8">
+          <Card className="shadow-lg rounded-xl overflow-hidden border border-lime-100 mb-8">
             <CardContent className="p-6">
-              <h3 className="text-lg font-bold text-amber-900 mb-4">
+              <h3 className="text-lg font-bold text-lime-900 mb-4">
                 About the Author
               </h3>
               <div className="flex items-start">
@@ -227,9 +227,9 @@ const BlogDetail: React.FC = () => {
           </Card>
 
           {/* Categories */}
-          <Card className="shadow-lg rounded-xl overflow-hidden border border-amber-100 mb-8">
-            <CardHeader className="bg-amber-50 p-4">
-              <CardTitle className="text-lg font-bold text-amber-900">
+          <Card className="shadow-lg rounded-xl overflow-hidden border border-lime-100 mb-8">
+            <CardHeader className="bg-lime-50 p-4">
+              <CardTitle className="text-lg font-bold text-lime-900">
                 Categories
               </CardTitle>
             </CardHeader>
@@ -240,10 +240,10 @@ const BlogDetail: React.FC = () => {
                     <li key={index}>
                       <Link
                         href="#"
-                        className="flex items-center justify-between py-2 text-gray-700 hover:text-amber-700 transition-colors"
+                        className="flex items-center justify-between py-2 text-gray-700 hover:text-lime-700 transition-colors"
                       >
                         <span>{category}</span>
-                        <span className="bg-amber-100 text-amber-800 text-xs font-medium px-2 py-1 rounded-full">
+                        <span className="bg-lime-100 text-lime-800 text-xs font-medium px-2 py-1 rounded-full">
                           {blogs.filter((b) => b.category === category).length}
                         </span>
                       </Link>
@@ -255,9 +255,9 @@ const BlogDetail: React.FC = () => {
           </Card>
 
           {/* Related Blogs */}
-          <Card className="shadow-lg rounded-xl overflow-hidden border border-amber-100">
-            <CardHeader className="bg-amber-50 p-4">
-              <CardTitle className="text-lg font-bold text-amber-900">
+          <Card className="shadow-lg rounded-xl overflow-hidden border border-lime-100">
+            <CardHeader className="bg-lime-50 p-4">
+              <CardTitle className="text-lg font-bold text-lime-900">
                 You May Also Like
               </CardTitle>
             </CardHeader>
@@ -283,7 +283,7 @@ const BlogDetail: React.FC = () => {
                           />
                         </div>
                         <div className="ml-4">
-                          <h4 className="font-bold text-gray-800 group-hover:text-amber-700 transition-colors">
+                          <h4 className="font-bold text-gray-800 group-hover:text-lime-700 transition-colors">
                             {relatedBlog.title}
                           </h4>
                           <div className="flex items-center text-xs text-gray-500 mt-1">
@@ -302,7 +302,7 @@ const BlogDetail: React.FC = () => {
 
       {/* Newsletter CTA */}
       <motion.div
-        className="mt-16 bg-gradient-to-r from-amber-700 to-amber-900 rounded-2xl p-8 text-white text-center"
+        className="mt-16 bg-gradient-to-r from-lime-700 to-lime-900 rounded-2xl p-8 text-white text-center"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.7, duration: 0.5 }}
@@ -310,7 +310,7 @@ const BlogDetail: React.FC = () => {
         <h3 className="text-2xl font-serif font-bold mb-4">
           Stay Inspired with Our Design Journal
         </h3>
-        <p className="text-amber-100 max-w-2xl mx-auto mb-6">
+        <p className="text-lime-100 max-w-2xl mx-auto mb-6">
           Subscribe to our newsletter for exclusive design tips, trend reports,
           and special offers delivered to your inbox.
         </p>
@@ -318,13 +318,13 @@ const BlogDetail: React.FC = () => {
           <input
             type="email"
             placeholder="Your email address"
-            className="flex-grow px-5 py-3 rounded-full bg-white/20 text-white placeholder-amber-200 focus:outline-none focus:ring-2 focus:ring-amber-400"
+            className="flex-grow px-5 py-3 rounded-full bg-white/20 text-white placeholder-lime-200 focus:outline-none focus:ring-2 focus:ring-lime-400"
           />
-          <button className="bg-amber-500 hover:bg-amber-400 text-amber-900 font-bold py-3 px-6 rounded-full transition-colors shadow-lg">
+          <button className="bg-lime-500 hover:bg-lime-400 text-lime-900 font-bold py-3 px-6 rounded-full transition-colors shadow-lg">
             Subscribe
           </button>
         </div>
-        <p className="text-amber-200 text-sm mt-4">
+        <p className="text-lime-200 text-sm mt-4">
           We respect your privacy. Unsubscribe at any time.
         </p>
       </motion.div>

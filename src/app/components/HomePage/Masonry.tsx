@@ -48,7 +48,7 @@ export default function MasonryGallery() {
     <section className="py-16 px-4 w-full max-w-7xl mx-auto">
       <div className="text-center mb-16 flex flex-col items-center">
         <motion.h2
-          className="text-3xl md:text-4xl font-serif font-bold italic text-amber-900 mb-4"
+          className="text-3xl md:text-4xl font-serif font-bold italic mb-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6 }}
@@ -61,7 +61,7 @@ export default function MasonryGallery() {
               height={50}
               className="mx-auto"
             />
-            <h2 className="text-4xl mb-1 font-bold text-orange-900 font-serif">
+            <h2 className="text-4xl mb-1 font-bold text-lime-900 font-serif">
               Inspiration for Interior Design Ideas
             </h2>
             <Image

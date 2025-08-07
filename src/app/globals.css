@@ -16,7 +16,7 @@ body::-webkit-scrollbar {
 }
 
 :root {
-  --primary: #8b4513; /* Example primary color - Blue */
+  --primary: #698406; /* Example primary color - Blue */
   --secondary: #22e45c; /* Example secondary color - Purple */
   --radius: 0.625rem;
   --background: oklch(1 0 0);
@@ -141,7 +141,7 @@ body::-webkit-scrollbar {
 }
 
 .nav-link {
-  @apply relative hover:text-amber-500 dark:hover:text-amber-50 transition;
+  @apply relative hover:text-lime-600 dark:hover:text-lime-50 transition;
 }
 
 .nav-link::after {
@@ -151,7 +151,7 @@ body::-webkit-scrollbar {
   left: 50%;
   width: 0;
   height: 2px;
-  background-color: theme("colors.amber.500"); /* Adjust if needed */
+  background-color: theme("colors.lime.600"); /* Adjust if needed */
   transition: all 0.3s ease-out;
   transform: translateX(-50%);
 }
@@ -161,13 +161,13 @@ body::-webkit-scrollbar {
 }
 
 .dropdown-link {
-  @apply block px-4 py-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700;
+  @apply block px-4 py-2 text-lime-900 dark:text-white hover:bg-lime-100 dark:hover:bg-gray-700;
 }
 
 .mobile-link {
-  @apply text-gray-900 dark:text-white text-lg font-medium hover:text-blue-600 dark:hover:text-blue-400;
+  @apply text-gray-900 dark:text-white text-lg font-medium;
 }
 
 .mobile-dropdown-link {
-  @apply text-gray-700 dark:text-gray-300 text-sm hover:text-blue-600 dark:hover:text-blue-400;
+  @apply text-gray-700 dark:text-gray-300 text-sm;
 }

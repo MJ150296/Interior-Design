@@ -4,13 +4,7 @@ import bcrypt from "bcryptjs"; // ✅ Use bcryptjs for hashing
 export interface IUser extends Document {
   email: string;
   password: string;
-  role:
-    | "SuperAdmin"
-    | "Admin"
-    | "clientAdmin"
-    | "Doctor"
-    | "Receptionist"
-    | "Patient";
+  role: "SuperAdmin" | "Client" | "Designer" | "clientAdmin";
   profileImageUrl?: string;
   registrationDate?: Date;
   lastLogin?: Date;
@@ -36,14 +30,7 @@ const userSchema: Schema<IUser> = new Schema(
     },
     role: {
       type: String,
-      enum: [
-        "SuperAdmin",
-        "Admin",
-        "clientAdmin",
-        "Doctor",
-        "Receptionist",
-        "Patient",
-      ],
+      enum: ["SuperAdmin", "Client", "Designer", "clientAdmin"],
       required: true,
     },
     profileImageUrl: {

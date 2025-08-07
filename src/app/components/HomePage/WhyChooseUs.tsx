@@ -22,7 +22,7 @@ const serviceCards = [
 
 const WhyChooseUs: React.FC = () => {
   return (
-    <section className="py-16 bg-gradient-to-r from-amber-700 to-amber-900 text-white w-full">
+    <section className="py-16 bg-gradient-to-r from-lime-700 to-lime-900 text-white w-full">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-16">
           <motion.h2
@@ -51,10 +51,10 @@ const WhyChooseUs: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
             >
-              <div className="text-4xl md:text-5xl font-bold text-amber-300 mb-2">
+              <div className="text-4xl md:text-5xl font-bold text-lime-300 mb-2">
                 {service.title}
               </div>
-              <div className="text-amber-100">{service.description}</div>
+              <div className="text-lime-100">{service.description}</div>
             </motion.div>
           ))}
         </div>

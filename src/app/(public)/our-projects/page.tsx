@@ -3,6 +3,13 @@ import React, { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useAppDispatch, useAppSelector } from "@/app/redux/store/hooks";
+import {
+  fetchPortfolioContent,
+  selectPortfolioContent,
+  selectPortfolioError,
+  selectPortfolioLoading,
+} from "@/app/redux/slices/portfolioPageSlice";
 
 interface Project {
   src: string;
@@ -162,6 +169,23 @@ const Projects = () => {
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
   const [fade, setFade] = useState(true);
   const [activeTab, setActiveTab] = useState("residential");
+  const [loading, setLoading] = useState(true);
+
+  const dispatch = useAppDispatch();
+  const reduxContent = useAppSelector(selectPortfolioContent);
+  const reduxLoading = useAppSelector(selectPortfolioLoading);
+  const reduxError = useAppSelector(selectPortfolioError);
+
+  useEffect(() => {
+    // Check if Redux data is available
+    if (reduxContent) {
+      setLoading(false);
+      console.log("Redux content loaded:", reduxContent);
+    } else {
+      // If not, fetch data from the server
+      dispatch(fetchPortfolioContent()).then(() => setLoading(false));
+    }
+  }, [dispatch, reduxContent]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -191,9 +215,9 @@ const Projects = () => {
           objectFit="cover"
           className="transition-transform duration-500 group-hover:scale-110"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-amber-900/70 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-lime-900/50 to-transparent" />
         <div className="absolute top-4 right-4">
-          <span className="bg-amber-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
+          <span className="bg-lime-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
             {project.category}
           </span>
         </div>
@@ -202,8 +226,8 @@ const Projects = () => {
       <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent text-white">
         <h3 className="text-xl font-bold">{project.title}</h3>
         <div className="flex justify-between items-center mt-2">
-          <p className="text-amber-300 text-sm">{project.location}</p>
-          <span className="text-xs bg-amber-500 px-2 py-1 rounded-full">
+          <p className="text-lime-300 text-sm">{project.location}</p>
+          <span className="text-xs bg-lime-500 px-2 py-1 rounded-full">
             View Project
           </span>
         </div>
@@ -212,7 +236,7 @@ const Projects = () => {
       <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-center p-4 text-white">
         <h3 className="text-xl font-bold">{project.title}</h3>
         <p className="text-sm mt-2 mb-4">{project.description}</p>
-        <div className="bg-amber-600 text-white text-sm px-4 py-2 rounded-full mt-4">
+        <div className="bg-lime-600 text-white text-sm px-4 py-2 rounded-full mt-4">
           Explore Project
         </div>
       </div>
@@ -220,7 +244,7 @@ const Projects = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-lime-50 to-white">
       {/* Hero Section */}
       <div className="relative w-full h-[500px] flex flex-col items-center justify-center text-center overflow-hidden">
         <div className="absolute inset-0 z-0">
@@ -231,7 +255,7 @@ const Projects = () => {
             objectFit="cover"
             className="brightness-90"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-amber-900/80 to-amber-700/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-lime-900/50 to-transparent" />
           {/* <div className="absolute inset-0 bg-[url('/pattern.svg')] bg-repeat opacity-10" /> */}
         </div>
 
@@ -242,7 +266,7 @@ const Projects = () => {
           transition={{ duration: 0.8 }}
         >
           <motion.span
-            className="text-xs md:text-sm tracking-widest font-bold text-amber-200 mb-5 block"
+            className="text-xs md:text-sm tracking-widest font-bold text-lime-200 mb-5 block"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.5 }}
@@ -260,7 +284,7 @@ const Projects = () => {
           </motion.h1>
 
           <motion.p
-            className="font-bold text-xl md:text-2xl text-amber-100 tracking-wide font-serif max-w-3xl mx-auto"
+            className="font-bold text-xl md:text-2xl text-lime-100 tracking-wide font-serif max-w-3xl mx-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6, duration: 0.5 }}
@@ -286,7 +310,7 @@ const Projects = () => {
               height={50}
               className="mx-auto"
             />
-            <h2 className="text-3xl md:text-4xl mb-1 font-bold italic text-orange-900 font-serif">
+            <h2 className="text-3xl md:text-4xl mb-1 font-bold italic text-lime-900 font-serif">
               Explore Our Signature Projects
             </h2>
             <Image
@@ -322,19 +346,19 @@ const Projects = () => {
             <TabsList className="bg-transparent gap-x-14 w-full flex justify-center">
               <TabsTrigger
                 value="residential"
-                className="relative font-serif text-2xl md:text-3xl text-amber-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none
-            after:content-[''] after:absolute after:-bottom-3 after:left-0 after:w-full after:h-1 after:bg-amber-500 after:scale-x-0 after:origin-right after:transition-transform after:duration-300
+                className="relative font-serif text-2xl md:text-3xl text-lime-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none
+            after:content-[''] after:absolute after:-bottom-3 after:left-0 after:w-full after:h-1 after:bg-lime-500 after:scale-x-0 after:origin-right after:transition-transform after:duration-300
             data-[state=active]:after:scale-x-100"
               >
                 Residential
               </TabsTrigger>
 
-              <div className="h-10 border border-l-2 border-amber-500 hidden md:block"></div>
+              <div className="h-10 border border-l-2 border-lime-500 hidden md:block"></div>
 
               <TabsTrigger
                 value="commercial"
-                className="relative font-serif text-2xl md:text-3xl text-amber-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none
-            after:content-[''] after:absolute after:-bottom-3 after:left-0 after:w-full after:h-1 after:bg-amber-500 after:scale-x-0 after:origin-left after:transition-transform after:duration-300
+                className="relative font-serif text-2xl md:text-3xl text-lime-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none
+            after:content-[''] after:absolute after:-bottom-3 after:left-0 after:w-full after:h-1 after:bg-lime-500 after:scale-x-0 after:origin-left after:transition-transform after:duration-300
             data-[state=active]:after:scale-x-100"
               >
                 Commercial
@@ -362,7 +386,7 @@ const Projects = () => {
       </div>
 
       {/* Stats Section */}
-      <section className="py-16 bg-gradient-to-r from-amber-700 to-amber-900 text-white">
+      <section className="py-16 bg-gradient-to-r from-lime-700 to-lime-900 text-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
             <motion.h2
@@ -391,10 +415,10 @@ const Projects = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
               >
-                <div className="text-4xl md:text-5xl font-bold text-amber-300 mb-2">
+                <div className="text-4xl md:text-5xl font-bold text-lime-300 mb-2">
                   {stat.value}
                 </div>
-                <div className="text-amber-100">{stat.label}</div>
+                <div className="text-lime-100">{stat.label}</div>
               </motion.div>
             ))}
           </div>
@@ -402,16 +426,16 @@ const Projects = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-b from-white to-amber-50">
+      <section className="py-16 bg-gradient-to-b from-white to-lime-50">
         <div className="max-w-4xl mx-auto text-center px-4">
           <motion.div
-            className="bg-white rounded-2xl shadow-xl p-8 md:p-12 border border-amber-200"
+            className="bg-white rounded-2xl shadow-xl p-8 md:p-12 border border-lime-200"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h3 className="text-2xl md:text-3xl font-serif font-bold text-amber-900 mb-4">
+            <h3 className="text-2xl md:text-3xl font-serif font-bold text-lime-900 mb-4">
               Ready to Start Your Project?
             </h3>
             <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
@@ -419,10 +443,10 @@ const Projects = () => {
               your vision
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 px-8 rounded-full transition-colors shadow-lg text-lg">
+              <button className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-3 px-8 rounded-full transition-colors shadow-lg text-lg">
                 Book a Consultation
               </button>
-              <button className="bg-white border-2 border-amber-600 text-amber-700 hover:bg-amber-50 font-bold py-3 px-8 rounded-full transition-colors text-lg">
+              <button className="bg-white border-2 border-lime-600 text-lime-700 hover:bg-lime-50 font-bold py-3 px-8 rounded-full transition-colors text-lg">
                 View Pricing
               </button>
             </div>

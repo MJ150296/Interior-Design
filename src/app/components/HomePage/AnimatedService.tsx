@@ -8,9 +8,9 @@ const AnimatedService: React.FC = () => {
       {/* Animated Services Section */}
       <section className="rounded-lg text-white px-4">
         <div className="text-center">
-          <h2 className="text-4xl font-bold mb-4 text-amber-950">
+          <h2 className="text-4xl font-bold mb-4 text-lime-950">
             Get the estimate for your{" "}
-            <span className="inline-block text-amber-500">
+            <span className="inline-block text-lime-500">
               <Typewriter
                 words={services}
                 loop={0} // infinite loop

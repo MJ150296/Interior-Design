@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 const About = () => {
   return (
-    <section className="py-16 px-12 bg-gradient-to-r from-amber-50 to-amber-100 w-full">
+    <section className="py-16 px-12 bg-gradient-to-r from-lime-50 to-lime-100 w-full">
       <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row gap-12 items-center">
         <motion.div
           className="w-full md:w-2/3"
@@ -13,31 +13,31 @@ const About = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7 }}
         >
-          <h2 className="text-3xl md:text-4xl font-serif italic font-bold text-amber-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-serif italic font-bold text-lime-900 mb-4">
             Crafting Dream Spaces with Elegance
           </h2>
-          <h3 className="text-xl text-amber-600 italic mb-6">
+          <h3 className="text-xl text-gray-600 italic mb-6">
             Riddhi Interiors - Tilak Road, Dehradun
           </h3>
 
           <p className="mb-4 text-lg text-gray-700">
-            At <strong className="text-amber-700">Riddhi Interiors</strong>, we
+            At <strong className="text-lime-700">Riddhi Interiors</strong>, we
             believe your space should be a reflection of your personality and
             lifestyle. Located at the heart of{" "}
-            <strong className="text-amber-700">Tilak Road, Dehradun</strong>, we
+            <strong className="text-lime-700">Tilak Road, Dehradun</strong>, we
             specialize in delivering tailored interior design solutions that
             bring comfort, beauty, and functionality to your home or workplace.
           </p>
 
           <p className="mb-8 text-lg">
             From{" "}
-            <strong className="text-amber-700">
+            <strong className="text-lime-700">
               end-to-end interior solutions
             </strong>{" "}
             and{" "}
-            <strong className="text-amber-700">modular kitchen setups</strong>{" "}
+            <strong className="text-lime-700">modular kitchen setups</strong>{" "}
             to elegant{" "}
-            <strong className="text-amber-700">
+            <strong className="text-lime-700">
               furniture and décor curation
             </strong>
             , our expert team combines creativity with craftsmanship to turn
@@ -46,18 +46,18 @@ const About = () => {
             transformation.
           </p>
 
-          <div className="my-8 p-6 bg-amber-50 rounded-xl border border-amber-200">
-            <p className="text-lg text-gray-700 italic border-l-4 border-amber-600 pl-4">
+          <div className="my-8 p-6 bg-lime-50 rounded-xl border border-lime-200">
+            <p className="text-lg text-gray-700 italic border-l-4 border-lime-600 pl-4">
               “Your home, your style — elevated with personalized design and
               timeless craftsmanship.”
             </p>
           </div>
 
           <div className="flex flex-wrap gap-4 mt-6">
-            <Button className="bg-amber-600 hover:bg-amber-700 text-white font-bold py-4 px-8 rounded-full transition-colors">
+            <Button className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-4 px-8 rounded-full transition-colors">
               Book a Free Consultation
             </Button>
-            <Button className="bg-white border-2 border-amber-600 text-amber-700 hover:bg-amber-50 font-bold py-4 px-8 rounded-full transition-colors">
+            <Button className="bg-white border-2 border-lime-600 text-lime-700 hover:bg-lime-50 font-bold py-4 px-8 rounded-full transition-colors">
               View Our Portfolio
             </Button>
           </div>

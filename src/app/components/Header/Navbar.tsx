@@ -46,15 +46,12 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="bg-white dark:bg-gray-900 shadow-md w-full z-50">
+    <nav className="bg-lime-50 dark:bg-gray-900 shadow-md w-full z-50">
       <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="w-full flex justify-between h-24 items-center">
           {/* Brand Logo */}
-          <div className="flex items-center gap-x-10">
-            <Link
-              href="/"
-              className="text-xl font-bold text-gray-900 dark:text-white"
-            >
+          <div className="flex items-center gap-x-5">
+            <Link href="/">
               <Image
                 src="/Riddhi Interior Design/Logo.png"
                 alt="Riddhi Interiors Logo"
@@ -65,7 +62,7 @@ export default function Navbar() {
             </Link>
             <div className="md:flex items-center space-x-8 hidden">
               {/* Social Icons */}
-              <div className="hidden h-full md:flex items-center space-x-4 text-gray-400">
+              <div className="hidden h-full md:flex items-center space-x-4 text-gray-500">
                 <a
                   href="#"
                   target="_blank"
@@ -100,8 +97,8 @@ export default function Navbar() {
               href="/"
               className={`nav-link ${
                 pathname === "/"
-                  ? "text-amber-500"
-                  : "text-amber-900 dark:text-white"
+                  ? "text-lime-800"
+                  : "text-gray-800 dark:text-white"
               }`}
             >
               Home
@@ -110,8 +107,8 @@ export default function Navbar() {
               href="/about-us"
               className={`nav-link ${
                 pathname === "/about-us"
-                  ? "text-amber-500"
-                  : "text-amber-900 dark:text-white"
+                  ? "text-lime-800"
+                  : "text-gray-800 dark:text-white"
               }`}
             >
               About Us
@@ -121,8 +118,8 @@ export default function Navbar() {
               href="/our-projects"
               className={`nav-link ${
                 pathname === "/our-projects"
-                  ? "text-amber-500"
-                  : "text-amber-900 dark:text-white"
+                  ? "text-lime-800"
+                  : "text-gray-800 dark:text-white"
               }`}
             >
               Portfolio
@@ -133,15 +130,15 @@ export default function Navbar() {
               <button
                 className={`nav-link flex items-center gap-1 ${
                   pathname.startsWith("/services")
-                    ? "text-amber-500"
-                    : "text-amber-900 dark:text-white"
+                    ? "text-lime-800"
+                    : "text-gray-800 dark:text-white"
                 }`}
                 onClick={() => setIsDropdownOpen((prev) => !prev)}
               >
                 Services <ChevronDown size={16} />
               </button>
               {isDropdownOpen && (
-                <div className="absolute left-0 z-20 mt-2 w-48 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg">
+                <div className="absolute left-0 z-20 mt-2 w-48 bg-lime-50 dark:bg-gray-800 border border-lime-200 dark:border-gray-700 rounded-lg shadow-lg">
                   <Link
                     href="/services/full-home-interiors"
                     className="dropdown-link"
@@ -170,8 +167,8 @@ export default function Navbar() {
               href="/testimonials"
               className={`nav-link ${
                 pathname === "/testimonials"
-                  ? "text-amber-500"
-                  : "text-amber-900 dark:text-white"
+                  ? "text-lime-800"
+                  : "text-gray-800 dark:text-white"
               }`}
             >
               Testimonials
@@ -180,8 +177,8 @@ export default function Navbar() {
               href="/blogs"
               className={`nav-link ${
                 pathname === "/blogs"
-                  ? "text-amber-500"
-                  : "text-amber-900 dark:text-white"
+                  ? "text-lime-800"
+                  : "text-gray-800 dark:text-white"
               }`}
             >
               Blogs
@@ -190,8 +187,8 @@ export default function Navbar() {
               href="/contact-us"
               className={`nav-link ${
                 pathname === "/"
-                  ? "text-amber-500"
-                  : "text-amber-900 dark:text-white"
+                  ? "text-lime-800"
+                  : "text-gray-800 dark:text-white"
               }`}
             >
               Contact Us

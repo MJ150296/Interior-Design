@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 const Owner: React.FC = () => {
   return (
-    <section className="py-16 bg-gradient-to-b from-amber-50 to-white w-full">
+    <section className="py-16 bg-gradient-to-b from-lime-50 to-white w-full">
       <div className="max-w-7xl mx-auto px-12 flex flex-col-reverse md:flex-row gap-12 items-center">
         <motion.div
           className="w-full md:w-1/3 relative rounded-3xl overflow-hidden shadow-2xl h-[500px]"
@@ -28,28 +28,28 @@ const Owner: React.FC = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7 }}
         >
-          <h2 className="text-3xl md:text-4xl font-serif font-bold italic text-amber-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-serif font-bold italic text-lime-900 mb-4">
             Meet Our Founder & Lead Designer
           </h2>
-          <h3 className="text-xl text-amber-600 italic mb-6">John Doe</h3>
+          <h3 className="text-xl text-lime-600 italic mb-6">John Doe</h3>
 
           <p className="mb-6 text-lg text-gray-700">
-            <strong className="text-amber-700">John Doe</strong>, the visionary
-            behind <strong className="text-amber-700">Riddhi Interiors</strong>,
+            <strong className="text-lime-700">John Doe</strong>, the visionary
+            behind <strong className="text-lime-700">Riddhi Interiors</strong>,
             brings over a decade of experience in transforming ordinary spaces
             into extraordinary interiors.
           </p>
 
           <p className="mb-6 text-lg text-gray-700">
             Specializing in{" "}
-            <strong className="text-amber-700">modern minimalism</strong>,{" "}
-            <strong className="text-amber-700">classic luxury interiors</strong>
+            <strong className="text-lime-700">modern minimalism</strong>,{" "}
+            <strong className="text-lime-700">classic luxury interiors</strong>
             , and personalized renovation strategies, John works closely with
             clients to understand their aspirations.
           </p>
 
-          <div className="my-8 p-6 bg-amber-50 rounded-xl border border-amber-200">
-            <p className="text-lg text-gray-700 italic border-l-4 border-amber-600 pl-4">
+          <div className="my-8 p-6 bg-lime-50 rounded-xl border border-lime-200">
+            <p className="text-lg text-gray-700 italic border-l-4 border-lime-600 pl-4">
               &quot;Design is not just about what you see. It&apos;s how you live in the
               space. My goal is to create interiors that feel as good as they
               look.&quot;
@@ -57,10 +57,10 @@ const Owner: React.FC = () => {
           </div>
 
           <div className="flex flex-wrap gap-4 mt-6">
-            <Button className="bg-amber-600 hover:bg-amber-700 text-white font-bold py-4 px-8 rounded-full transition-colors">
+            <Button className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-4 px-8 rounded-full transition-colors">
               Get in Touch
             </Button>
-            <Button className="bg-white border-2 border-amber-600 text-amber-700 hover:bg-amber-50 font-bold py-4 px-8 rounded-full transition-colors">
+            <Button className="bg-white border-2 border-lime-600 text-lime-700 hover:bg-lime-50 font-bold py-4 px-8 rounded-full transition-colors">
               Explore His Work
             </Button>
           </div>

@@ -56,7 +56,7 @@ const QuoteSection: React.FC = () => {
                 />
               </div>
             </CardHeader>
-            <CardTitle className="pl-6 text-amber-900 text-xl">
+            <CardTitle className="pl-6 text-lime-900 text-xl">
               {service.title}
             </CardTitle>
 
@@ -64,7 +64,7 @@ const QuoteSection: React.FC = () => {
               <p className="mb-4 text-gray-600">{service.description}</p>
               <Button
                 variant="default"
-                className="w-full bg-amber-600 hover:bg-amber-700 cursor-pointer"
+                className="w-full bg-lime-600 hover:bg-lime-700 cursor-pointer"
               >
                 Get Estimate
               </Button>

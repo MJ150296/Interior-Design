@@ -39,7 +39,7 @@ const allMenuItems = [
       {
         name: "About Us",
         path: (role: string) =>
-          `/dashboard/pages/${role}/website-content/about`,
+          `/dashboard/pages/${role}/website-content/about-us`,
       },
       {
         name: "Portfolio",
@@ -119,7 +119,7 @@ const allMenuItems = [
   {
     name: "Profile Settings",
     icon: <User size={20} />,
-    path: (role: string) => `/dashboard/pages/${role}/profile`,
+    path: (role: string) => `/dashboard/pages/${role}/profile-settings`,
     roles: ["SuperAdmin", "Client", "Designer", "clientAdmin"], // Removed Admin, added Client
   },
   // {
@@ -157,7 +157,7 @@ export function AppSidebar() {
 
   return (
     <>
-      <Sidebar className="min-h-screen border-r border-amber-600 shadow-lg shadow-amber-800">
+      <Sidebar className="min-h-screen border-r border-lime-600 shadow-lg shadow-lime-800">
         <SidebarHeader className="p-4">
           <div className="flex items-center gap-3 mb-2">
             <div className="border-2 border-dashed rounded-xl w-16 h-16" />
@@ -170,7 +170,7 @@ export function AppSidebar() {
               </h3>
             </div>
           </div>
-          <div className="text-xs px-2 py-1 bg-amber-100 text-amber-800 rounded-full inline-block capitalize">
+          <div className="text-xs px-2 py-1 bg-lime-100 text-lime-800 rounded-full inline-block capitalize">
             {userRole}
           </div>
         </SidebarHeader>
@@ -188,7 +188,7 @@ export function AppSidebar() {
                   <div className="flex items-center justify-between">
                     <Link
                       href={item.subItems ? "#" : path}
-                      className={`flex items-center gap-3 p-2 text-gray-700 hover:bg-amber-50 hover:text-amber-800 rounded transition-colors flex-1 ${
+                      className={`flex items-center gap-3 p-2 text-gray-700 hover:bg-lime-50 hover:text-lime-800 rounded transition-colors flex-1 ${
                         item.subItems ? "cursor-pointer" : ""
                       }`}
                       onClick={(e) => {
@@ -198,7 +198,7 @@ export function AppSidebar() {
                         }
                       }}
                     >
-                      <span className="text-amber-600">{item.icon}</span>
+                      <span className="text-lime-600">{item.icon}</span>
                       <span className="flex-1 text-left">{item.name}</span>
                     </Link>
 
@@ -206,7 +206,7 @@ export function AppSidebar() {
                     {item.subItems && (
                       <button
                         onClick={() => toggleExpand(item.name)}
-                        className="p-2 text-gray-500 hover:text-amber-700"
+                        className="p-2 text-gray-500 hover:text-lime-700"
                       >
                         {isExpanded ? (
                           <ChevronUp size={18} />
@@ -230,9 +230,9 @@ export function AppSidebar() {
                           <Link
                             key={subIndex}
                             href={subPath}
-                            className="flex items-center gap-2 p-2 text-sm text-gray-600 hover:bg-amber-50 hover:text-amber-700 rounded transition-colors"
+                            className="flex items-center gap-2 p-2 text-sm text-gray-600 hover:bg-lime-50 hover:text-lime-700 rounded transition-colors"
                           >
-                            <span className="w-2 h-2 bg-amber-400 rounded-full"></span>
+                            <span className="w-2 h-2 bg-lime-400 rounded-full"></span>
                             {subItem.name}
                           </Link>
                         );

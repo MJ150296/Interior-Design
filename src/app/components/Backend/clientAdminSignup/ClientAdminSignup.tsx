@@ -117,23 +117,23 @@ const ClientAdminSignup = () => {
   };
 
   return (
-    <div className="p-5 bg-amber-50 min-h-screen">
-      <Card className="max-w-2xl mx-auto p-5 shadow-lg border border-amber-200">
+    <div className="p-5 bg-lime-50 min-h-screen">
+      <Card className="max-w-2xl mx-auto p-5 shadow-lg border border-lime-200">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold text-amber-800">
+          <CardTitle className="text-2xl font-bold text-lime-800">
             Create Client Admin
           </CardTitle>
         </CardHeader>
-        <Separator className="bg-amber-200" />
+        <Separator className="bg-lime-200" />
         <CardContent className="pt-6">
           {error && (
             <Alert
               variant="destructive"
-              className="mb-6 border-l-4 border-amber-500"
+              className="mb-6 border-l-4 border-lime-500"
             >
-              <ExclamationTriangleIcon className="h-4 w-4 text-amber-700" />
-              <AlertTitle className="text-amber-700">Error</AlertTitle>
-              <AlertDescription className="text-amber-600">
+              <ExclamationTriangleIcon className="h-4 w-4 text-lime-700" />
+              <AlertTitle className="text-lime-700">Error</AlertTitle>
+              <AlertDescription className="text-lime-600">
                 {error}
               </AlertDescription>
             </Alert>
@@ -148,12 +148,12 @@ const ClientAdminSignup = () => {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-amber-800">Email</FormLabel>
+                      <FormLabel className="text-lime-800">Email</FormLabel>
                       <FormControl>
                         <Input
                           placeholder="admin@company.com"
                           type="email"
-                          className="focus:border-amber-500 focus:ring-amber-400"
+                          className="focus:border-lime-500 focus:ring-lime-400"
                           {...field}
                         />
                       </FormControl>
@@ -168,12 +168,12 @@ const ClientAdminSignup = () => {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-amber-800">Password</FormLabel>
+                      <FormLabel className="text-lime-800">Password</FormLabel>
                       <FormControl>
                         <Input
                           placeholder="At least 6 characters"
                           type="password"
-                          className="focus:border-amber-500 focus:ring-amber-400"
+                          className="focus:border-lime-500 focus:ring-lime-400"
                           {...field}
                         />
                       </FormControl>
@@ -188,13 +188,13 @@ const ClientAdminSignup = () => {
                   name="fullName"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-amber-800">
+                      <FormLabel className="text-lime-800">
                         Full Name
                       </FormLabel>
                       <FormControl>
                         <Input
                           placeholder="John Doe"
-                          className="focus:border-amber-500 focus:ring-amber-400"
+                          className="focus:border-lime-500 focus:ring-lime-400"
                           {...field}
                         />
                       </FormControl>
@@ -209,13 +209,13 @@ const ClientAdminSignup = () => {
                   name="contactNumber"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-amber-800">
+                      <FormLabel className="text-lime-800">
                         Contact Number
                       </FormLabel>
                       <FormControl>
                         <Input
                           placeholder="(123) 456-7890"
-                          className="focus:border-amber-500 focus:ring-amber-400"
+                          className="focus:border-lime-500 focus:ring-lime-400"
                           {...field}
                         />
                       </FormControl>
@@ -226,8 +226,8 @@ const ClientAdminSignup = () => {
               </div>
 
               {/* Address Fields */}
-              <div className="border border-amber-200 rounded-lg p-4 space-y-4 bg-amber-50">
-                <h3 className="font-medium text-amber-700">
+              <div className="border border-lime-200 rounded-lg p-4 space-y-4 bg-lime-50">
+                <h3 className="font-medium text-lime-700">
                   Address (Optional)
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -236,11 +236,11 @@ const ClientAdminSignup = () => {
                     name="address.street"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-amber-800">Street</FormLabel>
+                        <FormLabel className="text-lime-800">Street</FormLabel>
                         <FormControl>
                           <Input
                             placeholder="123 Main St"
-                            className="focus:border-amber-500 focus:ring-amber-400"
+                            className="focus:border-lime-500 focus:ring-lime-400"
                             {...field}
                           />
                         </FormControl>
@@ -254,11 +254,11 @@ const ClientAdminSignup = () => {
                     name="address.city"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-amber-800">City</FormLabel>
+                        <FormLabel className="text-lime-800">City</FormLabel>
                         <FormControl>
                           <Input
                             placeholder="New York"
-                            className="focus:border-amber-500 focus:ring-amber-400"
+                            className="focus:border-lime-500 focus:ring-lime-400"
                             {...field}
                           />
                         </FormControl>
@@ -272,11 +272,11 @@ const ClientAdminSignup = () => {
                     name="address.state"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-amber-800">State</FormLabel>
+                        <FormLabel className="text-lime-800">State</FormLabel>
                         <FormControl>
                           <Input
                             placeholder="NY"
-                            className="focus:border-amber-500 focus:ring-amber-400"
+                            className="focus:border-lime-500 focus:ring-lime-400"
                             {...field}
                           />
                         </FormControl>
@@ -290,13 +290,13 @@ const ClientAdminSignup = () => {
                     name="address.postalCode"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-amber-800">
+                        <FormLabel className="text-lime-800">
                           Postal Code
                         </FormLabel>
                         <FormControl>
                           <Input
                             placeholder="10001"
-                            className="focus:border-amber-500 focus:ring-amber-400"
+                            className="focus:border-lime-500 focus:ring-lime-400"
                             {...field}
                           />
                         </FormControl>
@@ -309,7 +309,7 @@ const ClientAdminSignup = () => {
 
               <Button
                 type="submit"
-                className="w-full bg-amber-600 hover:bg-amber-700 text-white"
+                className="w-full bg-lime-600 hover:bg-lime-700 text-white"
                 disabled={isLoading}
               >
                 {isLoading ? "Creating Account..." : "Create Client Admin"}

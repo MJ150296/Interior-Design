@@ -82,14 +82,14 @@ const SuperAdminSignup = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-amber-50 p-4">
-      <div className="w-full max-w-md p-6 bg-white border border-amber-200 rounded-xl shadow-lg">
-        <h2 className="text-3xl font-bold text-amber-800 text-center mb-4">
+    <div className="flex items-center justify-center min-h-screen bg-lime-50 p-4">
+      <div className="w-full max-w-md p-6 bg-white border border-lime-200 rounded-xl shadow-lg">
+        <h2 className="text-3xl font-bold text-lime-800 text-center mb-4">
           SuperAdmin Signup
         </h2>
 
         {error && (
-          <div className="mb-4 p-3 border-l-4 border-amber-500 bg-amber-100 text-amber-700 text-sm rounded">
+          <div className="mb-4 p-3 border-l-4 border-lime-500 bg-lime-100 text-lime-700 text-sm rounded">
             {error}
           </div>
         )}
@@ -100,7 +100,7 @@ const SuperAdminSignup = () => {
               type="email"
               placeholder="Email"
               {...register("email", { required: "Email is required" })}
-              className="w-full px-3 py-2 border border-amber-300 rounded focus:border-amber-500 focus:ring focus:ring-amber-200 text-amber-800 placeholder:text-amber-400"
+              className="w-full px-3 py-2 border border-lime-300 rounded focus:border-lime-500 focus:ring focus:ring-lime-200 text-lime-800 placeholder:text-lime-400"
             />
             {errors.email && (
               <p className="text-red-500 text-sm mt-1">
@@ -120,7 +120,7 @@ const SuperAdminSignup = () => {
                   message: "Password must be at least 8 characters",
                 },
               })}
-              className="w-full px-3 py-2 border border-amber-300 rounded focus:border-amber-500 focus:ring focus:ring-amber-200 text-amber-800 placeholder:text-amber-400"
+              className="w-full px-3 py-2 border border-lime-300 rounded focus:border-lime-500 focus:ring focus:ring-lime-200 text-lime-800 placeholder:text-lime-400"
             />
             {errors.password && (
               <p className="text-red-500 text-sm mt-1">
@@ -136,7 +136,7 @@ const SuperAdminSignup = () => {
               {...register("confirmPassword", {
                 required: "Confirm Password is required",
               })}
-              className="w-full px-3 py-2 border border-amber-300 rounded focus:border-amber-500 focus:ring focus:ring-amber-200 text-amber-800 placeholder:text-amber-400"
+              className="w-full px-3 py-2 border border-lime-300 rounded focus:border-lime-500 focus:ring focus:ring-lime-200 text-lime-800 placeholder:text-lime-400"
             />
             {errors.confirmPassword && (
               <p className="text-red-500 text-sm mt-1">
@@ -148,7 +148,7 @@ const SuperAdminSignup = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-amber-600 text-white py-2 rounded hover:bg-amber-700 transition disabled:bg-gray-400"
+            className="w-full bg-lime-600 text-white py-2 rounded hover:bg-lime-700 transition disabled:bg-gray-400"
           >
             {loading ? "Creating..." : "Create SuperAdmin"}
           </button>

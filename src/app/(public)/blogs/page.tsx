@@ -53,13 +53,13 @@ const BlogList: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-lime-50 to-white">
       {/* Hero Section */}
       <div className="relative w-full h-[530px] shadow-xl flex flex-col items-center justify-center text-center overflow-hidden">
         {/* Parallax background */}
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-[url('/Riddhi%20Interior%20Design/Projects/cover.jpg')] bg-cover bg-center bg-no-repeat" />
-          <div className="absolute inset-0 bg-gradient-to-t from-amber-900/80 to-amber-700/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-lime-900/50 to-transparent" />
           {/* <div className="absolute inset-0 bg-[url('/pattern.svg')] bg-repeat opacity-10" /> */}
         </div>
 
@@ -71,7 +71,7 @@ const BlogList: React.FC = () => {
           transition={{ duration: 0.8 }}
         >
           <motion.span
-            className="text-xs md:text-sm tracking-widest font-bold text-amber-200 mb-5"
+            className="text-xs md:text-sm tracking-widest font-bold text-lime-200 mb-5"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.3 }}
@@ -89,7 +89,7 @@ const BlogList: React.FC = () => {
           </motion.h1>
 
           <motion.p
-            className="font-bold text-xl md:text-2xl text-amber-100 tracking-wide font-serif max-w-3xl"
+            className="font-bold text-xl md:text-2xl text-lime-100 tracking-wide font-serif max-w-3xl"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6, duration: 0.4 }}
@@ -132,14 +132,14 @@ const BlogList: React.FC = () => {
       </div>
 
       {/* Featured Blog Carousel */}
-      <section className="py-12 bg-gradient-to-r from-amber-50 to-amber-100">
+      <section className="py-12 bg-gradient-to-r from-lime-50 to-lime-100">
         <div className="container mx-auto px-4">
           <div className="flex justify-center items-center gap-4 mb-12">
-            <div className="h-px bg-amber-300 flex-grow max-w-20 md:max-w-40" />
-            <h2 className="text-3xl md:text-4xl font-serif font-bold text-amber-900 text-center">
+            <div className="h-px bg-lime-300 flex-grow max-w-20 md:max-w-40" />
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-lime-900 text-center">
               Featured Inspiration
             </h2>
-            <div className="h-px bg-amber-300 flex-grow max-w-20 md:max-w-40" />
+            <div className="h-px bg-lime-300 flex-grow max-w-20 md:max-w-40" />
           </div>
 
           <AnimatePresence mode="wait">
@@ -159,28 +159,28 @@ const BlogList: React.FC = () => {
                   objectFit="cover"
                   className="brightness-90"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-amber-900/80 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-lime-900/80 to-transparent" />
               </div>
 
               <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-                <span className="bg-amber-600 text-white text-xs font-semibold px-3 py-1 rounded-full mb-3 inline-block">
+                <span className="bg-lime-600 text-white text-xs font-semibold px-3 py-1 rounded-full mb-3 inline-block">
                   {featuredBlog.category}
                 </span>
                 <Link href={`/blogs/${featuredBlog.id}`}>
-                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 hover:text-amber-200 transition-colors">
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 hover:text-lime-200 transition-colors">
                     {featuredBlog.title}
                   </h3>
                 </Link>
-                <p className="text-amber-100 mb-4 max-w-2xl">
+                <p className="text-lime-100 mb-4 max-w-2xl">
                   {featuredBlog.excerpt}
                 </p>
                 <div className="flex items-center">
                   <div className="bg-gray-200 border-2 border-dashed rounded-xl w-10 h-10" />
                   <div className="ml-3">
-                    <p className="text-amber-200 font-medium">
+                    <p className="text-lime-200 font-medium">
                       {featuredBlog.author}
                     </p>
-                    <p className="text-amber-300 text-sm">
+                    <p className="text-lime-300 text-sm">
                       {featuredBlog.date}
                     </p>
                   </div>
@@ -204,8 +204,8 @@ const BlogList: React.FC = () => {
                 key={category}
                 className={`px-4 py-2 rounded-full text-sm md:text-base font-medium transition-colors duration-300 ${
                   activeCategory === category
-                    ? "bg-amber-600 text-white shadow-lg"
-                    : "bg-gray-100 text-gray-700 hover:bg-amber-100"
+                    ? "bg-lime-600 text-white shadow-lg"
+                    : "bg-gray-100 text-gray-700 hover:bg-lime-100"
                 }`}
                 onClick={() => setActiveCategory(category)}
                 whileHover={{ scale: 1.05 }}
@@ -222,23 +222,23 @@ const BlogList: React.FC = () => {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="flex justify-center items-center gap-4 mb-12">
-            <div className="h-px bg-amber-300 flex-grow max-w-20 md:max-w-40" />
-            <h2 className="text-3xl md:text-4xl font-serif font-bold text-amber-900 text-center">
+            <div className="h-px bg-lime-300 flex-grow max-w-20 md:max-w-40" />
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-lime-900 text-center">
               Latest Articles
             </h2>
-            <div className="h-px bg-amber-300 flex-grow max-w-20 md:max-w-40" />
+            <div className="h-px bg-lime-300 flex-grow max-w-20 md:max-w-40" />
           </div>
 
           {filteredBlogs.length === 0 ? (
             <div className="text-center py-12">
-              <h3 className="text-xl font-bold text-amber-800 mb-4">
+              <h3 className="text-xl font-bold text-lime-800 mb-4">
                 No articles found
               </h3>
               <p className="text-gray-600 mb-6">
                 Try adjusting your search or filter
               </p>
               <button
-                className="bg-amber-600 hover:bg-amber-700 text-white font-medium py-2 px-6 rounded-full transition-colors"
+                className="bg-lime-600 hover:bg-lime-700 text-white font-medium py-2 px-6 rounded-full transition-colors"
                 onClick={() => {
                   setSearchQuery("");
                   setActiveCategory("all");
@@ -261,7 +261,7 @@ const BlogList: React.FC = () => {
                   className="relative"
                 >
                   <Link href={`/blogs/${blog.id}`}>
-                    <Card className="h-full shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-amber-100">
+                    <Card className="h-full shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-lime-100">
                       <div className="relative h-56 overflow-hidden">
                         <Image
                           src={blog.image}
@@ -273,7 +273,7 @@ const BlogList: React.FC = () => {
                           }`}
                         />
                         <div className="absolute top-4 right-4">
-                          <span className="bg-amber-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                          <span className="bg-lime-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
                             {blog.category}
                           </span>
                         </div>
@@ -288,7 +288,7 @@ const BlogList: React.FC = () => {
                       <CardContent className="px-6 pb-6">
                         <p className="text-gray-600 mb-4">{blog.excerpt}</p>
 
-                        <div className="flex items-center justify-between border-t border-amber-100 pt-4">
+                        <div className="flex items-center justify-between border-t border-lime-100 pt-4">
                           <div className="flex items-center">
                             <div className="bg-gray-200 border-2 border-dashed rounded-xl w-8 h-8" />
                             <span className="ml-2 text-sm text-gray-500">
@@ -306,7 +306,7 @@ const BlogList: React.FC = () => {
                     <AnimatePresence>
                       {hoveredBlog === blog.id && (
                         <motion.div
-                          className="absolute inset-0 bg-amber-600/90 flex items-center justify-center rounded-lg"
+                          className="absolute inset-0 bg-lime-700/90 flex items-center justify-center rounded-lg"
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           exit={{ opacity: 0 }}
@@ -331,13 +331,13 @@ const BlogList: React.FC = () => {
       </section>
 
       {/* Newsletter Section */}
-      <section className="py-16 bg-gradient-to-r from-amber-900 to-amber-700 text-white">
+      <section className="py-16 bg-gradient-to-r from-lime-900 to-lime-700 text-white">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="text-center mb-10">
             <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">
               Design Inspiration Delivered
             </h2>
-            <p className="text-amber-100 max-w-2xl mx-auto">
+            <p className="text-lime-100 max-w-2xl mx-auto">
               Join our newsletter and receive exclusive design tips, trend
               reports, and special offers.
             </p>
@@ -348,13 +348,13 @@ const BlogList: React.FC = () => {
               <input
                 type="email"
                 placeholder="Your email address"
-                className="flex-grow px-5 py-3 rounded-full bg-white/20 text-white placeholder-amber-200 focus:outline-none focus:ring-2 focus:ring-amber-400"
+                className="flex-grow px-5 py-3 rounded-full bg-white/20 text-white placeholder-lime-200 focus:outline-none focus:ring-2 focus:ring-lime-400"
               />
-              <button className="bg-amber-500 hover:bg-amber-400 text-amber-900 font-bold py-3 px-6 rounded-full transition-colors shadow-lg">
+              <button className="bg-lime-500 hover:bg-lime-400 text-lime-900 font-bold py-3 px-6 rounded-full transition-colors shadow-lg">
                 Subscribe
               </button>
             </div>
-            <p className="text-amber-200 text-sm text-center mt-4">
+            <p className="text-lime-200 text-sm text-center mt-4">
               We respect your privacy. Unsubscribe at any time.
             </p>
           </div>

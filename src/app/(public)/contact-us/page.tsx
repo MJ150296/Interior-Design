@@ -25,25 +25,25 @@ const AppointmentPage: React.FC = () => {
       title: "Expert Design Consultation",
       description:
         "Our experienced designers will work with you to create spaces that reflect your personality and lifestyle.",
-      icon: <PaletteIcon className="w-8 h-8 text-amber-600" />,
+      icon: <PaletteIcon className="w-8 h-8 text-lime-600" />,
     },
     {
       title: "Premium Quality Materials",
       description:
         "We source only the finest materials to ensure your interiors are both beautiful and durable.",
-      icon: <AwardIcon className="w-8 h-8 text-amber-600" />,
+      icon: <AwardIcon className="w-8 h-8 text-lime-600" />,
     },
     {
       title: "End-to-End Project Management",
       description:
         "From concept to completion, we handle every detail so you can relax and enjoy the transformation.",
-      icon: <HomeIcon className="w-8 h-8 text-amber-600" />,
+      icon: <HomeIcon className="w-8 h-8 text-lime-600" />,
     },
     {
       title: "Personalized Solutions",
       description:
         "Every space is unique - we create custom solutions tailored to your specific needs and preferences.",
-      icon: <CalendarIcon className="w-8 h-8 text-amber-600" />,
+      icon: <CalendarIcon className="w-8 h-8 text-lime-600" />,
     },
   ];
 
@@ -55,10 +55,10 @@ const AppointmentPage: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen pt-24 bg-gradient-to-br from-gray-50 to-amber-50">
+    <div className="min-h-screen pt-24 bg-gradient-to-br from-gray-50 to-lime-50">
       {/* Hero Section */}
       <motion.header
-        className="relative bg-gradient-to-r from-amber-900 via-amber-700 to-amber-600 text-white p-8 md:p-16 text-center shadow-xl overflow-hidden"
+        className="relative bg-gradient-to-r from-lime-900 via-lime-700 to-lime-600 text-white p-8 md:p-16 text-center shadow-xl overflow-hidden"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
@@ -90,7 +90,7 @@ const AppointmentPage: React.FC = () => {
           >
             <Button
               size="lg"
-              className="bg-amber-500 hover:bg-amber-400 text-amber-900 font-bold text-lg px-8 py-6 rounded-full shadow-lg transform hover:scale-105 transition-transform duration-300"
+              className="bg-lime-500 hover:bg-lime-400 text-lime-900 font-bold text-lg px-8 py-6 rounded-full shadow-lg transform hover:scale-105 transition-transform duration-300"
               onClick={() =>
                 document
                   .getElementById("appointment-form")
@@ -111,7 +111,7 @@ const AppointmentPage: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.5 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-amber-900">
+          <h2 className="text-3xl md:text-4xl font-bold text-lime-900">
             Why Choose Riddhi Interiors?
           </h2>
           <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
@@ -142,14 +142,14 @@ const AppointmentPage: React.FC = () => {
           </TabsList>
 
           <TabsContent value="consultation">
-            <Card className="border-amber-500 border-2">
+            <Card className="border-lime-500 border-2">
               <CardContent className="p-6">
                 <div className="flex flex-col md:flex-row gap-6 items-center">
                   <div className="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16 flex items-center justify-center">
-                    <PhoneIcon className="text-amber-600" />
+                    <PhoneIcon className="text-lime-600" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-amber-900">
+                    <h3 className="text-xl font-bold text-lime-900">
                       Personalized Consultation
                     </h3>
                     <p className="mt-2 text-gray-600">
@@ -164,14 +164,14 @@ const AppointmentPage: React.FC = () => {
           </TabsContent>
 
           <TabsContent value="design">
-            <Card className="border-amber-500 border-2">
+            <Card className="border-lime-500 border-2">
               <CardContent className="p-6">
                 <div className="flex flex-col md:flex-row gap-6 items-center">
                   <div className="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16 flex items-center justify-center">
-                    <PaletteIcon className="text-amber-600" />
+                    <PaletteIcon className="text-lime-600" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-amber-900">
+                    <h3 className="text-xl font-bold text-lime-900">
                       Creative Design Process
                     </h3>
                     <p className="mt-2 text-gray-600">
@@ -185,14 +185,14 @@ const AppointmentPage: React.FC = () => {
           </TabsContent>
 
           <TabsContent value="materials">
-            <Card className="border-amber-500 border-2">
+            <Card className="border-lime-500 border-2">
               <CardContent className="p-6">
                 <div className="flex flex-col md:flex-row gap-6 items-center">
                   <div className="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16 flex items-center justify-center">
-                    <AwardIcon className="text-amber-600" />
+                    <AwardIcon className="text-lime-600" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-amber-900">
+                    <h3 className="text-xl font-bold text-lime-900">
                       Quality Materials
                     </h3>
                     <p className="mt-2 text-gray-600">
@@ -206,14 +206,14 @@ const AppointmentPage: React.FC = () => {
           </TabsContent>
 
           <TabsContent value="execution">
-            <Card className="border-amber-500 border-2">
+            <Card className="border-lime-500 border-2">
               <CardContent className="p-6">
                 <div className="flex flex-col md:flex-row gap-6 items-center">
                   <div className="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16 flex items-center justify-center">
-                    <HomeIcon className="text-amber-600" />
+                    <HomeIcon className="text-lime-600" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-amber-900">
+                    <h3 className="text-xl font-bold text-lime-900">
                       Precision Execution
                     </h3>
                     <p className="mt-2 text-gray-600">
@@ -239,17 +239,17 @@ const AppointmentPage: React.FC = () => {
                 scale: index === currentHighlight ? 1.05 : 1,
               }}
               transition={{ duration: 0.5 }}
-              className={`bg-gradient-to-br from-white to-amber-50 p-6 rounded-xl shadow-lg border ${
+              className={`bg-gradient-to-br from-white to-lime-50 p-6 rounded-xl shadow-lg border ${
                 index === currentHighlight
-                  ? "border-amber-500 border-2 shadow-amber-100"
+                  ? "border-lime-500 border-2 shadow-lime-100"
                   : "border-gray-200"
               }`}
             >
               <div className="flex flex-col items-center text-center">
-                <div className="mb-4 p-3 bg-amber-100 rounded-full">
+                <div className="mb-4 p-3 bg-lime-100 rounded-full">
                   {highlight.icon}
                 </div>
-                <h3 className="text-xl font-bold text-amber-900">
+                <h3 className="text-xl font-bold text-lime-900">
                   {highlight.title}
                 </h3>
                 <p className="mt-2 text-gray-600">{highlight.description}</p>
@@ -260,7 +260,7 @@ const AppointmentPage: React.FC = () => {
       </section>
 
       {/* Portfolio Preview */}
-      <section className="py-16 bg-gradient-to-b from-amber-50 to-gray-100">
+      <section className="py-16 bg-gradient-to-b from-lime-50 to-gray-100">
         <div className="max-w-7xl mx-auto px-4">
           <motion.div
             className="text-center mb-12"
@@ -268,7 +268,7 @@ const AppointmentPage: React.FC = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-amber-900">
+            <h2 className="text-3xl md:text-4xl font-bold text-lime-900">
               Our Signature Designs
             </h2>
             <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
@@ -288,13 +288,13 @@ const AppointmentPage: React.FC = () => {
                 className="group"
               >
                 <Card className="overflow-hidden border-0 shadow-lg h-full">
-                  <div className="relative h-64 bg-gradient-to-r from-amber-200 to-amber-300 rounded-t-xl overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-t from-amber-900/40 to-transparent"></div>
+                  <div className="relative h-64 bg-gradient-to-r from-lime-200 to-lime-300 rounded-t-xl overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-t from-lime-900/40 to-transparent"></div>
                     <div className="absolute bottom-4 left-4">
                       <h3 className="text-white font-bold text-xl">
                         Project {item}
                       </h3>
-                      <p className="text-amber-100">Residential Design</p>
+                      <p className="text-lime-100">Residential Design</p>
                     </div>
                   </div>
                   <CardContent className="p-6">
@@ -302,7 +302,7 @@ const AppointmentPage: React.FC = () => {
                       Modern living room design with custom furniture and warm
                       lighting solutions.
                     </p>
-                    <Button variant="link" className="text-amber-600 p-0 mt-4">
+                    <Button variant="link" className="text-lime-600 p-0 mt-4">
                       View Project Details →
                     </Button>
                   </CardContent>
@@ -316,7 +316,7 @@ const AppointmentPage: React.FC = () => {
       {/* Appointment Form Section */}
       <section
         id="appointment-form"
-        className="relative py-16 bg-gradient-to-b from-gray-50 to-amber-50"
+        className="relative py-16 bg-gradient-to-b from-gray-50 to-lime-50"
       >
         <div className="max-w-6xl mx-auto px-4">
           <motion.div
@@ -325,7 +325,7 @@ const AppointmentPage: React.FC = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-amber-900">
+            <h2 className="text-3xl md:text-4xl font-bold text-lime-900">
               Schedule Your Design Consultation
             </h2>
             <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
@@ -335,7 +335,7 @@ const AppointmentPage: React.FC = () => {
           </motion.div>
 
           <motion.div
-            className="bg-white flex justify-center rounded-2xl shadow-xl p-6 md:p-8 border border-amber-200 max-w-4xl mx-auto"
+            className="bg-white flex justify-center rounded-2xl shadow-xl p-6 md:p-8 border border-lime-200 max-w-4xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -351,31 +351,31 @@ const AppointmentPage: React.FC = () => {
       </section>
 
       {/* Contact Info */}
-      <section className="py-12 bg-gradient-to-br from-amber-600 to-amber-800 text-white">
+      <section className="py-12 bg-gradient-to-br from-lime-600 to-lime-800 text-white">
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="flex flex-col items-center text-center">
-              <div className="bg-amber-500/20 p-4 rounded-full mb-4">
+              <div className="bg-lime-500/20 p-4 rounded-full mb-4">
                 <PhoneIcon className="w-8 h-8" />
               </div>
               <h3 className="text-xl font-bold">Call Us</h3>
-              <p className="mt-2 text-amber-100">+91 78959 27366</p>
+              <p className="mt-2 text-lime-100">+91 78959 27366</p>
             </div>
 
             <div className="flex flex-col items-center text-center">
-              <div className="bg-amber-500/20 p-4 rounded-full mb-4">
+              <div className="bg-lime-500/20 p-4 rounded-full mb-4">
                 <MapPinIcon className="w-8 h-8" />
               </div>
               <h3 className="text-xl font-bold">Visit Us</h3>
-              <p className="mt-2 text-amber-100">Tilak Road, Dehradun</p>
+              <p className="mt-2 text-lime-100">Tilak Road, Dehradun</p>
             </div>
 
             <div className="flex flex-col items-center text-center">
-              <div className="bg-amber-500/20 p-4 rounded-full mb-4">
+              <div className="bg-lime-500/20 p-4 rounded-full mb-4">
                 <CalendarIcon className="w-8 h-8" />
               </div>
               <h3 className="text-xl font-bold">Working Hours</h3>
-              <p className="mt-2 text-amber-100">Mon-Sat: 10AM - 7PM</p>
+              <p className="mt-2 text-lime-100">Mon-Sat: 10AM - 7PM</p>
             </div>
           </div>
         </div>

@@ -23,7 +23,7 @@ const BlogCarousel: React.FC = () => {
     <section className="py-16 px-4 w-full max-w-7xl mx-auto">
       <div className="text-center mb-16 flex flex-col items-center">
         <motion.h2
-          className="text-3xl md:text-4xl font-serif font-bold text-amber-900 mb-4"
+          className="text-3xl md:text-4xl font-serif font-bold text-lime-900 mb-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6 }}
@@ -36,7 +36,7 @@ const BlogCarousel: React.FC = () => {
               height={50}
               className="mx-auto"
             />
-            <h2 className="text-2xl md:text-4xl mb-1 font-bold italic text-orange-900 font-serif">
+            <h2 className="text-2xl md:text-4xl mb-1 font-bold italic text-lime-900 font-serif">
               Design Insights & Inspiration
             </h2>
             <Image
@@ -77,7 +77,7 @@ const BlogCarousel: React.FC = () => {
                 transition={{ delay: index * 0.1 + 0.3, duration: 0.5 }}
               >
                 <Link href={`/blogs/${blog.id}`} className="block">
-                  <Card className="h-[530px] rounded-2xl shadow-lg hover:shadow-xl transition-shadow border border-amber-100 overflow-hidden">
+                  <Card className="h-[530px] rounded-2xl shadow-lg hover:shadow-xl transition-shadow border border-lime-100 overflow-hidden">
                     <div className="relative h-60">
                       <Image
                         src={blog.image}
@@ -87,13 +87,13 @@ const BlogCarousel: React.FC = () => {
                       />
                     </div>
                     <CardContent className="p-6">
-                      <h3 className="text-xl font-bold text-amber-900 mb-4">
+                      <h3 className="text-xl font-bold text-lime-900 mb-4">
                         {blog.title}
                       </h3>
                       <p className="text-gray-600 mb-6">{blog.excerpt}</p>
                       <Button
                         variant="outline"
-                        className="w-full border-amber-600 text-amber-700 hover:bg-amber-50"
+                        className="w-full border-lime-600 text-lime-700 hover:bg-lime-50"
                       >
                         Read Article
                       </Button>

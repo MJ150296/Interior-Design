@@ -18,7 +18,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className="antialiased text-foreground dark:bg-black dark:text-white transition-colors bg-amber-100">
+      <body className="antialiased text-foreground dark:bg-black dark:text-white transition-colors bg-lime-100">
         <SessionProvider session={session}>{children}</SessionProvider>
       </body>
     </html>

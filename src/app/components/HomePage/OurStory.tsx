@@ -58,7 +58,7 @@ const OurStory: React.FC = () => {
             height={50}
             className="mx-auto"
           />
-          <h2 className="text-2xl md:text-4xl mb-1 font-bold italic text-orange-900 font-serif">
+          <h2 className="text-2xl md:text-4xl mb-1 font-bold italic text-lime-900 font-serif">
             One-stop shop for all interiors
           </h2>
           <Image
@@ -104,7 +104,7 @@ const OurStory: React.FC = () => {
                       height={500}
                       className="w-full h-60 rounded-t-xl object-cover"
                     />
-                    <CardTitle className="text-center text-lg sm:text-lg font-semibold text-gray-800 dark:text-white">
+                    <CardTitle className="text-center text-lg sm:text-lg font-semibold text-lime-900 dark:text-white">
                       {service.name}
                     </CardTitle>
                   </CardHeader>

@@ -1,32 +1,102 @@
 "use client";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { useAppDispatch, useAppSelector } from "@/app/redux/store/hooks";
+import {
+  fetchAboutContent,
+  selectAboutContent,
+  selectAboutError,
+  selectAboutLoading,
+} from "@/app/redux/slices/aboutUsPageSlice";
 
-const teamMembers = [
+interface MappedTeamMember {
+  name: string;
+  title: string;
+  bio: string;
+  imageUrl: string;
+  specialties: string[];
+}
+
+// Default values as fallbacks
+const defaultHero = {
+  upperTitle: "A FEW WORDS ABOUT",
+  title: "Our Firm",
+  subtitle: "Award Winning Interior Design Firm in UTTARAKHAND",
+  backgroundImageUrl: "/Riddhi Interior Design/About/cover.jpg",
+};
+
+const defaultStats = [
+  { value: "12+", label: "Years Experience" },
+  { value: "250+", label: "Projects Completed" },
+  { value: "98%", label: "Client Satisfaction" },
+  { value: "25+", label: "Awards Received" },
+];
+
+const defaultStory = {
+  title: "Our Story",
+  subtitle: "Transforming Spaces with Elegance & Style",
+  content: "At Riddhi Interiors, we believe every space tells a story...",
+  content2: "At Riddhi Interiors, we believe every space tells a story...",
+  quote: "Your trusted interior design partner in Dehradun...",
+  imageUrl: "/Riddhi Interior Design/About/story.jpg",
+  cities: "Dehradun, Mussoorie, Haridwar, Rishikesh, Roorkee",
+};
+
+const defaultCoreValues = [
+  {
+    title: "Innovation",
+    description:
+      "We embrace new ideas and technologies to create unique spaces",
+    icon: "💡",
+  },
+  {
+    title: "Excellence",
+    description: "We pursue perfection in every detail of our work",
+    icon: "⭐",
+  },
+  {
+    title: "Integrity",
+    description: "We build relationships based on trust and transparency",
+    icon: "🤝",
+  },
+  {
+    title: "Sustainability",
+    description: "We prioritize eco-friendly materials and practices",
+    icon: "🌿",
+  },
+];
+
+const defaultTeamMembers = [
   {
     name: "Riddhi Sharma",
     title: "Founder & Principal Designer",
-    imageUrl: "/Riddhi Interior Design/owner.jpg",
     bio: "With over 15 years of experience in interior design, Riddhi brings a unique blend of creativity and technical expertise to every project.",
+    imageUrl: "/Riddhi Interior Design/owner.jpg",
     specialties: ["Residential Design", "Space Planning", "Color Theory"],
   },
   {
     name: "Aarav Mehta",
     title: "Interior Architect",
-    imageUrl: "/Riddhi Interior Design/owner.jpg",
     bio: "Aarav combines structural knowledge with aesthetic sensibility to create spaces that are both beautiful and functional.",
+    imageUrl: "/Riddhi Interior Design/owner.jpg",
     specialties: ["Architectural Design", "3D Modeling", "Project Management"],
   },
   {
     name: "Simran Kaur",
     title: "3D Visualizer & Designer",
-    imageUrl: "/Riddhi Interior Design/owner.jpg",
     bio: "Simran transforms concepts into photorealistic visualizations that help clients envision their future spaces.",
+    imageUrl: "/Riddhi Interior Design/owner.jpg",
     specialties: ["3D Rendering", "Material Selection", "Lighting Design"],
   },
 ];
+
+const defaultConnect = {
+  address: "Tilak Road, Dehradun, Uttarakhand 248001",
+  hours: "Open Monday-Saturday: 9AM - 7PM",
+  phone: "+91 78959 27366",
+};
 
 const socialMedia = [
   {
@@ -55,52 +125,81 @@ const socialMedia = [
   },
 ];
 
-const stats = [
-  { value: "12+", label: "Years Experience" },
-  { value: "250+", label: "Projects Completed" },
-  { value: "98%", label: "Client Satisfaction" },
-  { value: "25+", label: "Awards Received" },
-];
-
-const coreValues = [
-  {
-    title: "Innovation",
-    description:
-      "We embrace new ideas and technologies to create unique spaces",
-    icon: "💡",
-  },
-  {
-    title: "Excellence",
-    description: "We pursue perfection in every detail of our work",
-    icon: "⭐",
-  },
-  {
-    title: "Integrity",
-    description: "We build relationships based on trust and transparency",
-    icon: "🤝",
-  },
-  {
-    title: "Sustainability",
-    description: "We prioritize eco-friendly materials and practices",
-    icon: "🌿",
-  },
-];
-
 const AboutUs: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const reduxContent = useAppSelector(selectAboutContent);
+  const reduxLoading = useAppSelector(selectAboutLoading);
+  const reduxError = useAppSelector(selectAboutError);
+
+  const [loading, setLoading] = useState(true);
+
+  // Merge Redux data with defaults
+  const heroData = reduxContent?.hero || defaultHero;
+  const statsData = reduxContent?.stats || defaultStats;
+  const storyData = reduxContent?.story || defaultStory;
+  const coreValuesData = reduxContent?.coreValues || defaultCoreValues;
+  const teamMembersData = reduxContent?.teamMembers || defaultTeamMembers;
+  const connectData = reduxContent?.connect || defaultConnect;
+
+  // Map team members to match UI structure
+  const mappedTeamMembers: MappedTeamMember[] = teamMembersData.map(
+    (member) => {
+      // Handle both Redux data structure and default structure
+      const specialties =
+        "tags" in member
+          ? member.tags
+          : "specialties" in member
+          ? member.specialties
+          : [];
+
+      return {
+        name: member.name,
+        title: member.title,
+        bio: member.bio,
+        imageUrl: member.imageUrl,
+        specialties,
+      };
+    }
+  );
+
+  useEffect(() => {
+    // Check if Redux data is available
+    if (reduxContent) {
+      setLoading(false);
+    } else {
+      // If not, fetch data from the server
+      dispatch(fetchAboutContent()).then(() => setLoading(false));
+    }
+  }, [dispatch, reduxContent]);
+
+  if (loading || reduxLoading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <Image
+          src="/Riddhi Interior Design/Logo.png" // Place your logo in the public directory
+          alt="Riddhi Interior Logo"
+          width={128} // equivalent to w-32
+          height={128} // equivalent to h-32
+          className="animate-pulse"
+          priority
+        />
+      </div>
+    );
+  }
+
   return (
-    <div className="w-full relative bg-gradient-to-b from-amber-50 to-white">
+    <div className="w-full relative bg-gradient-to-b from-lime-50 to-white">
       {/* Hero Section */}
       <div className="relative w-full h-[500px] flex flex-col items-center justify-center text-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/Riddhi Interior Design/About/cover.jpg"
+            src={heroData.backgroundImageUrl}
             alt="About background"
             layout="fill"
             objectFit="cover"
             className="brightness-90"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-amber-900/60 to-amber-700/30" />
-          {/* <div className="absolute inset-0 bg-[url('/pattern.svg')] bg-repeat opacity-10" /> */}
+          <div className="absolute inset-0 bg-gradient-to-t from-lime-900/50 to-transparent" />
         </div>
 
         <motion.div
@@ -110,12 +209,12 @@ const AboutUs: React.FC = () => {
           transition={{ duration: 0.8 }}
         >
           <motion.span
-            className="text-xs md:text-sm tracking-widest font-bold text-amber-200 mb-5 block"
+            className="text-xs md:text-sm tracking-widest font-bold text-lime-200 mb-5 block"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.5 }}
           >
-            A FEW WORDS ABOUT
+            {heroData.upperTitle}
           </motion.span>
 
           <motion.h1
@@ -124,25 +223,25 @@ const AboutUs: React.FC = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.4, duration: 0.5 }}
           >
-            Our Firm
+            {heroData.title}
           </motion.h1>
 
           <motion.p
-            className="font-bold text-xl md:text-2xl text-amber-100 tracking-wide font-serif max-w-3xl mx-auto"
+            className="font-bold text-xl md:text-2xl text-lime-100 tracking-wide font-serif max-w-3xl mx-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6, duration: 0.5 }}
           >
-            Award Winning Interior Design Firm in UTTARAKHAND
+            {heroData.subtitle}
           </motion.p>
         </motion.div>
       </div>
 
       {/* Stats Section */}
-      <div className="py-12 bg-gradient-to-r from-amber-700 to-amber-900 text-white">
+      <div className="py-12 bg-gradient-to-r from-lime-700 to-lime-900 text-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {stats.map((stat, index) => (
+            {statsData.map((stat, index) => (
               <motion.div
                 key={index}
                 className="text-center py-6"
@@ -150,10 +249,10 @@ const AboutUs: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 + 0.2, duration: 0.5 }}
               >
-                <div className="text-4xl md:text-5xl font-bold text-amber-300 mb-2">
+                <div className="text-4xl md:text-5xl font-bold text-lime-300 mb-2">
                   {stat.value}
                 </div>
-                <div className="text-amber-100">{stat.label}</div>
+                <div className="text-lime-100">{stat.label}</div>
               </motion.div>
             ))}
           </div>
@@ -168,45 +267,31 @@ const AboutUs: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7 }}
           >
-            <h2 className="text-3xl md:text-5xl font-serif font-bold text-amber-900 mb-6">
-              <span className="block">Our Story</span>
-              <span className="text-amber-600 italic text-3xl">
-                Transforming Spaces with Elegance & Style
+            <h2 className="text-3xl md:text-5xl font-serif font-bold text-lime-900 mb-6">
+              <span className="block">{storyData.title}</span>
+              <span className="text-lime-600 italic text-3xl">
+                {storyData.subtitle}
               </span>
             </h2>
 
             <p className="mb-6 text-lg text-gray-700 leading-relaxed">
-              At <strong className="text-amber-700">Riddhi Interiors</strong>,
-              we believe every space tells a story — and we&apos;re here to help you
-              tell yours. From timeless elegance to contemporary flair, our
-              designs breathe life into your interiors with a touch of
-              sophistication and functionality.
+              {storyData.content}
             </p>
 
             <p className="mb-6 text-lg text-gray-700 leading-relaxed">
-              With a strong presence in{" "}
-              <strong className="text-amber-700">Dehradun</strong>, our passion
-              for crafting beautiful and practical interiors extends across
-              nearby cities including
-              <strong className="text-amber-700"> Mussoorie</strong>,{" "}
-              <strong className="text-amber-700">Haridwar</strong>,
-              <strong className="text-amber-700"> Rishikesh</strong>, and{" "}
-              <strong className="text-amber-700">Roorkee</strong>. Whether it&apos;s
-              a cozy residence in the hills or a stylish commercial outlet in
-              the plains, we bring innovation and expertise to every project.
+              {storyData.content2}
             </p>
 
-            <div className="my-8 p-6 bg-amber-50 rounded-xl border border-amber-200">
-              <p className="text-lg text-gray-700 italic border-l-4 border-amber-600 pl-4">
-                “Your trusted interior design partner in Dehradun, dedicated to
-                creating beautiful, functional spaces that inspire and impress.”
+            <div className="my-8 p-6 bg-lime-50 rounded-xl border border-lime-200">
+              <p className="text-lg text-gray-700 italic border-l-4 border-lime-600 pl-4">
+                {storyData.quote}
               </p>
             </div>
 
             <div className="flex flex-wrap gap-4 mt-8">
               <motion.a
                 href="/contact-us"
-                className="px-8 py-4 bg-amber-600 text-white font-bold rounded-xl shadow-lg hover:bg-amber-700 transition-colors"
+                className="px-8 py-4 bg-lime-600 text-white font-bold rounded-xl shadow-lg hover:bg-lime-700 transition-colors"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -214,7 +299,7 @@ const AboutUs: React.FC = () => {
               </motion.a>
               <motion.a
                 href="/gallery"
-                className="px-8 py-4 bg-white border-2 border-amber-600 text-amber-700 font-bold rounded-xl shadow-lg hover:bg-amber-50 transition-colors"
+                className="px-8 py-4 bg-white border-2 border-lime-600 text-lime-700 font-bold rounded-xl shadow-lg hover:bg-lime-50 transition-colors"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -224,7 +309,7 @@ const AboutUs: React.FC = () => {
           </motion.div>
         </div>
 
-        <div className="w-full md:w-1/2 flex justify-center items-center mt-12 md:mt-0">
+        <div className="w-full md:w-1/2 flex justify-center items-center mt-12 md:mt-0 md:ml-10 md:px-20">
           <motion.div
             className="relative w-full max-w-lg h-[500px] rounded-3xl overflow-hidden shadow-2xl"
             initial={{ opacity: 0, scale: 0.9 }}
@@ -232,7 +317,7 @@ const AboutUs: React.FC = () => {
             transition={{ delay: 0.3, duration: 0.7 }}
           >
             <Image
-              src="/Riddhi Interior Design/About/story.jpg"
+              src={storyData.imageUrl}
               alt="Riddhi Interiors Project"
               layout="fill"
               objectFit="cover"
@@ -244,7 +329,7 @@ const AboutUs: React.FC = () => {
       </div>
 
       {/* Core Values Section */}
-      <section className="py-16 bg-amber-50">
+      <section className="py-16 bg-lime-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
             <motion.h2
@@ -261,7 +346,7 @@ const AboutUs: React.FC = () => {
                   height={50}
                   className="mx-auto"
                 />
-                <h2 className="text-3xl md:text-4xl mb-1 font-bold italic text-orange-900 font-serif">
+                <h2 className="text-3xl md:text-4xl mb-1 font-bold italic text-lime-900 font-serif">
                   Our Core Values
                 </h2>
                 <Image
@@ -284,16 +369,16 @@ const AboutUs: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {coreValues.map((value, index) => (
+            {coreValuesData.map((value, index) => (
               <motion.div
                 key={index}
-                className="bg-white rounded-xl shadow-lg p-6 border border-amber-100 hover:shadow-xl transition-shadow"
+                className="bg-white rounded-xl shadow-lg p-6 border border-lime-100 hover:shadow-xl transition-shadow"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 + 0.3, duration: 0.5 }}
               >
                 <div className="text-4xl mb-4">{value.icon}</div>
-                <h3 className="text-xl font-bold text-amber-900 mb-2">
+                <h3 className="text-xl font-bold text-lime-900 mb-2">
                   {value.title}
                 </h3>
                 <p className="text-gray-600">{value.description}</p>
@@ -321,7 +406,7 @@ const AboutUs: React.FC = () => {
                   height={50}
                   className="mx-auto"
                 />
-                <h2 className="text-3xl md:text-4xl mb-1 font-bold italic text-orange-900 font-serif">
+                <h2 className="text-3xl md:text-4xl mb-1 font-bold italic text-lime-900 font-serif">
                   Meet Our Creative Team
                 </h2>
                 <Image
@@ -339,14 +424,14 @@ const AboutUs: React.FC = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.5 }}
             >
-              &quot;Interior design is making the best possible use of the available
-              space.&quot;
+              &quot;Interior design is making the best possible use of the
+              available space.&quot;
             </motion.p>
           </div>
 
           {/* Team Members Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {teamMembers.map((member, index) => (
+            {mappedTeamMembers.map((member, index) => (
               <motion.div
                 key={index}
                 className="overflow-hidden"
@@ -367,22 +452,24 @@ const AboutUs: React.FC = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                   </div>
                   <CardContent className="p-6">
-                    <h3 className="text-xl font-bold text-amber-900">
+                    <h3 className="text-xl font-bold text-lime-900">
                       {member.name}
                     </h3>
-                    <p className="text-amber-600 font-medium mb-3">
+                    <p className="text-lime-600 font-medium mb-3">
                       {member.title}
                     </p>
                     <p className="text-gray-600 mb-4">{member.bio}</p>
                     <div className="flex flex-wrap gap-2">
-                      {member.specialties.map((specialty, idx) => (
-                        <span
-                          key={idx}
-                          className="bg-amber-100 text-amber-800 text-xs px-3 py-1 rounded-full"
-                        >
-                          {specialty}
-                        </span>
-                      ))}
+                      {member.specialties.map(
+                        (specialty: string, idx: number) => (
+                          <span
+                            key={idx}
+                            className="bg-lime-100 text-lime-800 text-xs px-3 py-1 rounded-full"
+                          >
+                            {specialty}
+                          </span>
+                        )
+                      )}
                     </div>
                   </CardContent>
                 </Card>
@@ -393,7 +480,7 @@ const AboutUs: React.FC = () => {
       </section>
 
       {/* Connect Section */}
-      <section className="py-16 bg-gradient-to-r from-amber-700 to-amber-900 text-white">
+      <section className="py-16 bg-gradient-to-r from-lime-700 to-lime-900 text-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <motion.h2
             className="text-3xl md:text-4xl font-serif font-bold mb-8"
@@ -436,13 +523,13 @@ const AboutUs: React.FC = () => {
             transition={{ delay: 0.6, duration: 0.5 }}
           >
             <h3 className="text-xl font-bold mb-4">Visit Our Studio</h3>
-            <p className="mb-4">Tilak Road, Dehradun, Uttarakhand 248001</p>
-            <p className="mb-6">Open Monday-Saturday: 9AM - 7PM</p>
+            <p className="mb-4">{connectData.address}</p>
+            <p className="mb-6">{connectData.hours}</p>
             <a
-              href="tel:+917895927366"
-              className="text-amber-300 font-bold text-lg hover:text-amber-200 transition-colors"
+              href={`tel:${connectData.phone.replace(/\D/g, "")}`}
+              className="text-lime-300 font-bold text-lg hover:text-lime-200 transition-colors"
             >
-              +91 78959 27366
+              {connectData.phone}
             </a>
           </motion.div>
         </div>

@@ -83,7 +83,7 @@ export default function GlobalOverlay() {
             alt="Whatsapp Logo"
             width={100}
             height={100}
-            className="h-12 w-auto mb-4 shadow-lg bg-amber-50 px-2 py-1 rounded-tl-lg rounded-bl-lg hover:scale-110 transition-transform duration-300 ease-in-out"
+            className="h-12 w-auto mb-4 shadow-lg bg-lime-50 px-2 py-1 rounded-tl-lg rounded-bl-lg hover:scale-110 transition-transform duration-300 ease-in-out"
           />
         </a>
       </div>
@@ -96,7 +96,7 @@ export default function GlobalOverlay() {
             alt="Phone Logo"
             width={100}
             height={100}
-            className="h-12 w-auto mb-4 shadow-lg bg-amber-50 p-2 rounded-tr-lg rounded-br-lg hover:scale-110 transition-transform duration-300 ease-in-out"
+            className="h-12 w-auto mb-4 shadow-lg bg-lime-50 p-2 rounded-tr-lg rounded-br-lg hover:scale-110 transition-transform duration-300 ease-in-out"
           />
         </a>
       </div>

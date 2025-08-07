@@ -40,7 +40,7 @@ const RiddhiInteriorsAd: React.FC<RiddhiInteriorsAdProps> = ({
       {/* Close Button */}
       <button
         onClick={onClose}
-        className="absolute top-2 right-2 text-amber-950 dark:text-gray-300 hover:text-red-500 transition"
+        className="absolute top-2 right-2 text-lime-950 dark:text-gray-300 hover:text-red-500 transition"
         aria-label="Close"
       >
         <X className="w-5 h-5" />
@@ -56,7 +56,7 @@ const RiddhiInteriorsAd: React.FC<RiddhiInteriorsAdProps> = ({
       />
 
       {/* Heading */}
-      <h2 className="text-xl font-bold text-amber-500 dark:text-blue-400">
+      <h2 className="text-xl font-bold text-lime-800 dark:text-blue-400">
         Riddhi Interiors - Tilak Road, Dehradun
       </h2>
 
