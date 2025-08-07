@@ -174,7 +174,7 @@ const Projects = () => {
   const dispatch = useAppDispatch();
   const reduxContent = useAppSelector(selectPortfolioContent);
   const reduxLoading = useAppSelector(selectPortfolioLoading);
-  const reduxError = useAppSelector(selectPortfolioError);
+  // const reduxError = useAppSelector(selectPortfolioError);
 
   useEffect(() => {
     // Check if Redux data is available
@@ -242,6 +242,21 @@ const Projects = () => {
       </div>
     </motion.div>
   );
+
+    if (loading || reduxLoading) {
+      return (
+        <div className="flex items-center justify-center h-screen">
+          <Image
+            src="/Riddhi Interior Design/Logo.png" // Place your logo in the public directory
+            alt="Riddhi Interior Logo"
+            width={128} // equivalent to w-32
+            height={128} // equivalent to h-32
+            className="animate-pulse"
+            priority
+          />
+        </div>
+      );
+    }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-lime-50 to-white">

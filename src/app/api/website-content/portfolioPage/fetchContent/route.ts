@@ -1,8 +1,8 @@
 import PortfolioPage from "@/app/model/website-content/PortfolioPage.model";
 import dbConnect from "@/app/utils/dbConnect";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   await dbConnect();
 
   try {
@@ -63,30 +63,6 @@ export async function GET(req: NextRequest) {
     console.error("Fetch error:", error);
     return NextResponse.json(
       { error: "Failed to fetch portfolio content" },
-      { status: 500 }
-    );
-  }
-}
-
-export async function PUT(req: NextRequest) {
-  await dbConnect();
-
-  try {
-    const contentData = await req.json();
-    let portfolioContent = await PortfolioPage.findOne();
-
-    if (!portfolioContent) {
-      portfolioContent = new PortfolioPage(contentData);
-    } else {
-      portfolioContent.set(contentData);
-    }
-
-    await portfolioContent.save();
-    return NextResponse.json(portfolioContent, { status: 200 });
-  } catch (error) {
-    console.error("Update error:", error);
-    return NextResponse.json(
-      { error: "Failed to update portfolio content" },
       { status: 500 }
     );
   }

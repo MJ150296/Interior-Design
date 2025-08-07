@@ -26,6 +26,7 @@ import {
   selectAboutLoading,
   updateAboutContent,
 } from "@/app/redux/slices/aboutUsPageSlice";
+import Image from "next/image";
 
 // Define Types
 type StatItem = {
@@ -306,7 +307,7 @@ const AboutAdminDashboard = () => {
   };
 
   // Add new item to array
-  const addArrayItem = <T extends unknown>(arrayPath: string, newItem: T) => {
+  const addArrayItem = <T,>(arrayPath: string, newItem: T) => {
     setFormData((prev) => {
       const newData: AboutContent = JSON.parse(JSON.stringify(prev));
       const parts = arrayPath.split(".");
@@ -330,10 +331,7 @@ const AboutAdminDashboard = () => {
   };
 
   // Remove item from array
-  const removeArrayItem = <T extends unknown>(
-    arrayName: string,
-    index: number
-  ) => {
+  const removeArrayItem = (arrayName: string, index: number) => {
     setFormData((prev) => {
       const newData: AboutContent = JSON.parse(JSON.stringify(prev));
       const arrayPath = arrayName.split(".");
@@ -398,7 +396,7 @@ const AboutAdminDashboard = () => {
     try {
       await dispatch(updateAboutContent(formData)).unwrap();
       alert("About page content saved successfully!");
-    } catch (error) {
+    } catch {
       alert("Failed to save content. Please try again.");
     }
   };
@@ -494,7 +492,7 @@ const AboutAdminDashboard = () => {
                   About Us Page Content Management
                 </h1>
                 <p className="text-sm text-gray-600 dark:text-gray-400 px-4">
-                  Manage your website's About Us page content
+                  Manage your website&apos;s About Us page content
                 </p>
               </div>
               <div className="flex space-x-3">
@@ -572,10 +570,11 @@ const AboutAdminDashboard = () => {
                       <div className="flex items-center space-x-4 mb-6">
                         <div className="w-32 h-32 border rounded-md flex items-center justify-center">
                           {formData.hero.backgroundImageUrl ? (
-                            <img
+                            <Image
                               src={formData.hero.backgroundImageUrl}
                               alt="Hero background preview"
-                              className="max-w-full max-h-full"
+                              fill
+                              className="object-contain"
                             />
                           ) : (
                             <FiImage className="text-gray-400 text-2xl" />
@@ -783,10 +782,11 @@ const AboutAdminDashboard = () => {
                       <div className="flex items-center space-x-4 mb-4">
                         <div className="w-32 h-32 border rounded-md flex items-center justify-center">
                           {formData.story.imageUrl ? (
-                            <img
+                            <Image
                               src={formData.story.imageUrl}
                               alt="Story image preview"
-                              className="max-w-full max-h-full"
+                              fill
+                              className="object-contain"
                             />
                           ) : (
                             <FiImage className="text-gray-400 text-2xl" />
@@ -954,10 +954,11 @@ const AboutAdminDashboard = () => {
                               <div className="flex items-center space-x-4 mb-6">
                                 <div className="w-24 h-24 border rounded-md flex items-center justify-center">
                                   {member.imageUrl ? (
-                                    <img
+                                    <Image
                                       src={member.imageUrl}
                                       alt="Team member preview"
-                                      className="max-w-full max-h-full"
+                                      fill
+                                      className="object-contain"
                                     />
                                   ) : (
                                     <FiImage className="text-gray-400 text-2xl" />

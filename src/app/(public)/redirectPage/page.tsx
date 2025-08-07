@@ -1,5 +1,5 @@
 // src/app/auth/redirect/page.tsx
-"use client";
+// "use client";
 import { auth } from "@/app/auth";
 import { redirect } from "next/navigation";
 

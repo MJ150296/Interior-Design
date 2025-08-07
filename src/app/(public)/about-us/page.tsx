@@ -129,7 +129,7 @@ const AboutUs: React.FC = () => {
   const dispatch = useAppDispatch();
   const reduxContent = useAppSelector(selectAboutContent);
   const reduxLoading = useAppSelector(selectAboutLoading);
-  const reduxError = useAppSelector(selectAboutError);
+  // const reduxError = useAppSelector(selectAboutError);
 
   const [loading, setLoading] = useState(true);
 

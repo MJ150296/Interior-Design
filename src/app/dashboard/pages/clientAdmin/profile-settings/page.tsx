@@ -61,8 +61,12 @@ const ProfileSettings = () => {
           },
           profileImageUrl: user.profileImageUrl || "",
         });
-      } catch (error) {
-        setErrorMessage("Failed to load profile data");
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          setErrorMessage(error.message);
+        } else {
+          setErrorMessage("Failed to load profile data");
+        }
       } finally {
         setIsLoading(false);
       }

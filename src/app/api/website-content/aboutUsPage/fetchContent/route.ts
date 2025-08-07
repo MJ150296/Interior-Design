@@ -1,9 +1,9 @@
 // app/api/about/route.ts
 import AboutUsPageModel from "@/app/model/website-content/AboutUsPage.model";
 import dbConnect from "@/app/utils/dbConnect";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   await dbConnect();
 
   try {
