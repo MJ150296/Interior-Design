@@ -3,7 +3,8 @@ import React from "react";
 const testimonials = [
   {
     name: "Amit Sharma",
-    feedback: "Riddhi Interiors transformed our home beautifully. Highly recommended!",
+    feedback:
+      "Riddhi Interiors transformed our home beautifully. Highly recommended!",
     company: "Homeowner",
   },
   {
@@ -25,10 +26,12 @@ export default function TestimonialsPage() {
       <div className="space-y-6">
         {testimonials.map((testimonial, idx) => (
           <div key={idx} className="bg-white shadow rounded p-4">
-            <p className="text-lg italic">"{testimonial.feedback}"</p>
+            <p className="text-lg italic">&quot;{testimonial.feedback}&quot;</p>
             <div className="mt-2 flex items-center justify-between">
               <span className="font-semibold">{testimonial.name}</span>
-              <span className="text-sm text-gray-500">{testimonial.company}</span>
+              <span className="text-sm text-gray-500">
+                {testimonial.company}
+              </span>
             </div>
           </div>
         ))}
