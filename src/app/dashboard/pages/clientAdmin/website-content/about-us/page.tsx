@@ -14,7 +14,6 @@ import {
   FiEyeOff,
   FiUpload,
   FiX,
-  FiCheck,
 } from "react-icons/fi";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
@@ -33,7 +32,7 @@ import {
   updateAboutContent,
 } from "@/app/redux/slices/aboutUsPageSlice";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 // Define Types (unchanged)
@@ -235,27 +234,37 @@ const AboutAdminDashboard = () => {
       .replace(/-+$/, "");
   };
 
-  // Improved handleInputChange function
   const handleInputChange = (path: string, value: string) => {
+    if (!formData) return;
+
     setFormData((prev) => {
+      if (!prev) return prev;
+
       const newData: AboutContent = JSON.parse(JSON.stringify(prev));
       const parts = path.split(".");
 
       // Track changed field
       setChangedFields((prevFields) => new Set(prevFields.add(path)));
 
-      // Traverse the object using reduce
+      // Traverse the object using reduce with proper type checking
       const lastPart = parts.pop()!;
-      const target = parts.reduce((obj, key) => {
-        // Handle array indices
-        if (Array.isArray(obj) && /^\d+$/.test(key)) {
-          return obj[parseInt(key)] as any;
-        }
-        return obj[key] as any;
-      }, newData as any);
+      let current: unknown = newData;
 
-      // Set the value
-      target[lastPart] = value;
+      for (const part of parts) {
+        if (Array.isArray(current) && /^\d+$/.test(part)) {
+          current = current[parseInt(part)];
+        } else if (typeof current === "object" && current !== null) {
+          current = (current as Record<string, unknown>)[part];
+        } else {
+          console.error("Invalid path encountered");
+          return newData;
+        }
+      }
+
+      // Set the value with proper type checking
+      if (typeof current === "object" && current !== null) {
+        (current as Record<string, unknown>)[lastPart] = value;
+      }
 
       return newData;
     });
@@ -288,31 +297,55 @@ const AboutAdminDashboard = () => {
     });
   };
 
-  // Update the removeArrayItem function for team members
-  const removeArrayItem = async (arrayName: string, index: number) => {
+  const removeArrayItem = async (arrayPath: string, index: number) => {
+    if (!formData) return;
+
     setFormData((prev) => {
+      if (!prev) return prev;
+
       const newData: AboutContent = JSON.parse(JSON.stringify(prev));
-      const parts = arrayName.split(".");
+      const parts = arrayPath.split(".");
 
       // Track changed field
-      setChangedFields((prevFields) => new Set(prevFields.add(arrayName)));
+      setChangedFields((prevFields) => new Set(prevFields.add(arrayPath)));
 
-      // Traverse to the parent of the array
-      let current: any = newData;
+      // Traverse to the parent of the array with proper type checking
+      let current: unknown = newData;
+
       for (let i = 0; i < parts.length - 1; i++) {
-        current = current[parts[i]];
+        const part = parts[i];
+        if (Array.isArray(current) && /^\d+$/.test(part)) {
+          current = current[parseInt(part)];
+        } else if (typeof current === "object" && current !== null) {
+          current = (current as Record<string, unknown>)[part];
+        } else {
+          console.error("Invalid path encountered");
+          return newData;
+        }
       }
 
-      const array = current[parts[parts.length - 1]];
+      // Get the array with proper type checking
+      const lastPart = parts[parts.length - 1];
+      if (typeof current !== "object" || current === null) {
+        console.error("Invalid path: expected an object");
+        return newData;
+      }
+
+      const array = (current as Record<string, unknown>)[lastPart];
+      if (!Array.isArray(array)) {
+        console.error("Invalid path: expected an array");
+        return newData;
+      }
+
       const item = array[index];
 
       // Extract URL from the item
       let imageUrl = "";
-      if (typeof item === "object") {
-        if ("imageUrl" in item) imageUrl = item.imageUrl;
-        else if ("imageURL" in item) imageUrl = item.imageURL;
+      if (typeof item === "object" && item !== null) {
+        if ("imageUrl" in item) imageUrl = item.imageUrl as string;
+        else if ("imageURL" in item) imageUrl = item.imageURL as string;
         else if ("backgroundImageUrl" in item)
-          imageUrl = item.backgroundImageUrl;
+          imageUrl = item.backgroundImageUrl as string;
       }
 
       // Delete from Cloudinary if valid URL - use team member name for folder
@@ -320,8 +353,13 @@ const AboutAdminDashboard = () => {
         let folderPath = "";
 
         // Handle team member deletion differently
-        if (arrayName === "teamMembers" && item.name) {
-          const slug = generateSlug(item.name);
+        if (
+          arrayPath === "teamMembers" &&
+          typeof item === "object" &&
+          item !== null &&
+          "name" in item
+        ) {
+          const slug = generateSlug(item.name as string);
           folderPath = `riddhi_interiors/aboutUs/team/${slug}`;
         } else {
           // For other items, use the existing logic
@@ -331,7 +369,6 @@ const AboutAdminDashboard = () => {
         }
 
         fetch("/api/cloudinary/delete", {
-          // You'll need to create this API
           method: "DELETE",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ folderPath }),

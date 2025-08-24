@@ -7,13 +7,9 @@ import {
   FiMessageSquare,
   FiSettings,
   FiPlus,
-  FiMinus,
   FiSave,
-  FiEye,
-  FiEyeOff,
   FiUpload,
   FiX,
-  FiLink,
 } from "react-icons/fi";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
@@ -31,7 +27,7 @@ import {
   selectPortfolioLoading,
   updatePortfolioContent,
 } from "@/app/redux/slices/portfolioPageSlice";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
@@ -360,18 +356,25 @@ const PortfolioAdminDashboard = () => {
       // Track changed field
       setChangedFields((prevFields) => new Set(prevFields.add(path)));
 
-      // Traverse the object using reduce
+      // Traverse the object using reduce with proper type checking
       const lastPart = parts.pop()!;
-      const target = parts.reduce((obj, key) => {
-        // Handle array indices
-        if (Array.isArray(obj) && /^\d+$/.test(key)) {
-          return obj[parseInt(key)] as any;
-        }
-        return obj[key] as any;
-      }, newData as any);
+      let current: unknown = newData;
 
-      // Set the value
-      target[lastPart] = value;
+      for (const part of parts) {
+        if (Array.isArray(current) && /^\d+$/.test(part)) {
+          current = current[parseInt(part)];
+        } else if (typeof current === "object" && current !== null) {
+          current = (current as Record<string, unknown>)[part];
+        } else {
+          console.error("Invalid path encountered");
+          return newData;
+        }
+      }
+
+      // Set the value with proper type checking
+      if (typeof current === "object" && current !== null) {
+        (current as Record<string, unknown>)[lastPart] = value;
+      }
 
       return newData;
     });
@@ -421,21 +424,42 @@ const PortfolioAdminDashboard = () => {
       // Track changed field
       setChangedFields((prevFields) => new Set(prevFields.add(arrayPath)));
 
-      // Traverse to the parent of the array
-      let current: any = newData;
+      // Traverse to the parent of the array with proper type checking
+      let current: unknown = newData;
+
       for (let i = 0; i < parts.length - 1; i++) {
-        current = current[parts[i]];
+        const part = parts[i];
+        if (Array.isArray(current) && /^\d+$/.test(part)) {
+          current = current[parseInt(part)];
+        } else if (typeof current === "object" && current !== null) {
+          current = (current as Record<string, unknown>)[part];
+        } else {
+          console.error("Invalid path encountered");
+          return newData;
+        }
       }
 
-      const array = current[parts[parts.length - 1]];
+      // Get the array with proper type checking
+      const lastPart = parts[parts.length - 1];
+      if (typeof current !== "object" || current === null) {
+        console.error("Invalid path: expected an object");
+        return newData;
+      }
+
+      const array = (current as Record<string, unknown>)[lastPart];
+      if (!Array.isArray(array)) {
+        console.error("Invalid path: expected an array");
+        return newData;
+      }
+
       const item = array[index];
 
       // Extract URL from the item
       let imageUrl = "";
-      if (typeof item === "object") {
-        if ("imageUrl" in item) imageUrl = item.imageUrl;
+      if (typeof item === "object" && item !== null) {
+        if ("imageUrl" in item) imageUrl = item.imageUrl as string;
         else if ("backgroundImageUrl" in item)
-          imageUrl = item.backgroundImageUrl;
+          imageUrl = item.backgroundImageUrl as string;
       }
 
       // Delete from Cloudinary if valid URL - use project title for folder
@@ -443,11 +467,16 @@ const PortfolioAdminDashboard = () => {
         let folderPath = "";
 
         // Handle project deletion
-        if (arrayPath.includes("Projects") && item.title) {
+        if (
+          arrayPath.includes("Projects") &&
+          typeof item === "object" &&
+          item !== null &&
+          "title" in item
+        ) {
           const section = arrayPath.includes("residential")
             ? "residential"
             : "commercial";
-          const slug = generateSlug(item.title);
+          const slug = generateSlug(item.title as string);
           folderPath = `riddhi_interiors/portfolio/${section}/${slug}`;
         } else {
           // For hero section, delete the specific file

@@ -1,7 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { Clock, Rocket, Sparkles } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Rocket, Sparkles } from "lucide-react";
 
 export default function ComingSoonDashboard() {
   return (
