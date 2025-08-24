@@ -14,6 +14,7 @@ const ProjectSchema = new Schema({
   imageUrl: { type: String },
   hoverTitle: { type: String },
   hoverDescription: { type: String },
+  exploreLink: { type: String },
 });
 
 // Define the Stat schema
@@ -64,6 +65,7 @@ export interface IPortfolioPage extends Document {
     imageUrl?: string;
     hoverTitle?: string;
     hoverDescription?: string;
+    exploreLink?: string;
   }>;
   commercialProjects: Array<{
     title?: string;
@@ -72,6 +74,7 @@ export interface IPortfolioPage extends Document {
     imageUrl?: string;
     hoverTitle?: string;
     hoverDescription?: string;
+    exploreLink?: string;
   }>;
   stats: Array<{
     value?: string;

@@ -17,152 +17,94 @@ interface Project {
   description: string;
   category: string;
   location: string;
+  exploreLink?: string;
 }
 
-const residentialImages = [
+// Default values as fallbacks
+const defaultHero = {
+  backgroundImageUrl: "/Riddhi Interior Design/Portfolio/cover.jpg",
+  title: "Our Portfolio",
+  subtitle: "Showcasing Excellence in Interior Design Across Uttarakhand",
+  preTitle: "EXPLORE OUR WORK",
+};
+
+const defaultQuotes = [
   {
-    src: "/Riddhi Interior Design/masonry-1.jpg",
-    alt: "Residential 1",
-    title: "Elegant Living",
-    description: "Cozy and refined home interiors.",
-    category: "Living Room",
-    location: "Dehradun",
+    text: "Riddhi Interiors transformed our home into a masterpiece. Their attention to detail and creative solutions exceeded our expectations.",
+    author: "Rajesh & Priya Sharma, Dehradun",
   },
   {
-    src: "/Riddhi Interior Design/masonry-2.jpg",
-    alt: "Residential 2",
-    title: "Serene Spaces",
-    description: "Comfort meets creativity.",
-    category: "Bedroom",
-    location: "Mussoorie",
-  },
-  {
-    src: "/Riddhi Interior Design/masonry-3.jpg",
-    alt: "Residential 3",
-    title: "Modern Vibes",
-    description: "Designed to enhance everyday life.",
-    category: "Kitchen",
-    location: "Rishikesh",
-  },
-  {
-    src: "/Riddhi Interior Design/masonry-4.jpg",
-    alt: "Commercial 1",
-    title: "Corporate Class",
-    description: "Workspaces that inspire productivity.",
-    category: "Office",
-    location: "Haridwar",
-  },
-  {
-    src: "/Riddhi Interior Design/masonry-5.jpg",
-    alt: "Commercial 2",
-    title: "Retail Radiance",
-    description: "Showrooms that attract attention.",
-    category: "Retail",
-    location: "Noida",
-  },
-  {
-    src: "/Riddhi Interior Design/masonry-6.jpg",
-    alt: "Commercial 3",
-    title: "Hospitality Harmony",
-    description: "Where business meets comfort.",
-    category: "Restaurant",
-    location: "Delhi",
-  },
-  {
-    src: "/Riddhi Interior Design/luxury.jpg",
-    alt: "Luxury Residence",
-    title: "Opulent Retreat",
-    description: "Premium finishes for discerning clients.",
-    category: "Penthouse",
-    location: "Dehradun",
-  },
-  {
-    src: "/Riddhi Interior Design/modular-interior.jpg",
-    alt: "Modular Kitchen",
-    title: "Culinary Excellence",
-    description: "Smart storage solutions for modern homes.",
-    category: "Kitchen",
-    location: "Rishikesh",
-  },
-  {
-    src: "/Riddhi Interior Design/modular-interior.jpg",
-    alt: "Master Bedroom",
-    title: "Tranquil Sanctuary",
-    description: "Restful spaces designed for relaxation.",
-    category: "Bedroom",
-    location: "Mussoorie",
+    text: "The commercial space design perfectly captured our brand identity while maximizing functionality. A truly professional team!",
+    author: "Vikram Singh, Business Owner, Haridwar",
   },
 ];
 
-const commercialImages = [
+const defaultResidentialProjects = [
   {
-    src: "/Riddhi Interior Design/luxury.jpg",
-    alt: "Commercial Office",
-    title: "Corporate Class",
-    description: "Workspaces that inspire productivity.",
-    category: "Office",
-    location: "Dehradun",
-  },
-  {
-    src: "/Riddhi Interior Design/masonry1.jpg",
-    alt: "Retail Space",
-    title: "Retail Radiance",
-    description: "Showrooms that attract attention.",
-    category: "Retail",
-    location: "Delhi",
-  },
-  {
-    src: "/Riddhi Interior Design/luxury.jpg",
-    alt: "Hotel Lobby",
-    title: "Hospitality Harmony",
-    description: "Where business meets comfort.",
-    category: "Hotel",
-    location: "Rishikesh",
-  },
-  {
-    src: "/Riddhi Interior Design/luxury.jpg",
-    alt: "Fine Dining",
-    title: "Culinary Experience",
-    description: "Atmosphere that complements cuisine.",
-    category: "Restaurant",
+    id: 1,
+    title: "Modern Hillside Villa",
     location: "Mussoorie",
+    category: "Residential",
+    imageUrl:
+      "/Riddhi Interior Design/Portfolio/Residential/modern-hillside-villa/cover.jpg",
+    hoverTitle: "Contemporary Luxury",
+    hoverDescription:
+      "A 5,000 sq.ft villa with panoramic mountain views featuring open-plan living spaces and premium finishes",
+    exploreLink: "",
   },
   {
-    src: "/Riddhi Interior Design/masonry3.jpg",
-    alt: "Coffee Shop",
-    title: "Urban Oasis",
-    description: "Spaces that encourage conversation.",
-    category: "Cafe",
-    location: "Haridwar",
-  },
-  {
-    src: "/Riddhi Interior Design/modular-interior.jpg",
-    alt: "Wellness Center",
-    title: "Holistic Design",
-    description: "Spaces that promote wellbeing.",
-    category: "Spa",
+    id: 2,
+    title: "Heritage Bungalow Restoration",
     location: "Dehradun",
+    category: "Residential",
+    imageUrl:
+      "/Riddhi Interior Design/Portfolio/Residential/heritage-bungalow-restoration/cover.jpg",
+    hoverTitle: "Classic Elegance",
+    hoverDescription:
+      "Restoration of a colonial-era bungalow preserving original architectural elements while adding modern comforts",
+    exploreLink: "",
   },
 ];
 
-const quotes = [
+const defaultCommercialProjects = [
   {
-    text: "The best rooms have something to say about the people who live in them.",
-    author: "M.J",
+    id: 1,
+    title: "Premium Restaurant Design",
+    location: "Rishikesh",
+    category: "Commercial",
+    imageUrl:
+      "/Riddhi Interior Design/Portfolio/Commercial/premium-restaurant-design/cover.jpg",
+    hoverTitle: "Ambiance Creation",
+    hoverDescription:
+      "A 120-seat fine dining establishment with custom lighting and bespoke furniture",
+    exploreLink: "",
   },
   {
-    text: "Design is not just what it looks like and feels like. Design is how it works.",
-    author: "Steve Jobs",
-  },
-  {
-    text: "The details are not the details. They make the design.",
-    author: "Charles Eames",
-  },
-  {
-    text: "A room should feel collected, not decorated.",
-    author: "Benjamin Noriega-Ortiz",
+    id: 2,
+    title: "Corporate Office Space",
+    location: "Dehradun",
+    category: "Commercial",
+    imageUrl:
+      "/Riddhi Interior Design/Portfolio/Commercial/corporate-office-space/cover.jpg",
+    hoverTitle: "Productive Environment",
+    hoverDescription:
+      "A 10,000 sq.ft office designed for productivity with ergonomic furniture and collaborative spaces",
+    exploreLink: "",
   },
 ];
+
+const defaultStats = [
+  { value: "250+", label: "Projects Completed" },
+  { value: "98%", label: "Client Satisfaction" },
+  { value: "15+", label: "Cities Served" },
+  { value: "12+", label: "Years Experience" },
+];
+
+const defaultCta = {
+  title: "Ready to Start Your Project?",
+  description:
+    "Let's discuss how we can transform your space into something extraordinary. Our team is ready to bring your vision to life with our expert design services.",
+};
 
 const Projects = () => {
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
@@ -173,13 +115,23 @@ const Projects = () => {
   const dispatch = useAppDispatch();
   const reduxContent = useAppSelector(selectPortfolioContent);
   const reduxLoading = useAppSelector(selectPortfolioLoading);
-  // const reduxError = useAppSelector(selectPortfolioError);
+
+  // Merge Redux data with defaults
+  const heroData = reduxContent?.hero || defaultHero;
+  const quotesData = reduxContent?.quotes || defaultQuotes;
+  const residentialData =
+    reduxContent?.residentialProjects || defaultResidentialProjects;
+  const commercialData =
+    reduxContent?.commercialProjects || defaultCommercialProjects;
+  const statsData = reduxContent?.stats || defaultStats;
+  const ctaData = reduxContent?.cta || defaultCta;
 
   useEffect(() => {
     // Check if Redux data is available
     if (reduxContent) {
+      console.log("Using cached portfolio data from Redux.", reduxContent);
+
       setLoading(false);
-      console.log("Redux content loaded:", reduxContent);
     } else {
       // If not, fetch data from the server
       dispatch(fetchPortfolioContent()).then(() => setLoading(false));
@@ -190,13 +142,29 @@ const Projects = () => {
     const interval = setInterval(() => {
       setFade(false);
       setTimeout(() => {
-        setCurrentQuoteIndex((prev) => (prev + 1) % quotes.length);
+        setCurrentQuoteIndex((prev) => (prev + 1) % quotesData.length);
         setFade(true);
       }, 500);
     }, 5000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [quotesData.length]);
+
+  // Convert project data to the format expected by the ProjectCard component
+  const formatProjectData = (projects: any[]) => {
+    return projects.map((project) => ({
+      src: project.imageUrl,
+      alt: project.title,
+      title: project.hoverTitle || project.title,
+      description: project.hoverDescription || "",
+      category: project.category,
+      location: project.location,
+      exploreLink: project.exploreLink || "",
+    }));
+  };
+
+  const residentialImages = formatProjectData(residentialData);
+  const commercialImages = formatProjectData(commercialData);
 
   const ProjectCard = ({ project }: { project: Project }) => (
     <motion.div
@@ -235,27 +203,38 @@ const Projects = () => {
       <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-center p-4 text-white">
         <h3 className="text-xl font-bold">{project.title}</h3>
         <p className="text-sm mt-2 mb-4">{project.description}</p>
-        <div className="bg-lime-600 text-white text-sm px-4 py-2 rounded-full mt-4">
-          Explore Project
-        </div>
+        {project.exploreLink ? (
+          <a
+            href={project.exploreLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-lime-600 text-white text-sm px-4 py-2 rounded-full mt-4 hover:bg-lime-700 transition-colors"
+          >
+            Explore Project
+          </a>
+        ) : (
+          <div className="bg-lime-600 text-white text-sm px-4 py-2 rounded-full mt-4">
+            Explore Project
+          </div>
+        )}
       </div>
     </motion.div>
   );
 
-    if (loading || reduxLoading) {
-      return (
-        <div className="flex items-center justify-center h-screen">
-          <Image
-            src="/Riddhi Interior Design/Logo.png" // Place your logo in the public directory
-            alt="Riddhi Interior Logo"
-            width={128} // equivalent to w-32
-            height={128} // equivalent to h-32
-            className="animate-pulse"
-            priority
-          />
-        </div>
-      );
-    }
+  if (loading || reduxLoading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <Image
+          src="/Riddhi Interior Design/Logo.png"
+          alt="Riddhi Interior Logo"
+          width={128}
+          height={128}
+          className="animate-pulse"
+          priority
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-lime-50 to-white">
@@ -263,14 +242,13 @@ const Projects = () => {
       <div className="relative w-full h-[500px] flex flex-col items-center justify-center text-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/Riddhi Interior Design/Projects/cover.jpg"
+            src={heroData.backgroundImageUrl}
             alt="Projects background"
             layout="fill"
             objectFit="cover"
             className="brightness-90"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-lime-900/50 to-transparent" />
-          {/* <div className="absolute inset-0 bg-[url('/pattern.svg')] bg-repeat opacity-10" /> */}
         </div>
 
         <motion.div
@@ -285,7 +263,7 @@ const Projects = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.5 }}
           >
-            OUR EXCLUSIVE CLIENT
+            {heroData.preTitle}
           </motion.span>
 
           <motion.h1
@@ -294,7 +272,7 @@ const Projects = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.4, duration: 0.5 }}
           >
-            Project Portfolio
+            {heroData.title}
           </motion.h1>
 
           <motion.p
@@ -303,7 +281,7 @@ const Projects = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6, duration: 0.5 }}
           >
-            We Have Solutions for All Your Space Related Issues!
+            {heroData.subtitle}
           </motion.p>
         </motion.div>
       </div>
@@ -343,10 +321,10 @@ const Projects = () => {
             }`}
           >
             <p className="text-lg text-gray-700 max-w-3xl mx-auto font-light italic">
-              “{quotes[currentQuoteIndex].text}”
+              “{quotesData[currentQuoteIndex]?.text}”
             </p>
             <p className="text-sm text-gray-500 mt-2">
-              - {quotes[currentQuoteIndex].author}
+              - {quotesData[currentQuoteIndex]?.author}
             </p>
           </div>
         </div>
@@ -380,7 +358,7 @@ const Projects = () => {
             </TabsList>
           </div>
 
-          {/* Tabs Content - Now properly inside Tabs */}
+          {/* Tabs Content */}
           <TabsContent value="residential">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {residentialImages.map((project, index) => (
@@ -415,12 +393,7 @@ const Projects = () => {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { value: "250+", label: "Projects Completed" },
-              { value: "98%", label: "Client Satisfaction" },
-              { value: "15+", label: "Years Experience" },
-              { value: "50+", label: "Awards Received" },
-            ].map((stat, index) => (
+            {statsData.map((stat, index) => (
               <motion.div
                 key={index}
                 className="text-center"
@@ -450,11 +423,10 @@ const Projects = () => {
             transition={{ duration: 0.6 }}
           >
             <h3 className="text-2xl md:text-3xl font-serif font-bold text-lime-900 mb-4">
-              Ready to Start Your Project?
+              {ctaData.title}
             </h3>
             <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-              Schedule a free consultation with our design experts to discuss
-              your vision
+              {ctaData.description}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-3 px-8 rounded-full transition-colors shadow-lg text-lg">

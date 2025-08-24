@@ -12,6 +12,19 @@ export async function PUT(req: NextRequest) {
     if (!content) {
       content = new PortfolioPageModel(contentData);
     } else {
+      // Ensure exploreLink field exists for all projects
+      if (contentData.residentialProjects) {
+        contentData.residentialProjects.forEach((project: any) => {
+          if (!project.exploreLink) project.exploreLink = "";
+        });
+      }
+
+      if (contentData.commercialProjects) {
+        contentData.commercialProjects.forEach((project: any) => {
+          if (!project.exploreLink) project.exploreLink = "";
+        });
+      }
+
       content.set(contentData);
     }
 

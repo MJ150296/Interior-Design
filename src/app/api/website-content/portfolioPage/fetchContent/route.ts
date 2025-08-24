@@ -7,7 +7,7 @@ export async function GET() {
 
   try {
     let portfolioContent = await PortfolioPage.findOne();
-    
+
     if (!portfolioContent) {
       // Create default if not found
       portfolioContent = new PortfolioPage({
@@ -32,6 +32,7 @@ export async function GET() {
             imageUrl: "/Riddhi Interior Design/masonry-1.jpg",
             hoverTitle: "Elegant Living",
             hoverDescription: "Cozy and refined home interiors.",
+            exploreLink: "", // Add exploreLink field
           },
         ],
         commercialProjects: [
@@ -43,6 +44,7 @@ export async function GET() {
             imageUrl: "/Riddhi Interior Design/masonry-4.jpg",
             hoverTitle: "Corporate Class",
             hoverDescription: "Workspaces that inspire productivity.",
+            exploreLink: "", // Add exploreLink field
           },
         ],
         stats: [
@@ -56,6 +58,25 @@ export async function GET() {
       });
 
       await portfolioContent.save();
+    } else {
+      // Ensure exploreLink field exists for all existing projects
+      if (portfolioContent.residentialProjects) {
+        portfolioContent.residentialProjects.forEach((project: any) => {
+          if (!project.exploreLink) project.exploreLink = "";
+        });
+      }
+
+      if (portfolioContent.commercialProjects) {
+        portfolioContent.commercialProjects.forEach((project: any) => {
+          if (!project.exploreLink) project.exploreLink = "";
+        });
+      }
+
+      // Save if any changes were made
+      const isModified = portfolioContent.isModified();
+      if (isModified) {
+        await portfolioContent.save();
+      }
     }
 
     return NextResponse.json(portfolioContent, { status: 200 });

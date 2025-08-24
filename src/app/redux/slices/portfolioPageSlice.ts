@@ -159,6 +159,7 @@ const portfolioPageSlice = createSlice({
             imageUrl: "",
             hoverTitle: "",
             hoverDescription: "",
+            exploreLink: "",
           },
         ],
       };

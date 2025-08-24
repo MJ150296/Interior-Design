@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import ComingSoonDashboard from "./ComingSoon";
 
 function DashboardContent({ role }: { role: string }) {
   switch (role) {
@@ -13,7 +14,11 @@ function DashboardContent({ role }: { role: string }) {
       return <div>Designer Dashboard Content</div>;
 
     case "clientAdmin":
-      return <div>Client Admin Dashboard Content</div>;
+      return (
+        <div>
+          <ComingSoonDashboard />
+        </div>
+      );
 
     default:
       return <div>Unknown role</div>;
