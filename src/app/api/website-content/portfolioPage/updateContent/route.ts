@@ -1,4 +1,7 @@
-import PortfolioPageModel from "@/app/model/website-content/PortfolioPage.model";
+import PortfolioPageModel, {
+  IPortfolioPage,
+  IProject,
+} from "@/app/model/website-content/PortfolioPage.model";
 import dbConnect from "@/app/utils/dbConnect";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -6,7 +9,7 @@ export async function PUT(req: NextRequest) {
   await dbConnect();
 
   try {
-    const contentData = await req.json();
+    const contentData: IPortfolioPage = await req.json();
     let content = await PortfolioPageModel.findOne();
 
     if (!content) {
@@ -14,13 +17,13 @@ export async function PUT(req: NextRequest) {
     } else {
       // Ensure exploreLink field exists for all projects
       if (contentData.residentialProjects) {
-        contentData.residentialProjects.forEach((project: any) => {
+        contentData.residentialProjects.forEach((project: IProject) => {
           if (!project.exploreLink) project.exploreLink = "";
         });
       }
 
       if (contentData.commercialProjects) {
-        contentData.commercialProjects.forEach((project: any) => {
+        contentData.commercialProjects.forEach((project: IProject) => {
           if (!project.exploreLink) project.exploreLink = "";
         });
       }

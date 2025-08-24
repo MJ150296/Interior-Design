@@ -1,4 +1,4 @@
-import PortfolioPage from "@/app/model/website-content/PortfolioPage.model";
+import PortfolioPage, { IProject } from "@/app/model/website-content/PortfolioPage.model";
 import dbConnect from "@/app/utils/dbConnect";
 import { NextResponse } from "next/server";
 
@@ -61,13 +61,13 @@ export async function GET() {
     } else {
       // Ensure exploreLink field exists for all existing projects
       if (portfolioContent.residentialProjects) {
-        portfolioContent.residentialProjects.forEach((project: any) => {
+        portfolioContent.residentialProjects.forEach((project: IProject) => {
           if (!project.exploreLink) project.exploreLink = "";
         });
       }
 
       if (portfolioContent.commercialProjects) {
-        portfolioContent.commercialProjects.forEach((project: any) => {
+        portfolioContent.commercialProjects.forEach((project: IProject) => {
           if (!project.exploreLink) project.exploreLink = "";
         });
       }

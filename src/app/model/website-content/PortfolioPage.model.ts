@@ -1,5 +1,15 @@
 import mongoose, { Document, Schema } from "mongoose";
 
+export interface IProject {
+  title?: string;
+  location?: string;
+  category?: string;
+  imageUrl?: string;
+  hoverTitle?: string;
+  hoverDescription?: string;
+  exploreLink?: string;
+}
+
 // Define the Quote schema
 const QuoteSchema = new Schema({
   text: { type: String },
@@ -58,24 +68,8 @@ export interface IPortfolioPage extends Document {
     text?: string;
     author?: string;
   }>;
-  residentialProjects: Array<{
-    title?: string;
-    location?: string;
-    category?: string;
-    imageUrl?: string;
-    hoverTitle?: string;
-    hoverDescription?: string;
-    exploreLink?: string;
-  }>;
-  commercialProjects: Array<{
-    title?: string;
-    location?: string;
-    category?: string;
-    imageUrl?: string;
-    hoverTitle?: string;
-    hoverDescription?: string;
-    exploreLink?: string;
-  }>;
+  residentialProjects: IProject[];
+  commercialProjects: IProject[];
   stats: Array<{
     value?: string;
     label?: string;

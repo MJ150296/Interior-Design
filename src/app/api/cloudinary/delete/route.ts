@@ -1,6 +1,6 @@
 // src/app/api/cloudinaryDeleteFolder/route.ts
 import { NextRequest, NextResponse } from "next/server";
-import { v2 as cloudinary } from "cloudinary";
+import { v2 as cloudinary, ResourceApiResponse } from "cloudinary";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -22,7 +22,7 @@ export async function DELETE(request: NextRequest) {
     }
 
     // Find all resources in the given "folder" (prefix)
-    const resources = await cloudinary.api.resources({
+    const resources: ResourceApiResponse = await cloudinary.api.resources({
       type: "upload",
       prefix: folderPath,
       max_results: 500,
@@ -33,7 +33,7 @@ export async function DELETE(request: NextRequest) {
     );
 
     if (resources.resources.length > 0) {
-      const publicIds = resources.resources.map((r: any) => r.public_id);
+      const publicIds = resources.resources.map((r) => r.public_id);
       const deleteResult = await cloudinary.api.delete_resources(publicIds);
 
       console.log("Delete resources result:", deleteResult);

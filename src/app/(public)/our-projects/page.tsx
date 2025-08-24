@@ -10,6 +10,16 @@ import {
   selectPortfolioLoading,
 } from "@/app/redux/slices/portfolioPageSlice";
 
+interface RawProject {
+  imageUrl: string;
+  title: string;
+  hoverTitle?: string;
+  hoverDescription?: string;
+  category: string;
+  location: string;
+  exploreLink?: string;
+}
+
 interface Project {
   src: string;
   alt: string;
@@ -151,7 +161,7 @@ const Projects = () => {
   }, [quotesData.length]);
 
   // Convert project data to the format expected by the ProjectCard component
-  const formatProjectData = (projects: any[]) => {
+  const formatProjectData = (projects: RawProject[]): Project[] => {
     return projects.map((project) => ({
       src: project.imageUrl,
       alt: project.title,
