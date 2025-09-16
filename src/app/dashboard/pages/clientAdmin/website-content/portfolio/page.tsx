@@ -520,842 +520,243 @@ const PortfolioAdminDashboard = () => {
   }
 
   return (
-    <DashboardLayoutClient>
-      <form onSubmit={onSubmit}>
-        <div className="flex flex-col min-h-screen bg-gradient-to-br from-slate-50 to-lime-50 dark:from-slate-900 dark:to-slate-800">
-          {/* Header */}
-          <motion.header
-            className="flex flex-col bg-white dark:bg-slate-800 shadow-sm"
-            initial={{ y: -20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="flex justify-between items-center p-4">
-              <div>
-                <h1 className="text-2xl font-bold text-lime-900 dark:text-lime-100">
-                  Portfolio Page Content Management
-                </h1>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                  Manage your portfolio page content and projects
-                </p>
-              </div>
-              <div className="flex space-x-3">
-                <Button
-                  type="submit"
-                  variant="default"
-                  disabled={loading || isSaving}
-                  className={cn(
-                    "flex items-center gap-2 transition-all",
-                    changedFields.size > 0 && "ring-2 ring-lime-500"
-                  )}
-                >
-                  {isSaving ? (
-                    <>
-                      <motion.div
-                        animate={{ rotate: 360 }}
-                        transition={{
-                          duration: 1,
-                          repeat: Infinity,
-                          ease: "linear",
-                        }}
-                      >
-                        <FiSave className="w-4 h-4" />
-                      </motion.div>
-                      Saving...
-                    </>
-                  ) : (
-                    <>
-                      <FiSave className="w-4 h-4" />
-                      {changedFields.size > 0
-                        ? "Publish Changes*"
-                        : "Publish Changes"}
-                    </>
-                  )}
-                </Button>
-              </div>
+    <form onSubmit={onSubmit}>
+      <div className="flex flex-col min-h-screen bg-gradient-to-br from-slate-50 to-lime-50 dark:from-slate-900 dark:to-slate-800">
+        {/* Header */}
+        <motion.header
+          className="flex flex-col bg-white dark:bg-slate-800 shadow-sm"
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.3 }}
+        >
+          <div className="flex justify-between items-center p-4">
+            <div>
+              <h1 className="text-2xl font-bold text-lime-900 dark:text-lime-100">
+                Portfolio Page Content Management
+              </h1>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                Manage your portfolio page content and projects
+              </p>
             </div>
-            <div className="border-t border-b border-gray-100 dark:border-slate-700 px-4">
-              <div className="flex items-center justify-center py-2">
-                <Tabs
-                  value={activeTab}
-                  onValueChange={setActiveTab}
-                  className="w-full"
-                >
-                  <TabsList className="grid grid-cols-3 md:grid-cols-6 bg-lime-50 dark:bg-slate-700 gap-1 p-1 w-full">
-                    {tabItems.map((item, index) => (
-                      <TabsTrigger
-                        key={index}
-                        value={item.value}
-                        className="flex flex-col items-center h-auto py-2 px-1 text-xs data-[state=active]:bg-lime-500 data-[state=active]:text-white transition-all"
-                      >
-                        <span className="mb-1">{item.icon}</span>
-                        <span>{item.label}</span>
-                      </TabsTrigger>
-                    ))}
-                  </TabsList>
-                </Tabs>
-              </div>
-            </div>
-          </motion.header>
-
-          {/* Main Content */}
-          <main className="flex-1 overflow-auto p-4 md:p-6">
-            {error && (
-              <motion.div
-                className="mb-4 p-3 bg-red-100 text-red-700 rounded-lg flex items-center"
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
+            <div className="flex space-x-3">
+              <Button
+                type="submit"
+                variant="default"
+                disabled={loading || isSaving}
+                className={cn(
+                  "flex items-center gap-2 transition-all",
+                  changedFields.size > 0 && "ring-2 ring-lime-500"
+                )}
               >
-                <FiX className="mr-2" /> {error}
-              </motion.div>
-            )}
+                {isSaving ? (
+                  <>
+                    <motion.div
+                      animate={{ rotate: 360 }}
+                      transition={{
+                        duration: 1,
+                        repeat: Infinity,
+                        ease: "linear",
+                      }}
+                    >
+                      <FiSave className="w-4 h-4" />
+                    </motion.div>
+                    Saving...
+                  </>
+                ) : (
+                  <>
+                    <FiSave className="w-4 h-4" />
+                    {changedFields.size > 0
+                      ? "Publish Changes*"
+                      : "Publish Changes"}
+                  </>
+                )}
+              </Button>
+            </div>
+          </div>
+          <div className="border-t border-b border-gray-100 dark:border-slate-700 px-4 py-2">
+            <div className="flex items-center justify-center py-2">
+              <Tabs
+                value={activeTab}
+                onValueChange={setActiveTab}
+                className="w-full"
+              >
+                <TabsList className="grid grid-cols-3 md:grid-cols-6 bg-lime-50 dark:bg-slate-700 gap-1 p-1 w-full">
+                  {tabItems.map((item, index) => (
+                    <TabsTrigger
+                      key={index}
+                      value={item.value}
+                      className="flex flex-col items-center h-auto py-2 px-1 text-xs data-[state=active]:bg-lime-500 data-[state=active]:text-white transition-all"
+                    >
+                      <span>{item.icon}</span>
+                      <span>{item.label}</span>
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+              </Tabs>
+            </div>
+          </div>
+        </motion.header>
 
-            <Tabs value={activeTab} className="w-full">
-              {/* Hero Tab */}
-              <TabsContent value="hero" className="mt-4">
-                <motion.div
-                  variants={fadeIn}
-                  initial="hidden"
-                  animate="visible"
-                >
-                  <Card className="bg-white dark:bg-slate-800 border-lime-200 dark:border-slate-700 overflow-hidden">
-                    <CardHeader className="bg-lime-50 dark:bg-slate-700">
-                      <CardTitle className="text-lime-900 dark:text-lime-100">
-                        Hero Section
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="p-6">
-                      <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6 mb-6">
-                        <div className="w-32 h-32 border-2 border-dashed border-lime-300 rounded-lg flex items-center justify-center overflow-hidden bg-lime-50 dark:bg-slate-700">
-                          {formData.hero.backgroundImageUrl ? (
-                            <Image
-                              src={formData.hero.backgroundImageUrl}
-                              alt="Hero background preview"
-                              width={128}
-                              height={128}
-                              className="object-cover w-full h-full"
-                            />
-                          ) : (
-                            <FiImage className="text-lime-400 text-2xl" />
-                          )}
-                        </div>
-                        <div className="flex-1">
-                          <Label>Background Image</Label>
-                          <div className="relative mt-2">
-                            <motion.div
-                              whileHover={{ scale: 1.02 }}
-                              whileTap={{ scale: 0.98 }}
+        {/* Main Content */}
+        <main className="flex-1 overflow-auto p-4 md:p-6">
+          {error && (
+            <motion.div
+              className="mb-4 p-3 bg-red-100 text-red-700 rounded-lg flex items-center"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              <FiX className="mr-2" /> {error}
+            </motion.div>
+          )}
+
+          <Tabs value={activeTab} className="w-full">
+            {/* Hero Tab */}
+            <TabsContent value="hero" className="mt-4">
+              <motion.div variants={fadeIn} initial="hidden" animate="visible">
+                <Card className="bg-white dark:bg-slate-800 border-lime-200 dark:border-slate-700 overflow-hidden">
+                  <CardHeader className="bg-lime-50 dark:bg-slate-700">
+                    <CardTitle className="text-lime-900 dark:text-lime-100">
+                      Hero Section
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="p-6">
+                    <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6 mb-6">
+                      <div className="w-32 h-32 border-2 border-dashed border-lime-300 rounded-lg flex items-center justify-center overflow-hidden bg-lime-50 dark:bg-slate-700">
+                        {formData.hero.backgroundImageUrl ? (
+                          <Image
+                            src={formData.hero.backgroundImageUrl}
+                            alt="Hero background preview"
+                            width={128}
+                            height={128}
+                            className="object-cover w-full h-full"
+                          />
+                        ) : (
+                          <FiImage className="text-lime-400 text-2xl" />
+                        )}
+                      </div>
+                      <div className="flex-1">
+                        <Label>Background Image</Label>
+                        <div className="relative mt-2">
+                          <motion.div
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                          >
+                            <Button
+                              variant="outline"
+                              disabled={uploading}
+                              type="button"
+                              className="w-full md:w-auto flex items-center gap-2 border-lime-300 text-lime-700 hover:bg-lime-50"
                             >
-                              <Button
-                                variant="outline"
-                                disabled={uploading}
-                                type="button"
-                                className="w-full md:w-auto flex items-center gap-2 border-lime-300 text-lime-700 hover:bg-lime-50"
-                              >
-                                {uploading ? (
-                                  <motion.div
-                                    animate={{ rotate: 360 }}
-                                    transition={{
-                                      duration: 1,
-                                      repeat: Infinity,
-                                      ease: "linear",
-                                    }}
-                                  >
-                                    <FiUpload className="w-4 h-4" />
-                                  </motion.div>
-                                ) : (
+                              {uploading ? (
+                                <motion.div
+                                  animate={{ rotate: 360 }}
+                                  transition={{
+                                    duration: 1,
+                                    repeat: Infinity,
+                                    ease: "linear",
+                                  }}
+                                >
                                   <FiUpload className="w-4 h-4" />
-                                )}
-                                {uploading ? "Uploading..." : "Upload Image"}
-                              </Button>
-                            </motion.div>
-                            <Input
-                              type="file"
-                              className="absolute inset-0 opacity-0 cursor-pointer"
-                              accept="image/*"
-                              onChange={(e) =>
-                                handleFileUpload(
-                                  e,
-                                  "hero.backgroundImageUrl",
-                                  "hero"
-                                )
-                              }
-                            />
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="space-y-4">
-                        <div>
-                          <Label>Pre-Title</Label>
+                                </motion.div>
+                              ) : (
+                                <FiUpload className="w-4 h-4" />
+                              )}
+                              {uploading ? "Uploading..." : "Upload Image"}
+                            </Button>
+                          </motion.div>
                           <Input
-                            value={formData.hero.preTitle}
+                            type="file"
+                            className="absolute inset-0 opacity-0 cursor-pointer"
+                            accept="image/*"
                             onChange={(e) =>
-                              handleInputChange("hero.preTitle", e.target.value)
+                              handleFileUpload(
+                                e,
+                                "hero.backgroundImageUrl",
+                                "hero"
+                              )
                             }
-                            className="mt-1 focus:ring-lime-500 focus:border-lime-500"
-                          />
-                        </div>
-
-                        <div>
-                          <Label>Title</Label>
-                          <Input
-                            value={formData.hero.title}
-                            onChange={(e) =>
-                              handleInputChange("hero.title", e.target.value)
-                            }
-                            className="mt-1 focus:ring-lime-500 focus:border-lime-500"
-                          />
-                        </div>
-
-                        <div>
-                          <Label>Subtitle</Label>
-                          <Textarea
-                            value={formData.hero.subtitle}
-                            onChange={(e) =>
-                              handleInputChange("hero.subtitle", e.target.value)
-                            }
-                            rows={3}
-                            className="mt-1 focus:ring-lime-500 focus:border-lime-500"
                           />
                         </div>
                       </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              </TabsContent>
+                    </div>
 
-              {/* Quotes Tab */}
-              <TabsContent value="quotes" className="mt-4">
-                <motion.div
-                  variants={fadeIn}
-                  initial="hidden"
-                  animate="visible"
-                >
-                  <Card className="bg-white dark:bg-slate-800 border-lime-200 dark:border-slate-700 overflow-hidden">
-                    <CardHeader className="bg-lime-50 dark:bg-slate-700">
-                      <div className="flex justify-between items-center">
-                        <CardTitle className="text-lime-900 dark:text-lime-100">
-                          Quotes Section
-                        </CardTitle>
-                        <motion.div
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                        >
-                          <Button
-                            onClick={() =>
-                              addArrayItem("quotes", {
-                                text: "",
-                                author: "",
-                              })
-                            }
-                            type="button"
-                            className="bg-lime-500 hover:bg-lime-600 text-white flex items-center gap-2"
-                          >
-                            <FiPlus className="w-4 h-4" /> Add Quote
-                          </Button>
-                        </motion.div>
+                    <div className="space-y-4">
+                      <div>
+                        <Label>Pre-Title</Label>
+                        <Input
+                          value={formData.hero.preTitle}
+                          onChange={(e) =>
+                            handleInputChange("hero.preTitle", e.target.value)
+                          }
+                          className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+                        />
                       </div>
-                    </CardHeader>
-                    <CardContent>
+
+                      <div>
+                        <Label>Title</Label>
+                        <Input
+                          value={formData.hero.title}
+                          onChange={(e) =>
+                            handleInputChange("hero.title", e.target.value)
+                          }
+                          className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+                        />
+                      </div>
+
+                      <div>
+                        <Label>Subtitle</Label>
+                        <Textarea
+                          value={formData.hero.subtitle}
+                          onChange={(e) =>
+                            handleInputChange("hero.subtitle", e.target.value)
+                          }
+                          rows={3}
+                          className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+                        />
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </TabsContent>
+
+            {/* Quotes Tab */}
+            <TabsContent value="quotes" className="mt-4">
+              <motion.div variants={fadeIn} initial="hidden" animate="visible">
+                <Card className="bg-white dark:bg-slate-800 border-lime-200 dark:border-slate-700 overflow-hidden">
+                  <CardHeader className="bg-lime-50 dark:bg-slate-700">
+                    <div className="flex justify-between items-center">
+                      <CardTitle className="text-lime-900 dark:text-lime-100">
+                        Quotes Section
+                      </CardTitle>
                       <motion.div
-                        className="space-y-4"
-                        variants={staggerChildren}
-                        initial="hidden"
-                        animate="visible"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                       >
-                        {formData.quotes.map(
-                          (quote: QuoteContent, index: number) => (
-                            <motion.div
-                              key={index}
-                              variants={scaleIn}
-                              whileHover={{ y: -3 }}
-                            >
-                              <Card className="p-4 bg-lime-50 dark:bg-slate-700 border-lime-200 dark:border-slate-600">
-                                <div className="flex justify-between items-center mb-3">
-                                  <Badge className="bg-lime-500 text-white">
-                                    Quote {index + 1}
-                                  </Badge>
-                                  <motion.div
-                                    whileHover={{ scale: 1.1 }}
-                                    whileTap={{ scale: 0.9 }}
-                                  >
-                                    <Button
-                                      variant="ghost"
-                                      size="sm"
-                                      onClick={() =>
-                                        removeArrayItem("quotes", index)
-                                      }
-                                      type="button"
-                                      className="text-red-500 hover:text-red-700 hover:bg-red-50"
-                                    >
-                                      <FiX className="w-4 h-4" />
-                                    </Button>
-                                  </motion.div>
-                                </div>
-                                <div className="mb-4">
-                                  <Label>Quote Text</Label>
-                                  <Textarea
-                                    value={quote.text}
-                                    onChange={(e) =>
-                                      handleInputChange(
-                                        `quotes.${index}.text`,
-                                        e.target.value
-                                      )
-                                    }
-                                    rows={3}
-                                    className="mt-1 focus:ring-lime-500 focus:border-lime-500"
-                                  />
-                                </div>
-                                <div>
-                                  <Label>Author</Label>
-                                  <Input
-                                    value={quote.author}
-                                    onChange={(e) =>
-                                      handleInputChange(
-                                        `quotes.${index}.author`,
-                                        e.target.value
-                                      )
-                                    }
-                                    className="mt-1 focus:ring-lime-500 focus:border-lime-500"
-                                  />
-                                </div>
-                              </Card>
-                            </motion.div>
-                          )
-                        )}
+                        <Button
+                          onClick={() =>
+                            addArrayItem("quotes", {
+                              text: "",
+                              author: "",
+                            })
+                          }
+                          type="button"
+                          className="bg-lime-500 hover:bg-lime-600 text-white flex items-center gap-2"
+                        >
+                          <FiPlus className="w-4 h-4" /> Add Quote
+                        </Button>
                       </motion.div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              </TabsContent>
-
-              {/* Residential Projects Tab */}
-              <TabsContent value="residential" className="mt-4">
-                <motion.div
-                  variants={fadeIn}
-                  initial="hidden"
-                  animate="visible"
-                >
-                  <Card className="bg-white dark:bg-slate-800 border-lime-200 dark:border-slate-700 overflow-hidden">
-                    <CardHeader className="bg-lime-50 dark:bg-slate-700">
-                      <div className="flex justify-between items-center">
-                        <CardTitle className="text-lime-900 dark:text-lime-100">
-                          Residential Projects
-                        </CardTitle>
-                        <motion.div
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                        >
-                          <Button
-                            onClick={() =>
-                              addArrayItem("residentialProjects", {
-                                id: Date.now(),
-                                title: "New Project",
-                                location: "",
-                                category: "",
-                                imageUrl: "",
-                                hoverTitle: "",
-                                hoverDescription: "",
-                                exploreLink: "",
-                              })
-                            }
-                            type="button"
-                            disabled={loading}
-                            className="bg-lime-500 hover:bg-lime-600 text-white flex items-center gap-2"
-                          >
-                            <FiPlus className="w-4 h-4" /> Add Project
-                          </Button>
-                        </motion.div>
-                      </div>
-                    </CardHeader>
-                    <CardContent>
-                      <motion.div
-                        className="space-y-6"
-                        variants={staggerChildren}
-                        initial="hidden"
-                        animate="visible"
-                      >
-                        {formData.residentialProjects.map(
-                          (project: Project, index: number) => (
-                            <motion.div
-                              key={index}
-                              variants={scaleIn}
-                              whileHover={{ y: -5 }}
-                            >
-                              <Card className="p-5 bg-lime-50 dark:bg-slate-700 border-lime-200 dark:border-slate-600 overflow-hidden">
-                                <div className="flex flex-row items-center justify-between p-4 -mx-5 -mt-5 mb-5 bg-lime-100 dark:bg-slate-600">
-                                  <div className="flex items-center">
-                                    <Badge
-                                      variant="secondary"
-                                      className="bg-lime-500 text-white"
-                                    >
-                                      Project {index + 1}
-                                    </Badge>
-                                  </div>
-                                  <motion.div
-                                    whileHover={{ scale: 1.1 }}
-                                    whileTap={{ scale: 0.9 }}
-                                  >
-                                    <Button
-                                      variant="ghost"
-                                      size="sm"
-                                      onClick={() =>
-                                        removeArrayItem(
-                                          "residentialProjects",
-                                          index
-                                        )
-                                      }
-                                      type="button"
-                                      className="text-red-500 hover:text-red-700 hover:bg-red-50"
-                                    >
-                                      <FiX className="w-4 h-4" />
-                                    </Button>
-                                  </motion.div>
-                                </div>
-                                <CardContent className="p-0">
-                                  <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6 mb-6">
-                                    <div className="w-24 h-24 border-2 border-dashed border-lime-300 rounded-lg flex items-center justify-center overflow-hidden bg-white dark:bg-slate-800">
-                                      {project.imageUrl ? (
-                                        <Image
-                                          src={project.imageUrl}
-                                          alt="Project preview"
-                                          width={96}
-                                          height={96}
-                                          className="object-cover w-full h-full"
-                                        />
-                                      ) : (
-                                        <FiImage className="text-lime-400 text-2xl" />
-                                      )}
-                                    </div>
-                                    <div className="flex-1">
-                                      <Label>Project Image</Label>
-                                      <div className="relative mt-2">
-                                        <motion.div
-                                          whileHover={{ scale: 1.02 }}
-                                          whileTap={{ scale: 0.98 }}
-                                        >
-                                          <Button
-                                            variant="outline"
-                                            disabled={uploading}
-                                            type="button"
-                                            className="w-full md:w-auto flex items-center gap-2 border-lime-300 text-lime-700 hover:bg-lime-50"
-                                          >
-                                            {uploading ? (
-                                              <motion.div
-                                                animate={{ rotate: 360 }}
-                                                transition={{
-                                                  duration: 1,
-                                                  repeat: Infinity,
-                                                  ease: "linear",
-                                                }}
-                                              >
-                                                <FiUpload className="w-4 h-4" />
-                                              </motion.div>
-                                            ) : (
-                                              <FiUpload className="w-4 h-4" />
-                                            )}
-                                            {uploading
-                                              ? "Uploading..."
-                                              : "Upload Image"}
-                                          </Button>
-                                        </motion.div>
-                                        <Input
-                                          type="file"
-                                          className="absolute inset-0 opacity-0 cursor-pointer"
-                                          accept="image/*"
-                                          onChange={(e) =>
-                                            handleFileUpload(
-                                              e,
-                                              `residentialProjects.${index}.imageUrl`,
-                                              "residential",
-                                              project.title
-                                            )
-                                          }
-                                        />
-                                      </div>
-                                    </div>
-                                  </div>
-
-                                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div>
-                                      <Label>Project Title</Label>
-                                      <Input
-                                        value={project.title}
-                                        onChange={(e) =>
-                                          handleInputChange(
-                                            `residentialProjects.${index}.title`,
-                                            e.target.value
-                                          )
-                                        }
-                                        className="mt-1 focus:ring-lime-500 focus:border-lime-500"
-                                      />
-                                    </div>
-                                    <div>
-                                      <Label>Location</Label>
-                                      <Input
-                                        value={project.location}
-                                        onChange={(e) =>
-                                          handleInputChange(
-                                            `residentialProjects.${index}.location`,
-                                            e.target.value
-                                          )
-                                        }
-                                        className="mt-1 focus:ring-lime-500 focus:border-lime-500"
-                                      />
-                                    </div>
-                                    <div>
-                                      <Label>Category</Label>
-                                      <Input
-                                        value={project.category}
-                                        onChange={(e) =>
-                                          handleInputChange(
-                                            `residentialProjects.${index}.category`,
-                                            e.target.value
-                                          )
-                                        }
-                                        className="mt-1 focus:ring-lime-500 focus:border-lime-500"
-                                      />
-                                    </div>
-                                  </div>
-
-                                  <div className="mt-4">
-                                    <Label>Hover Title</Label>
-                                    <Input
-                                      value={project.hoverTitle}
-                                      onChange={(e) =>
-                                        handleInputChange(
-                                          `residentialProjects.${index}.hoverTitle`,
-                                          e.target.value
-                                        )
-                                      }
-                                      className="mt-1 focus:ring-lime-500 focus:border-lime-500"
-                                    />
-                                  </div>
-
-                                  <div className="mt-4">
-                                    <Label>Hover Description</Label>
-                                    <Textarea
-                                      value={project.hoverDescription}
-                                      onChange={(e) =>
-                                        handleInputChange(
-                                          `residentialProjects.${index}.hoverDescription`,
-                                          e.target.value
-                                        )
-                                      }
-                                      rows={3}
-                                      className="mt-1 focus:ring-lime-500 focus:border-lime-500"
-                                    />
-                                  </div>
-
-                                  <div className="mt-4">
-                                    <Label>Explore Project Link</Label>
-                                    <Input
-                                      value={project.exploreLink}
-                                      onChange={(e) =>
-                                        handleInputChange(
-                                          `residentialProjects.${index}.exploreLink`,
-                                          e.target.value
-                                        )
-                                      }
-                                      placeholder="https://example.com/project-details"
-                                      className="mt-1 focus:ring-lime-500 focus:border-lime-500"
-                                    />
-                                  </div>
-                                </CardContent>
-                              </Card>
-                            </motion.div>
-                          )
-                        )}
-                      </motion.div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              </TabsContent>
-
-              {/* Commercial Projects Tab */}
-              <TabsContent value="commercial" className="mt-4">
-                <motion.div
-                  variants={fadeIn}
-                  initial="hidden"
-                  animate="visible"
-                >
-                  <Card className="bg-white dark:bg-slate-800 border-lime-200 dark:border-slate-700 overflow-hidden">
-                    <CardHeader className="bg-lime-50 dark:bg-slate-700">
-                      <div className="flex justify-between items-center">
-                        <CardTitle className="text-lime-900 dark:text-lime-100">
-                          Commercial Projects
-                        </CardTitle>
-                        <motion.div
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                        >
-                          <Button
-                            onClick={() =>
-                              addArrayItem("commercialProjects", {
-                                id: Date.now(),
-                                title: "New Project",
-                                location: "",
-                                category: "",
-                                imageUrl: "",
-                                hoverTitle: "",
-                                hoverDescription: "",
-                                exploreLink: "",
-                              })
-                            }
-                            type="button"
-                            disabled={loading}
-                            className="bg-lime-500 hover:bg-lime-600 text-white flex items-center gap-2"
-                          >
-                            <FiPlus className="w-4 h-4" /> Add Project
-                          </Button>
-                        </motion.div>
-                      </div>
-                    </CardHeader>
-                    <CardContent>
-                      <motion.div
-                        className="space-y-6"
-                        variants={staggerChildren}
-                        initial="hidden"
-                        animate="visible"
-                      >
-                        {formData.commercialProjects.map(
-                          (project: Project, index: number) => (
-                            <motion.div
-                              key={index}
-                              variants={scaleIn}
-                              whileHover={{ y: -5 }}
-                            >
-                              <Card className="p-5 bg-lime-50 dark:bg-slate-700 border-lime-200 dark:border-slate-600 overflow-hidden">
-                                <div className="flex flex-row items-center justify-between p-4 -mx-5 -mt-5 mb-5 bg-lime-100 dark:bg-slate-600">
-                                  <div className="flex items-center">
-                                    <Badge
-                                      variant="secondary"
-                                      className="bg-lime-500 text-white"
-                                    >
-                                      Project {index + 1}
-                                    </Badge>
-                                  </div>
-                                  <motion.div
-                                    whileHover={{ scale: 1.1 }}
-                                    whileTap={{ scale: 0.9 }}
-                                  >
-                                    <Button
-                                      variant="ghost"
-                                      size="sm"
-                                      onClick={() =>
-                                        removeArrayItem(
-                                          "commercialProjects",
-                                          index
-                                        )
-                                      }
-                                      type="button"
-                                      className="text-red-500 hover:text-red-700 hover:bg-red-50"
-                                    >
-                                      <FiX className="w-4 h-4" />
-                                    </Button>
-                                  </motion.div>
-                                </div>
-                                <CardContent className="p-0">
-                                  <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6 mb-6">
-                                    <div className="w-24 h-24 border-2 border-dashed border-lime-300 rounded-lg flex items-center justify-center overflow-hidden bg-white dark:bg-slate-800">
-                                      {project.imageUrl ? (
-                                        <Image
-                                          src={project.imageUrl}
-                                          alt="Project preview"
-                                          width={96}
-                                          height={96}
-                                          className="object-cover w-full h-full"
-                                        />
-                                      ) : (
-                                        <FiImage className="text-lime-400 text-2xl" />
-                                      )}
-                                    </div>
-                                    <div className="flex-1">
-                                      <Label>Project Image</Label>
-                                      <div className="relative mt-2">
-                                        <motion.div
-                                          whileHover={{ scale: 1.02 }}
-                                          whileTap={{ scale: 0.98 }}
-                                        >
-                                          <Button
-                                            variant="outline"
-                                            disabled={uploading}
-                                            type="button"
-                                            className="w-full md:w-auto flex items-center gap-2 border-lime-300 text-lime-700 hover:bg-lime-50"
-                                          >
-                                            {uploading ? (
-                                              <motion.div
-                                                animate={{ rotate: 360 }}
-                                                transition={{
-                                                  duration: 1,
-                                                  repeat: Infinity,
-                                                  ease: "linear",
-                                                }}
-                                              >
-                                                <FiUpload className="w-4 h-4" />
-                                              </motion.div>
-                                            ) : (
-                                              <FiUpload className="w-4 h-4" />
-                                            )}
-                                            {uploading
-                                              ? "Uploading..."
-                                              : "Upload Image"}
-                                          </Button>
-                                        </motion.div>
-                                        <Input
-                                          type="file"
-                                          className="absolute inset-0 opacity-0 cursor-pointer"
-                                          accept="image/*"
-                                          onChange={(e) =>
-                                            handleFileUpload(
-                                              e,
-                                              `commercialProjects.${index}.imageUrl`,
-                                              "commercial",
-                                              project.title
-                                            )
-                                          }
-                                        />
-                                      </div>
-                                    </div>
-                                  </div>
-
-                                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div>
-                                      <Label>Project Title</Label>
-                                      <Input
-                                        value={project.title}
-                                        onChange={(e) =>
-                                          handleInputChange(
-                                            `commercialProjects.${index}.title`,
-                                            e.target.value
-                                          )
-                                        }
-                                        className="mt-1 focus:ring-lime-500 focus:border-lime-500"
-                                      />
-                                    </div>
-                                    <div>
-                                      <Label>Location</Label>
-                                      <Input
-                                        value={project.location}
-                                        onChange={(e) =>
-                                          handleInputChange(
-                                            `commercialProjects.${index}.location`,
-                                            e.target.value
-                                          )
-                                        }
-                                        className="mt-1 focus:ring-lime-500 focus:border-lime-500"
-                                      />
-                                    </div>
-                                    <div>
-                                      <Label>Category</Label>
-                                      <Input
-                                        value={project.category}
-                                        onChange={(e) =>
-                                          handleInputChange(
-                                            `commercialProjects.${index}.category`,
-                                            e.target.value
-                                          )
-                                        }
-                                        className="mt-1 focus:ring-lime-500 focus:border-lime-500"
-                                      />
-                                    </div>
-                                  </div>
-
-                                  <div className="mt-4">
-                                    <Label>Hover Title</Label>
-                                    <Input
-                                      value={project.hoverTitle}
-                                      onChange={(e) =>
-                                        handleInputChange(
-                                          `commercialProjects.${index}.hoverTitle`,
-                                          e.target.value
-                                        )
-                                      }
-                                      className="mt-1 focus:ring-lime-500 focus:border-lime-500"
-                                    />
-                                  </div>
-
-                                  <div className="mt-4">
-                                    <Label>Hover Description</Label>
-                                    <Textarea
-                                      value={project.hoverDescription}
-                                      onChange={(e) =>
-                                        handleInputChange(
-                                          `commercialProjects.${index}.hoverDescription`,
-                                          e.target.value
-                                        )
-                                      }
-                                      rows={3}
-                                      className="mt-1 focus:ring-lime-500 focus:border-lime-500"
-                                    />
-                                  </div>
-
-                                  <div className="mt-4">
-                                    <Label>Explore Project Link</Label>
-                                    <Input
-                                      value={project.exploreLink}
-                                      onChange={(e) =>
-                                        handleInputChange(
-                                          `commercialProjects.${index}.exploreLink`,
-                                          e.target.value
-                                        )
-                                      }
-                                      placeholder="https://example.com/project-details"
-                                      className="mt-1 focus:ring-lime-500 focus:border-lime-500"
-                                    />
-                                  </div>
-                                </CardContent>
-                              </Card>
-                            </motion.div>
-                          )
-                        )}
-                      </motion.div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              </TabsContent>
-
-              {/* Stats Tab */}
-              <TabsContent value="stats" className="mt-4">
-                <motion.div
-                  variants={fadeIn}
-                  initial="hidden"
-                  animate="visible"
-                >
-                  <Card className="bg-white dark:bg-slate-800 border-lime-200 dark:border-slate-700 overflow-hidden">
-                    <CardHeader className="bg-lime-50 dark:bg-slate-700">
-                      <div className="flex justify-between items-center">
-                        <CardTitle className="text-lime-900 dark:text-lime-100">
-                          Statistics Section
-                        </CardTitle>
-                        <motion.div
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                        >
-                          <Button
-                            onClick={() =>
-                              addArrayItem("stats", {
-                                value: "",
-                                label: "",
-                              })
-                            }
-                            type="button"
-                            className="bg-lime-500 hover:bg-lime-600 text-white flex items-center gap-2"
-                          >
-                            <FiPlus className="w-4 h-4" /> Add Statistic
-                          </Button>
-                        </motion.div>
-                      </div>
-                    </CardHeader>
-                    <CardContent>
-                      <motion.div
-                        className="space-y-4"
-                        variants={staggerChildren}
-                        initial="hidden"
-                        animate="visible"
-                      >
-                        {formData.stats.map((stat: Stat, index: number) => (
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <motion.div
+                      className="space-y-4"
+                      variants={staggerChildren}
+                      initial="hidden"
+                      animate="visible"
+                    >
+                      {formData.quotes.map(
+                        (quote: QuoteContent, index: number) => (
                           <motion.div
                             key={index}
                             variants={scaleIn}
@@ -1364,7 +765,7 @@ const PortfolioAdminDashboard = () => {
                             <Card className="p-4 bg-lime-50 dark:bg-slate-700 border-lime-200 dark:border-slate-600">
                               <div className="flex justify-between items-center mb-3">
                                 <Badge className="bg-lime-500 text-white">
-                                  Stat {index + 1}
+                                  Quote {index + 1}
                                 </Badge>
                                 <motion.div
                                   whileHover={{ scale: 1.1 }}
@@ -1374,7 +775,7 @@ const PortfolioAdminDashboard = () => {
                                     variant="ghost"
                                     size="sm"
                                     onClick={() =>
-                                      removeArrayItem("stats", index)
+                                      removeArrayItem("quotes", index)
                                     }
                                     type="button"
                                     className="text-red-500 hover:text-red-700 hover:bg-red-50"
@@ -1384,25 +785,26 @@ const PortfolioAdminDashboard = () => {
                                 </motion.div>
                               </div>
                               <div className="mb-4">
-                                <Label>Value</Label>
-                                <Input
-                                  value={stat.value}
+                                <Label>Quote Text</Label>
+                                <Textarea
+                                  value={quote.text}
                                   onChange={(e) =>
                                     handleInputChange(
-                                      `stats.${index}.value`,
+                                      `quotes.${index}.text`,
                                       e.target.value
                                     )
                                   }
+                                  rows={3}
                                   className="mt-1 focus:ring-lime-500 focus:border-lime-500"
                                 />
                               </div>
                               <div>
-                                <Label>Label</Label>
+                                <Label>Author</Label>
                                 <Input
-                                  value={stat.label}
+                                  value={quote.author}
                                   onChange={(e) =>
                                     handleInputChange(
-                                      `stats.${index}.label`,
+                                      `quotes.${index}.author`,
                                       e.target.value
                                     )
                                   }
@@ -1411,62 +813,631 @@ const PortfolioAdminDashboard = () => {
                               </div>
                             </Card>
                           </motion.div>
-                        ))}
-                      </motion.div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              </TabsContent>
+                        )
+                      )}
+                    </motion.div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </TabsContent>
 
-              {/* CTA Tab */}
-              <TabsContent value="cta" className="mt-4">
-                <motion.div
-                  variants={fadeIn}
-                  initial="hidden"
-                  animate="visible"
-                >
-                  <Card className="bg-white dark:bg-slate-800 border-lime-200 dark:border-slate-700 overflow-hidden">
-                    <CardHeader className="bg-lime-50 dark:bg-slate-700">
+            {/* Residential Projects Tab */}
+            <TabsContent value="residential" className="mt-4">
+              <motion.div variants={fadeIn} initial="hidden" animate="visible">
+                <Card className="bg-white dark:bg-slate-800 border-lime-200 dark:border-slate-700 overflow-hidden">
+                  <CardHeader className="bg-lime-50 dark:bg-slate-700">
+                    <div className="flex justify-between items-center">
                       <CardTitle className="text-lime-900 dark:text-lime-100">
-                        Call to Action Section
+                        Residential Projects
                       </CardTitle>
-                    </CardHeader>
-                    <CardContent className="p-6">
-                      <div className="space-y-4">
-                        <div>
-                          <Label>Title</Label>
-                          <Input
-                            value={formData.cta.title}
-                            onChange={(e) =>
-                              handleInputChange("cta.title", e.target.value)
-                            }
-                            className="mt-1 focus:ring-lime-500 focus:border-lime-500"
-                          />
-                        </div>
-                        <div>
-                          <Label>Description</Label>
-                          <Textarea
-                            value={formData.cta.description}
-                            onChange={(e) =>
-                              handleInputChange(
-                                "cta.description",
-                                e.target.value
-                              )
-                            }
-                            rows={3}
-                            className="mt-1 focus:ring-lime-500 focus:border-lime-500"
-                          />
-                        </div>
+                      <motion.div
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <Button
+                          onClick={() =>
+                            addArrayItem("residentialProjects", {
+                              id: Date.now(),
+                              title: "New Project",
+                              location: "",
+                              category: "",
+                              imageUrl: "",
+                              hoverTitle: "",
+                              hoverDescription: "",
+                              exploreLink: "",
+                            })
+                          }
+                          type="button"
+                          disabled={loading}
+                          className="bg-lime-500 hover:bg-lime-600 text-white flex items-center gap-2"
+                        >
+                          <FiPlus className="w-4 h-4" /> Add Project
+                        </Button>
+                      </motion.div>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <motion.div
+                      className="space-y-6"
+                      variants={staggerChildren}
+                      initial="hidden"
+                      animate="visible"
+                    >
+                      {formData.residentialProjects.map(
+                        (project: Project, index: number) => (
+                          <motion.div
+                            key={index}
+                            variants={scaleIn}
+                            whileHover={{ y: -5 }}
+                          >
+                            <Card className="p-5 bg-lime-50 dark:bg-slate-700 border-lime-200 dark:border-slate-600 overflow-hidden">
+                              <div className="flex flex-row items-center justify-between p-4 -mx-5 -mt-5 mb-5 bg-lime-100 dark:bg-slate-600">
+                                <div className="flex items-center">
+                                  <Badge
+                                    variant="secondary"
+                                    className="bg-lime-500 text-white"
+                                  >
+                                    Project {index + 1}
+                                  </Badge>
+                                </div>
+                                <motion.div
+                                  whileHover={{ scale: 1.1 }}
+                                  whileTap={{ scale: 0.9 }}
+                                >
+                                  <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    onClick={() =>
+                                      removeArrayItem(
+                                        "residentialProjects",
+                                        index
+                                      )
+                                    }
+                                    type="button"
+                                    className="text-red-500 hover:text-red-700 hover:bg-red-50"
+                                  >
+                                    <FiX className="w-4 h-4" />
+                                  </Button>
+                                </motion.div>
+                              </div>
+                              <CardContent className="p-0">
+                                <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6 mb-6">
+                                  <div className="w-24 h-24 border-2 border-dashed border-lime-300 rounded-lg flex items-center justify-center overflow-hidden bg-white dark:bg-slate-800">
+                                    {project.imageUrl ? (
+                                      <Image
+                                        src={project.imageUrl}
+                                        alt="Project preview"
+                                        width={96}
+                                        height={96}
+                                        className="object-cover w-full h-full"
+                                      />
+                                    ) : (
+                                      <FiImage className="text-lime-400 text-2xl" />
+                                    )}
+                                  </div>
+                                  <div className="flex-1">
+                                    <Label>Project Image</Label>
+                                    <div className="relative mt-2">
+                                      <motion.div
+                                        whileHover={{ scale: 1.02 }}
+                                        whileTap={{ scale: 0.98 }}
+                                      >
+                                        <Button
+                                          variant="outline"
+                                          disabled={uploading}
+                                          type="button"
+                                          className="w-full md:w-auto flex items-center gap-2 border-lime-300 text-lime-700 hover:bg-lime-50"
+                                        >
+                                          {uploading ? (
+                                            <motion.div
+                                              animate={{ rotate: 360 }}
+                                              transition={{
+                                                duration: 1,
+                                                repeat: Infinity,
+                                                ease: "linear",
+                                              }}
+                                            >
+                                              <FiUpload className="w-4 h-4" />
+                                            </motion.div>
+                                          ) : (
+                                            <FiUpload className="w-4 h-4" />
+                                          )}
+                                          {uploading
+                                            ? "Uploading..."
+                                            : "Upload Image"}
+                                        </Button>
+                                      </motion.div>
+                                      <Input
+                                        type="file"
+                                        className="absolute inset-0 opacity-0 cursor-pointer"
+                                        accept="image/*"
+                                        onChange={(e) =>
+                                          handleFileUpload(
+                                            e,
+                                            `residentialProjects.${index}.imageUrl`,
+                                            "residential",
+                                            project.title
+                                          )
+                                        }
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                  <div>
+                                    <Label>Project Title</Label>
+                                    <Input
+                                      value={project.title}
+                                      onChange={(e) =>
+                                        handleInputChange(
+                                          `residentialProjects.${index}.title`,
+                                          e.target.value
+                                        )
+                                      }
+                                      className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+                                    />
+                                  </div>
+                                  <div>
+                                    <Label>Location</Label>
+                                    <Input
+                                      value={project.location}
+                                      onChange={(e) =>
+                                        handleInputChange(
+                                          `residentialProjects.${index}.location`,
+                                          e.target.value
+                                        )
+                                      }
+                                      className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+                                    />
+                                  </div>
+                                  <div>
+                                    <Label>Category</Label>
+                                    <Input
+                                      value={project.category}
+                                      onChange={(e) =>
+                                        handleInputChange(
+                                          `residentialProjects.${index}.category`,
+                                          e.target.value
+                                        )
+                                      }
+                                      className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className="mt-4">
+                                  <Label>Hover Title</Label>
+                                  <Input
+                                    value={project.hoverTitle}
+                                    onChange={(e) =>
+                                      handleInputChange(
+                                        `residentialProjects.${index}.hoverTitle`,
+                                        e.target.value
+                                      )
+                                    }
+                                    className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+                                  />
+                                </div>
+
+                                <div className="mt-4">
+                                  <Label>Hover Description</Label>
+                                  <Textarea
+                                    value={project.hoverDescription}
+                                    onChange={(e) =>
+                                      handleInputChange(
+                                        `residentialProjects.${index}.hoverDescription`,
+                                        e.target.value
+                                      )
+                                    }
+                                    rows={3}
+                                    className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+                                  />
+                                </div>
+
+                                <div className="mt-4">
+                                  <Label>Explore Project Link</Label>
+                                  <Input
+                                    value={project.exploreLink}
+                                    onChange={(e) =>
+                                      handleInputChange(
+                                        `residentialProjects.${index}.exploreLink`,
+                                        e.target.value
+                                      )
+                                    }
+                                    placeholder="https://example.com/project-details"
+                                    className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+                                  />
+                                </div>
+                              </CardContent>
+                            </Card>
+                          </motion.div>
+                        )
+                      )}
+                    </motion.div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </TabsContent>
+
+            {/* Commercial Projects Tab */}
+            <TabsContent value="commercial" className="mt-4">
+              <motion.div variants={fadeIn} initial="hidden" animate="visible">
+                <Card className="bg-white dark:bg-slate-800 border-lime-200 dark:border-slate-700 overflow-hidden">
+                  <CardHeader className="bg-lime-50 dark:bg-slate-700">
+                    <div className="flex justify-between items-center">
+                      <CardTitle className="text-lime-900 dark:text-lime-100">
+                        Commercial Projects
+                      </CardTitle>
+                      <motion.div
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <Button
+                          onClick={() =>
+                            addArrayItem("commercialProjects", {
+                              id: Date.now(),
+                              title: "New Project",
+                              location: "",
+                              category: "",
+                              imageUrl: "",
+                              hoverTitle: "",
+                              hoverDescription: "",
+                              exploreLink: "",
+                            })
+                          }
+                          type="button"
+                          disabled={loading}
+                          className="bg-lime-500 hover:bg-lime-600 text-white flex items-center gap-2"
+                        >
+                          <FiPlus className="w-4 h-4" /> Add Project
+                        </Button>
+                      </motion.div>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <motion.div
+                      className="space-y-6"
+                      variants={staggerChildren}
+                      initial="hidden"
+                      animate="visible"
+                    >
+                      {formData.commercialProjects.map(
+                        (project: Project, index: number) => (
+                          <motion.div
+                            key={index}
+                            variants={scaleIn}
+                            whileHover={{ y: -5 }}
+                          >
+                            <Card className="p-5 bg-lime-50 dark:bg-slate-700 border-lime-200 dark:border-slate-600 overflow-hidden">
+                              <div className="flex flex-row items-center justify-between p-4 -mx-5 -mt-5 mb-5 bg-lime-100 dark:bg-slate-600">
+                                <div className="flex items-center">
+                                  <Badge
+                                    variant="secondary"
+                                    className="bg-lime-500 text-white"
+                                  >
+                                    Project {index + 1}
+                                  </Badge>
+                                </div>
+                                <motion.div
+                                  whileHover={{ scale: 1.1 }}
+                                  whileTap={{ scale: 0.9 }}
+                                >
+                                  <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    onClick={() =>
+                                      removeArrayItem(
+                                        "commercialProjects",
+                                        index
+                                      )
+                                    }
+                                    type="button"
+                                    className="text-red-500 hover:text-red-700 hover:bg-red-50"
+                                  >
+                                    <FiX className="w-4 h-4" />
+                                  </Button>
+                                </motion.div>
+                              </div>
+                              <CardContent className="p-0">
+                                <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6 mb-6">
+                                  <div className="w-24 h-24 border-2 border-dashed border-lime-300 rounded-lg flex items-center justify-center overflow-hidden bg-white dark:bg-slate-800">
+                                    {project.imageUrl ? (
+                                      <Image
+                                        src={project.imageUrl}
+                                        alt="Project preview"
+                                        width={96}
+                                        height={96}
+                                        className="object-cover w-full h-full"
+                                      />
+                                    ) : (
+                                      <FiImage className="text-lime-400 text-2xl" />
+                                    )}
+                                  </div>
+                                  <div className="flex-1">
+                                    <Label>Project Image</Label>
+                                    <div className="relative mt-2">
+                                      <motion.div
+                                        whileHover={{ scale: 1.02 }}
+                                        whileTap={{ scale: 0.98 }}
+                                      >
+                                        <Button
+                                          variant="outline"
+                                          disabled={uploading}
+                                          type="button"
+                                          className="w-full md:w-auto flex items-center gap-2 border-lime-300 text-lime-700 hover:bg-lime-50"
+                                        >
+                                          {uploading ? (
+                                            <motion.div
+                                              animate={{ rotate: 360 }}
+                                              transition={{
+                                                duration: 1,
+                                                repeat: Infinity,
+                                                ease: "linear",
+                                              }}
+                                            >
+                                              <FiUpload className="w-4 h-4" />
+                                            </motion.div>
+                                          ) : (
+                                            <FiUpload className="w-4 h-4" />
+                                          )}
+                                          {uploading
+                                            ? "Uploading..."
+                                            : "Upload Image"}
+                                        </Button>
+                                      </motion.div>
+                                      <Input
+                                        type="file"
+                                        className="absolute inset-0 opacity-0 cursor-pointer"
+                                        accept="image/*"
+                                        onChange={(e) =>
+                                          handleFileUpload(
+                                            e,
+                                            `commercialProjects.${index}.imageUrl`,
+                                            "commercial",
+                                            project.title
+                                          )
+                                        }
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                  <div>
+                                    <Label>Project Title</Label>
+                                    <Input
+                                      value={project.title}
+                                      onChange={(e) =>
+                                        handleInputChange(
+                                          `commercialProjects.${index}.title`,
+                                          e.target.value
+                                        )
+                                      }
+                                      className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+                                    />
+                                  </div>
+                                  <div>
+                                    <Label>Location</Label>
+                                    <Input
+                                      value={project.location}
+                                      onChange={(e) =>
+                                        handleInputChange(
+                                          `commercialProjects.${index}.location`,
+                                          e.target.value
+                                        )
+                                      }
+                                      className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+                                    />
+                                  </div>
+                                  <div>
+                                    <Label>Category</Label>
+                                    <Input
+                                      value={project.category}
+                                      onChange={(e) =>
+                                        handleInputChange(
+                                          `commercialProjects.${index}.category`,
+                                          e.target.value
+                                        )
+                                      }
+                                      className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className="mt-4">
+                                  <Label>Hover Title</Label>
+                                  <Input
+                                    value={project.hoverTitle}
+                                    onChange={(e) =>
+                                      handleInputChange(
+                                        `commercialProjects.${index}.hoverTitle`,
+                                        e.target.value
+                                      )
+                                    }
+                                    className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+                                  />
+                                </div>
+
+                                <div className="mt-4">
+                                  <Label>Hover Description</Label>
+                                  <Textarea
+                                    value={project.hoverDescription}
+                                    onChange={(e) =>
+                                      handleInputChange(
+                                        `commercialProjects.${index}.hoverDescription`,
+                                        e.target.value
+                                      )
+                                    }
+                                    rows={3}
+                                    className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+                                  />
+                                </div>
+
+                                <div className="mt-4">
+                                  <Label>Explore Project Link</Label>
+                                  <Input
+                                    value={project.exploreLink}
+                                    onChange={(e) =>
+                                      handleInputChange(
+                                        `commercialProjects.${index}.exploreLink`,
+                                        e.target.value
+                                      )
+                                    }
+                                    placeholder="https://example.com/project-details"
+                                    className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+                                  />
+                                </div>
+                              </CardContent>
+                            </Card>
+                          </motion.div>
+                        )
+                      )}
+                    </motion.div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </TabsContent>
+
+            {/* Stats Tab */}
+            <TabsContent value="stats" className="mt-4">
+              <motion.div variants={fadeIn} initial="hidden" animate="visible">
+                <Card className="bg-white dark:bg-slate-800 border-lime-200 dark:border-slate-700 overflow-hidden">
+                  <CardHeader className="bg-lime-50 dark:bg-slate-700">
+                    <div className="flex justify-between items-center">
+                      <CardTitle className="text-lime-900 dark:text-lime-100">
+                        Statistics Section
+                      </CardTitle>
+                      <motion.div
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <Button
+                          onClick={() =>
+                            addArrayItem("stats", {
+                              value: "",
+                              label: "",
+                            })
+                          }
+                          type="button"
+                          className="bg-lime-500 hover:bg-lime-600 text-white flex items-center gap-2"
+                        >
+                          <FiPlus className="w-4 h-4" /> Add Statistic
+                        </Button>
+                      </motion.div>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <motion.div
+                      className="space-y-4"
+                      variants={staggerChildren}
+                      initial="hidden"
+                      animate="visible"
+                    >
+                      {formData.stats.map((stat: Stat, index: number) => (
+                        <motion.div
+                          key={index}
+                          variants={scaleIn}
+                          whileHover={{ y: -3 }}
+                        >
+                          <Card className="p-4 bg-lime-50 dark:bg-slate-700 border-lime-200 dark:border-slate-600">
+                            <div className="flex justify-between items-center mb-3">
+                              <Badge className="bg-lime-500 text-white">
+                                Stat {index + 1}
+                              </Badge>
+                              <motion.div
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.9 }}
+                              >
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  onClick={() =>
+                                    removeArrayItem("stats", index)
+                                  }
+                                  type="button"
+                                  className="text-red-500 hover:text-red-700 hover:bg-red-50"
+                                >
+                                  <FiX className="w-4 h-4" />
+                                </Button>
+                              </motion.div>
+                            </div>
+                            <div className="mb-4">
+                              <Label>Value</Label>
+                              <Input
+                                value={stat.value}
+                                onChange={(e) =>
+                                  handleInputChange(
+                                    `stats.${index}.value`,
+                                    e.target.value
+                                  )
+                                }
+                                className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+                              />
+                            </div>
+                            <div>
+                              <Label>Label</Label>
+                              <Input
+                                value={stat.label}
+                                onChange={(e) =>
+                                  handleInputChange(
+                                    `stats.${index}.label`,
+                                    e.target.value
+                                  )
+                                }
+                                className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+                              />
+                            </div>
+                          </Card>
+                        </motion.div>
+                      ))}
+                    </motion.div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </TabsContent>
+
+            {/* CTA Tab */}
+            <TabsContent value="cta" className="mt-4">
+              <motion.div variants={fadeIn} initial="hidden" animate="visible">
+                <Card className="bg-white dark:bg-slate-800 border-lime-200 dark:border-slate-700 overflow-hidden">
+                  <CardHeader className="bg-lime-50 dark:bg-slate-700">
+                    <CardTitle className="text-lime-900 dark:text-lime-100">
+                      Call to Action Section
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="p-6">
+                    <div className="space-y-4">
+                      <div>
+                        <Label>Title</Label>
+                        <Input
+                          value={formData.cta.title}
+                          onChange={(e) =>
+                            handleInputChange("cta.title", e.target.value)
+                          }
+                          className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+                        />
                       </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              </TabsContent>
-            </Tabs>
-          </main>
-        </div>
-      </form>
-    </DashboardLayoutClient>
+                      <div>
+                        <Label>Description</Label>
+                        <Textarea
+                          value={formData.cta.description}
+                          onChange={(e) =>
+                            handleInputChange("cta.description", e.target.value)
+                          }
+                          rows={3}
+                          className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+                        />
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </TabsContent>
+          </Tabs>
+        </main>
+      </div>
+    </form>
   );
 };
 

@@ -36,7 +36,7 @@ export default function ComingSoonDashboard() {
         transition={{ delay: 0.4, duration: 0.8 }}
         className="text-lg md:text-xl text-gray-600 max-w-xl text-center"
       >
-        We’re crafting something amazing for you. Stay tuned for your all-new
+        We&apos;re crafting something amazing for you. Stay tuned for your all-new
         interactive dashboard experience!
       </motion.p>
     </div>

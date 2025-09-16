@@ -1,5 +1,5 @@
 // "use client";
-// import React, { useState } from "react";
+// import React, { useEffect, useState, useCallback } from "react";
 // import {
 //   FiImage,
 //   FiEdit,
@@ -7,705 +7,1639 @@
 //   FiMessageSquare,
 //   FiSettings,
 //   FiPlus,
-//   FiMinus,
+//   FiSave,
+//   FiUpload,
+//   FiX,
+//   FiStar,
 //   FiSearch,
-//   FiCalendar,
+//   FiFileText,
 // } from "react-icons/fi";
 // import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 // import { Button } from "@/components/ui/button";
 // import { Input } from "@/components/ui/input";
 // import { Textarea } from "@/components/ui/textarea";
-// import {
-//   Card,
-//   CardHeader,
-//   CardTitle,
-//   CardContent,
-//   CardFooter,
-// } from "@/components/ui/card";
+// import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 // import { Label } from "@/components/ui/label";
 // import { Badge } from "@/components/ui/badge";
 // import DashboardLayoutClient from "@/app/dashboard/client_side_layout/ClientSideDashboardLayout";
-// import { useForm, useFieldArray, FormProvider } from "react-hook-form";
-// import { zodResolver } from "@hookform/resolvers/zod";
-// import * as z from "zod";
+// import { useAppDispatch, useAppSelector } from "@/app/redux/store/hooks";
+
+// import { motion } from "framer-motion";
+// import { cn } from "@/lib/utils";
+// import Image from "next/image";
+
+// // Import TypeScript interfaces
 // import {
-//   Form,
-//   FormControl,
-//   FormField,
-//   FormItem,
-//   FormLabel,
-//   FormMessage,
-// } from "@/components/ui/form";
-// import {
-//   Select,
-//   SelectContent,
-//   SelectItem,
-//   SelectTrigger,
-//   SelectValue,
-// } from "@/components/ui/select";
+//   BlogContent,
+//   HeroContent,
+//   Category,
+//   FeaturedPost,
+//   Article,
+//   NewsletterContent,
+//   selectBlogContent,
+//   selectBlogLoading,
+//   selectBlogError,
+//   updateBlogContent,
+// } from "../../../../../redux/slices/blogPageSlice";
+// import { fetchBlogContent } from "../../../../../redux/slices/blogPageSlice";
 
-// // Define Zod schemas
-// const blogPostSchema = z.object({
-//   id: z.number(),
-//   title: z.string().min(10, "Title must be at least 10 characters"),
-//   excerpt: z.string().min(30, "Excerpt must be at least 30 characters"),
-//   author: z.string().min(2, "Author name must be at least 2 characters"),
-//   date: z.string().refine((val) => /^\d{4}-\d{2}-\d{2}$/.test(val), {
-//     message: "Date must be in YYYY-MM-DD format",
-//   }),
-//   category: z.string().min(1, "Category is required"),
-//   imageUrl: z.string().url("Invalid URL format").or(z.literal("")),
-//   content: z
-//     .string()
-//     .min(100, "Content must be at least 100 characters")
-//     .optional(),
-//   featured: z.boolean(), // Removed .default() to fix type issues
-// });
+// // Animation variants
+// const fadeIn = {
+//   hidden: { opacity: 0, y: 20 },
+//   visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
+// };
 
-// const categorySchema = z.object({
-//   name: z.string().min(2, "Category name must be at least 2 characters"),
-// });
+// const staggerChildren = {
+//   visible: { transition: { staggerChildren: 0.05 } },
+// };
 
-// const blogPageSchema = z.object({
-//   hero: z.object({
-//     backgroundImageUrl: z.string().url("Invalid URL format").or(z.literal("")),
-//     preTitle: z.string().min(5, "Pre-title must be at least 5 characters"),
-//     title: z.string().min(5, "Title must be at least 5 characters"),
-//     subtitle: z.string().min(10, "Subtitle must be at least 10 characters"),
-//   }),
-//   categories: z.array(categorySchema),
-//   blogPosts: z.array(blogPostSchema),
-//   featuredPostId: z.number().optional(),
-//   newsletter: z.object({
-//     title: z.string().min(10, "Title must be at least 10 characters"),
-//     description: z
-//       .string()
-//       .min(20, "Description must be at least 20 characters"),
-//   }),
-// });
+// const scaleIn = {
+//   hidden: { opacity: 0, scale: 0.9 },
+//   visible: { opacity: 1, scale: 1, transition: { duration: 0.2 } },
+// };
 
-// // Infer TypeScript type from Zod schema
-// type BlogPageContent = z.infer<typeof blogPageSchema>;
+// // Add this interface
+// interface FullBlogContent {
+//   id: number;
+//   title: string;
+//   author: string;
+//   date: string;
+//   imageUrl: string;
+//   category: string;
+//   content: string; // HTML content for the full blog
+//   relatedPosts: number[]; // IDs of related posts
+// }
 
-// const defaultValues: BlogPageContent = {
+// // Update the BlogContent interface to include fullBlogs
+// interface BlogContent {
+//   hero: HeroContent;
+//   featured: FeaturedPost;
+//   categories: string[];
+//   articles: Article[];
+//   newsletter: NewsletterContent;
+//   fullBlogs: FullBlogContent[]; // Add this line
+// }
+
+// const defaultValues: BlogContent = {
 //   hero: {
-//     backgroundImageUrl: "/Riddhi Interior Design/Projects/cover.jpg",
+//     backgroundImageUrl: "/Riddhi%20Interior%20Design/Projects/cover.jpg",
 //     preTitle: "INSIGHTS & INSPIRATION",
 //     title: "Design Journal",
 //     subtitle:
 //       "Explore Ideas, Trends, and Expert Advice on Beautiful Living Spaces.",
+//     searchPlaceholder: "Search blog posts...",
+//   },
+//   featured: {
+//     title: "Featured Inspiration",
+//     posts: [
+//       {
+//         id: 1,
+//         imageUrl:
+//           "/Riddhi%20Interior%20Design/Blogs/top_interior_design_trends_for_the_year.jpeg",
+//         category: "Trends",
+//         title: "Top Interior Design Trends for 2025",
+//         description:
+//           "Discover the biggest interior design trends for 2025—from natural textures and bold color accents to smart homes and sustainable materials.",
+//         author: "Riddhi Sharma",
+//         date: "May 15, 2025",
+//       },
+//       {
+//         id: 1,
+//         imageUrl:
+//           "/Riddhi%20Interior%20Design/Blogs/top_interior_design_trends_for_the_year.jpeg",
+//         category: "Trends",
+//         title: "Top Interior Design Trends for 2025",
+//         description:
+//           "Discover the biggest interior design trends for 2025—from natural textures and bold color accents to smart homes and sustainable materials.",
+//         author: "Riddhi Sharma",
+//         date: "May 15, 2025",
+//       },
+//       {
+//         id: 1,
+//         imageUrl:
+//           "/Riddhi%20Interior%20Design/Blogs/top_interior_design_trends_for_the_year.jpeg",
+//         category: "Trends",
+//         title: "Top Interior Design Trends for 2025",
+//         description:
+//           "Discover the biggest interior design trends for 2025—from natural textures and bold color accents to smart homes and sustainable materials.",
+//         author: "Riddhi Sharma",
+//         date: "May 15, 2025",
+//       },
+//     ],
 //   },
 //   categories: [
-//     { name: "All" },
-//     { name: "Trends" },
-//     { name: "Space Planning" },
-//     { name: "Residential" },
-//     { name: "Color Theory" },
-//     { name: "Budget Design" },
+//     "All",
+//     "Trends",
+//     "Space Planning",
+//     "Residential",
+//     "Color Theory",
+//     "Budget Design",
 //   ],
-//   blogPosts: [
-//     {
-//       id: 1,
-//       title: "Top Interior Design Trends for 2025",
-//       excerpt:
-//         "Discover the biggest interior design trends for 2025—from natural textures and bold color accents to smart homes and sustainable materials.",
-//       author: "Riddhi Sharma",
-//       date: "2025-05-15",
-//       category: "Trends",
-//       imageUrl:
-//         "/Riddhi Interior Design/Blogs/top_interior_design_trends_for_the_year.jpeg",
-//       featured: true,
-//       content: "",
-//     },
-//     {
-//       id: 2,
-//       title: "Small Space Solutions: Big Impact Design",
-//       excerpt:
-//         "Living in a compact apartment? Learn how to maximize space with clever furniture, lighting, and color tricks that transform tight areas into stylish sanctuaries.",
-//       author: "Arjun Patel",
-//       date: "2025-04-28",
-//       category: "Space Planning",
-//       imageUrl: "/Riddhi Interior Design/Blogs/small_space_makeover_ideas.jpeg",
-//       featured: false,
-//       content: "",
-//     },
-//     {
-//       id: 3,
-//       title: "Creating Timeless Living Spaces",
-//       excerpt:
-//         "From layout planning to material choices, explore how to design a modern living room that's stylish, practical, and tailored to your lifestyle.",
-//       author: "Neha Kapoor",
-//       date: "2025-06-03",
-//       category: "Residential",
-//       imageUrl:
-//         "/Riddhi Interior Design/Blogs/modern_living_room_design_tips.jpeg",
-//       featured: false,
-//       content: "",
-//     },
-//   ],
+//   articles: {
+//     title: "Latest Articles",
+//     items: [
+//       {
+//         id: 1,
+//         imageUrl:
+//           "/Riddhi%20Interior%20Design/Blogs/top_interior_design_trends_for_the_year.jpeg",
+//         category: "Trends",
+//         title: "Top Interior Design Trends for 2025",
+//         description:
+//           "Discover the biggest interior design trends for 2025—from natural textures and bold color accents to smart homes and sustainable materials.",
+//         author: "Riddhi Sharma",
+//         date: "May 15, 2025",
+//       },
+//       {
+//         id: 2,
+//         imageUrl:
+//           "/Riddhi%20Interior%20Design/Blogs/small_space_makeover_ideas.jpeg",
+//         category: "Space Planning",
+//         title: "Small Space Solutions: Big Impact Design",
+//         description:
+//           "Living in a compact apartment? Learn how to maximize space with clever furniture, lighting, and color tricks that transform tight areas into stylish sanctuaries.",
+//         author: "Arjun Patel",
+//         date: "April 28, 2025",
+//       },
+//       {
+//         id: 3,
+//         imageUrl:
+//           "/Riddhi%20Interior%20Design/Blogs/modern_living_room_design_tips.jpeg",
+//         category: "Residential",
+//         title: "Creating Timeless Living Spaces",
+//         description:
+//           "From layout planning to material choices, explore how to design a modern living room that's stylish, practical, and tailored to your lifestyle.",
+//         author: "Neha Kapoor",
+//         date: "June 3, 2025",
+//       },
+//       {
+//         id: 4,
+//         imageUrl:
+//           "/Riddhi%20Interior%20Design/Blogs/how_to_choose_the_right_color_palette.jpeg",
+//         category: "Color Theory",
+//         title: "The Art of Color: Designing with Hue",
+//         description:
+//           "Choosing the right colors can make or break your interiors. Learn how to build a cohesive palette that enhances mood, style, and functionality.",
+//         author: "Riddhi Sharma",
+//         date: "May 22, 2025",
+//       },
+//       {
+//         id: 5,
+//         imageUrl:
+//           "/Riddhi%20Interior%20Design/Blogs/affordable_interior_upgrades_for_your_home%20(2).jpeg",
+//         category: "Budget Design",
+//         title: "Transform Your Space: Budget-Friendly Makeovers",
+//         description:
+//           "Refresh your home without breaking the bank. Discover smart, budget-friendly design updates that boost style and comfort.",
+//         author: "Vikram Mehta",
+//         date: "April 10, 2025",
+//       },
+//     ],
+//   },
 //   newsletter: {
 //     title: "Design Inspiration Delivered",
 //     description:
 //       "Join our newsletter and receive exclusive design tips, trend reports, and special offers.",
+//     placeholder: "Your email address",
+//     buttonText: "Subscribe",
+//     privacyText: "We respect your privacy. Unsubscribe at any time.",
 //   },
 // };
 
 // const BlogAdminDashboard = () => {
-//   const [previewMode, setPreviewMode] = useState(false);
 //   const [activeTab, setActiveTab] = useState("hero");
 //   const [uploading, setUploading] = useState(false);
+//   const [formData, setFormData] = useState<BlogContent>(defaultValues);
+//   const [isSaving, setIsSaving] = useState(false);
+//   const [changedFields, setChangedFields] = useState<Set<string>>(new Set());
 
-//   const form = useForm<BlogPageContent>({
-//     resolver: zodResolver(blogPageSchema),
-//     defaultValues,
-//     mode: "onChange",
-//   });
+//   const dispatch = useAppDispatch();
+//   const blogData = useAppSelector(selectBlogContent);
+//   const loading = useAppSelector(selectBlogLoading);
+//   const error = useAppSelector(selectBlogError);
 
-//   // Field arrays for repeatable sections
-//   const categoryFields = useFieldArray({
-//     control: form.control,
-//     name: "categories",
-//   });
+//   // Save form data to backend
+//   const saveFormData = useCallback(
+//     async (dataToSave?: BlogContent) => {
+//       setIsSaving(true);
+//       try {
+//         await dispatch(updateBlogContent(dataToSave || formData)).unwrap();
+//         setChangedFields(new Set()); // Reset changed fields after successful save
+//         return true;
+//       } catch (error) {
+//         console.error("Save failed:", error);
+//         alert("Failed to save changes. Please try again.");
+//         return false;
+//       } finally {
+//         setIsSaving(false);
+//       }
+//     },
+//     [formData, dispatch]
+//   );
 
-//   const blogPostFields = useFieldArray({
-//     control: form.control,
-//     name: "blogPosts",
-//   });
-
-//   const onSubmit = (data: BlogPageContent) => {
-//     console.log("Form submitted:", data);
-//     // Add your publish logic here
+//   // Manual save for text changes
+//   const onSubmit = async (e: React.FormEvent) => {
+//     e.preventDefault();
+//     const success = await saveFormData();
+//     if (success) {
+//       // Show success animation/feedback
+//     }
 //   };
 
-//   const uploadFile = async (file: File) => {
+//   // Upload file function
+//   const uploadFile = async (
+//     file: File,
+//     section: string,
+//     customFolder?: string
+//   ): Promise<string> => {
 //     setUploading(true);
 //     try {
-//       // Simulate file upload
-//       await new Promise((resolve) => setTimeout(resolve, 1000));
-//       return URL.createObjectURL(file);
+//       const formData = new FormData();
+//       formData.append("file", file);
+
+//       // Use custom folder if provided, otherwise use section
+//       const folderPath = customFolder
+//         ? `riddhi_interiors/blog/${section}/${customFolder}`
+//         : `riddhi_interiors/blog/${section}`;
+
+//       formData.append("folderPath", folderPath);
+
+//       // Validate file size (5MB max)
+//       const MAX_SIZE = 5 * 1024 * 1024;
+//       if (file.size > MAX_SIZE) {
+//         alert("File size exceeds 5MB limit");
+//         return "";
+//       }
+
+//       // Validate file type
+//       const validTypes = ["image/jpeg", "image/png", "image/webp"];
+//       if (!validTypes.includes(file.type)) {
+//         alert("Only JPG, PNG, or WebP images are allowed");
+//         return "";
+//       }
+
+//       const response = await fetch("/api/cloudinary/upload", {
+//         method: "POST",
+//         body: formData,
+//       });
+
+//       if (!response.ok) {
+//         const errorData = await response.json();
+//         throw new Error(errorData.error || "Upload failed");
+//       }
+
+//       const { secure_url } = await response.json();
+//       return secure_url;
 //     } catch (error) {
 //       console.error("Upload failed:", error);
+//       const errorMessage =
+//         error instanceof Error ? error.message : "Unknown error";
+//       alert(`Upload failed: ${errorMessage}`);
 //       return "";
 //     } finally {
 //       setUploading(false);
 //     }
 //   };
 
+//   // Handle file upload
 //   const handleFileUpload = async (
 //     e: React.ChangeEvent<HTMLInputElement>,
-//     fieldName: string,
-//     index?: number
+//     fieldPath: string,
+//     section: string,
+//     customFolder?: string
 //   ) => {
-//     if (!e.target.files?.[0]) return;
-
+//     if (!e.target.files?.[0] || !formData) return;
 //     const file = e.target.files[0];
-//     const fileUrl = await uploadFile(file);
+//     e.target.value = ""; // Reset input
 
-//     if (fileUrl) {
-//       if (index !== undefined) {
-//         // For array fields
-//         form.setValue(`${fieldName}.${index}.imageUrl` as any, fileUrl);
-//       } else {
-//         // For single fields
-//         form.setValue(fieldName as any, fileUrl);
+//     setUploading(true);
+
+//     try {
+//       const fileUrl = await uploadFile(file, section, customFolder);
+
+//       if (fileUrl) {
+//         // Update form data
+//         const updatedFormData = JSON.parse(JSON.stringify(formData));
+//         const parts = fieldPath.split(".");
+//         let current = updatedFormData;
+//         for (let i = 0; i < parts.length - 1; i++) {
+//           current = current[parts[i]];
+//         }
+//         current[parts[parts.length - 1]] = fileUrl;
+
+//         setFormData(updatedFormData);
+//         const success = await saveFormData(updatedFormData);
+
+//         if (success) {
+//           console.log("Image uploaded and saved successfully");
+//         } else {
+//           console.error("Failed to save image URL to database");
+//         }
 //       }
+//     } catch (error) {
+//       console.error("Upload failed:", error);
+//     } finally {
+//       setUploading(false);
 //     }
 //   };
 
-//   const handleSetFeatured = (index: number) => {
-//     const currentPosts = form.getValues().blogPosts;
-//     const updatedPosts = currentPosts.map((post, i) => ({
-//       ...post,
-//       featured: i === index,
-//     }));
-//     form.setValue("blogPosts", updatedPosts);
+//   // Fetch data on component mount
+//   useEffect(() => {
+//     dispatch(fetchBlogContent());
+//   }, [dispatch]);
+
+//   // Update form when Redux data changes
+//   useEffect(() => {
+//     if (blogData) {
+//       console.log("Loaded blog data:", blogData);
+//       setFormData(blogData);
+//       setChangedFields(new Set());
+//     }
+//   }, [blogData]);
+
+//   // Handle API errors
+//   useEffect(() => {
+//     if (error) {
+//       alert(error);
+//     }
+//   }, [error]);
+
+//   // Helper function to generate slugs for cloudinary
+//   const generateSlug = (name: string): string => {
+//     return name
+//       .toLowerCase()
+//       .replace(/\s+/g, "-")
+//       .replace(/[^\w-]+/g, "")
+//       .replace(/--+/g, "-")
+//       .replace(/^-+/, "")
+//       .replace(/-+$/, "");
+//   };
+
+//   // Handle input changes
+//   const handleInputChange = (path: string, value: string | number) => {
+//     if (!formData) return;
+
+//     setFormData((prev) => {
+//       if (!prev) return prev;
+
+//       const newData: BlogContent = JSON.parse(JSON.stringify(prev));
+//       const parts = path.split(".");
+
+//       // Track changed field
+//       setChangedFields((prevFields) => new Set(prevFields.add(path)));
+
+//       // Traverse the object
+//       const lastPart = parts.pop()!;
+//       let current: unknown = newData;
+
+//       for (const part of parts) {
+//         if (Array.isArray(current) && /^\d+$/.test(part)) {
+//           current = current[parseInt(part)];
+//         } else if (typeof current === "object" && current !== null) {
+//           current = (current as Record<string, unknown>)[part];
+//         } else {
+//           console.error("Invalid path encountered");
+//           return newData;
+//         }
+//       }
+
+//       // Set the value safely
+//       if (typeof current === "object" && current !== null) {
+//         (current as Record<string, unknown>)[lastPart] = value;
+//       }
+
+//       return newData;
+//     });
+//   };
+
+//   // Add new item to array
+//   const addArrayItem = <T,>(arrayPath: string, newItem: T) => {
+//     if (!formData) return;
+
+//     setFormData((prev) => {
+//       if (!prev) return prev;
+
+//       const newData: BlogContent = JSON.parse(JSON.stringify(prev));
+//       const parts = arrayPath.split(".");
+
+//       // Track changed field
+//       setChangedFields((prevFields) => new Set(prevFields.add(arrayPath)));
+
+//       // Traverse dynamically
+//       let current: unknown = newData;
+//       for (let i = 0; i < parts.length - 1; i++) {
+//         const part = parts[i];
+//         if (
+//           typeof current === "object" &&
+//           current !== null &&
+//           part in (current as Record<string, unknown>)
+//         ) {
+//           current = (current as Record<string, unknown>)[part];
+//         }
+//       }
+
+//       const lastPart = parts[parts.length - 1];
+//       if (
+//         typeof current === "object" &&
+//         current !== null &&
+//         Array.isArray((current as Record<string, unknown>)[lastPart])
+//       ) {
+//         (current as Record<string, unknown>)[lastPart] = [
+//           ...((current as Record<string, unknown>)[lastPart] as T[]),
+//           newItem,
+//         ];
+//       }
+
+//       return newData;
+//     });
+//   };
+
+//   // Remove item from array
+//   const removeArrayItem = async (arrayPath: string, index: number) => {
+//     if (!formData) return;
+
+//     setFormData((prev) => {
+//       if (!prev) return prev;
+
+//       const newData: BlogContent = JSON.parse(JSON.stringify(prev));
+//       const parts = arrayPath.split(".");
+
+//       // Track changed field
+//       setChangedFields((prevFields) => new Set(prevFields.add(arrayPath)));
+
+//       // Traverse to the parent
+//       let current: unknown = newData;
+//       for (let i = 0; i < parts.length - 1; i++) {
+//         const part = parts[i];
+//         if (Array.isArray(current) && /^\d+$/.test(part)) {
+//           current = current[parseInt(part)];
+//         } else if (typeof current === "object" && current !== null) {
+//           current = (current as Record<string, unknown>)[part];
+//         } else {
+//           console.error("Invalid path encountered");
+//           return newData;
+//         }
+//       }
+
+//       // Validate array
+//       const lastPart = parts[parts.length - 1];
+//       if (typeof current !== "object" || current === null) {
+//         console.error("Invalid path: expected an object");
+//         return newData;
+//       }
+
+//       const array = (current as Record<string, unknown>)[lastPart];
+//       if (!Array.isArray(array)) {
+//         console.error("Invalid path: expected an array");
+//         return newData;
+//       }
+
+//       const item = array[index];
+
+//       // Extract image URL
+//       let imageUrl = "";
+//       if (typeof item === "object" && item !== null) {
+//         if ("imageUrl" in item) imageUrl = item.imageUrl as string;
+//         else if ("backgroundImageUrl" in item) {
+//           imageUrl = item.backgroundImageUrl as string;
+//         }
+//       }
+
+//       // Delete from Cloudinary
+//       if (imageUrl && imageUrl.includes("res.cloudinary.com")) {
+//         let folderPath = "";
+
+//         if (
+//           arrayPath.includes("articles") &&
+//           typeof item === "object" &&
+//           item !== null &&
+//           "title" in item
+//         ) {
+//           const slug = generateSlug(item.title as string);
+//           folderPath = `riddhi_interiors/blog/${slug}`;
+//         } else {
+//           const url = new URL(imageUrl);
+//           const parts = url.pathname.split("/").filter(Boolean);
+//           folderPath = parts.slice(1, -1).join("/");
+//         }
+
+//         fetch("/api/cloudinary/delete", {
+//           method: "DELETE",
+//           headers: { "Content-Type": "application/json" },
+//           body: JSON.stringify({ folderPath }),
+//         }).catch((err) => console.error("Delete failed:", err));
+//       }
+
+//       // Remove item
+//       array.splice(index, 1);
+
+//       return newData;
+//     });
+//   };
+
+//   // Update category
+//   const updateCategory = (index: number, value: string) => {
+//     if (!formData) return;
+
+//     setFormData((prev) => {
+//       if (!prev) return prev;
+
+//       const newData: BlogContent = JSON.parse(JSON.stringify(prev));
+//       newData.categories[index] = value;
+
+//       // Track changed field
+//       setChangedFields((prevFields) => new Set(prevFields.add("categories")));
+
+//       return newData;
+//     });
+//   };
+
+//   // Add category
+//   const addCategory = () => {
+//     if (!formData) return;
+
+//     setFormData((prev) => {
+//       if (!prev) return prev;
+
+//       const newData: BlogContent = JSON.parse(JSON.stringify(prev));
+//       newData.categories.push("New Category");
+
+//       // Track changed field
+//       setChangedFields((prevFields) => new Set(prevFields.add("categories")));
+
+//       return newData;
+//     });
+//   };
+
+//   // Remove category
+//   const removeCategory = (index: number) => {
+//     if (!formData) return;
+
+//     setFormData((prev) => {
+//       if (!prev) return prev;
+
+//       const newData: BlogContent = JSON.parse(JSON.stringify(prev));
+//       newData.categories.splice(index, 1);
+
+//       // Track changed field
+//       setChangedFields((prevFields) => new Set(prevFields.add("categories")));
+
+//       return newData;
+//     });
 //   };
 
 //   // Tab navigation items
 //   const tabItems = [
 //     { value: "hero", icon: <FiImage />, label: "Hero" },
+//     { value: "featured", icon: <FiStar />, label: "Featured" },
 //     { value: "categories", icon: <FiSettings />, label: "Categories" },
-//     { value: "posts", icon: <FiEdit />, label: "Blog Posts" },
+//     { value: "articles", icon: <FiEdit />, label: "Articles" },
+//     { value: "full-blogs", icon: <FiFileText />, label: "Full Blogs" }, // Add this line
 //     { value: "newsletter", icon: <FiMessageSquare />, label: "Newsletter" },
 //   ];
 
-//   return (
-//     <DashboardLayoutClient>
-//       <FormProvider {...form}>
-//         <div className="flex flex-col min-h-screen">
-//           {/* Header */}
-//           <header className="flex flex-col">
-//             <div className="flex justify-between items-center">
-//               <div>
-//                 <h1 className="text-2xl font-bold text-lime-900 dark:text-[#e8e6e3] p-4">
-//                   Blog Page Content Management
-//                 </h1>
-//                 <p className="text-sm text-gray-600 dark:text-gray-400 px-4">
-//                   Manage your blog content, categories, and featured posts
-//                 </p>
-//               </div>
-//               <div className="flex space-x-3">
-//                 <Button
-//                   onClick={() => setPreviewMode(!previewMode)}
-//                   variant={previewMode ? "secondary" : "outline"}
-//                 >
-//                   {previewMode ? "Exit Preview" : "Preview Mode"}
-//                 </Button>
-//                 <Button onClick={form.handleSubmit(onSubmit)} variant="default">
-//                   Publish Changes
-//                 </Button>
-//               </div>
-//             </div>
-//             <div className="border-b p-10 flex justify-center items-center">
-//               <div className="flex items-center">
-//                 <Tabs
-//                   value={activeTab}
-//                   onValueChange={setActiveTab}
-//                   className="hidden md:block"
-//                 >
-//                   <TabsList className="grid grid-cols-4 bg-lime-100 gap-1">
-//                     {tabItems.map((item) => (
-//                       <TabsTrigger
-//                         key={item.value}
-//                         value={item.value}
-//                         className="flex flex-col items-center h-auto py-2 px-1 text-xs"
-//                       >
-//                         <span className="mb-1">{item.icon}</span>
-//                         <span>{item.label}</span>
-//                       </TabsTrigger>
-//                     ))}
-//                   </TabsList>
-//                 </Tabs>
-//               </div>
-//             </div>
-//           </header>
+//   if (!formData) {
+//     return (
+//       <DashboardLayoutClient>
+//         <div className="flex justify-center items-center h-screen">
+//           <p>Loading blog content...</p>
+//         </div>
+//       </DashboardLayoutClient>
+//     );
+//   }
 
-//           {/* Main Content */}
-//           <main className="flex-1 overflow-auto p-6">
-//             {previewMode ? (
-//               <Card>
-//                 <CardHeader>
-//                   <CardTitle>Preview Mode</CardTitle>
-//                 </CardHeader>
-//                 <CardContent>
-//                   <div className="border-2 border-dashed rounded-xl w-full h-[600px] flex items-center justify-center text-gray-500">
-//                     <div className="text-center">
-//                       <FiPlus className="text-4xl mx-auto mb-3" />
-//                       <p>Blog page preview will appear here</p>
-//                       <p className="text-sm mt-2 text-gray-400">
-//                         Note: Actual content will be rendered based on your
-//                         current edits
-//                       </p>
-//                     </div>
-//                   </div>
-//                 </CardContent>
-//               </Card>
-//             ) : (
-//               <Tabs value={activeTab} className="w-full">
-//                 {/* Hero Tab */}
-//                 <TabsContent value="hero">
-//                   <Card>
-//                     <CardHeader>
-//                       <CardTitle>Hero Section</CardTitle>
-//                     </CardHeader>
-//                     <CardContent>
-//                       <div className="flex items-center space-x-4 mb-6">
-//                         <div className="w-32 h-32 border rounded-md flex items-center justify-center">
-//                           {form.watch("hero.backgroundImageUrl") ? (
-//                             <img
-//                               src={form.watch("hero.backgroundImageUrl")}
-//                               alt="Hero background preview"
-//                               className="max-w-full max-h-full"
-//                             />
-//                           ) : (
-//                             <FiImage className="text-gray-400 text-2xl" />
-//                           )}
-//                         </div>
-//                         <div>
-//                           <Label>Background Image</Label>
-//                           <div className="relative mt-2">
-//                             <Button variant="outline" disabled={uploading}>
+//   return (
+//     <form onSubmit={onSubmit}>
+//       <div className="flex flex-col min-h-screen bg-gradient-to-br from-slate-50 to-lime-50 dark:from-slate-900 dark:to-slate-800">
+//         {/* Header */}
+//         <motion.header
+//           className="flex flex-col bg-white dark:bg-slate-800 shadow-sm"
+//           initial={{ y: -20, opacity: 0 }}
+//           animate={{ y: 0, opacity: 1 }}
+//           transition={{ duration: 0.3 }}
+//         >
+//           <div className="flex justify-between items-center p-4">
+//             <div>
+//               <h1 className="text-2xl font-bold text-lime-900 dark:text-lime-100">
+//                 Blog Page Content Management
+//               </h1>
+//               <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+//                 Manage your blog page content and articles
+//               </p>
+//             </div>
+//             <div className="flex space-x-3">
+//               <Button
+//                 type="submit"
+//                 variant="default"
+//                 disabled={loading || isSaving}
+//                 className={cn(
+//                   "flex items-center gap-2 transition-all",
+//                   changedFields.size > 0 && "ring-2 ring-lime-500"
+//                 )}
+//               >
+//                 {isSaving ? (
+//                   <>
+//                     <motion.div
+//                       animate={{ rotate: 360 }}
+//                       transition={{
+//                         duration: 1,
+//                         repeat: Infinity,
+//                         ease: "linear",
+//                       }}
+//                     >
+//                       <FiSave className="w-4 h-4" />
+//                     </motion.div>
+//                     Saving...
+//                   </>
+//                 ) : (
+//                   <>
+//                     <FiSave className="w-4 h-4" />
+//                     {changedFields.size > 0
+//                       ? "Publish Changes*"
+//                       : "Publish Changes"}
+//                   </>
+//                 )}
+//               </Button>
+//             </div>
+//           </div>
+//           <div className="border-t border-b border-gray-100 dark:border-slate-700 px-4 py-2">
+//             <div className="flex items-center justify-center py-2">
+//               <Tabs
+//                 value={activeTab}
+//                 onValueChange={setActiveTab}
+//                 className="w-full"
+//               >
+//                 <TabsList className="grid grid-cols-6 bg-lime-50 dark:bg-slate-700 gap-1 p-1 w-full">
+//                   {tabItems.map((item, index) => (
+//                     <TabsTrigger
+//                       key={index}
+//                       value={item.value}
+//                       className="flex flex-col items-center h-auto py-2 px-1 text-xs data-[state=active]:bg-lime-500 data-[state=active]:text-white transition-all"
+//                     >
+//                       <span>{item.icon}</span>
+//                       <span>{item.label}</span>
+//                     </TabsTrigger>
+//                   ))}
+//                 </TabsList>
+//               </Tabs>
+//             </div>
+//           </div>
+//         </motion.header>
+
+//         {/* Main Content */}
+//         <main className="flex-1 overflow-auto p-4 md:p-6">
+//           {error && (
+//             <motion.div
+//               className="mb-4 p-3 bg-red-100 text-red-700 rounded-lg flex items-center"
+//               initial={{ opacity: 0, y: -10 }}
+//               animate={{ opacity: 1, y: 0 }}
+//             >
+//               <FiX className="mr-2" /> {error}
+//             </motion.div>
+//           )}
+
+//           <Tabs value={activeTab} className="w-full">
+//             {/* Hero Tab */}
+//             <TabsContent value="hero" className="mt-4">
+//               <motion.div variants={fadeIn} initial="hidden" animate="visible">
+//                 <Card className="bg-white dark:bg-slate-800 border-lime-200 dark:border-slate-700 overflow-hidden">
+//                   <CardHeader className="bg-lime-50 dark:bg-slate-700">
+//                     <CardTitle className="text-lime-900 dark:text-lime-100">
+//                       Hero Section
+//                     </CardTitle>
+//                   </CardHeader>
+//                   <CardContent className="p-6">
+//                     <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6 mb-6">
+//                       <div className="w-32 h-32 border-2 border-dashed border-lime-300 rounded-lg flex items-center justify-center overflow-hidden bg-lime-50 dark:bg-slate-700">
+//                         {formData.hero.backgroundImageUrl ? (
+//                           <Image
+//                             src={formData.hero.backgroundImageUrl}
+//                             alt="Hero background preview"
+//                             width={128}
+//                             height={128}
+//                             className="object-cover w-full h-full"
+//                           />
+//                         ) : (
+//                           <FiImage className="text-lime-400 text-2xl" />
+//                         )}
+//                       </div>
+//                       <div className="flex-1">
+//                         <Label>Background Image</Label>
+//                         <div className="relative mt-2">
+//                           <motion.div
+//                             whileHover={{ scale: 1.02 }}
+//                             whileTap={{ scale: 0.98 }}
+//                           >
+//                             <Button
+//                               variant="outline"
+//                               disabled={uploading}
+//                               type="button"
+//                               className="w-full md:w-auto flex items-center gap-2 border-lime-300 text-lime-700 hover:bg-lime-50"
+//                             >
+//                               {uploading ? (
+//                                 <motion.div
+//                                   animate={{ rotate: 360 }}
+//                                   transition={{
+//                                     duration: 1,
+//                                     repeat: Infinity,
+//                                     ease: "linear",
+//                                   }}
+//                                 >
+//                                   <FiUpload className="w-4 h-4" />
+//                                 </motion.div>
+//                               ) : (
+//                                 <FiUpload className="w-4 h-4" />
+//                               )}
 //                               {uploading ? "Uploading..." : "Upload Image"}
 //                             </Button>
+//                           </motion.div>
+//                           <Input
+//                             type="file"
+//                             className="absolute inset-0 opacity-0 cursor-pointer"
+//                             accept="image/*"
+//                             onChange={(e) =>
+//                               handleFileUpload(
+//                                 e,
+//                                 "hero.backgroundImageUrl",
+//                                 "hero"
+//                               )
+//                             }
+//                           />
+//                         </div>
+//                       </div>
+//                     </div>
+
+//                     <div className="space-y-4">
+//                       <div>
+//                         <Label>Pre-Title</Label>
+//                         <Input
+//                           value={formData.hero.preTitle || ""}
+//                           onChange={(e) =>
+//                             handleInputChange("hero.preTitle", e.target.value)
+//                           }
+//                           className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+//                         />
+//                       </div>
+
+//                       <div>
+//                         <Label>Title</Label>
+//                         <Input
+//                           value={formData.hero.title || ""}
+//                           onChange={(e) =>
+//                             handleInputChange("hero.title", e.target.value)
+//                           }
+//                           className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+//                         />
+//                       </div>
+
+//                       <div>
+//                         <Label>Subtitle</Label>
+//                         <Textarea
+//                           value={formData.hero.subtitle || ""}
+//                           onChange={(e) =>
+//                             handleInputChange("hero.subtitle", e.target.value)
+//                           }
+//                           rows={3}
+//                           className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+//                         />
+//                       </div>
+
+//                       <div>
+//                         <Label>Search Placeholder</Label>
+//                         <Input
+//                           value={formData.hero.searchPlaceholder || ""}
+//                           onChange={(e) =>
+//                             handleInputChange(
+//                               "hero.searchPlaceholder",
+//                               e.target.value
+//                             )
+//                           }
+//                           className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+//                         />
+//                       </div>
+//                     </div>
+//                   </CardContent>
+//                 </Card>
+//               </motion.div>
+//             </TabsContent>
+
+//             {/* Featured Tab */}
+//             <TabsContent value="featured" className="mt-4">
+//               <motion.div variants={fadeIn} initial="hidden" animate="visible">
+//                 <Card className="bg-white dark:bg-slate-800 border-lime-200 dark:border-slate-700 overflow-hidden">
+//                   <CardHeader className="bg-lime-50 dark:bg-slate-700">
+//                     <div className="flex justify-between items-center">
+//                       <CardTitle className="text-lime-900 dark:text-lime-100">
+//                         Featured Post
+//                       </CardTitle>
+//                     </div>
+//                   </CardHeader>
+//                   <CardContent className="p-6">
+//                     <div className="mb-4">
+//                       <Label>Featured Section Title</Label>
+//                       <Input
+//                         value={formData.featured.title || ""}
+//                         onChange={(e) =>
+//                           handleInputChange("featured.title", e.target.value)
+//                         }
+//                         className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+//                       />
+//                     </div>
+
+//                     <div className="border-t border-lime-200 pt-4 mt-4">
+//                       <h3 className="text-lg font-medium text-lime-800 mb-4">
+//                         Featured Post Details
+//                       </h3>
+
+//                       <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6 mb-6">
+//                         <div className="w-32 h-32 border-2 border-dashed border-lime-300 rounded-lg flex items-center justify-center overflow-hidden bg-lime-50 dark:bg-slate-700">
+//                           {formData.featured.post.imageUrl ? (
+//                             <Image
+//                               src={formData.featured.post.imageUrl}
+//                               alt="Featured post preview"
+//                               width={128}
+//                               height={128}
+//                               className="object-cover w-full h-full"
+//                             />
+//                           ) : (
+//                             <FiImage className="text-lime-400 text-2xl" />
+//                           )}
+//                         </div>
+//                         <div className="flex-1">
+//                           <Label>Featured Post Image</Label>
+//                           <div className="relative mt-2">
+//                             <motion.div
+//                               whileHover={{ scale: 1.02 }}
+//                               whileTap={{ scale: 0.98 }}
+//                             >
+//                               <Button
+//                                 variant="outline"
+//                                 disabled={uploading}
+//                                 type="button"
+//                                 className="w-full md:w-auto flex items-center gap-2 border-lime-300 text-lime-700 hover:bg-lime-50"
+//                               >
+//                                 {uploading ? (
+//                                   <motion.div
+//                                     animate={{ rotate: 360 }}
+//                                     transition={{
+//                                       duration: 1,
+//                                       repeat: Infinity,
+//                                       ease: "linear",
+//                                     }}
+//                                   >
+//                                     <FiUpload className="w-4 h-4" />
+//                                   </motion.div>
+//                                 ) : (
+//                                   <FiUpload className="w-4 h-4" />
+//                                 )}
+//                                 {uploading ? "Uploading..." : "Upload Image"}
+//                               </Button>
+//                             </motion.div>
 //                             <Input
 //                               type="file"
 //                               className="absolute inset-0 opacity-0 cursor-pointer"
 //                               accept="image/*"
 //                               onChange={(e) =>
-//                                 handleFileUpload(e, "hero.backgroundImageUrl")
+//                                 handleFileUpload(
+//                                   e,
+//                                   "featured.post.imageUrl",
+//                                   "featured",
+//                                   generateSlug(formData.featured.post.title)
+//                                 )
 //                               }
 //                             />
 //                           </div>
 //                         </div>
 //                       </div>
 
-//                       <FormField
-//                         control={form.control}
-//                         name="hero.preTitle"
-//                         render={({ field }) => (
-//                           <FormItem className="mb-4">
-//                             <FormLabel>Pre-Title</FormLabel>
-//                             <FormControl>
-//                               <Input {...field} />
-//                             </FormControl>
-//                             <FormMessage />
-//                           </FormItem>
-//                         )}
-//                       />
+//                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+//                         <div>
+//                           <Label>Category</Label>
+//                           <select
+//                             value={formData.featured.post.category}
+//                             onChange={(e) =>
+//                               handleInputChange(
+//                                 "featured.post.category",
+//                                 e.target.value
+//                               )
+//                             }
+//                             className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+//                           >
+//                             {formData.categories?.map((cat) => (
+//                               <option key={cat} value={cat}>
+//                                 {cat}
+//                               </option>
+//                             ))}
+//                           </select>
+//                         </div>
+//                         <div>
+//                           <Label>Author</Label>
+//                           <Input
+//                             value={formData.featured.post.author}
+//                             onChange={(e) =>
+//                               handleInputChange(
+//                                 "featured.post.author",
+//                                 e.target.value
+//                               )
+//                             }
+//                             className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+//                           />
+//                         </div>
+//                         <div>
+//                           <Label>Date</Label>
+//                           <Input
+//                             value={formData.featured.post.date}
+//                             onChange={(e) =>
+//                               handleInputChange(
+//                                 "featured.post.date",
+//                                 e.target.value
+//                               )
+//                             }
+//                             className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+//                           />
+//                         </div>
+//                       </div>
 
-//                       <FormField
-//                         control={form.control}
-//                         name="hero.title"
-//                         render={({ field }) => (
-//                           <FormItem className="mb-4">
-//                             <FormLabel>Title</FormLabel>
-//                             <FormControl>
-//                               <Input {...field} />
-//                             </FormControl>
-//                             <FormMessage />
-//                           </FormItem>
-//                         )}
-//                       />
-
-//                       <FormField
-//                         control={form.control}
-//                         name="hero.subtitle"
-//                         render={({ field }) => (
-//                           <FormItem className="mb-4">
-//                             <FormLabel>Subtitle</FormLabel>
-//                             <FormControl>
-//                               <Textarea {...field} rows={3} />
-//                             </FormControl>
-//                             <FormMessage />
-//                           </FormItem>
-//                         )}
-//                       />
-//                     </CardContent>
-//                   </Card>
-//                 </TabsContent>
-
-//                 {/* Categories Tab */}
-//                 <TabsContent value="categories">
-//                   <Card>
-//                     <CardHeader>
-//                       <div className="flex justify-between items-center">
-//                         <CardTitle>Blog Categories</CardTitle>
-//                         <Button
-//                           onClick={() =>
-//                             categoryFields.append({ name: "New Category" })
+//                       <div className="mb-4">
+//                         <Label>Title</Label>
+//                         <Input
+//                           value={formData.featured.post.title}
+//                           onChange={(e) =>
+//                             handleInputChange(
+//                               "featured.post.title",
+//                               e.target.value
+//                             )
 //                           }
-//                         >
-//                           + Add Category
-//                         </Button>
+//                           className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+//                         />
 //                       </div>
-//                     </CardHeader>
-//                     <CardContent>
-//                       <div className="space-y-4">
-//                         {categoryFields.fields.map((category, index) => (
-//                           <Card key={category.id} className="p-4">
-//                             <div className="flex justify-between items-center mb-4">
-//                               <Badge variant="secondary">
-//                                 Category {index + 1}
-//                               </Badge>
-//                               <Button
-//                                 variant="destructive"
-//                                 size="sm"
-//                                 onClick={() => categoryFields.remove(index)}
-//                               >
-//                                 Remove
-//                               </Button>
-//                             </div>
-//                             <FormField
-//                               control={form.control}
-//                               name={`categories.${index}.name`}
-//                               render={({ field }) => (
-//                                 <FormItem>
-//                                   <FormLabel>Category Name</FormLabel>
-//                                   <FormControl>
-//                                     <Input {...field} />
-//                                   </FormControl>
-//                                   <FormMessage />
-//                                 </FormItem>
-//                               )}
-//                             />
-//                           </Card>
-//                         ))}
-//                       </div>
-//                     </CardContent>
-//                   </Card>
-//                 </TabsContent>
 
-//                 {/* Blog Posts Tab */}
-//                 <TabsContent value="posts">
-//                   <Card>
-//                     <CardHeader>
-//                       <div className="flex justify-between items-center">
-//                         <CardTitle>Blog Posts</CardTitle>
+//                       <div>
+//                         <Label>Description</Label>
+//                         <Textarea
+//                           value={formData.featured.post.description}
+//                           onChange={(e) =>
+//                             handleInputChange(
+//                               "featured.post.description",
+//                               e.target.value
+//                             )
+//                           }
+//                           rows={3}
+//                           className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+//                         />
+//                       </div>
+//                     </div>
+//                   </CardContent>
+//                 </Card>
+//               </motion.div>
+//             </TabsContent>
+
+//             {/* Categories Tab */}
+//             <TabsContent value="categories" className="mt-4">
+//               <motion.div variants={fadeIn} initial="hidden" animate="visible">
+//                 <Card className="bg-white dark:bg-slate-800 border-lime-200 dark:border-slate-700 overflow-hidden">
+//                   <CardHeader className="bg-lime-50 dark:bg-slate-700">
+//                     <div className="flex justify-between items-center">
+//                       <CardTitle className="text-lime-900 dark:text-lime-100">
+//                         Blog Categories
+//                       </CardTitle>
+//                       <motion.div
+//                         whileHover={{ scale: 1.05 }}
+//                         whileTap={{ scale: 0.95 }}
+//                       >
+//                         <Button
+//                           onClick={addCategory}
+//                           type="button"
+//                           className="bg-lime-500 hover:bg-lime-600 text-white flex items-center gap-2"
+//                         >
+//                           <FiPlus className="w-4 h-4" /> Add Category
+//                         </Button>
+//                       </motion.div>
+//                     </div>
+//                   </CardHeader>
+//                   <CardContent>
+//                     <motion.div
+//                       className="space-y-4"
+//                       variants={staggerChildren}
+//                       initial="hidden"
+//                       animate="visible"
+//                     >
+//                       {formData.categories?.map(
+//                         (category: string, index: number) => (
+//                           <motion.div
+//                             key={index}
+//                             variants={scaleIn}
+//                             whileHover={{ y: -3 }}
+//                           >
+//                             <Card className="p-4 bg-lime-50 dark:bg-slate-700 border-lime-200 dark:border-slate-600">
+//                               <div className="flex justify-between items-center mb-3">
+//                                 <Badge className="bg-lime-500 text-white">
+//                                   Category {index + 1}
+//                                 </Badge>
+//                                 {index > 0 && ( // Don't allow deleting the first category ("All")
+//                                   <motion.div
+//                                     whileHover={{ scale: 1.1 }}
+//                                     whileTap={{ scale: 0.9 }}
+//                                   >
+//                                     <Button
+//                                       variant="ghost"
+//                                       size="sm"
+//                                       onClick={() => removeCategory(index)}
+//                                       type="button"
+//                                       className="text-red-500 hover:text-red-700 hover:bg-red-50"
+//                                     >
+//                                       <FiX className="w-4 h-4" />
+//                                     </Button>
+//                                   </motion.div>
+//                                 )}
+//                               </div>
+//                               <div>
+//                                 <Label>Category Name</Label>
+//                                 <Input
+//                                   value={category}
+//                                   onChange={(e) =>
+//                                     updateCategory(index, e.target.value)
+//                                   }
+//                                   className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+//                                 />
+//                               </div>
+//                             </Card>
+//                           </motion.div>
+//                         )
+//                       )}
+//                     </motion.div>
+//                   </CardContent>
+//                 </Card>
+//               </motion.div>
+//             </TabsContent>
+
+//             {/* Articles Tab */}
+//             <TabsContent value="articles" className="mt-4">
+//               <motion.div variants={fadeIn} initial="hidden" animate="visible">
+//                 <Card className="bg-white dark:bg-slate-800 border-lime-200 dark:border-slate-700 overflow-hidden">
+//                   <CardHeader className="bg-lime-50 dark:bg-slate-700">
+//                     <div className="flex justify-between items-center">
+//                       <CardTitle className="text-lime-900 dark:text-lime-100">
+//                         Blog Articles
+//                       </CardTitle>
+//                       <motion.div
+//                         whileHover={{ scale: 1.05 }}
+//                         whileTap={{ scale: 0.95 }}
+//                       >
 //                         <Button
 //                           onClick={() =>
-//                             blogPostFields.append({
-//                               id: blogPostFields.fields.length + 1,
-//                               title: `New Blog Post ${
-//                                 blogPostFields.fields.length + 1
-//                               }`,
-//                               excerpt: "",
-//                               author: "",
-//                               date: new Date().toISOString().split("T")[0],
-//                               category: form.watch("categories")[0]?.name || "",
+//                             addArrayItem("articles", {
+//                               id: Date.now(),
 //                               imageUrl: "",
-//                               featured: false,
-//                               content: "",
+//                               category: formData.categories[1] || "Trends", // Default to first non-"All" category
+//                               title: "New Article",
+//                               description: "",
+//                               author: "",
+//                               date: new Date().toLocaleDateString("en-US", {
+//                                 year: "numeric",
+//                                 month: "long",
+//                                 day: "numeric",
+//                               }),
 //                             })
 //                           }
+//                           type="button"
+//                           disabled={loading}
+//                           className="bg-lime-500 hover:bg-lime-600 text-white flex items-center gap-2"
 //                         >
-//                           + Add Post
+//                           <FiPlus className="w-4 h-4" /> Add Article
 //                         </Button>
-//                       </div>
-//                     </CardHeader>
-//                     <CardContent>
-//                       <div className="space-y-6">
-//                         {blogPostFields.fields.map((post, index) => (
-//                           <Card key={post.id} className="p-5">
-//                             <CardHeader className="flex flex-row items-center justify-between">
-//                               <div className="flex items-center">
-//                                 <Badge
-//                                   variant={
-//                                     post.featured ? "default" : "secondary"
-//                                   }
-//                                 >
-//                                   {post.featured
-//                                     ? "Featured Post"
-//                                     : `Post ${index + 1}`}
-//                                 </Badge>
-//                               </div>
-//                               <Button
-//                                 variant="destructive"
-//                                 size="sm"
-//                                 onClick={() => blogPostFields.remove(index)}
-//                               >
-//                                 Remove
-//                               </Button>
-//                             </CardHeader>
-//                             <CardContent>
-//                               <div className="flex items-center space-x-4 mb-6">
-//                                 <div className="w-24 h-24 border rounded-md flex items-center justify-center">
-//                                   {form.watch(`blogPosts.${index}.imageUrl`) ? (
-//                                     <img
-//                                       src={form.watch(
-//                                         `blogPosts.${index}.imageUrl`
-//                                       )}
-//                                       alt="Blog post preview"
-//                                       className="max-w-full max-h-full"
-//                                     />
-//                                   ) : (
-//                                     <FiImage className="text-gray-400 text-2xl" />
-//                                   )}
+//                       </motion.div>
+//                     </div>
+//                   </CardHeader>
+//                   <CardContent>
+//                     <motion.div
+//                       className="space-y-6"
+//                       variants={staggerChildren}
+//                       initial="hidden"
+//                       animate="visible"
+//                     >
+//                       {formData.articles?.map(
+//                         (article: Article, index: number) => (
+//                           <motion.div
+//                             key={index}
+//                             variants={scaleIn}
+//                             whileHover={{ y: -5 }}
+//                           >
+//                             <Card className="p-5 bg-lime-50 dark:bg-slate-700 border-lime-200 dark:border-slate-600 overflow-hidden">
+//                               <div className="flex flex-row items-center justify-between p-4 -mx-5 -mt-5 mb-5 bg-lime-100 dark:bg-slate-600">
+//                                 <div className="flex items-center">
+//                                   <Badge
+//                                     variant="secondary"
+//                                     className="bg-lime-500 text-white"
+//                                   >
+//                                     Article {index + 1}
+//                                   </Badge>
 //                                 </div>
-//                                 <div>
-//                                   <Label>Featured Image</Label>
-//                                   <div className="relative mt-2">
-//                                     <Button
-//                                       variant="outline"
-//                                       disabled={uploading}
-//                                     >
-//                                       {uploading
-//                                         ? "Uploading..."
-//                                         : "Upload Image"}
-//                                     </Button>
+//                                 <motion.div
+//                                   whileHover={{ scale: 1.1 }}
+//                                   whileTap={{ scale: 0.9 }}
+//                                 >
+//                                   <Button
+//                                     variant="ghost"
+//                                     size="sm"
+//                                     onClick={() =>
+//                                       removeArrayItem("articles", index)
+//                                     }
+//                                     type="button"
+//                                     className="text-red-500 hover:text-red-700 hover:bg-red-50"
+//                                   >
+//                                     <FiX className="w-4 h-4" />
+//                                   </Button>
+//                                 </motion.div>
+//                               </div>
+//                               <CardContent className="p-0">
+//                                 <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6 mb-6">
+//                                   <div className="w-24 h-24 border-2 border-dashed border-lime-300 rounded-lg flex items-center justify-center overflow-hidden bg-white dark:bg-slate-800">
+//                                     {article.imageUrl ? (
+//                                       <Image
+//                                         src={article.imageUrl}
+//                                         alt="Article preview"
+//                                         width={96}
+//                                         height={96}
+//                                         className="object-cover w-full h-full"
+//                                       />
+//                                     ) : (
+//                                       <FiImage className="text-lime-400 text-2xl" />
+//                                     )}
+//                                   </div>
+//                                   <div className="flex-1">
+//                                     <Label>Article Image</Label>
+//                                     <div className="relative mt-2">
+//                                       <motion.div
+//                                         whileHover={{ scale: 1.02 }}
+//                                         whileTap={{ scale: 0.98 }}
+//                                       >
+//                                         <Button
+//                                           variant="outline"
+//                                           disabled={uploading}
+//                                           type="button"
+//                                           className="w-full md:w-auto flex items-center gap-2 border-lime-300 text-lime-700 hover:bg-lime-50"
+//                                         >
+//                                           {uploading ? (
+//                                             <motion.div
+//                                               animate={{ rotate: 360 }}
+//                                               transition={{
+//                                                 duration: 1,
+//                                                 repeat: Infinity,
+//                                                 ease: "linear",
+//                                               }}
+//                                             >
+//                                               <FiUpload className="w-4 h-4" />
+//                                             </motion.div>
+//                                           ) : (
+//                                             <FiUpload className="w-4 h-4" />
+//                                           )}
+//                                           {uploading
+//                                             ? "Uploading..."
+//                                             : "Upload Image"}
+//                                         </Button>
+//                                       </motion.div>
+//                                       <Input
+//                                         type="file"
+//                                         className="absolute inset-0 opacity-0 cursor-pointer"
+//                                         accept="image/*"
+//                                         onChange={(e) =>
+//                                           handleFileUpload(
+//                                             e,
+//                                             `articles.${index}.imageUrl`,
+//                                             "articles",
+//                                             generateSlug(article.title)
+//                                           )
+//                                         }
+//                                       />
+//                                     </div>
+//                                   </div>
+//                                 </div>
+
+//                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+//                                   <div>
+//                                     <Label>Title</Label>
 //                                     <Input
-//                                       type="file"
-//                                       className="absolute inset-0 opacity-0 cursor-pointer"
-//                                       accept="image/*"
+//                                       value={article.title}
 //                                       onChange={(e) =>
-//                                         handleFileUpload(
-//                                           e,
-//                                           `blogPosts.${index}.imageUrl`,
-//                                           index
+//                                         handleInputChange(
+//                                           `articles.${index}.title`,
+//                                           e.target.value
 //                                         )
 //                                       }
+//                                       className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+//                                     />
+//                                   </div>
+//                                   <div>
+//                                     <Label>Author</Label>
+//                                     <Input
+//                                       value={article.author}
+//                                       onChange={(e) =>
+//                                         handleInputChange(
+//                                           `articles.${index}.author`,
+//                                           e.target.value
+//                                         )
+//                                       }
+//                                       className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+//                                     />
+//                                   </div>
+//                                   <div>
+//                                     <Label>Category</Label>
+//                                     <select
+//                                       value={article.category}
+//                                       onChange={(e) =>
+//                                         handleInputChange(
+//                                           `articles.${index}.category`,
+//                                           e.target.value
+//                                         )
+//                                       }
+//                                       className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+//                                     >
+//                                       {formData.categories?.map((cat) => (
+//                                         <option key={cat} value={cat}>
+//                                           {cat}
+//                                         </option>
+//                                       ))}
+//                                     </select>
+//                                   </div>
+//                                   <div>
+//                                     <Label>Date</Label>
+//                                     <Input
+//                                       value={article.date}
+//                                       onChange={(e) =>
+//                                         handleInputChange(
+//                                           `articles.${index}.date`,
+//                                           e.target.value
+//                                         )
+//                                       }
+//                                       className="mt-1 focus:ring-lime-500 focus:border-lime-500"
 //                                     />
 //                                   </div>
 //                                 </div>
-//                               </div>
 
-//                               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-//                                 <FormField
-//                                   control={form.control}
-//                                   name={`blogPosts.${index}.title`}
-//                                   render={({ field }) => (
-//                                     <FormItem>
-//                                       <FormLabel>Post Title</FormLabel>
-//                                       <FormControl>
-//                                         <Input {...field} />
-//                                       </FormControl>
-//                                       <FormMessage />
-//                                     </FormItem>
-//                                   )}
-//                                 />
-//                                 <FormField
-//                                   control={form.control}
-//                                   name={`blogPosts.${index}.author`}
-//                                   render={({ field }) => (
-//                                     <FormItem>
-//                                       <FormLabel>Author</FormLabel>
-//                                       <FormControl>
-//                                         <Input {...field} />
-//                                       </FormControl>
-//                                       <FormMessage />
-//                                     </FormItem>
-//                                   )}
-//                                 />
-//                                 <FormField
-//                                   control={form.control}
-//                                   name={`blogPosts.${index}.date`}
-//                                   render={({ field }) => (
-//                                     <FormItem>
-//                                       <FormLabel>Publish Date</FormLabel>
-//                                       <FormControl>
-//                                         <div className="relative">
-//                                           <Input {...field} type="date" />
-//                                           <FiCalendar className="absolute right-3 top-3 text-gray-400" />
-//                                         </div>
-//                                       </FormControl>
-//                                       <FormMessage />
-//                                     </FormItem>
-//                                   )}
-//                                 />
-//                                 <FormField
-//                                   control={form.control}
-//                                   name={`blogPosts.${index}.category`}
-//                                   render={({ field }) => (
-//                                     <FormItem>
-//                                       <FormLabel>Category</FormLabel>
-//                                       <Select
-//                                         onValueChange={field.onChange}
-//                                         value={field.value}
-//                                       >
-//                                         <FormControl>
-//                                           <SelectTrigger>
-//                                             <SelectValue placeholder="Select a category" />
-//                                           </SelectTrigger>
-//                                         </FormControl>
-//                                         <SelectContent>
-//                                           {form
-//                                             .watch("categories")
-//                                             .map((category) => (
-//                                               <SelectItem
-//                                                 key={category.name}
-//                                                 value={category.name}
-//                                               >
-//                                                 {category.name}
-//                                               </SelectItem>
-//                                             ))}
-//                                         </SelectContent>
-//                                       </Select>
-//                                       <FormMessage />
-//                                     </FormItem>
-//                                   )}
-//                                 />
-//                               </div>
+//                                 <div className="mt-4">
+//                                   <Label>Description</Label>
+//                                   <Textarea
+//                                     value={article.description}
+//                                     onChange={(e) =>
+//                                       handleInputChange(
+//                                         `articles.${index}.description`,
+//                                         e.target.value
+//                                       )
+//                                     }
+//                                     rows={3}
+//                                     className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+//                                   />
+//                                 </div>
+//                               </CardContent>
+//                             </Card>
+//                           </motion.div>
+//                         )
+//                       )}
+//                     </motion.div>
+//                   </CardContent>
+//                 </Card>
+//               </motion.div>
+//             </TabsContent>
 
-//                               <FormField
-//                                 control={form.control}
-//                                 name={`blogPosts.${index}.featured`}
-//                                 render={({ field }) => (
-//                                   <FormItem className="mt-4 flex items-center">
-//                                     <FormControl>
-//                                       <input
-//                                         type="checkbox"
-//                                         checked={field.value}
-//                                         onChange={(e) => {
-//                                           handleSetFeatured(index);
-//                                         }}
-//                                         className="mr-2 h-4 w-4 rounded border-gray-300 text-lime-600 focus:ring-lime-500"
+//             {/* Full Blogs Tab */}
+//             <TabsContent value="full-blogs" className="mt-4">
+//               <motion.div variants={fadeIn} initial="hidden" animate="visible">
+//                 <Card className="bg-white dark:bg-slate-800 border-lime-200 dark:border-slate-700 overflow-hidden">
+//                   <CardHeader className="bg-lime-50 dark:bg-slate-700">
+//                     <div className="flex justify-between items-center">
+//                       <CardTitle className="text-lime-900 dark:text-lime-100">
+//                         Full Blog Content
+//                       </CardTitle>
+//                       <motion.div
+//                         whileHover={{ scale: 1.05 }}
+//                         whileTap={{ scale: 0.95 }}
+//                       >
+//                         <Button
+//                           onClick={() =>
+//                             addArrayItem("fullBlogs", {
+//                               id: Date.now(),
+//                               title: "New Blog Post",
+//                               author: "",
+//                               date: new Date().toLocaleDateString("en-US", {
+//                                 year: "numeric",
+//                                 month: "long",
+//                                 day: "numeric",
+//                               }),
+//                               imageUrl: "",
+//                               category: formData.categories[1] || "Trends",
+//                               content: "",
+//                               relatedPosts: [],
+//                             })
+//                           }
+//                           type="button"
+//                           disabled={loading}
+//                           className="bg-lime-500 hover:bg-lime-600 text-white flex items-center gap-2"
+//                         >
+//                           <FiPlus className="w-4 h-4" /> Add Full Blog
+//                         </Button>
+//                       </motion.div>
+//                     </div>
+//                   </CardHeader>
+//                   <CardContent>
+//                     <motion.div
+//                       className="space-y-6"
+//                       variants={staggerChildren}
+//                       initial="hidden"
+//                       animate="visible"
+//                     >
+//                       {formData.fullBlogs?.map(
+//                         (blog: FullBlogContent, index: number) => (
+//                           <motion.div
+//                             key={index}
+//                             variants={scaleIn}
+//                             whileHover={{ y: -5 }}
+//                           >
+//                             <Card className="p-5 bg-lime-50 dark:bg-slate-700 border-lime-200 dark:border-slate-600 overflow-hidden">
+//                               <div className="flex flex-row items-center justify-between p-4 -mx-5 -mt-5 mb-5 bg-lime-100 dark:bg-slate-600">
+//                                 <div className="flex items-center">
+//                                   <Badge
+//                                     variant="secondary"
+//                                     className="bg-lime-500 text-white"
+//                                   >
+//                                     Full Blog {index + 1}
+//                                   </Badge>
+//                                   <span className="ml-2 font-medium">
+//                                     {blog.title}
+//                                   </span>
+//                                 </div>
+//                                 <motion.div
+//                                   whileHover={{ scale: 1.1 }}
+//                                   whileTap={{ scale: 0.9 }}
+//                                 >
+//                                   <Button
+//                                     variant="ghost"
+//                                     size="sm"
+//                                     onClick={() =>
+//                                       removeArrayItem("fullBlogs", index)
+//                                     }
+//                                     type="button"
+//                                     className="text-red-500 hover:text-red-700 hover:bg-red-50"
+//                                   >
+//                                     <FiX className="w-4 h-4" />
+//                                   </Button>
+//                                 </motion.div>
+//                               </div>
+//                               <CardContent className="p-0">
+//                                 <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6 mb-6">
+//                                   <div className="w-24 h-24 border-2 border-dashed border-lime-300 rounded-lg flex items-center justify-center overflow-hidden bg-white dark:bg-slate-800">
+//                                     {blog.imageUrl ? (
+//                                       <Image
+//                                         src={blog.imageUrl}
+//                                         alt="Blog preview"
+//                                         width={96}
+//                                         height={96}
+//                                         className="object-cover w-full h-full"
 //                                       />
-//                                     </FormControl>
-//                                     <FormLabel className="!mt-0">
-//                                       Set as featured post
-//                                     </FormLabel>
-//                                     <FormMessage />
-//                                   </FormItem>
-//                                 )}
-//                               />
+//                                     ) : (
+//                                       <FiImage className="text-lime-400 text-2xl" />
+//                                     )}
+//                                   </div>
+//                                   <div className="flex-1">
+//                                     <Label>Blog Image</Label>
+//                                     <div className="relative mt-2">
+//                                       <motion.div
+//                                         whileHover={{ scale: 1.02 }}
+//                                         whileTap={{ scale: 0.98 }}
+//                                       >
+//                                         <Button
+//                                           variant="outline"
+//                                           disabled={uploading}
+//                                           type="button"
+//                                           className="w-full md:w-auto flex items-center gap-2 border-lime-300 text-lime-700 hover:bg-lime-50"
+//                                         >
+//                                           {uploading ? (
+//                                             <motion.div
+//                                               animate={{ rotate: 360 }}
+//                                               transition={{
+//                                                 duration: 1,
+//                                                 repeat: Infinity,
+//                                                 ease: "linear",
+//                                               }}
+//                                             >
+//                                               <FiUpload className="w-4 h-4" />
+//                                             </motion.div>
+//                                           ) : (
+//                                             <FiUpload className="w-4 h-4" />
+//                                           )}
+//                                           {uploading
+//                                             ? "Uploading..."
+//                                             : "Upload Image"}
+//                                         </Button>
+//                                       </motion.div>
+//                                       <Input
+//                                         type="file"
+//                                         className="absolute inset-0 opacity-0 cursor-pointer"
+//                                         accept="image/*"
+//                                         onChange={(e) =>
+//                                           handleFileUpload(
+//                                             e,
+//                                             `fullBlogs.${index}.imageUrl`,
+//                                             "full-blogs",
+//                                             generateSlug(blog.title)
+//                                           )
+//                                         }
+//                                       />
+//                                     </div>
+//                                   </div>
+//                                 </div>
 
-//                               <FormField
-//                                 control={form.control}
-//                                 name={`blogPosts.${index}.excerpt`}
-//                                 render={({ field }) => (
-//                                   <FormItem className="mt-4">
-//                                     <FormLabel>Excerpt</FormLabel>
-//                                     <FormControl>
-//                                       <Textarea {...field} rows={3} />
-//                                     </FormControl>
-//                                     <FormMessage />
-//                                   </FormItem>
-//                                 )}
-//                               />
+//                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+//                                   <div>
+//                                     <Label>Title</Label>
+//                                     <Input
+//                                       value={blog.title}
+//                                       onChange={(e) =>
+//                                         handleInputChange(
+//                                           `fullBlogs.${index}.title`,
+//                                           e.target.value
+//                                         )
+//                                       }
+//                                       className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+//                                     />
+//                                   </div>
+//                                   <div>
+//                                     <Label>Author</Label>
+//                                     <Input
+//                                       value={blog.author}
+//                                       onChange={(e) =>
+//                                         handleInputChange(
+//                                           `fullBlogs.${index}.author`,
+//                                           e.target.value
+//                                         )
+//                                       }
+//                                       className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+//                                     />
+//                                   </div>
+//                                   <div>
+//                                     <Label>Category</Label>
+//                                     <select
+//                                       value={blog.category}
+//                                       onChange={(e) =>
+//                                         handleInputChange(
+//                                           `fullBlogs.${index}.category`,
+//                                           e.target.value
+//                                         )
+//                                       }
+//                                       className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+//                                     >
+//                                       {formData.categories?.map((cat) => (
+//                                         <option key={cat} value={cat}>
+//                                           {cat}
+//                                         </option>
+//                                       ))}
+//                                     </select>
+//                                   </div>
+//                                   <div>
+//                                     <Label>Date</Label>
+//                                     <Input
+//                                       value={blog.date}
+//                                       onChange={(e) =>
+//                                         handleInputChange(
+//                                           `fullBlogs.${index}.date`,
+//                                           e.target.value
+//                                         )
+//                                       }
+//                                       className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+//                                     />
+//                                   </div>
+//                                 </div>
 
-//                               <FormField
-//                                 control={form.control}
-//                                 name={`blogPosts.${index}.content`}
-//                                 render={({ field }) => (
-//                                   <FormItem className="mt-4">
-//                                     <FormLabel>Content</FormLabel>
-//                                     <FormControl>
-//                                       <Textarea {...field} rows={6} />
-//                                     </FormControl>
-//                                     <FormMessage />
-//                                   </FormItem>
-//                                 )}
-//                               />
-//                             </CardContent>
-//                           </Card>
-//                         ))}
+//                                 <div className="mb-4">
+//                                   <Label>Related Posts (IDs)</Label>
+//                                   <Input
+//                                     value={blog.relatedPosts.join(", ")}
+//                                     onChange={(e) => {
+//                                       const values = e.target.value
+//                                         .split(",")
+//                                         .map((v) => parseInt(v.trim()))
+//                                         .filter((v) => !isNaN(v));
+//                                       handleInputChange(
+//                                         `fullBlogs.${index}.relatedPosts`,
+//                                         values
+//                                       );
+//                                     }}
+//                                     placeholder="Comma-separated IDs (e.g., 1, 2, 3)"
+//                                     className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+//                                   />
+//                                 </div>
+
+//                                 <div>
+//                                   <Label>Full Content (HTML)</Label>
+//                                   <Textarea
+//                                     value={blog.content}
+//                                     onChange={(e) =>
+//                                       handleInputChange(
+//                                         `fullBlogs.${index}.content`,
+//                                         e.target.value
+//                                       )
+//                                     }
+//                                     rows={10}
+//                                     className="mt-1 font-mono focus:ring-lime-500 focus:border-lime-500"
+//                                     placeholder="Enter HTML content for the full blog post..."
+//                                   />
+//                                 </div>
+//                               </CardContent>
+//                             </Card>
+//                           </motion.div>
+//                         )
+//                       )}
+//                     </motion.div>
+//                   </CardContent>
+//                 </Card>
+//               </motion.div>
+//             </TabsContent>
+
+//             {/* Newsletter Tab */}
+//             <TabsContent value="newsletter" className="mt-4">
+//               <motion.div variants={fadeIn} initial="hidden" animate="visible">
+//                 <Card className="bg-white dark:bg-slate-800 border-lime-200 dark:border-slate-700 overflow-hidden">
+//                   <CardHeader className="bg-lime-50 dark:bg-slate-700">
+//                     <CardTitle className="text-lime-900 dark:text-lime-100">
+//                       Newsletter Section
+//                     </CardTitle>
+//                   </CardHeader>
+//                   <CardContent className="p-6">
+//                     <div className="space-y-4">
+//                       <div>
+//                         <Label>Title</Label>
+//                         <Input
+//                           value={formData.newsletter.title}
+//                           onChange={(e) =>
+//                             handleInputChange(
+//                               "newsletter.title",
+//                               e.target.value
+//                             )
+//                           }
+//                           className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+//                         />
 //                       </div>
-//                     </CardContent>
-//                   </Card>
-//                 </TabsContent>
-
-//                 {/* Newsletter Tab */}
-//                 <TabsContent value="newsletter">
-//                   <Card>
-//                     <CardHeader>
-//                       <CardTitle>Newsletter Section</CardTitle>
-//                     </CardHeader>
-//                     <CardContent>
-//                       <FormField
-//                         control={form.control}
-//                         name="newsletter.title"
-//                         render={({ field }) => (
-//                           <FormItem className="mb-4">
-//                             <FormLabel>Title</FormLabel>
-//                             <FormControl>
-//                               <Input {...field} />
-//                             </FormControl>
-//                             <FormMessage />
-//                           </FormItem>
-//                         )}
-//                       />
-
-//                       <FormField
-//                         control={form.control}
-//                         name="newsletter.description"
-//                         render={({ field }) => (
-//                           <FormItem>
-//                             <FormLabel>Description</FormLabel>
-//                             <FormControl>
-//                               <Textarea {...field} rows={3} />
-//                             </FormControl>
-//                             <FormMessage />
-//                           </FormItem>
-//                         )}
-//                       />
-//                     </CardContent>
-//                   </Card>
-//                 </TabsContent>
-//               </Tabs>
-//             )}
-//           </main>
-//         </div>
-//       </FormProvider>
-//     </DashboardLayoutClient>
+//                       <div>
+//                         <Label>Description</Label>
+//                         <Textarea
+//                           value={formData.newsletter.description}
+//                           onChange={(e) =>
+//                             handleInputChange(
+//                               "newsletter.description",
+//                               e.target.value
+//                             )
+//                           }
+//                           rows={3}
+//                           className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+//                         />
+//                       </div>
+//                       <div>
+//                         <Label>Placeholder Text</Label>
+//                         <Input
+//                           value={formData.newsletter.placeholder}
+//                           onChange={(e) =>
+//                             handleInputChange(
+//                               "newsletter.placeholder",
+//                               e.target.value
+//                             )
+//                           }
+//                           className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+//                         />
+//                       </div>
+//                       <div>
+//                         <Label>Button Text</Label>
+//                         <Input
+//                           value={formData.newsletter.buttonText}
+//                           onChange={(e) =>
+//                             handleInputChange(
+//                               "newsletter.buttonText",
+//                               e.target.value
+//                             )
+//                           }
+//                           className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+//                         />
+//                       </div>
+//                       <div>
+//                         <Label>Privacy Text</Label>
+//                         <Input
+//                           value={formData.newsletter.privacyText}
+//                           onChange={(e) =>
+//                             handleInputChange(
+//                               "newsletter.privacyText",
+//                               e.target.value
+//                             )
+//                           }
+//                           className="mt-1 focus:ring-lime-500 focus:border-lime-500"
+//                         />
+//                       </div>
+//                     </div>
+//                   </CardContent>
+//                 </Card>
+//               </motion.div>
+//             </TabsContent>
+//           </Tabs>
+//         </main>
+//       </div>
+//     </form>
 //   );
 // };
 

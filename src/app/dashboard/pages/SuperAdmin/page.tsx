@@ -11,9 +11,5 @@ export default async function DashboardPage() {
     redirect("/api/auth/signin");
   }
 
-  return (
-    <DashboardLayoutClient>
-      <DashboardContent role={session.user.role} />
-    </DashboardLayoutClient>
-  );
+  return <DashboardContent role={session.user.role} />;
 }

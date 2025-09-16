@@ -3,6 +3,7 @@ import React from "react";
 import ComingSoonDashboard from "./ComingSoon";
 
 function DashboardContent({ role }: { role: string }) {
+  console.log("DashboardContent role:", role); // Debugging line
   switch (role) {
     case "SuperAdmin":
       return <div>SuperAdmin Dashboard Content</div>;

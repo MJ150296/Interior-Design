@@ -543,7 +543,6 @@ const AboutAdminDashboard = () => {
   ];
 
   return (
-    <DashboardLayoutClient>
       <form onSubmit={onSubmit}>
         <div className="flex flex-col min-h-screen bg-gradient-to-br from-slate-50 to-lime-50 dark:from-slate-900 dark:to-slate-800">
           {/* Header */}
@@ -1660,7 +1659,6 @@ const AboutAdminDashboard = () => {
           </main>
         </div>
       </form>
-    </DashboardLayoutClient>
   );
 };
 
