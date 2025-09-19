@@ -57,7 +57,7 @@ export async function GET() {
     await dbConnect();
 
     // Try to find existing testimonial page content
-    let testimonialContent = await TestimonialPageModel.findOne();
+    const testimonialContent = await TestimonialPageModel.findOne();
 
     // If no content exists, return default content
     if (!testimonialContent) {

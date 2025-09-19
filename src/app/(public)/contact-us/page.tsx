@@ -10,14 +10,14 @@ import BookAppointmentForm from "../../components/HomePage/ads/BookAppointmentFo
 import { getStaticIcon } from "@/app/utils/staticIcons";
 import {
   fetchAppointmentForm,
-  selectAppointmentForm,
-  selectAppointmentFormError,
+  // selectAppointmentForm,
+  // selectAppointmentFormError,
   selectAppointmentFormLoading,
 } from "@/app/redux/slices/appointmentFormSlice";
 import {
   fetchContactContent,
   selectContactContent,
-  selectContactError,
+  // selectContactError,
   selectContactLoading,
 } from "@/app/redux/slices/contactPageSlice";
 import { useAppDispatch, useAppSelector } from "@/app/redux/store/hooks";

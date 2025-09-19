@@ -1,5 +1,5 @@
 import React from "react";
-import DashboardLayoutClient from "../../client_side_layout/ClientSideDashboardLayout";
+// import DashboardLayoutClient from "../../client_side_layout/ClientSideDashboardLayout";
 import { redirect } from "next/navigation";
 import { auth } from "@/app/auth";
 import DashboardContent from "../../components/DashboardContent";

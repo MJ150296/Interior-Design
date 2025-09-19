@@ -3,6 +3,35 @@ import { NextResponse } from "next/server";
 import dbConnect from "@/app/utils/dbConnect";
 import ContactPageModel from "@/app/model/website-content/ContactPage.model";
 
+interface WhyChooseUsTab {
+  title?: string;
+  icon?: string;
+  contentTitle?: string;
+  description?: string;
+  content?: string;
+}
+
+interface WhyChooseUsFeature {
+  icon?: string;
+  title?: string;
+  description?: string;
+}
+
+// Define a Project type
+interface Project {
+  title?: string;
+  imageUrl?: string;
+  category?: string;
+  description?: string;
+}
+
+// Define a ContactInfoItem type
+interface ContactInfoItem {
+  icon?: string;
+  title?: string;
+  details?: string;
+}
+
 export async function PUT(request: Request) {
   try {
     await dbConnect();
@@ -35,7 +64,7 @@ export async function PUT(request: Request) {
     // Ensure all required fields are present in the tabs
     if (contentToSave.whyChooseUs.tabs) {
       contentToSave.whyChooseUs.tabs = contentToSave.whyChooseUs.tabs.map(
-        (tab: any) => ({
+        (tab: WhyChooseUsTab) => ({
           title: tab.title || "",
           icon: tab.icon || "star",
           contentTitle: tab.contentTitle || tab.title || "",
@@ -47,17 +76,19 @@ export async function PUT(request: Request) {
     // Ensure all required fields are present in the features
     if (contentToSave.whyChooseUs.features) {
       contentToSave.whyChooseUs.features =
-        contentToSave.whyChooseUs.features.map((feature: any) => ({
-          icon: feature.icon || "star",
-          title: feature.title || "",
-          description: feature.description || "",
-        }));
+        contentToSave.whyChooseUs.features.map(
+          (feature: WhyChooseUsFeature) => ({
+            icon: feature.icon || "star",
+            title: feature.title || "",
+            description: feature.description || "",
+          })
+        );
     }
 
     // Ensure all required fields are present in the projects
     if (contentToSave.projects.items) {
       contentToSave.projects.items = contentToSave.projects.items.map(
-        (project: any) => ({
+        (project: Project) => ({
           title: project.title || "",
           imageUrl: project.imageUrl || "",
           category: project.category || "",
@@ -69,7 +100,7 @@ export async function PUT(request: Request) {
     // Ensure all required fields are present in the contact info
     if (contentToSave.contactInfo.items) {
       contentToSave.contactInfo.items = contentToSave.contactInfo.items.map(
-        (item: any) => ({
+        (item: ContactInfoItem) => ({
           icon: item.icon || "star",
           title: item.title || "",
           details: item.details || "",

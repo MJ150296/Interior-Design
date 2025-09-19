@@ -58,7 +58,7 @@ export async function GET() {
     await dbConnect();
 
     // Try to find existing blog page content
-    let blogContent = await BlogPageModel.findOne();
+    const blogContent = await BlogPageModel.findOne();
 
     // If no content exists, return default content
     if (!blogContent) {

@@ -22,7 +22,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
-import DashboardLayoutClient from "@/app/dashboard/client_side_layout/ClientSideDashboardLayout";
+// import DashboardLayoutClient from "@/app/dashboard/client_side_layout/ClientSideDashboardLayout";
 import { useAppDispatch, useAppSelector } from "@/app/redux/store/hooks";
 import {
   fetchAboutContent,

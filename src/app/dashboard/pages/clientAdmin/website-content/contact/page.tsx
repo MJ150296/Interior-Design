@@ -435,7 +435,7 @@ const ContactAdminDashboard = () => {
     { value: "contactInfo", icon: <FiPhone />, label: "Contact Info" },
   ];
 
-  if (!contactFormData || !appointmentFormData) {
+  if (!contactFormData || !appointmentFormData || contactLoading || appointmentLoading) {
     return (
       <DashboardLayoutClient>
         <div className="flex justify-center items-center h-screen">

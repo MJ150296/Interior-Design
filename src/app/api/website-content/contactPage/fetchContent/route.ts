@@ -2,6 +2,14 @@
 import { NextResponse } from "next/server";
 import dbConnect from "@/app/utils/dbConnect";
 
+interface WhyChooseUsTab {
+  title?: string;
+  icon?: string;
+  contentTitle?: string;
+  description?: string;
+  content?: string;
+}
+
 // Update default values to match the new structure
 const defaultContactContent = {
   hero: {
@@ -120,7 +128,7 @@ export async function GET() {
     ).default;
 
     // Try to find existing contact page content
-    let contactContent = await ContactPageModel.findOne();
+    const contactContent = await ContactPageModel.findOne();
 
     // If no content exists, return default content
     if (!contactContent) {
@@ -145,7 +153,7 @@ export async function GET() {
           contactContent.whyChooseUs?.description ||
           defaultContactContent.whyChooseUs.description,
         tabs: contactContent.whyChooseUs?.tabs
-          ? contactContent.whyChooseUs.tabs.map((tab: any) => ({
+          ? contactContent.whyChooseUs.tabs.map((tab: WhyChooseUsTab) => ({
               title: tab.title || "",
               icon: tab.icon || "star",
               contentTitle: tab.contentTitle || tab.title || "",

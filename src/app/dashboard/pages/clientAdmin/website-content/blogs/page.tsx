@@ -3,7 +3,6 @@ import React, { useEffect, useState, useCallback } from "react";
 import {
   FiImage,
   FiEdit,
-  FiUsers,
   FiMessageSquare,
   FiSettings,
   FiPlus,
@@ -11,7 +10,6 @@ import {
   FiUpload,
   FiX,
   FiStar,
-  FiSearch,
 } from "react-icons/fi";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
@@ -30,10 +28,7 @@ import Image from "next/image";
 // Import TypeScript interfaces
 import {
   BlogContent,
-  HeroContent,
-  FeaturedPost,
   Article,
-  NewsletterContent,
   selectBlogContent,
   selectBlogLoading,
   selectBlogError,
