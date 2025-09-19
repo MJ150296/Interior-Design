@@ -6,15 +6,6 @@ import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import {
-  CalendarIcon,
-  HomeIcon,
-  AwardIcon,
-  PaletteIcon,
-  PhoneIcon,
-  MapPinIcon,
-  ClockIcon,
-} from "lucide-react";
 import BookAppointmentForm from "../../components/HomePage/ads/BookAppointmentForm";
 import { getStaticIcon } from "@/app/utils/staticIcons";
 import {
@@ -160,10 +151,10 @@ const AppointmentPage: React.FC = () => {
   const dispatch = useAppDispatch();
   const contactData = useAppSelector(selectContactContent);
   const contactLoading = useAppSelector(selectContactLoading);
-  const contactError = useAppSelector(selectContactError);
-  const appointmentData = useAppSelector(selectAppointmentForm);
+  // const contactError = useAppSelector(selectContactError);
+  // const appointmentData = useAppSelector(selectAppointmentForm);
   const appointmentLoading = useAppSelector(selectAppointmentFormLoading);
-  const appointmentError = useAppSelector(selectAppointmentFormError);
+  // const appointmentError = useAppSelector(selectAppointmentFormError);
 
   // Use fetched data or fallback to default
   const contactContent = contactData || defaultContactContent;

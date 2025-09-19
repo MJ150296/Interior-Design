@@ -2,23 +2,12 @@
 import React, { useEffect, useState, useCallback } from "react";
 import {
   FiImage,
-  FiEdit,
-  FiUsers,
   FiMessageSquare,
-  FiSettings,
   FiPlus,
   FiSave,
-  FiUpload,
   FiX,
   FiStar,
-  FiMapPin,
   FiPhone,
-  FiMail,
-  FiClock,
-  FiGlobe,
-  FiAward,
-  FiHome,
-  FiCalendar,
 } from "react-icons/fi";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
@@ -412,7 +401,7 @@ const ContactAdminDashboard = () => {
   }, [contactData]);
 
   // Update appointment form when Redux data changes
-  useEffect(() => {    
+  useEffect(() => {
     if (appointmentData) {
       console.log("Loaded appointment data:", appointmentData);
       setAppointmentFormData(appointmentData);
@@ -424,12 +413,12 @@ const ContactAdminDashboard = () => {
   useEffect(() => {
     if (contactError) {
       console.log("contactError", contactError);
-      
+
       alert(contactError);
     }
     if (appointmentError) {
       console.log("appointmentError", appointmentError);
-      
+
       alert(appointmentError);
     }
   }, [contactError, appointmentError]);

@@ -2,7 +2,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import {
   FiImage,
-  FiEdit,
   FiUsers,
   FiMessageSquare,
   FiSettings,
@@ -10,7 +9,6 @@ import {
   FiSave,
   FiUpload,
   FiX,
-  FiStar,
 } from "react-icons/fi";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
@@ -30,9 +28,7 @@ import Image from "next/image";
 import {
   Testimonial,
   Stat,
-  HeroContent,
   Category,
-  CtaContent,
   TestimonialContent,
   selectTestimonialContent,
   selectTestimonialLoading,
