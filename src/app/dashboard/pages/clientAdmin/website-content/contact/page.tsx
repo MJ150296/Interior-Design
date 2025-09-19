@@ -1,7 +1,7 @@
+"use client";
 import DashboardLayoutClient from "@/app/dashboard/client_side_layout/ClientSideDashboardLayout";
 import React from "react";
 
-("use client");
 
 const ContactPage: React.FC = () => {
   return (
