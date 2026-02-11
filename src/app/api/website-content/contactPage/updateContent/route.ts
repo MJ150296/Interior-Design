@@ -2,6 +2,7 @@
 import { NextResponse } from "next/server";
 import dbConnect from "@/app/utils/dbConnect";
 import ContactPageModel from "@/app/model/website-content/ContactPage.model";
+import { requireRoles } from "@/app/api/_utils/requireRoles";
 
 interface WhyChooseUsTab {
   title?: string;
@@ -33,6 +34,11 @@ interface ContactInfoItem {
 }
 
 export async function PUT(request: Request) {
+  const guard = await requireRoles(["SuperAdmin", "clientAdmin"]);
+  if (!guard.ok) {
+    return guard.response;
+  }
+
   try {
     await dbConnect();
 

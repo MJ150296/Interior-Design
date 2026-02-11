@@ -3,6 +3,7 @@ import UserModel from "@/app/model/User.model";
 import clientAdminModel from "@/app/model/clientAdmin.model"; // Import client admin model
 import dbConnect from "@/app/utils/dbConnect";
 import { setClientAdminStatus } from "@/app/utils/globalStore";
+import { requireRoles } from "@/app/api/_utils/requireRoles";
 
 // ✅ Define request structure for Client Admin
 interface ClientAdminRequest {
@@ -21,6 +22,11 @@ interface ClientAdminRequest {
 }
 
 export async function POST(req: Request) {
+  const guard = await requireRoles(["SuperAdmin"]);
+  if (!guard.ok) {
+    return guard.response;
+  }
+
   try {
     await dbConnect();
     const {

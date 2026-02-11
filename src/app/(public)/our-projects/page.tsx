@@ -3,12 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useAppDispatch, useAppSelector } from "@/app/redux/store/hooks";
-import {
-  fetchPortfolioContent,
-  selectPortfolioContent,
-  selectPortfolioLoading,
-} from "@/app/redux/slices/portfolioPageSlice";
+import { usePublicContent } from "../PublicContentProvider";
 
 interface RawProject {
   imageUrl: string;
@@ -30,123 +25,104 @@ interface Project {
   exploreLink?: string;
 }
 
-// Default values as fallbacks
-const defaultHero = {
-  backgroundImageUrl: "/Riddhi Interior Design/Portfolio/cover.jpg",
-  title: "Our Portfolio",
-  subtitle: "Showcasing Excellence in Interior Design Across Uttarakhand",
-  preTitle: "EXPLORE OUR WORK",
-};
-
-const defaultQuotes = [
-  {
-    text: "Riddhi Interiors transformed our home into a masterpiece. Their attention to detail and creative solutions exceeded our expectations.",
-    author: "Rajesh & Priya Sharma, Dehradun",
+// Create a consolidated default content object
+const defaultContent = {
+  hero: {
+    backgroundImageUrl: "/Riddhi Interior Design/Portfolio/cover.jpg",
+    title: "Our Portfolio",
+    subtitle: "Showcasing Excellence in Interior Design Across Uttarakhand",
+    preTitle: "EXPLORE OUR WORK",
   },
-  {
-    text: "The commercial space design perfectly captured our brand identity while maximizing functionality. A truly professional team!",
-    author: "Vikram Singh, Business Owner, Haridwar",
+  quotes: [
+    {
+      text: "Riddhi Interiors transformed our home into a masterpiece. Their attention to detail and creative solutions exceeded our expectations.",
+      author: "Rajesh & Priya Sharma, Dehradun",
+    },
+    {
+      text: "The commercial space design perfectly captured our brand identity while maximizing functionality. A truly professional team!",
+      author: "Vikram Singh, Business Owner, Haridwar",
+    },
+  ],
+  residentialProjects: [
+    {
+      id: 1,
+      title: "Modern Hillside Villa",
+      location: "Mussoorie",
+      category: "Residential",
+      imageUrl:
+        "/Riddhi Interior Design/Portfolio/Residential/modern-hillside-villa/cover.jpg",
+      hoverTitle: "Contemporary Luxury",
+      hoverDescription:
+        "A 5,000 sq.ft villa with panoramic mountain views featuring open-plan living spaces and premium finishes",
+      exploreLink: "",
+    },
+    {
+      id: 2,
+      title: "Heritage Bungalow Restoration",
+      location: "Dehradun",
+      category: "Residential",
+      imageUrl:
+        "/Riddhi Interior Design/Portfolio/Residential/heritage-bungalow-restoration/cover.jpg",
+      hoverTitle: "Classic Elegance",
+      hoverDescription:
+        "Restoration of a colonial-era bungalow preserving original architectural elements while adding modern comforts",
+      exploreLink: "",
+    },
+  ],
+  commercialProjects: [
+    {
+      id: 1,
+      title: "Premium Restaurant Design",
+      location: "Rishikesh",
+      category: "Commercial",
+      imageUrl:
+        "/Riddhi Interior Design/Portfolio/Commercial/premium-restaurant-design/cover.jpg",
+      hoverTitle: "Ambiance Creation",
+      hoverDescription:
+        "A 120-seat fine dining establishment with custom lighting and bespoke furniture",
+      exploreLink: "",
+    },
+    {
+      id: 2,
+      title: "Corporate Office Space",
+      location: "Dehradun",
+      category: "Commercial",
+      imageUrl:
+        "/Riddhi Interior Design/Portfolio/Commercial/corporate-office-space/cover.jpg",
+      hoverTitle: "Productive Environment",
+      hoverDescription:
+        "A 10,000 sq.ft office designed for productivity with ergonomic furniture and collaborative spaces",
+      exploreLink: "",
+    },
+  ],
+  stats: [
+    { value: "250+", label: "Projects Completed" },
+    { value: "98%", label: "Client Satisfaction" },
+    { value: "15+", label: "Cities Served" },
+    { value: "12+", label: "Years Experience" },
+  ],
+  cta: {
+    title: "Ready to Start Your Project?",
+    description:
+      "Let's discuss how we can transform your space into something extraordinary. Our team is ready to bring your vision to life with our expert design services.",
   },
-];
-
-const defaultResidentialProjects = [
-  {
-    id: 1,
-    title: "Modern Hillside Villa",
-    location: "Mussoorie",
-    category: "Residential",
-    imageUrl:
-      "/Riddhi Interior Design/Portfolio/Residential/modern-hillside-villa/cover.jpg",
-    hoverTitle: "Contemporary Luxury",
-    hoverDescription:
-      "A 5,000 sq.ft villa with panoramic mountain views featuring open-plan living spaces and premium finishes",
-    exploreLink: "",
-  },
-  {
-    id: 2,
-    title: "Heritage Bungalow Restoration",
-    location: "Dehradun",
-    category: "Residential",
-    imageUrl:
-      "/Riddhi Interior Design/Portfolio/Residential/heritage-bungalow-restoration/cover.jpg",
-    hoverTitle: "Classic Elegance",
-    hoverDescription:
-      "Restoration of a colonial-era bungalow preserving original architectural elements while adding modern comforts",
-    exploreLink: "",
-  },
-];
-
-const defaultCommercialProjects = [
-  {
-    id: 1,
-    title: "Premium Restaurant Design",
-    location: "Rishikesh",
-    category: "Commercial",
-    imageUrl:
-      "/Riddhi Interior Design/Portfolio/Commercial/premium-restaurant-design/cover.jpg",
-    hoverTitle: "Ambiance Creation",
-    hoverDescription:
-      "A 120-seat fine dining establishment with custom lighting and bespoke furniture",
-    exploreLink: "",
-  },
-  {
-    id: 2,
-    title: "Corporate Office Space",
-    location: "Dehradun",
-    category: "Commercial",
-    imageUrl:
-      "/Riddhi Interior Design/Portfolio/Commercial/corporate-office-space/cover.jpg",
-    hoverTitle: "Productive Environment",
-    hoverDescription:
-      "A 10,000 sq.ft office designed for productivity with ergonomic furniture and collaborative spaces",
-    exploreLink: "",
-  },
-];
-
-const defaultStats = [
-  { value: "250+", label: "Projects Completed" },
-  { value: "98%", label: "Client Satisfaction" },
-  { value: "15+", label: "Cities Served" },
-  { value: "12+", label: "Years Experience" },
-];
-
-const defaultCta = {
-  title: "Ready to Start Your Project?",
-  description:
-    "Let's discuss how we can transform your space into something extraordinary. Our team is ready to bring your vision to life with our expert design services.",
 };
 
 const Projects = () => {
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
   const [fade, setFade] = useState(true);
   const [activeTab, setActiveTab] = useState("residential");
-  const [loading, setLoading] = useState(true);
-
-  const dispatch = useAppDispatch();
-  const reduxContent = useAppSelector(selectPortfolioContent);
-  const reduxLoading = useAppSelector(selectPortfolioLoading);
+  const { portfolio: reduxContent } = usePublicContent();
 
   // Merge Redux data with defaults
-  const heroData = reduxContent?.hero || defaultHero;
-  const quotesData = reduxContent?.quotes || defaultQuotes;
+  const heroData = reduxContent?.hero || defaultContent.hero;
+  const quotesData = reduxContent?.quotes || defaultContent.quotes;
   const residentialData =
-    reduxContent?.residentialProjects || defaultResidentialProjects;
+    reduxContent?.residentialProjects || defaultContent.residentialProjects;
   const commercialData =
-    reduxContent?.commercialProjects || defaultCommercialProjects;
-  const statsData = reduxContent?.stats || defaultStats;
-  const ctaData = reduxContent?.cta || defaultCta;
-
-  useEffect(() => {
-    // Check if Redux data is available
-    if (reduxContent) {
-      console.log("Using cached portfolio data from Redux.", reduxContent);
-
-      setLoading(false);
-    } else {
-      // If not, fetch data from the server
-      dispatch(fetchPortfolioContent()).then(() => setLoading(false));
-    }
-  }, [dispatch, reduxContent]);
+    reduxContent?.commercialProjects || defaultContent.commercialProjects;
+  const statsData = reduxContent?.stats || defaultContent.stats;
+  const ctaData = reduxContent?.cta || defaultContent.cta;
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -231,21 +207,6 @@ const Projects = () => {
     </motion.div>
   );
 
-  if (loading || reduxLoading) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <Image
-          src="/Riddhi Interior Design/Logo.png"
-          alt="Riddhi Interior Logo"
-          width={128}
-          height={128}
-          className="animate-pulse"
-          priority
-        />
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-lime-50 to-white">
       {/* Hero Section */}
@@ -326,12 +287,11 @@ const Projects = () => {
         </motion.div>
         <div className="min-h-[100px] flex items-center justify-center">
           <div
-            className={`transition-all duration-500 ease-in-out ${
-              fade ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-            }`}
+            className={`transition-all duration-500 ease-in-out ${fade ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
           >
             <p className="text-lg text-gray-700 max-w-3xl mx-auto font-light italic">
-              “{quotesData[currentQuoteIndex]?.text}”
+              &quot;{quotesData[currentQuoteIndex]?.text}&quot;
             </p>
             <p className="text-sm text-gray-500 mt-2">
               - {quotesData[currentQuoteIndex]?.author}
@@ -438,13 +398,23 @@ const Projects = () => {
             <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
               {ctaData.description}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-3 px-8 rounded-full transition-colors shadow-lg text-lg">
-                Book a Consultation
-              </button>
-              <button className="bg-white border-2 border-lime-600 text-lime-700 hover:bg-lime-50 font-bold py-3 px-8 rounded-full transition-colors text-lg">
+            <div className="flex flex-wrap gap-4 mt-8 justify-center">
+              <motion.a
+                href="/contact-us"
+                className="px-8 py-4 bg-lime-600 text-white font-bold rounded-xl shadow-lg hover:bg-lime-700 transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Book A Consultation
+              </motion.a>
+              <motion.a
+                href="/our-projects"
+                className="px-8 py-4 bg-white border-2 border-lime-600 text-lime-700 font-bold rounded-xl shadow-lg hover:bg-lime-50 transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 View Pricing
-              </button>
+              </motion.a>
             </div>
           </motion.div>
         </div>

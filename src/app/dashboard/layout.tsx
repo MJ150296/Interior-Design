@@ -1,11 +1,20 @@
 import { ReactNode } from "react";
+import type { Metadata } from "next";
 import { auth } from "../auth";
 import { redirect } from "next/navigation";
 import { SessionProvider } from "next-auth/react";
 import { ReduxProvider } from "../redux/providers";
 import DashboardLayoutClient from "./client_side_layout/ClientSideDashboardLayout";
+import { buildPublicMetadata } from "@/lib/seo";
 
 // src/app/dashboard/layout.tsx
+export const metadata: Metadata = buildPublicMetadata({
+  title: "Dashboard",
+  description: "Private dashboard.",
+  path: "/dashboard",
+  noIndex: true,
+});
+
 export default async function DashboardLayout({
   children,
 }: {

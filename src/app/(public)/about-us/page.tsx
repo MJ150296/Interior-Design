@@ -1,14 +1,9 @@
 "use client";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
-import { useAppDispatch, useAppSelector } from "@/app/redux/store/hooks";
-import {
-  fetchAboutContent,
-  selectAboutContent,
-  selectAboutLoading,
-} from "@/app/redux/slices/aboutUsPageSlice";
+import { usePublicContent } from "../PublicContentProvider";
 
 interface MappedTeamMember {
   name: string;
@@ -18,83 +13,84 @@ interface MappedTeamMember {
   specialties: string[];
 }
 
-// Default values as fallbacks
-const defaultHero = {
-  upperTitle: "A FEW WORDS ABOUT",
-  title: "Our Firm",
-  subtitle: "Award Winning Interior Design Firm in UTTARAKHAND",
-  backgroundImageUrl: "/Riddhi Interior Design/About/cover.jpg",
-};
-
-const defaultStats = [
-  { value: "12+", label: "Years Experience" },
-  { value: "250+", label: "Projects Completed" },
-  { value: "98%", label: "Client Satisfaction" },
-  { value: "25+", label: "Awards Received" },
-];
-
-const defaultStory = {
-  title: "Our Story",
-  subtitle: "Transforming Spaces with Elegance & Style",
-  content: "At Riddhi Interiors, we believe every space tells a story...",
-  content2: "At Riddhi Interiors, we believe every space tells a story...",
-  quote: "Your trusted interior design partner in Dehradun...",
-  imageUrl: "/Riddhi Interior Design/About/story.jpg",
-  cities: "Dehradun, Mussoorie, Haridwar, Rishikesh, Roorkee",
-};
-
-const defaultCoreValues = [
-  {
-    title: "Innovation",
-    description:
-      "We embrace new ideas and technologies to create unique spaces",
-    icon: "💡",
+// Create a consolidated default content object
+const defaultContent = {
+  hero: {
+    upperTitle: "A FEW WORDS ABOUT",
+    title: "Our Firm",
+    subtitle: "Award Winning Interior Design Firm in UTTARAKHAND",
+    backgroundImageUrl: "/Riddhi Interior Design/About/cover.jpg",
   },
-  {
-    title: "Excellence",
-    description: "We pursue perfection in every detail of our work",
-    icon: "⭐",
+  stats: [
+    { value: "12+", label: "Years Experience" },
+    { value: "250+", label: "Projects Completed" },
+    { value: "98%", label: "Client Satisfaction" },
+    { value: "25+", label: "Awards Received" },
+  ],
+  story: {
+    title: "Our Story",
+    subtitle: "Transforming Spaces with Elegance & Style",
+    content: "At Riddhi Interiors, we believe every space tells a story...",
+    content2: "At Riddhi Interiors, we believe every space tells a story...",
+    quote: "Your trusted interior design partner in Dehradun...",
+    imageUrl: "/Riddhi Interior Design/About/story.jpg",
+    cities: "Dehradun, Mussoorie, Haridwar, Rishikesh, Roorkee",
   },
-  {
-    title: "Integrity",
-    description: "We build relationships based on trust and transparency",
-    icon: "🤝",
+  coreValues: [
+    {
+      title: "Innovation",
+      description:
+        "We embrace new ideas and technologies to create unique spaces",
+      icon: "💡",
+    },
+    {
+      title: "Excellence",
+      description: "We pursue perfection in every detail of our work",
+      icon: "⭐",
+    },
+    {
+      title: "Integrity",
+      description: "We build relationships based on trust and transparency",
+      icon: "🤝",
+    },
+    {
+      title: "Sustainability",
+      description: "We prioritize eco-friendly materials and practices",
+      icon: "🌿",
+    },
+  ],
+  teamMembers: [
+    {
+      name: "Riddhi Sharma",
+      title: "Founder & Principal Designer",
+      bio: "With over 15 years of experience in interior design, Riddhi brings a unique blend of creativity and technical expertise to every project.",
+      imageUrl: "/Riddhi Interior Design/owner.jpg",
+      tags: ["Residential Design", "Space Planning", "Color Theory"],
+    },
+    {
+      name: "Aarav Mehta",
+      title: "Interior Architect",
+      bio: "Aarav combines structural knowledge with aesthetic sensibility to create spaces that are both beautiful and functional.",
+      imageUrl: "/Riddhi Interior Design/owner.jpg",
+      tags: [
+        "Architectural Design",
+        "3D Modeling",
+        "Project Management",
+      ],
+    },
+    {
+      name: "Simran Kaur",
+      title: "3D Visualizer & Designer",
+      bio: "Simran transforms concepts into photorealistic visualizations that help clients envision their future spaces.",
+      imageUrl: "/Riddhi Interior Design/owner.jpg",
+      tags: ["3D Rendering", "Material Selection", "Lighting Design"],
+    },
+  ],
+  connect: {
+    address: "Tilak Road, Dehradun, Uttarakhand 248001",
+    hours: "Open Monday-Saturday: 9AM - 7PM",
+    phone: "+91 78959 27366",
   },
-  {
-    title: "Sustainability",
-    description: "We prioritize eco-friendly materials and practices",
-    icon: "🌿",
-  },
-];
-
-const defaultTeamMembers = [
-  {
-    name: "Riddhi Sharma",
-    title: "Founder & Principal Designer",
-    bio: "With over 15 years of experience in interior design, Riddhi brings a unique blend of creativity and technical expertise to every project.",
-    imageUrl: "/Riddhi Interior Design/owner.jpg",
-    specialties: ["Residential Design", "Space Planning", "Color Theory"],
-  },
-  {
-    name: "Aarav Mehta",
-    title: "Interior Architect",
-    bio: "Aarav combines structural knowledge with aesthetic sensibility to create spaces that are both beautiful and functional.",
-    imageUrl: "/Riddhi Interior Design/owner.jpg",
-    specialties: ["Architectural Design", "3D Modeling", "Project Management"],
-  },
-  {
-    name: "Simran Kaur",
-    title: "3D Visualizer & Designer",
-    bio: "Simran transforms concepts into photorealistic visualizations that help clients envision their future spaces.",
-    imageUrl: "/Riddhi Interior Design/owner.jpg",
-    specialties: ["3D Rendering", "Material Selection", "Lighting Design"],
-  },
-];
-
-const defaultConnect = {
-  address: "Tilak Road, Dehradun, Uttarakhand 248001",
-  hours: "Open Monday-Saturday: 9AM - 7PM",
-  phone: "+91 78959 27366",
 };
 
 const socialMedia = [
@@ -125,31 +121,21 @@ const socialMedia = [
 ];
 
 const AboutUs: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const reduxContent = useAppSelector(selectAboutContent);
-  const reduxLoading = useAppSelector(selectAboutLoading);
-  // const reduxError = useAppSelector(selectAboutError);
-
-  const [loading, setLoading] = useState(true);
+  const { about: reduxContent } = usePublicContent();
 
   // Merge Redux data with defaults
-  const heroData = reduxContent?.hero || defaultHero;
-  const statsData = reduxContent?.stats || defaultStats;
-  const storyData = reduxContent?.story || defaultStory;
-  const coreValuesData = reduxContent?.coreValues || defaultCoreValues;
-  const teamMembersData = reduxContent?.teamMembers || defaultTeamMembers;
-  const connectData = reduxContent?.connect || defaultConnect;
+  const heroData = reduxContent?.hero || defaultContent.hero;
+  const statsData = reduxContent?.stats || defaultContent.stats;
+  const storyData = reduxContent?.story || defaultContent.story;
+  const coreValuesData = reduxContent?.coreValues || defaultContent.coreValues;
+  const teamMembersData =
+    reduxContent?.teamMembers || defaultContent.teamMembers;
+  const connectData = reduxContent?.connect || defaultContent.connect;
 
   // Map team members to match UI structure
   const mappedTeamMembers: MappedTeamMember[] = teamMembersData.map(
     (member) => {
-      // Handle both Redux data structure and default structure
-      const specialties =
-        "tags" in member
-          ? member.tags
-          : "specialties" in member
-          ? member.specialties
-          : [];
+      const specialties = member.tags ?? [];
 
       return {
         name: member.name,
@@ -160,31 +146,6 @@ const AboutUs: React.FC = () => {
       };
     }
   );
-
-  useEffect(() => {
-    // Check if Redux data is available
-    if (reduxContent) {
-      setLoading(false);
-    } else {
-      // If not, fetch data from the server
-      dispatch(fetchAboutContent()).then(() => setLoading(false));
-    }
-  }, [dispatch, reduxContent]);
-
-  if (loading || reduxLoading) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <Image
-          src="/Riddhi Interior Design/Logo.png" // Place your logo in the public directory
-          alt="Riddhi Interior Logo"
-          width={128} // equivalent to w-32
-          height={128} // equivalent to h-32
-          className="animate-pulse"
-          priority
-        />
-      </div>
-    );
-  }
 
   return (
     <div className="w-full relative bg-gradient-to-b from-lime-50 to-white">
@@ -297,7 +258,7 @@ const AboutUs: React.FC = () => {
                 Contact Design Experts
               </motion.a>
               <motion.a
-                href="/gallery"
+                href="/our-projects"
                 className="px-8 py-4 bg-white border-2 border-lime-600 text-lime-700 font-bold rounded-xl shadow-lg hover:bg-lime-50 transition-colors"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}

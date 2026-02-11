@@ -3,9 +3,15 @@ import PortfolioPageModel, {
   IProject,
 } from "@/app/model/website-content/PortfolioPage.model";
 import dbConnect from "@/app/utils/dbConnect";
+import { requireRoles } from "@/app/api/_utils/requireRoles";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function PUT(req: NextRequest) {
+  const guard = await requireRoles(["SuperAdmin", "clientAdmin"]);
+  if (!guard.ok) {
+    return guard.response;
+  }
+
   await dbConnect();
 
   try {

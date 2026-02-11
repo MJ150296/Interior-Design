@@ -8,20 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import BookAppointmentForm from "../../components/HomePage/ads/BookAppointmentForm";
 import { getStaticIcon } from "@/app/utils/staticIcons";
-import {
-  fetchAppointmentForm,
-  // selectAppointmentForm,
-  // selectAppointmentFormError,
-  selectAppointmentFormLoading,
-} from "@/app/redux/slices/appointmentFormSlice";
-import {
-  fetchContactContent,
-  selectContactContent,
-  // selectContactError,
-  selectContactLoading,
-} from "@/app/redux/slices/contactPageSlice";
-import { useAppDispatch, useAppSelector } from "@/app/redux/store/hooks";
-import Image from "next/image";
+import { usePublicContent } from "../PublicContentProvider";
 
 // Define types for our dynamic content
 interface ContactContent {
@@ -54,8 +41,8 @@ interface ContactContent {
   };
 }
 
-// Default values as fallback
-const defaultContactContent: ContactContent = {
+// Create a consolidated default content object
+const defaultContent: ContactContent = {
   hero: {
     title: "Design Your Dream Space",
     subtitle:
@@ -133,12 +120,12 @@ const defaultContactContent: ContactContent = {
       {
         icon: "map-pin",
         title: "Visit Us",
-        details: "Tilak Road, Dehradun",
+        details: "Tilak Road, Dehradun, Uttarakhand 248001",
       },
       {
         icon: "clock",
         title: "Working Hours",
-        details: "Mon-Sat: 10AM - 7PM",
+        details: "Mon-Sat: 10AM - 7PM, Sun: Closed",
       },
     ],
   },
@@ -147,47 +134,25 @@ const defaultContactContent: ContactContent = {
 const AppointmentPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState("consultation");
   const [currentHighlight, setCurrentHighlight] = useState(0);
+
   // Redux state management
-  const dispatch = useAppDispatch();
-  const contactData = useAppSelector(selectContactContent);
-  const contactLoading = useAppSelector(selectContactLoading);
-  // const contactError = useAppSelector(selectContactError);
-  // const appointmentData = useAppSelector(selectAppointmentForm);
-  const appointmentLoading = useAppSelector(selectAppointmentFormLoading);
-  // const appointmentError = useAppSelector(selectAppointmentFormError);
+  const { contact: reduxContactData } = usePublicContent();
 
-  // Use fetched data or fallback to default
-  const contactContent = contactData || defaultContactContent;
-
-  // Fetch data on component mount
-  useEffect(() => {
-    dispatch(fetchContactContent());
-    dispatch(fetchAppointmentForm());
-  }, [dispatch]);
+  // Merge Redux data with defaults
+  const contactContent = {
+    hero: reduxContactData?.hero || defaultContent.hero,
+    whyChooseUs: reduxContactData?.whyChooseUs || defaultContent.whyChooseUs,
+    contactInfo: reduxContactData?.contactInfo || defaultContent.contactInfo,
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentHighlight(
-        (prev) => (prev + 1) % (contactContent.whyChooseUs.features.length || 4)
+        (prev) => (prev + 1) % contactContent.whyChooseUs.features.length
       );
     }, 4000);
     return () => clearInterval(interval);
   }, [contactContent.whyChooseUs.features.length]);
-
-  if (contactLoading || appointmentLoading) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <Image
-          src="/Riddhi Interior Design/Logo.png"
-          alt="Riddhi Interior Logo"
-          width={128}
-          height={128}
-          className="animate-pulse"
-          priority
-        />
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen pt-24 bg-gradient-to-br from-gray-50 to-lime-50">
@@ -353,16 +318,20 @@ const AppointmentPage: React.FC = () => {
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {contactContent.contactInfo.items.map((item, index) => (
-              <div
+              <motion.div
                 key={index}
                 className="flex flex-col items-center text-center"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
               >
                 <div className="bg-lime-500/20 p-4 rounded-full mb-4">
                   {getStaticIcon(item.icon)}
                 </div>
                 <h3 className="text-xl font-bold">{item.title}</h3>
                 <p className="mt-2 text-lime-100">{item.details}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

@@ -1,6 +1,7 @@
 // src/app/api/cloudinaryDeleteFolder/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { v2 as cloudinary, ResourceApiResponse } from "cloudinary";
+import { requireRoles } from "@/app/api/_utils/requireRoles";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -9,6 +10,11 @@ cloudinary.config({
 });
 
 export async function DELETE(request: NextRequest) {
+  const guard = await requireRoles(["SuperAdmin", "clientAdmin"]);
+  if (!guard.ok) {
+    return guard.response;
+  }
+
   try {
     const { folderPath }: { folderPath: string } = await request.json();
 

@@ -27,52 +27,15 @@ import {
   selectPortfolioLoading,
   updatePortfolioContent,
 } from "@/app/redux/slices/portfolioPageSlice";
+import type {
+  PortfolioContent,
+  Project,
+  QuoteContent,
+  Stat,
+} from "@/app/types/content/portfolio";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-
-// Define TypeScript interfaces
-export type Project = {
-  id: number;
-  title: string;
-  location: string;
-  category: string;
-  imageUrl: string;
-  hoverTitle: string;
-  hoverDescription: string;
-  exploreLink: string;
-};
-
-export type Stat = {
-  value: string;
-  label: string;
-};
-
-export type HeroContent = {
-  backgroundImageUrl: string;
-  title: string;
-  subtitle: string;
-  preTitle: string;
-};
-
-export type QuoteContent = {
-  text: string;
-  author: string;
-};
-
-export type CtaContent = {
-  title: string;
-  description: string;
-};
-
-export type PortfolioContent = {
-  hero: HeroContent;
-  quotes: QuoteContent[];
-  residentialProjects: Project[];
-  commercialProjects: Project[];
-  stats: Stat[];
-  cta: CtaContent;
-};
 
 // Animation variants
 const fadeIn = {

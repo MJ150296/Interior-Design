@@ -1,8 +1,14 @@
 import { NextResponse } from "next/server";
 import dbConnect from "@/app/utils/dbConnect";
 import BlogPageModel from "@/app/model/website-content/BlogPage.model";
+import { requireRoles } from "@/app/api/_utils/requireRoles";
 
 export async function PUT(request: Request) {
+  const guard = await requireRoles(["SuperAdmin", "clientAdmin"]);
+  if (!guard.ok) {
+    return guard.response;
+  }
+
   try {
     await dbConnect();
 

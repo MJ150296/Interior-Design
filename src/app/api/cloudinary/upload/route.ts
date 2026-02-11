@@ -2,6 +2,7 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { v2 as cloudinary } from "cloudinary";
+import { requireRoles } from "@/app/api/_utils/requireRoles";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -10,6 +11,11 @@ cloudinary.config({
 });
 
 export async function POST(request: NextRequest) {
+  const guard = await requireRoles(["SuperAdmin", "clientAdmin"]);
+  if (!guard.ok) {
+    return guard.response;
+  }
+
   const formData = await request.formData();
   const file = formData.get("file") as File;
   const folderPath = formData.get("folderPath") as string;

@@ -1,6 +1,7 @@
 // src/app/auth/redirect/page.tsx
 // "use client";
 import { auth } from "@/app/auth";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 export default async function AuthRedirectPage() {
@@ -17,12 +18,12 @@ export default async function AuthRedirectPage() {
         <h1 className="text-2xl font-bold mb-4">Signing you in...</h1>
         <p>Redirecting to your dashboard</p>
         <div className="mt-6">
-          <button
+          <Link
+            href="/iamadmin"
             className="text-blue-600 underline"
-            onClick={() => redirect("/iamadmin")}
           >
             Click here if not redirected automatically
-          </button>
+          </Link>
         </div>
       </div>
     </div>

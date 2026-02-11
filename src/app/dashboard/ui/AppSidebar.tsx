@@ -47,11 +47,6 @@ const allMenuItems = [
           `/dashboard/pages/${role}/website-content/portfolio`,
       },
       {
-        name: "Services",
-        path: (role: string) =>
-          `/dashboard/pages/${role}/website-content/services`,
-      },
-      {
         name: "Testimonials",
         path: (role: string) =>
           `/dashboard/pages/${role}/website-content/testimonials`,

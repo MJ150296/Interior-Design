@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "../store/store";
-import { AboutContent } from "@/app/dashboard/pages/clientAdmin/website-content/about-us/page";
+import { AboutContent } from "@/app/types/content/about";
 
 interface AboutUsPageState {
   content: AboutContent | null;

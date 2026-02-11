@@ -1,51 +1,106 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { QuoteIcon } from "lucide-react";
-import { useAppDispatch, useAppSelector } from "@/app/redux/store/hooks";
-import {
-  fetchTestimonialContent,
-  selectTestimonialContent,
-  selectTestimonialLoading,
-  selectTestimonialError,
-} from "@/app/redux/slices/testimonialPageSlice";
+import { usePublicContent } from "../PublicContentProvider";
+
+// Create a consolidated default content object
+const defaultContent = {
+  hero: {
+    backgroundImageUrl: "/Riddhi Interior Design/Testimonials/cover.jpg",
+    preTitle: "CLIENT TESTIMONIALS",
+    title: "What Our Clients Say",
+    subtitle: "Real Stories from Satisfied Customers Across Uttarakhand",
+  },
+  testimonials: [
+    {
+      id: 1,
+      author: "Rajesh & Priya Sharma",
+      role: "Homeowners, Dehradun",
+      quote:
+        "Riddhi Interiors transformed our 3BHK apartment into a dream home. Their attention to detail and creative space utilization was exceptional. The team was professional and delivered on time.",
+      rating: 5,
+      category: "Residential",
+      imageUrl: "/Riddhi Interior Design/Testimonials/residential-1.jpg",
+    },
+    {
+      id: 2,
+      author: "Vikram Singh",
+      role: "Restaurant Owner, Haridwar",
+      quote:
+        "Our restaurant's ambiance has been completely transformed. The design not only looks beautiful but has significantly improved customer flow and experience. Highly recommended for commercial projects!",
+      rating: 5,
+      category: "Commercial",
+      imageUrl: "/Riddhi Interior Design/Testimonials/commercial-1.jpg",
+    },
+    {
+      id: 3,
+      author: "Anita Desai",
+      role: "Villa Owner, Mussoorie",
+      quote:
+        "Working with Riddhi Interiors was a pleasure from start to finish. They understood our vision for a modern yet cozy mountain home and executed it perfectly. The quality of materials and workmanship is outstanding.",
+      rating: 5,
+      category: "Residential",
+      imageUrl: "/Riddhi Interior Design/Testimonials/residential-2.jpg",
+    },
+    {
+      id: 4,
+      author: "Dr. Sameer Gupta",
+      role: "Clinic Owner, Rishikesh",
+      quote:
+        "The clinic interior design has created a calming and professional atmosphere that our patients love. The team managed the project efficiently while we continued our practice.",
+      rating: 5,
+      category: "Commercial",
+      imageUrl: "/Riddhi Interior Design/Testimonials/commercial-2.jpg",
+    },
+    {
+      id: 5,
+      author: "The Kapoor Family",
+      role: "Family Home, Dehradun",
+      quote:
+        "They transformed our outdated house into a modern, functional home that meets all our family's needs. The children love their new rooms, and we enjoy the open living space.",
+      rating: 5,
+      category: "Residential",
+      imageUrl: "/Riddhi Interior Design/Testimonials/residential-3.jpg",
+    },
+    {
+      id: 6,
+      author: "Neha Rawat",
+      role: "Boutique Owner, Roorkee",
+      quote:
+        "The store design has doubled our footfall! The lighting, layout, and color scheme perfectly showcase our products. It's exactly what we envisioned for our brand.",
+      rating: 5,
+      category: "Commercial",
+      imageUrl: "/Riddhi Interior Design/Testimonials/commercial-3.jpg",
+    },
+  ],
+  stats: [
+    { value: "98%", label: "Client Satisfaction Rate" },
+    { value: "250+", label: "Projects Completed" },
+    { value: "50+", label: "5-Star Reviews" },
+    { value: "15+", label: "Cities Served" },
+  ],
+  cta: {
+    title: "Ready to Share Your Success Story?",
+    description:
+      "Join our growing family of satisfied clients. Let us transform your space and create an experience you'll love to share.",
+  },
+};
 
 const Testimonials = () => {
-  const dispatch = useAppDispatch();
-  const content = useAppSelector(selectTestimonialContent);
-  const loading = useAppSelector(selectTestimonialLoading);
-  const error = useAppSelector(selectTestimonialError);
+  const { testimonials: reduxContent } = usePublicContent();
   const [activeFilter, setActiveFilter] = useState("All");
 
-  useEffect(() => {
-    dispatch(fetchTestimonialContent());
-  }, [dispatch]);
-
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <Image
-          src="/Riddhi Interior Design/Logo.png"
-          alt="Riddhi Interior Logo"
-          width={128}
-          height={128}
-          className="animate-pulse"
-          priority
-        />
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-red-500">Error: {error}</div>
-      </div>
-    );
-  }
+  // Merge Redux data with defaults
+  const content = {
+    hero: reduxContent?.hero || defaultContent.hero,
+    testimonials: reduxContent?.testimonials || defaultContent.testimonials,
+    stats: reduxContent?.stats || defaultContent.stats,
+    cta: reduxContent?.cta || defaultContent.cta,
+  };
 
   // Get categories for filtering
   const projectTypes = [

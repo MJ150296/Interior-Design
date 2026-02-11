@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
 const CallToAction: React.FC = () => {
@@ -19,13 +18,23 @@ const CallToAction: React.FC = () => {
             Schedule a free consultation with our design experts to discuss your
             vision
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="bg-lime-500 hover:bg-lime-400 text-lime-900 font-bold py-4 px-8 rounded-full transition-colors shadow-lg text-lg">
-              Book a Consultation
-            </Button>
-            <Button className="bg-transparent border-2 border-white text-white hover:bg-white/10 font-bold py-4 px-8 rounded-full transition-colors text-lg">
+          <div className="flex flex-wrap gap-4 mt-8 justify-center">
+            <motion.a
+              href="/contact-us"
+              className="px-8 py-4 bg-lime-600 text-white font-bold rounded-xl shadow-lg hover:bg-lime-700 transition-colors"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Book A Consultation
+            </motion.a>
+            <motion.a
+              href="/our-projects"
+              className="px-8 py-4 bg-white border-2 border-lime-600 text-lime-700 font-bold rounded-xl shadow-lg hover:bg-lime-50 transition-colors"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
               View Pricing
-            </Button>
+            </motion.a>
           </div>
         </motion.div>
       </div>

@@ -4,7 +4,7 @@ import { RootState } from "../store/store";
 import {
   PortfolioContent,
   Project,
-} from "@/app/dashboard/pages/clientAdmin/website-content/portfolio/page";
+} from "@/app/types/content/portfolio";
 
 interface PortfolioPageState {
   content: PortfolioContent | null;

@@ -2,12 +2,12 @@
 
 import React from "react";
 import { roContent } from "@/app/data/roContent";
-import SinglaROSection from "@/app/components/Services/SinglaROsection";
+import ServiceSection from "@/app/components/Services/ServiceSection";
 
 export default function LivpureService() {
   const data = roContent.find((item) => item.slug === "renovations");
 
   if (!data) return <div>Service not found</div>;
 
-  return <SinglaROSection data={[data]} />;
+  return <ServiceSection data={[data]} />;
 }

@@ -31,68 +31,10 @@ import {
   selectAboutLoading,
   updateAboutContent,
 } from "@/app/redux/slices/aboutUsPageSlice";
+import type { AboutContent } from "@/app/types/content/about";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-
-// Define Types (unchanged)
-type StatItem = {
-  value: string;
-  label: string;
-};
-
-type CoreValueItem = {
-  title: string;
-  description: string;
-  icon: string;
-};
-
-type TeamMember = {
-  name: string;
-  title: string;
-  bio: string;
-  imageUrl: string;
-  tags: string[];
-};
-
-type SocialLink = {
-  platform: string;
-  imageURL: string;
-  url: string;
-};
-
-type HeroSection = {
-  title: string;
-  subtitle: string;
-  upperTitle: string;
-  backgroundImageUrl: string;
-};
-
-type StorySection = {
-  title: string;
-  subtitle: string;
-  content: string;
-  content2: string;
-  quote: string;
-  imageUrl: string;
-  cities: string;
-};
-
-type ConnectSection = {
-  socialLinks: SocialLink[];
-  address: string;
-  hours: string;
-  phone: string;
-};
-
-export type AboutContent = {
-  hero: HeroSection;
-  stats: StatItem[];
-  story: StorySection;
-  coreValues: CoreValueItem[];
-  teamMembers: TeamMember[];
-  connect: ConnectSection;
-};
 
 const defaultValues: AboutContent = {
   hero: {

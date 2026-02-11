@@ -3,6 +3,7 @@ import UserModel from "@/app/model/User.model";
 import superAdminModel from "@/app/model/superAdmin.model";
 import dbConnect from "@/app/utils/dbConnect";
 import { setSuperAdminStatus } from "@/app/utils/globalStore";
+import { auth } from "@/app/auth";
 
 // ✅ Define the expected structure of req.json()
 interface SuperAdminRequest {
@@ -35,6 +36,13 @@ export async function POST(req: Request) {
     const existingSuperAdmin = await UserModel.findOne({ role: "SuperAdmin" });
 
     if (existingSuperAdmin) {
+      const session = await auth();
+      if (!session?.user || session.user.role !== "SuperAdmin") {
+        return NextResponse.json(
+          { error: "Forbidden" },
+          { status: 403 }
+        );
+      }
       return NextResponse.json(
         { error: "SuperAdmin already exists." },
         { status: 400 }

@@ -71,9 +71,8 @@ const ServiceSection: React.FC<Props> = ({ data }) => {
               return (
                 <motion.div
                   key={sectionIndex}
-                  className={`flex flex-col md:flex-row items-center gap-10 mb-20 ${
-                    isImageLeft ? "md:flex-row-reverse" : ""
-                  }`}
+                  className={`flex flex-col md:flex-row items-center gap-10 mb-20 ${isImageLeft ? "md:flex-row-reverse" : ""
+                    }`}
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{
@@ -130,9 +129,8 @@ const ServiceSection: React.FC<Props> = ({ data }) => {
                       <div className="absolute inset-0 border-8 border-white opacity-20 pointer-events-none"></div>
                     </div>
                     <div
-                      className={`absolute -z-10 w-full h-full rounded-xl bg-lime-200 ${
-                        isImageLeft ? "-left-6 -bottom-6" : "-right-6 -bottom-6"
-                      }`}
+                      className={`absolute -z-10 w-full h-full rounded-xl bg-lime-200 ${isImageLeft ? "-left-6 -bottom-6" : "-right-6 -bottom-6"
+                        }`}
                     ></div>
                   </div>
                 </motion.div>
@@ -206,17 +204,23 @@ const ServiceSection: React.FC<Props> = ({ data }) => {
               Schedule a free consultation with our design experts to discuss
               your project
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact-us">
-                <Button className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-6 px-8 rounded-full transition-colors shadow-lg text-lg">
-                  Book a Free Consultation
-                </Button>
-              </Link>
-              <Link href="/our-projects">
-                <Button className="bg-white border-2 border-lime-600 text-lime-700 hover:bg-lime-50 font-bold py-6 px-8 rounded-full transition-colors text-lg">
-                  View Our Projects
-                </Button>
-              </Link>
+            <div className="flex flex-wrap gap-4 mt-8 justify-center">
+              <motion.a
+                href="/contact-us"
+                className="px-8 py-4 bg-lime-600 text-white font-bold rounded-xl shadow-lg hover:bg-lime-700 transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Book A Consultation
+              </motion.a>
+              <motion.a
+                href="/our-projects"
+                className="px-8 py-4 bg-white border-2 border-lime-600 text-lime-700 font-bold rounded-xl shadow-lg hover:bg-lime-50 transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                View Pricing
+              </motion.a>
             </div>
           </motion.div>
         </div>
