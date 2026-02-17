@@ -486,7 +486,7 @@ const AboutAdminDashboard = () => {
 
   return (
       <form onSubmit={onSubmit}>
-        <div className="flex flex-col min-h-screen bg-gradient-to-br from-slate-50 to-lime-50 dark:from-slate-900 dark:to-slate-800">
+        <div className="flex flex-col min-h-screen bg-linear-to-br from-slate-50 to-lime-50 dark:from-slate-900 dark:to-slate-800">
           {/* Header */}
           <motion.header
             className="flex flex-col bg-white dark:bg-slate-800 shadow-sm"
@@ -598,7 +598,7 @@ const AboutAdminDashboard = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="p-0">
-                  <div className="border-2 border-dashed rounded-xl w-full h-[600px] flex items-center justify-center text-gray-500 bg-gray-50 dark:bg-slate-900">
+                  <div className="border-2 border-dashed rounded-xl w-full h-150 flex items-center justify-center text-gray-500 bg-gray-50 dark:bg-slate-900">
                     <div className="text-center">
                       <FiLayout className="text-4xl mx-auto mb-3" />
                       <p>About Us page preview will appear here</p>

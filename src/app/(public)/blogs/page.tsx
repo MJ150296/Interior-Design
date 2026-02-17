@@ -53,13 +53,13 @@ const BlogList: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-lime-50 to-white">
+    <div className="min-h-screen bg-linear-to-b from-lime-50 to-white">
       {/* Hero Section */}
-      <div className="relative w-full h-[530px] shadow-xl flex flex-col items-center justify-center text-center overflow-hidden">
+      <div className="relative w-full h-132 shadow-xl flex flex-col items-center justify-center text-center overflow-hidden">
         {/* Parallax background */}
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-[url('/Riddhi%20Interior%20Design/Projects/cover.jpg')] bg-cover bg-center bg-no-repeat" />
-          <div className="absolute inset-0 bg-gradient-to-t from-lime-900/50 to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t from-lime-900/50 to-transparent" />
           {/* <div className="absolute inset-0 bg-[url('/pattern.svg')] bg-repeat opacity-10" /> */}
         </div>
 
@@ -132,14 +132,14 @@ const BlogList: React.FC = () => {
       </div>
 
       {/* Featured Blog Carousel */}
-      <section className="py-12 bg-gradient-to-r from-lime-50 to-lime-100">
+      <section className="py-12 bg-linear-to-r from-lime-50 to-lime-100">
         <div className="container mx-auto px-4">
           <div className="flex justify-center items-center gap-4 mb-12">
-            <div className="h-px bg-lime-300 flex-grow max-w-20 md:max-w-40" />
+            <div className="h-px bg-lime-300 grow max-w-20 md:max-w-40" />
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-lime-900 text-center">
               Featured Inspiration
             </h2>
-            <div className="h-px bg-lime-300 flex-grow max-w-20 md:max-w-40" />
+            <div className="h-px bg-lime-300 grow max-w-20 md:max-w-40" />
           </div>
 
           <AnimatePresence mode="wait">
@@ -155,11 +155,10 @@ const BlogList: React.FC = () => {
                 <Image
                   src={featuredBlog.image}
                   alt={featuredBlog.title}
-                  layout="fill"
-                  objectFit="cover"
-                  className="brightness-90"
+                  fill
+                  className="brightness-90 object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-lime-900/80 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-lime-900/80 to-transparent" />
               </div>
 
               <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
@@ -193,20 +192,18 @@ const BlogList: React.FC = () => {
 
       {/* Sticky category filter */}
       <div
-        className={`sticky top-0 z-10 py-4 bg-white shadow-md transition-all duration-300 ${
-          isScrolled ? "py-3" : "py-4"
-        }`}
+        className={`sticky top-0 z-10 py-4 bg-white shadow-md transition-all duration-300 ${isScrolled ? "py-3" : "py-4"
+          }`}
       >
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap justify-center gap-2 md:gap-4">
             {categories.map((category) => (
               <motion.button
                 key={category}
-                className={`px-4 py-2 rounded-full text-sm md:text-base font-medium transition-colors duration-300 ${
-                  activeCategory === category
+                className={`px-4 py-2 rounded-full text-sm md:text-base font-medium transition-colors duration-300 ${activeCategory === category
                     ? "bg-lime-600 text-white shadow-lg"
                     : "bg-gray-100 text-gray-700 hover:bg-lime-100"
-                }`}
+                  }`}
                 onClick={() => setActiveCategory(category)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -222,11 +219,11 @@ const BlogList: React.FC = () => {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="flex justify-center items-center gap-4 mb-12">
-            <div className="h-px bg-lime-300 flex-grow max-w-20 md:max-w-40" />
+            <div className="h-px bg-lime-300 grow max-w-20 md:max-w-40" />
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-lime-900 text-center">
               Latest Articles
             </h2>
-            <div className="h-px bg-lime-300 flex-grow max-w-20 md:max-w-40" />
+            <div className="h-px bg-lime-300 grow max-w-20 md:max-w-40" />
           </div>
 
           {filteredBlogs.length === 0 ? (
@@ -266,11 +263,9 @@ const BlogList: React.FC = () => {
                         <Image
                           src={blog.image}
                           alt={blog.title}
-                          layout="fill"
-                          objectFit="cover"
-                          className={`transition-transform duration-500 ${
-                            hoveredBlog === blog.id ? "scale-110" : "scale-100"
-                          }`}
+                          fill
+                          className={`object-cover transition-transform duration-500 ${hoveredBlog === blog.id ? "scale-110" : "scale-100"
+                            }`}
                         />
                         <div className="absolute top-4 right-4">
                           <span className="bg-lime-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
@@ -331,7 +326,7 @@ const BlogList: React.FC = () => {
       </section>
 
       {/* Newsletter Section */}
-      <section className="py-16 bg-gradient-to-r from-lime-900 to-lime-700 text-white">
+      <section className="py-16 bg-linear-to-r from-lime-900 to-lime-700 text-white">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="text-center mb-10">
             <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">
@@ -348,7 +343,7 @@ const BlogList: React.FC = () => {
               <input
                 type="email"
                 placeholder="Your email address"
-                className="flex-grow px-5 py-3 rounded-full bg-white/20 text-white placeholder-lime-200 focus:outline-none focus:ring-2 focus:ring-lime-400"
+                className="grow px-5 py-3 rounded-full bg-white/20 text-white placeholder-lime-200 focus:outline-none focus:ring-2 focus:ring-lime-400"
               />
               <button className="bg-lime-500 hover:bg-lime-400 text-lime-900 font-bold py-3 px-6 rounded-full transition-colors shadow-lg">
                 Subscribe

@@ -48,15 +48,14 @@ const BlogDetail: React.FC = () => {
       </div>
 
       {/* Featured Image with Overlay */}
-      <div className="relative w-full h-[500px] rounded-xl overflow-hidden shadow-xl mb-12">
+      <div className="relative w-full h-125 rounded-xl overflow-hidden shadow-xl mb-12">
         <Image
           src={blog.image}
           alt={blog.title}
-          layout="fill"
-          objectFit="cover"
-          className="brightness-90"
+          fill
+          className="object-cover brightness-90"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-lime-900/70 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-lime-900/70 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-8">
           <motion.h1
             className="text-3xl md:text-5xl font-serif font-bold text-white mb-4"
@@ -128,7 +127,7 @@ const BlogDetail: React.FC = () => {
                     {blog.keyFeatures.map((feature, index) => (
                       <li key={index} className="flex items-start">
                         <svg
-                          className="w-5 h-5 text-lime-600 mt-0.5 mr-2 flex-shrink-0"
+                          className="w-5 h-5 text-lime-600 mt-0.5 mr-2 shrink-0"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -151,7 +150,7 @@ const BlogDetail: React.FC = () => {
               {/* Design Tips */}
               {blog.designTips && blog.designTips.length > 0 && (
                 <motion.div
-                  className="mt-8 bg-gradient-to-r from-lime-50 to-lime-100 rounded-xl p-6 border border-lime-200"
+                  className="mt-8 bg-linear-to-r from-lime-50 to-lime-100 rounded-xl p-6 border border-lime-200"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5, duration: 0.5 }}
@@ -162,7 +161,7 @@ const BlogDetail: React.FC = () => {
                   <ul className="space-y-3">
                     {blog.designTips.map((tip, index) => (
                       <li key={index} className="flex items-start">
-                        <div className="bg-lime-500 rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">
+                        <div className="bg-lime-500 rounded-full w-6 h-6 flex items-center justify-center mr-3 shrink-0">
                           <span className="text-white text-sm font-bold">
                             {index + 1}
                           </span>
@@ -194,9 +193,8 @@ const BlogDetail: React.FC = () => {
                         <Image
                           src={img}
                           alt={`${blog.title} gallery image ${index + 1}`}
-                          layout="fill"
-                          objectFit="cover"
-                          className="transition-transform duration-500 hover:scale-105"
+                          fill
+                          className="object-cover transition-transform duration-500 hover:scale-105"
                         />
                       </div>
                     ))}
@@ -275,13 +273,12 @@ const BlogDetail: React.FC = () => {
                       className="group block"
                     >
                       <div className="flex items-start">
-                        <div className="relative w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                        <div className="relative w-20 h-20 rounded-lg overflow-hidden shrink-0">
                           <Image
                             src={relatedBlog.image}
                             alt={relatedBlog.title}
-                            layout="fill"
-                            objectFit="cover"
-                            className="transition-transform duration-500 group-hover:scale-110"
+                            fill
+                            className="object-cover transition-transform duration-500 group-hover:scale-110"
                           />
                         </div>
                         <div className="ml-4">
@@ -304,7 +301,7 @@ const BlogDetail: React.FC = () => {
 
       {/* Newsletter CTA */}
       <motion.div
-        className="mt-16 bg-gradient-to-r from-lime-700 to-lime-900 rounded-2xl p-8 text-white text-center"
+        className="mt-16 bg-linear-to-r from-lime-700 to-lime-900 rounded-2xl p-8 text-white text-center"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.7, duration: 0.5 }}
@@ -320,7 +317,7 @@ const BlogDetail: React.FC = () => {
           <input
             type="email"
             placeholder="Your email address"
-            className="flex-grow px-5 py-3 rounded-full bg-white/20 text-white placeholder-lime-200 focus:outline-none focus:ring-2 focus:ring-lime-400"
+            className="grow px-5 py-3 rounded-full bg-white/20 text-white placeholder-lime-200 focus:outline-none focus:ring-2 focus:ring-lime-400"
           />
           <button className="bg-lime-500 hover:bg-lime-400 text-lime-900 font-bold py-3 px-6 rounded-full transition-colors shadow-lg">
             Subscribe

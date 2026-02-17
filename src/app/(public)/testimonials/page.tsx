@@ -114,19 +114,18 @@ const Testimonials = () => {
       : content.testimonials.filter((t) => t.category === activeFilter);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-lime-50 to-gray-50">
+    <div className="min-h-screen bg-linear-to-b from-lime-50 to-gray-50">
       {/* Hero Section */}
-      <div className="relative w-full h-[500px] flex flex-col items-center justify-center text-center overflow-hidden">
+      <div className="relative w-full h-125 flex flex-col items-center justify-center text-center overflow-hidden">
         {/* Parallax background */}
         <div className="absolute inset-0 z-0">
           <Image
             src={content.hero.backgroundImageUrl}
             alt="Testimonials background"
-            layout="fill"
-            objectFit="cover"
-            className="brightness-90"
+            fill
+            className="object-cover brightness-90"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-lime-900/50 to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t from-lime-900/50 to-transparent" />
         </div>
 
         {/* Content */}
@@ -217,11 +216,10 @@ const Testimonials = () => {
           {projectTypes.map((type) => (
             <motion.button
               key={type}
-              className={`px-4 py-2 rounded-full text-sm md:text-base font-medium transition-colors duration-300 ${
-                activeFilter === type
+              className={`px-4 py-2 rounded-full text-sm md:text-base font-medium transition-colors duration-300 ${activeFilter === type
                   ? "bg-lime-600 text-white shadow-lg"
                   : "bg-gray-100 text-gray-700 hover:bg-lime-100"
-              }`}
+                }`}
               onClick={() => setActiveFilter(type)}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -246,9 +244,8 @@ const Testimonials = () => {
                   <Image
                     src={client.imageUrl}
                     alt={client.category}
-                    layout="fill"
-                    objectFit="cover"
-                    className="transition-transform duration-500 group-hover:scale-110"
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute top-4 right-4">
                     <span className="bg-lime-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
@@ -297,7 +294,7 @@ const Testimonials = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-gradient-to-r from-lime-700 to-lime-900 text-white">
+      <section className="py-16 bg-linear-to-r from-lime-700 to-lime-900 text-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
             <motion.h2
@@ -332,7 +329,7 @@ const Testimonials = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 bg-gradient-to-b from-white to-lime-50">
+      <section className="py-20 px-4 bg-linear-to-b from-white to-lime-50">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
             className="bg-white rounded-2xl shadow-xl p-8 md:p-12 border border-lime-200"

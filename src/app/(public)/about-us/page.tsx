@@ -93,32 +93,7 @@ const defaultContent = {
   },
 };
 
-const socialMedia = [
-  {
-    name: "Instagram",
-    icon: "/Riddhi Interior Design/icons/Instagram.png",
-    url: "https://instagram.com",
-    color: "bg-gradient-to-r from-purple-500 to-pink-500",
-  },
-  {
-    name: "Facebook",
-    icon: "/Riddhi Interior Design/icons/Facebook.png",
-    url: "https://facebook.com",
-    color: "bg-gradient-to-r from-blue-600 to-blue-400",
-  },
-  {
-    name: "Twitter",
-    icon: "/Riddhi Interior Design/icons/Gmail.png",
-    url: "https://twitter.com",
-    color: "bg-gradient-to-r from-blue-400 to-cyan-400",
-  },
-  {
-    name: "LinkedIn",
-    icon: "/Riddhi Interior Design/icons/WhatsApp.png",
-    url: "https://linkedin.com",
-    color: "bg-gradient-to-r from-teal-500 to-teal-300",
-  },
-];
+
 
 const AboutUs: React.FC = () => {
   const { about: reduxContent } = usePublicContent();
@@ -148,18 +123,18 @@ const AboutUs: React.FC = () => {
   );
 
   return (
-    <div className="w-full relative bg-gradient-to-b from-lime-50 to-white">
+    <div className="w-full relative bg-linear-to-b from-lime-50 to-white">
       {/* Hero Section */}
-      <div className="relative w-full h-[500px] flex flex-col items-center justify-center text-center overflow-hidden">
+      <div className="relative w-full h-125 flex flex-col items-center justify-center text-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
             src={heroData.backgroundImageUrl}
             alt="About background"
-            layout="fill"
-            objectFit="cover"
-            className="brightness-90"
+            fill
+            sizes=""
+            className="brightness-90 object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-lime-900/50 to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t from-lime-900/50 to-transparent" />
         </div>
 
         <motion.div
@@ -198,7 +173,7 @@ const AboutUs: React.FC = () => {
       </div>
 
       {/* Stats Section */}
-      <div className="py-12 bg-gradient-to-r from-lime-700 to-lime-900 text-white">
+      <div className="py-12 bg-linear-to-r from-lime-700 to-lime-900 text-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {statsData.map((stat, index) => (
@@ -271,7 +246,7 @@ const AboutUs: React.FC = () => {
 
         <div className="w-full md:w-1/2 flex justify-center items-center mt-12 md:mt-0 md:ml-10 md:px-20">
           <motion.div
-            className="relative w-full max-w-lg h-[500px] rounded-3xl overflow-hidden shadow-2xl"
+            className="relative w-full max-w-lg h-125 rounded-3xl overflow-hidden shadow-2xl"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.3, duration: 0.7 }}
@@ -279,11 +254,10 @@ const AboutUs: React.FC = () => {
             <Image
               src={storyData.imageUrl}
               alt="Riddhi Interiors Project"
-              layout="fill"
-              objectFit="cover"
-              className="transition-transform duration-500 hover:scale-110"
+              fill
+              className="object-cover transition-transform duration-500 hover:scale-110"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent" />
           </motion.div>
         </div>
       </div>
@@ -405,11 +379,10 @@ const AboutUs: React.FC = () => {
                     <Image
                       src={member.imageUrl}
                       alt={member.name}
-                      layout="fill"
-                      objectFit="cover"
-                      className="transition-transform duration-500 group-hover:scale-110"
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/40 to-transparent" />
                   </div>
                   <CardContent className="p-6">
                     <h3 className="text-xl font-bold text-lime-900">
@@ -440,7 +413,7 @@ const AboutUs: React.FC = () => {
       </section>
 
       {/* Connect Section */}
-      <section className="py-16 bg-gradient-to-r from-lime-700 to-lime-900 text-white">
+      <section className="py-16 bg-linear-to-r from-lime-700 to-lime-900 text-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <motion.h2
             className="text-3xl md:text-4xl font-serif font-bold mb-8"
@@ -452,13 +425,13 @@ const AboutUs: React.FC = () => {
           </motion.h2>
 
           <div className="flex flex-wrap justify-center gap-8 mb-12">
-            {socialMedia.map((social, index) => (
+            {connectData?.socialLinks.map((social, index) => (
               <motion.a
                 key={index}
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${social.color} w-24 h-24 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow`}
+                className={`w-24 h-24 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow`}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: index * 0.1 + 0.3, duration: 0.5 }}
@@ -466,12 +439,13 @@ const AboutUs: React.FC = () => {
                 whileTap={{ scale: 0.9 }}
               >
                 <Image
-                  src={social.icon}
-                  alt={social.name}
+                  src={social.imageURL || "/Riddhi Interior Design/icons/default-social.png"}
+                  alt={social.platform}
                   width={40}
                   height={40}
-                  className="filter brightness-0 invert"
+                  className="object-cover"
                 />
+
               </motion.a>
             ))}
           </div>

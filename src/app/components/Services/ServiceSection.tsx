@@ -13,21 +13,20 @@ interface Props {
 
 const ServiceSection: React.FC<Props> = ({ data }) => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-lime-50 to-white">
+    <div className="min-h-screen bg-linear-to-b from-lime-50 to-white">
       {/* Main Service Content */}
       {data.map((item) => (
         <div key={item.id}>
           {/* Hero Section */}
-          <div className="relative w-full h-[500px] flex flex-col items-center justify-center text-center overflow-hidden">
+          <div className="relative w-full h-125 flex flex-col items-center justify-center text-center overflow-hidden">
             <div className="absolute inset-0 z-0">
               <Image
                 src={item.backgroundImage || "/default-bg.jpg"}
                 alt={item.title}
-                layout="fill"
-                objectFit="cover"
-                className="brightness-90"
+                fill
+                className="object-cover brightness-90"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-lime-900/50 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-lime-900/50 to-transparent" />
               {/* <div className="absolute inset-0 bg-[url('/pattern.svg')] bg-repeat opacity-10" /> */}
             </div>
 
@@ -189,7 +188,7 @@ const ServiceSection: React.FC<Props> = ({ data }) => {
       ))}
 
       {/* Consultation CTA */}
-      <section className="py-16 bg-gradient-to-r from-lime-700 to-lime-900">
+      <section className="py-16 bg-linear-to-r from-lime-700 to-lime-900">
         <div className="max-w-4xl mx-auto text-center px-4">
           <motion.div
             className="bg-white rounded-2xl shadow-xl p-8 md:p-12"

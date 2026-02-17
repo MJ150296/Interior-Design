@@ -164,11 +164,10 @@ const Projects = () => {
         <Image
           src={project.src}
           alt={project.alt}
-          layout="fill"
-          objectFit="cover"
-          className="transition-transform duration-500 group-hover:scale-110"
+          fill
+          className="object-cover transition-transform duration-500 group-hover:scale-110"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-lime-900/50 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-lime-900/50 to-transparent" />
         <div className="absolute top-4 right-4">
           <span className="bg-lime-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
             {project.category}
@@ -176,7 +175,7 @@ const Projects = () => {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent text-white">
+      <div className="absolute bottom-0 left-0 right-0 p-4 bg-linear-to-t from-black/80 to-transparent text-white">
         <h3 className="text-xl font-bold">{project.title}</h3>
         <div className="flex justify-between items-center mt-2">
           <p className="text-lime-300 text-sm">{project.location}</p>
@@ -208,18 +207,17 @@ const Projects = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-lime-50 to-white">
+    <div className="min-h-screen bg-linear-to-b from-lime-50 to-white">
       {/* Hero Section */}
-      <div className="relative w-full h-[500px] flex flex-col items-center justify-center text-center overflow-hidden">
+      <div className="relative w-full h-125 flex flex-col items-center justify-center text-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
             src={heroData.backgroundImageUrl}
             alt="Projects background"
-            layout="fill"
-            objectFit="cover"
-            className="brightness-90"
+            fill
+            className="object-cover brightness-90"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-lime-900/50 to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t from-lime-900/50 to-transparent" />
         </div>
 
         <motion.div
@@ -285,7 +283,7 @@ const Projects = () => {
             />
           </div>
         </motion.div>
-        <div className="min-h-[100px] flex items-center justify-center">
+        <div className="min-h-25 flex items-center justify-center">
           <div
             className={`transition-all duration-500 ease-in-out ${fade ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
@@ -348,7 +346,7 @@ const Projects = () => {
       </div>
 
       {/* Stats Section */}
-      <section className="py-16 bg-gradient-to-r from-lime-700 to-lime-900 text-white">
+      <section className="py-16 bg-linear-to-r from-lime-700 to-lime-900 text-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
             <motion.h2
@@ -383,7 +381,7 @@ const Projects = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-b from-white to-lime-50">
+      <section className="py-16 bg-linear-to-b from-white to-lime-50">
         <div className="max-w-4xl mx-auto text-center px-4">
           <motion.div
             className="bg-white rounded-2xl shadow-xl p-8 md:p-12 border border-lime-200"
