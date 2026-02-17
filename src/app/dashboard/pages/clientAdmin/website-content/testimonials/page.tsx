@@ -115,10 +115,16 @@ const TestimonialAdminDashboard = () => {
   const saveFormData = useCallback(
     async (dataToSave?: TestimonialContent) => {
       setIsSaving(true);
+      const finalData = dataToSave ?? formData;
+      console.log("data to save", finalData);
+      console.log("formData value", formData);
+
       try {
         await dispatch(
-          updateTestimonialContent(dataToSave || formData)
+          updateTestimonialContent(finalData)
         ).unwrap();
+        // 🔁 Refetch to guarantee the Redux state has the full data
+        await dispatch(fetchTestimonialContent()).unwrap();
         setChangedFields(new Set()); // Reset changed fields after successful save
         return true;
       } catch (error) {
@@ -465,7 +471,7 @@ const TestimonialAdminDashboard = () => {
 
   return (
     <form onSubmit={onSubmit}>
-      <div className="flex flex-col min-h-screen bg-gradient-to-br from-slate-50 to-lime-50 dark:from-slate-900 dark:to-slate-800">
+      <div className="flex flex-col min-h-screen bg-linear-to-br from-slate-50 to-lime-50 dark:from-slate-900 dark:to-slate-800">
         {/* Header */}
         <motion.header
           className="flex flex-col bg-white dark:bg-slate-800 shadow-sm"

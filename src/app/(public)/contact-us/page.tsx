@@ -155,10 +155,10 @@ const AppointmentPage: React.FC = () => {
   }, [contactContent.whyChooseUs.features.length]);
 
   return (
-    <div className="min-h-screen pt-24 bg-gradient-to-br from-gray-50 to-lime-50">
+    <div className="min-h-screen pt-24 bg-linear-to-br from-gray-50 to-lime-50">
       {/* Hero Section */}
       <motion.header
-        className="relative bg-gradient-to-r from-lime-900 via-lime-700 to-lime-600 text-white p-8 md:p-16 text-center shadow-xl overflow-hidden"
+        className="relative bg-linear-to-r from-lime-900 via-lime-700 to-lime-600 text-white p-8 md:p-16 text-center shadow-xl overflow-hidden"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
@@ -271,7 +271,7 @@ const AppointmentPage: React.FC = () => {
                 scale: index === currentHighlight ? 1.05 : 1,
               }}
               transition={{ duration: 0.5 }}
-              className={`bg-gradient-to-br from-white to-lime-50 p-6 rounded-xl shadow-lg border ${
+              className={`bg-linear-to-br from-white to-lime-50 p-6 rounded-xl shadow-lg border ${
                 index === currentHighlight
                   ? "border-lime-500 border-2 shadow-lime-100"
                   : "border-gray-200"
@@ -294,7 +294,7 @@ const AppointmentPage: React.FC = () => {
       {/* Appointment Form Section */}
       <section
         id="appointment-form"
-        className="relative py-16 bg-gradient-to-b from-gray-50 to-lime-50"
+        className="relative py-16 bg-linear-to-b from-gray-50 to-lime-50"
       >
         <div className="max-w-6xl mx-auto px-4">
           <motion.div
@@ -314,7 +314,7 @@ const AppointmentPage: React.FC = () => {
       </section>
 
       {/* Contact Info */}
-      <section className="py-12 bg-gradient-to-br from-lime-600 to-lime-800 text-white">
+      <section className="py-12 bg-linear-to-br from-lime-600 to-lime-800 text-white">
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {contactContent.contactInfo.items.map((item, index) => (

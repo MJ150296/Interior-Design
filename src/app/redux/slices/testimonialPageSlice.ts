@@ -185,6 +185,7 @@ const testimonialPageSlice = createSlice({
       .addCase(
         updateTestimonialContent.fulfilled,
         (state, action: PayloadAction<TestimonialContent>) => {
+          console.log("Update fulfilled, payload:", action.payload);
           state.loading = false;
           state.content = action.payload;
         }

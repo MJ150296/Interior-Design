@@ -6,6 +6,8 @@ import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { QuoteIcon } from "lucide-react";
 import { usePublicContent } from "../PublicContentProvider";
+import { ca } from "zod/v4/locales";
+import Link from "next/link";
 
 // Create a consolidated default content object
 const defaultContent = {
@@ -15,6 +17,7 @@ const defaultContent = {
     title: "What Our Clients Say",
     subtitle: "Real Stories from Satisfied Customers Across Uttarakhand",
   },
+  categories: [{ name: "All" }],
   testimonials: [
     {
       id: 1,
@@ -97,15 +100,18 @@ const Testimonials = () => {
   // Merge Redux data with defaults
   const content = {
     hero: reduxContent?.hero || defaultContent.hero,
+    categories: reduxContent?.categories || defaultContent.categories,
     testimonials: reduxContent?.testimonials || defaultContent.testimonials,
     stats: reduxContent?.stats || defaultContent.stats,
     cta: reduxContent?.cta || defaultContent.cta,
   };
 
+  console.log("content", content);
+
+
   // Get categories for filtering
   const projectTypes = [
-    "All",
-    ...new Set(content.testimonials.map((t) => t.category)),
+    ...new Set(content.categories.map((t) => t.name)),
   ];
 
   const filteredTestimonials =
@@ -217,8 +223,8 @@ const Testimonials = () => {
             <motion.button
               key={type}
               className={`px-4 py-2 rounded-full text-sm md:text-base font-medium transition-colors duration-300 ${activeFilter === type
-                  ? "bg-lime-600 text-white shadow-lg"
-                  : "bg-gray-100 text-gray-700 hover:bg-lime-100"
+                ? "bg-lime-600 text-white shadow-lg"
+                : "bg-gray-100 text-gray-700 hover:bg-lime-100"
                 }`}
               onClick={() => setActiveFilter(type)}
               whileHover={{ scale: 1.05 }}
@@ -345,12 +351,16 @@ const Testimonials = () => {
               {content.cta.description}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-3 px-8 rounded-full transition-colors shadow-lg text-lg">
-                Book a Consultation
-              </button>
-              <button className="bg-white border-2 border-lime-600 text-lime-700 hover:bg-lime-50 font-bold py-3 px-8 rounded-full transition-colors text-lg">
-                View Our Portfolio
-              </button>
+              <Link href="/contact-us">
+                <button className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-3 px-8 rounded-full transition-colors shadow-lg text-lg">
+                  Book a Consultation
+                </button>
+              </Link>
+              <Link href="/our-projects">
+                <button className="bg-white border-2 border-lime-600 text-lime-700 hover:bg-lime-50 font-bold py-3 px-8 rounded-full transition-colors text-lg">
+                  View Our Portfolio
+                </button>
+              </Link>
             </div>
           </motion.div>
         </div>
