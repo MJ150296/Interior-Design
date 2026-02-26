@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import dbConnect from "@/app/utils/dbConnect";
 import TestimonialPageModel from "@/app/model/website-content/TestimonialPage.model";
 import { requireRoles } from "@/app/api/_utils/requireRoles";
+import { revalidatePublicContent } from "@/app/lib/revalidatePublicContent";
 
 export async function PUT(request: Request) {
   const guard = await requireRoles(["SuperAdmin", "clientAdmin"]);
@@ -26,6 +27,7 @@ export async function PUT(request: Request) {
 
     // Save to database
     await testimonialContent.save();
+    revalidatePublicContent();
 
     return NextResponse.json({
       success: true,

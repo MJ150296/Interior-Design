@@ -180,7 +180,7 @@ const BookAppointmentForm: React.FC<BookAppointmentFormProps> = ({
           <Textarea
             id="message"
             rows={5}
-            className="bg-lime-50 dark:bg-[#23201c] border-[#d9d2c5] dark:border-[#3a3632] focus:border-[#c8a97e] focus:ring-1 focus:ring-[#c8a97e] rounded-lg py-4 px-4 transition-all duration-300 placeholder-[#a0988c] min-h-[120px]"
+            className="bg-lime-50 dark:bg-[#23201c] border-[#d9d2c5] dark:border-[#3a3632] focus:border-[#c8a97e] focus:ring-1 focus:ring-[#c8a97e] rounded-lg py-4 px-4 transition-all duration-300 placeholder-[#a0988c] min-h-30"
             {...register("message")}
             placeholder="Tell us about your project..."
           />

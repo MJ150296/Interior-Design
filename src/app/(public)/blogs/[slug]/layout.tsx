@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { blogs } from "@/app/data/blogs";
+import { getPublicContentBundle } from "@/app/lib/publicContent.server";
 import { buildPublicMetadata } from "@/lib/seo";
 
 type BlogLayoutProps = {
@@ -14,9 +14,15 @@ export async function generateMetadata({
   params,
 }: BlogMetadataProps): Promise<Metadata> {
   const { slug } = await params;
-  const blog = blogs.find((item) => item.id === slug);
+  
+  // Fetch blog content from database
+  const content = await getPublicContentBundle();
+  const blogContent = content.blog;
+  
+  // Find article by id (slug)
+  const article = blogContent?.articles?.find((item) => item.id === slug);
 
-  if (!blog) {
+  if (!article) {
     return buildPublicMetadata({
       title: "Blog Not Found",
       description: "The requested blog article does not exist.",
@@ -26,15 +32,15 @@ export async function generateMetadata({
   }
 
   return buildPublicMetadata({
-    title: blog.title,
-    description: blog.excerpt,
-    path: `/blogs/${blog.id}`,
-    image: blog.image,
+    title: article.title,
+    description: article.description,
+    path: `/blogs/${article.id}`,
+    image: article.imageUrl,
     keywords: [
       "interior design blog",
       "Riddhi Interiors",
-      blog.category,
-      blog.author,
+      article.category,
+      article.author,
     ],
     type: "article",
   });

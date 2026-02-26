@@ -1,6 +1,58 @@
 import type { AboutContent } from "./about";
 import type { PortfolioContent } from "./portfolio";
 
+export interface BlogContent {
+  hero: {
+    backgroundImageUrl: string;
+    preTitle: string;
+    title: string;
+    subtitle: string;
+    searchPlaceholder: string;
+  };
+  featured: {
+    title: string;
+    postIds: string[];
+  };
+  categories: string[];
+  articles: Array<{
+    id: string;
+    imageUrl: string;
+    category: string;
+    title: string;
+    description: string;
+    author: string;
+    authorBio: string;
+    date: string;
+    content: {
+      hero: {
+        title: string;
+        subtitle: string;
+        imageUrl: string;
+      };
+      meta: {
+        readTime: string;
+      };
+      body: Array<{
+        type: string;
+        text?: string;
+        title?: string;
+        url?: string;
+        caption?: string;
+        items?: string[];
+      }>;
+      features: string[];
+      tips: string[];
+    };
+  }>;
+  newsletter: {
+    title: string;
+    description: string;
+    placeholder: string;
+    buttonText: string;
+    privacyText: string;
+  };
+}
+
 export interface ContactContent {
   hero: {
     title: string;
@@ -73,4 +125,5 @@ export interface PublicContentBundle {
   contact: ContactContent;
   appointmentForm: AppointmentFormContent;
   testimonials: TestimonialContent;
+  blog: BlogContent;
 }

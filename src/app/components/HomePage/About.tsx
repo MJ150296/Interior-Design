@@ -2,10 +2,14 @@ import Image from "next/image";
 import React from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { useGlobalUI } from "@/app/contexts/GlobalUIContext";
+import Link from "next/link";
 
 const About = () => {
+  const { openAppointmentForm } = useGlobalUI();
+
   return (
-    <section className="py-16 px-12 bg-gradient-to-r from-lime-50 to-lime-100 w-full">
+    <section className="py-16 px-12 bg-linear-to-r from-lime-50 to-lime-100 w-full">
       <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row gap-12 items-center">
         <motion.div
           className="w-full md:w-2/3"
@@ -54,12 +58,17 @@ const About = () => {
           </div>
 
           <div className="flex flex-wrap gap-4 mt-6">
-            <Button className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-4 px-8 rounded-full transition-colors">
+            <Button
+              onClick={openAppointmentForm}
+              className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-4 px-8 rounded-full transition-colors"
+            >
               Book a Free Consultation
             </Button>
-            <Button className="bg-white border-2 border-lime-600 text-lime-700 hover:bg-lime-50 font-bold py-4 px-8 rounded-full transition-colors">
-              View Our Portfolio
-            </Button>
+            <Link href="/our-projects">
+              <Button className="bg-white border-2 border-lime-600 text-lime-700 hover:bg-lime-50 font-bold py-4 px-8 rounded-full transition-colors">
+                View Our Portfolio
+              </Button>
+            </Link>
           </div>
         </motion.div>
 

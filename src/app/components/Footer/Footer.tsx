@@ -2,7 +2,8 @@
 
 import React from "react";
 import Link from "next/link";
-import { FaFacebookF, FaTwitter, FaInstagram } from "react-icons/fa";
+import { FaFacebookF, FaInstagram } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 const Footer: React.FC = () => {
   return (
@@ -97,7 +98,7 @@ const Footer: React.FC = () => {
           {/* Social Icons */}
           <div className="flex space-x-4 mt-4 text-gray-400">
             <a
-              href="https://www.facebook.com/"
+              href="https://www.facebook.com/profile.php?id=61581159277317"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-white"
@@ -105,15 +106,15 @@ const Footer: React.FC = () => {
               <FaFacebookF />
             </a>
             <a
-              href="https://x.com/"
+              href="https://x.com/riddhiinterior"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-white"
             >
-              <FaTwitter />
+              <FaXTwitter />
             </a>
             <a
-              href="https://www.instagram.com/"
+              href="https://www.instagram.com/riddhiinterior1/"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-white"

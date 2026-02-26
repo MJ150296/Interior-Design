@@ -3,12 +3,13 @@
 import * as React from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function HomePageCarousel() {
   return (
     <div className="relative w-full h-screen">
       {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-lime-900/50 to-transparent z-10" />
+      <div className="absolute inset-0 bg-linear-to-t from-lime-900/50 to-transparent z-10" />
 
       {/* Pattern background */}
       {/* <div className="absolute inset-0 bg-[url('/pattern.svg')] bg-repeat opacity-10 z-0" /> */}
@@ -69,9 +70,12 @@ export default function HomePageCarousel() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button className="bg-lime-600 hover:bg-lime-700 hover:cursor-pointer text-white font-bold py-6 px-8 text-lg">
-                  View Our Projects
-                </Button>
+                <Link href="/our-projects">
+                  <Button className="bg-lime-600 hover:bg-lime-700 hover:cursor-pointer text-white font-bold py-6 px-8 text-lg">
+                    View Our Projects
+                  </Button>
+                </Link>
+
               </motion.div>
             </motion.div>
           </div>

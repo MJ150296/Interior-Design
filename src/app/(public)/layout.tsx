@@ -3,6 +3,7 @@ import Navbar from "../components/Header/Navbar";
 import Footer from "../components/Footer/Footer";
 import GlobalOverlay from "../components/GlobalOverlay";
 import { PublicContentProvider } from "./PublicContentProvider";
+import { GlobalUIProvider } from "../contexts/GlobalUIContext";
 import { getPublicContentBundle } from "@/app/lib/publicContent.server";
 import type { Metadata } from "next";
 import { buildPublicMetadata, SITE_NAME, siteUrl } from "@/lib/seo";
@@ -54,16 +55,18 @@ export default async function PublicLayout({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
       />
-      <PublicContentProvider value={content}>
-        <header className="w-full flex flex-col fixed z-30">
-          <Navbar />
-        </header>
-        <main className="pt-24">{children}</main>
-        <footer>
-          <Footer />
-        </footer>
-        <GlobalOverlay />
-      </PublicContentProvider>
+      <GlobalUIProvider>
+        <PublicContentProvider value={content}>
+          <header className="w-full flex flex-col fixed z-30">
+            <Navbar />
+          </header>
+          <main className="pt-24">{children}</main>
+          <footer>
+            <Footer />
+          </footer>
+          <GlobalOverlay />
+        </PublicContentProvider>
+      </GlobalUIProvider>
     </>
   );
 }

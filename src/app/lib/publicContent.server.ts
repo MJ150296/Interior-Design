@@ -5,11 +5,13 @@ import PortfolioPageModel from "@/app/model/website-content/PortfolioPage.model"
 import ContactPageModel from "@/app/model/website-content/ContactPage.model";
 import AppointmentFormModel from "@/app/model/website-content/AppointmentForm.model";
 import TestimonialPageModel from "@/app/model/website-content/TestimonialPage.model";
+import BlogPageModel from "@/app/model/website-content/BlogPage.model";
 import type {
   AppointmentFormContent,
   ContactContent,
   PublicContentBundle,
   TestimonialContent,
+  BlogContent,
 } from "@/app/types/content/public";
 import type { AboutContent } from "@/app/types/content/about";
 import type { PortfolioContent } from "@/app/types/content/portfolio";
@@ -186,6 +188,29 @@ const defaultTestimonials: TestimonialContent = {
   },
 };
 
+const defaultBlog: BlogContent = {
+  hero: {
+    backgroundImageUrl: "/Riddhi Interior Design/Projects/cover.jpg",
+    preTitle: "INSIGHTS & INSPIRATION",
+    title: "Design Journal",
+    subtitle: "Explore Ideas, Trends, and Expert Advice on Beautiful Living Spaces.",
+    searchPlaceholder: "Search blog posts...",
+  },
+  featured: {
+    title: "Featured Inspiration",
+    postIds: [],
+  },
+  categories: ["All"],
+  articles: [],
+  newsletter: {
+    title: "Design Inspiration Delivered",
+    description: "Join our newsletter and receive exclusive design tips, trend reports, and special offers.",
+    placeholder: "Your email address",
+    buttonText: "Subscribe",
+    privacyText: "We respect your privacy. Unsubscribe at any time.",
+  },
+};
+
 function toPlain<T>(value: unknown): T {
   return JSON.parse(JSON.stringify(value)) as T;
 }
@@ -201,12 +226,14 @@ const getPublicContentBundleCached = unstable_cache(
         contactRaw,
         appointmentRaw,
         testimonialsRaw,
+        blogRaw,
       ] = await Promise.all([
         AboutUsPageModel.findOne().lean(),
         PortfolioPageModel.findOne().lean(),
         ContactPageModel.findOne().lean(),
         AppointmentFormModel.findOne().lean(),
         TestimonialPageModel.findOne().lean(),
+        BlogPageModel.findOne().lean(),
       ]);
 
       return {
@@ -223,6 +250,7 @@ const getPublicContentBundleCached = unstable_cache(
         testimonials: testimonialsRaw
           ? toPlain<TestimonialContent>(testimonialsRaw)
           : defaultTestimonials,
+        blog: blogRaw ? toPlain<BlogContent>(blogRaw) : defaultBlog,
       };
     } catch (error) {
       console.error("Public content fallback due to data fetch error:", error);
@@ -232,6 +260,7 @@ const getPublicContentBundleCached = unstable_cache(
         contact: defaultContact,
         appointmentForm: defaultAppointmentForm,
         testimonials: defaultTestimonials,
+        blog: defaultBlog,
       };
     }
   },

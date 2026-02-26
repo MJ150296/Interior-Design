@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import dbConnect from "@/app/utils/dbConnect";
 import AppointmentFormModel from "@/app/model/website-content/AppointmentForm.model";
 import { requireRoles } from "@/app/api/_utils/requireRoles";
+import { revalidatePublicContent } from "@/app/lib/revalidatePublicContent";
 
 export async function PUT(request: Request) {
   const guard = await requireRoles(["SuperAdmin", "clientAdmin"]);
@@ -30,6 +31,7 @@ export async function PUT(request: Request) {
       appointmentForm = await AppointmentFormModel.create(formData);
     }
 
+    revalidatePublicContent();
     return NextResponse.json(appointmentForm);
   } catch (error) {
     console.error("Error updating appointment form content:", error);

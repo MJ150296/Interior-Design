@@ -13,7 +13,8 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Image from "next/image";
-import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
+import { FaFacebookF, FaInstagram } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import { usePathname } from "next/navigation";
 
 export default function Navbar() {
@@ -64,7 +65,7 @@ export default function Navbar() {
               {/* Social Icons */}
               <div className="hidden h-full md:flex items-center space-x-4 text-gray-500">
                 <a
-                  href="#"
+                  href="https://www.facebook.com/profile.php?id=61581159277317"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-blue-600"
@@ -72,15 +73,15 @@ export default function Navbar() {
                   <FaFacebookF />
                 </a>
                 <a
-                  href="#"
+                  href="https://x.com/riddhiinterior"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-blue-400"
                 >
-                  <FaTwitter />
+                  <FaXTwitter />
                 </a>
                 <a
-                  href="#"
+                  href="https://www.instagram.com/riddhiinterior1/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-pink-500"
@@ -95,32 +96,29 @@ export default function Navbar() {
           <div className="font-sans hidden md:flex justify-end space-x-8 items-center font-medium text-base tracking-wide">
             <Link
               href="/"
-              className={`nav-link ${
-                pathname === "/"
-                  ? "text-lime-800"
-                  : "text-gray-800 dark:text-white"
-              }`}
+              className={`nav-link ${pathname === "/"
+                ? "text-lime-800"
+                : "text-gray-800 dark:text-white"
+                }`}
             >
               Home
             </Link>
             <Link
               href="/about-us"
-              className={`nav-link ${
-                pathname === "/about-us"
-                  ? "text-lime-800"
-                  : "text-gray-800 dark:text-white"
-              }`}
+              className={`nav-link ${pathname === "/about-us"
+                ? "text-lime-800"
+                : "text-gray-800 dark:text-white"
+                }`}
             >
               About Us
             </Link>
 
             <Link
               href="/our-projects"
-              className={`nav-link ${
-                pathname === "/our-projects"
-                  ? "text-lime-800"
-                  : "text-gray-800 dark:text-white"
-              }`}
+              className={`nav-link ${pathname === "/our-projects"
+                ? "text-lime-800"
+                : "text-gray-800 dark:text-white"
+                }`}
             >
               Portfolio
             </Link>
@@ -128,11 +126,10 @@ export default function Navbar() {
             {/* Services Dropdown */}
             <div className="relative" ref={dropdownRef}>
               <button
-                className={`nav-link flex items-center gap-1 ${
-                  pathname.startsWith("/services")
-                    ? "text-lime-800"
-                    : "text-gray-800 dark:text-white"
-                }`}
+                className={`nav-link flex items-center gap-1 ${pathname.startsWith("/services")
+                  ? "text-lime-800"
+                  : "text-gray-800 dark:text-white"
+                  }`}
                 onClick={() => setIsDropdownOpen((prev) => !prev)}
               >
                 Services <ChevronDown size={16} />
@@ -165,31 +162,28 @@ export default function Navbar() {
             </div>
             <Link
               href="/testimonials"
-              className={`nav-link ${
-                pathname === "/testimonials"
-                  ? "text-lime-800"
-                  : "text-gray-800 dark:text-white"
-              }`}
+              className={`nav-link ${pathname === "/testimonials"
+                ? "text-lime-800"
+                : "text-gray-800 dark:text-white"
+                }`}
             >
               Testimonials
             </Link>
             <Link
               href="/blogs"
-              className={`nav-link ${
-                pathname === "/blogs"
-                  ? "text-lime-800"
-                  : "text-gray-800 dark:text-white"
-              }`}
+              className={`nav-link ${pathname === "/blogs"
+                ? "text-lime-800"
+                : "text-gray-800 dark:text-white"
+                }`}
             >
               Blogs
             </Link>
             <Link
               href="/contact-us"
-              className={`nav-link ${
-                pathname === "/"
-                  ? "text-lime-800"
-                  : "text-gray-800 dark:text-white"
-              }`}
+              className={`nav-link ${pathname === "/"
+                ? "text-lime-800"
+                : "text-gray-800 dark:text-white"
+                }`}
             >
               Contact Us
             </Link>

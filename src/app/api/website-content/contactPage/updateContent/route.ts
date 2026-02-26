@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import dbConnect from "@/app/utils/dbConnect";
 import ContactPageModel from "@/app/model/website-content/ContactPage.model";
 import { requireRoles } from "@/app/api/_utils/requireRoles";
+import { revalidatePublicContent } from "@/app/lib/revalidatePublicContent";
 
 interface WhyChooseUsTab {
   title?: string;
@@ -125,6 +126,8 @@ export async function PUT(request: Request) {
       // Create new document
       contactContent = await ContactPageModel.create(contentToSave);
     }
+
+    revalidatePublicContent();
 
     // Return the saved content in the same format as fetchContent
     return NextResponse.json({

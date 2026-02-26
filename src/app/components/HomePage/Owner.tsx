@@ -2,20 +2,21 @@ import Image from "next/image";
 import React from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const Owner: React.FC = () => {
   return (
-    <section className="py-16 bg-gradient-to-b from-lime-50 to-white w-full">
+    <section className="py-16 bg-linear-to-b from-lime-50 to-white w-full">
       <div className="max-w-7xl mx-auto px-12 flex flex-col-reverse md:flex-row gap-12 items-center">
         <motion.div
-          className="w-full md:w-1/3 relative rounded-3xl overflow-hidden shadow-2xl h-[500px]"
+          className="w-full md:w-1/3 relative rounded-3xl overflow-hidden shadow-2xl h-125"
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7 }}
         >
           <Image
             src="/Riddhi Interior Design/owner.jpg"
-            alt="Founder - John Doe"
+            alt="Founder - Pankaj Chauhan"
             width={500}
             height={500}
             className="transition-transform duration-500 hover:scale-110 object-cover"
@@ -31,7 +32,7 @@ const Owner: React.FC = () => {
           <h2 className="text-3xl md:text-4xl font-serif font-bold italic text-lime-900 mb-4">
             Meet Our Founder & Lead Designer
           </h2>
-          <h3 className="text-xl text-lime-600 italic mb-6">John Doe</h3>
+          <h3 className="text-xl text-lime-600 italic mb-6">Pankaj Chauhan</h3>
 
           <p className="mb-6 text-lg text-gray-700">
             <strong className="text-lime-700">John Doe</strong>, the visionary
@@ -57,12 +58,20 @@ const Owner: React.FC = () => {
           </div>
 
           <div className="flex flex-wrap gap-4 mt-6">
-            <Button className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-4 px-8 rounded-full transition-colors">
-              Get in Touch
-            </Button>
-            <Button className="bg-white border-2 border-lime-600 text-lime-700 hover:bg-lime-50 font-bold py-4 px-8 rounded-full transition-colors">
-              Explore His Work
-            </Button>
+            <a
+              href="https://wa.me/919634705815"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button className="bg-lime-600 hover:bg-lime-700 text-white font-bold py-4 px-8 rounded-full transition-colors">
+                Get in Touch
+              </Button>
+            </a>
+            <Link href="/our-projects">
+              <Button className="bg-white border-2 border-lime-600 text-lime-700 hover:bg-lime-50 font-bold py-4 px-8 rounded-full transition-colors">
+                Explore His Work
+              </Button>
+            </Link>
           </div>
         </motion.div>
       </div>

@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { QuoteIcon } from "lucide-react";
 import { usePublicContent } from "../PublicContentProvider";
-import { ca } from "zod/v4/locales";
 import Link from "next/link";
 
 // Create a consolidated default content object

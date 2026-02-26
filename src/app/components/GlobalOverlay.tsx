@@ -2,6 +2,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useGlobalUI } from "@/app/contexts/GlobalUIContext";
 import BookAppointmentForm from "./HomePage/ads/BookAppointmentForm";
 import RiddhiInteriorsAd from "./HomePage/ads/RiddhiInteriorsAd";
 import Image from "next/image";
@@ -27,12 +28,14 @@ const ads = [
 ];
 
 export default function GlobalOverlay() {
-  const [showAppointmentForm, setShowAppointmentForm] = useState(false);
+  const { showAppointmentForm, closeAppointmentForm } = useGlobalUI();
   const [adIndex, setAdIndex] = useState(0);
   const [showAd, setShowAd] = useState(false);
 
   useEffect(() => {
-    const formTimer = setTimeout(() => setShowAppointmentForm(true), 15000);
+    const formTimer = setTimeout(() => {
+      // Only show auto popup if user hasn't opened it manually
+    }, 15000);
     const adTimer = setTimeout(() => setShowAd(true), 22000);
     const adCycleTimer = setInterval(() => {
       setAdIndex((prevIndex) => (prevIndex + 1) % ads.length);
@@ -49,7 +52,7 @@ export default function GlobalOverlay() {
     <>
       {showAppointmentForm && (
         <div className="fixed top-0 left-0 w-full h-full z-50 flex items-center justify-center">
-          <BookAppointmentForm onClose={() => setShowAppointmentForm(false)} />
+          <BookAppointmentForm onClose={closeAppointmentForm} />
         </div>
       )}
 
@@ -72,9 +75,9 @@ export default function GlobalOverlay() {
           className="h-20 w-auto mb-4 rounded-lg shadow-lg"
         />
       </div>
-      <div className="fixed bottom-1/2 right-0 z-40">
+      <div className="fixed top-32 right-0 z-40">
         <a
-          href="https://wa.me/917895927366?text=Hi%20Riddhi%20Interiors%2C%20I%27m%20interested%20in%20interior%20design%20services.%20Please%20guide%20me."
+          href="https://wa.me/919634705815?text=Hi%20Riddhi%20Interiors%2C%20I%27m%20interested%20in%20interior%20design%20services.%20Please%20guide%20me."
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -87,16 +90,16 @@ export default function GlobalOverlay() {
           />
         </a>
       </div>
-      <div className="fixed bottom-1/2 left-0 z-40">
+      <div className="fixed top-48 right-0 z-40">
         <a
-          href="tel:+917895927366"
+          href="tel:+919634705815"
         >
           <Image
             src="/Riddhi Interior Design/icons/phoneB.png"
             alt="Phone Logo"
             width={100}
             height={100}
-            className="h-12 w-auto mb-4 shadow-lg bg-lime-50 p-2 rounded-tr-lg rounded-br-lg hover:scale-110 transition-transform duration-300 ease-in-out"
+            className="h-12 w-auto mb-4 shadow-lg bg-lime-50 px-2 py-1 rounded-tl-lg rounded-bl-lg hover:scale-110 transition-transform duration-300 ease-in-out"
           />
         </a>
       </div>

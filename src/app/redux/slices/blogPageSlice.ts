@@ -1,5 +1,5 @@
 // redux/slices/blogPageSlice.ts
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
 // Interfaces
 export interface HeroContent {
@@ -10,19 +10,65 @@ export interface HeroContent {
   searchPlaceholder: string;
 }
 
+export interface ContentBlock {
+  type: "paragraph" | "image" | "heading" | "list" | "quote";
+
+  text?: string;
+
+  title?: string;
+
+  url?: string;
+
+  caption?: string;
+
+  items?: string[];
+
+  blockSetId?: string;
+}
+
+export interface ArticleContent {
+  hero: {
+    title: string;
+
+    subtitle: string;
+
+    imageUrl: string;
+  };
+
+  meta: {
+    readTime: string;
+  };
+
+  body: ContentBlock[];
+
+  features: string[];
+
+  tips: string[];
+}
+
 export interface Article {
-  id: number;
+  id?: string;
+
   imageUrl: string;
+
   category: string;
+
   title: string;
+
   description: string;
+
   author: string;
+
+  authorBio: string;
+
   date: string;
+
+  content: ArticleContent;
 }
 
 export interface FeaturedPost {
   title: string;
-  post: Article;
+  postIds: string[];
 }
 
 export interface NewsletterContent {
@@ -56,50 +102,55 @@ const initialState: BlogState = {
 
 // Async thunks
 export const fetchBlogContent = createAsyncThunk(
-  'blog/fetchContent',
+  "blog/fetchContent",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch('/api/blogPage/fetchContent');
+      const response = await fetch(
+        "/api/website-content/blogPage/fetchContent",
+      );
       if (!response.ok) {
-        throw new Error('Failed to fetch blog content');
+        throw new Error("Failed to fetch blog content");
       }
       return await response.json();
     } catch (error) {
       return rejectWithValue(
-        error instanceof Error ? error.message : 'An unknown error occurred'
+        error instanceof Error ? error.message : "An unknown error occurred",
       );
     }
-  }
+  },
 );
 
 export const updateBlogContent = createAsyncThunk(
-  'blog/updateContent',
+  "blog/updateContent",
   async (content: BlogContent, { rejectWithValue }) => {
     try {
-      const response = await fetch('/api/blogPage/updateContent', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
+      const response = await fetch(
+        "/api/website-content/blogPage/updateContent",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(content),
         },
-        body: JSON.stringify(content),
-      });
-      
+      );
+
       if (!response.ok) {
-        throw new Error('Failed to update blog content');
+        throw new Error("Failed to update blog content");
       }
-      
+
       return await response.json();
     } catch (error) {
       return rejectWithValue(
-        error instanceof Error ? error.message : 'An unknown error occurred'
+        error instanceof Error ? error.message : "An unknown error occurred",
       );
     }
-  }
+  },
 );
 
 // Slice
 const blogPageSlice = createSlice({
-  name: 'blog',
+  name: "blog",
   initialState,
   reducers: {
     clearError: (state) => {
@@ -144,9 +195,12 @@ const blogPageSlice = createSlice({
 });
 
 // Selectors
-export const selectBlogContent = (state: { blogPage: BlogState }) => state.blogPage.content;
-export const selectBlogLoading = (state: { blogPage: BlogState }) => state.blogPage.loading;
-export const selectBlogError = (state: { blogPage: BlogState }) => state.blogPage.error;
+export const selectBlogContent = (state: { blogPage: BlogState }) =>
+  state.blogPage.content;
+export const selectBlogLoading = (state: { blogPage: BlogState }) =>
+  state.blogPage.loading;
+export const selectBlogError = (state: { blogPage: BlogState }) =>
+  state.blogPage.error;
 
 // Export actions and reducer
 export const { clearError, updateHeroContent } = blogPageSlice.actions;
