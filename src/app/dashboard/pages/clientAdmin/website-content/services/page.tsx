@@ -1,18 +1,18 @@
 import { Metadata } from "next";
 import { getPublicContentBundle } from "@/app/lib/publicContent.server";
-import PageClient from "./PageClient";
+import { ServicesPageClient } from "./PageClient";
 
 export const metadata: Metadata = {
-  title: "About Us - Admin Panel",
-  description: "Manage about us page content for the website",
+  title: "Services - Admin Panel",
+  description: "Manage services content for the website",
 };
 
-export default async function Page() {
+export default async function ServicesPage() {
   const content = await getPublicContentBundle();
   
   return (
     <div className="container mx-auto">
-      <PageClient initialContent={content.about} />
+      <ServicesPageClient initialContent={content.services} />
     </div>
   );
 }

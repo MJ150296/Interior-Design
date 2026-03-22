@@ -1,24 +1,22 @@
-// src/store/index.ts
 import { configureStore } from "@reduxjs/toolkit";
-import aboutUsPageReducer from "../slices/aboutUsPageSlice";
-import portfolioPageReducer from "../slices/portfolioPageSlice";
+import aboutUsReducer from "../slices/aboutUsPageSlice";
+import portfolioReducer from "../slices/portfolioPageSlice";
+import blogReducer from "../slices/blogPageSlice";
+import contactReducer from "../slices/contactPageSlice";
 import testimonialReducer from "../slices/testimonialPageSlice";
-import contactPageReducer from "../slices/contactPageSlice";
-import appointmentFormReducer from "../slices/appointmentFormSlice";
-import blogPageReducer from "../slices/blogPageSlice";
 
-export const store = configureStore({
-  reducer: {
-    aboutUsPage: aboutUsPageReducer,
-    portfolioPage: portfolioPageReducer,
-    testimonialPage: testimonialReducer,
-    contactPage: contactPageReducer,
-    appointmentForm: appointmentFormReducer,
-    blogPage: blogPageReducer,
-  },
-  // Redux Toolkit automatically sets up the Redux DevTools extension and middleware
-});
+export const makeStore = () => {
+  return configureStore({
+    reducer: {
+      aboutUsPage: aboutUsReducer,
+      portfolioPage: portfolioReducer,
+      blogPage: blogReducer,
+      contactPage: contactReducer,
+      testimonialPage: testimonialReducer,
+    },
+  });
+};
 
-// Infer the RootState and AppDispatch types from the store itself
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export type AppStore = ReturnType<typeof makeStore>;
+export type RootState = ReturnType<AppStore["getState"]>;
+export type AppDispatch = AppStore["dispatch"];

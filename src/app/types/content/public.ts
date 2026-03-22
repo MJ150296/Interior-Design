@@ -1,5 +1,6 @@
 import type { AboutContent } from "./about";
 import type { PortfolioContent } from "./portfolio";
+import type { ServiceContent } from "./services";
 
 export interface BlogContent {
   hero: {
@@ -126,4 +127,5 @@ export interface PublicContentBundle {
   appointmentForm: AppointmentFormContent;
   testimonials: TestimonialContent;
   blog: BlogContent;
+  services: ServiceContent;
 }

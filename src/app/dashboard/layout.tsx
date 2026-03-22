@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { auth } from "../auth";
 import { redirect } from "next/navigation";
 import { SessionProvider } from "next-auth/react";
-import { ReduxProvider } from "../redux/providers";
+import StoreProvider from "../redux/providers";
 import DashboardLayoutClient from "./client_side_layout/ClientSideDashboardLayout";
 import { buildPublicMetadata } from "@/lib/seo";
 
@@ -24,31 +24,23 @@ export default async function DashboardLayout({
   // Extract role (assuming your session has user.role)
   const role = session?.user?.role;
 
-  // Role-based rendering
-  const getLayout = () => {
-    switch (role) {
-      case "SuperAdmin":
-        return <DashboardLayoutClient>{children}</DashboardLayoutClient>;
-      case "clientAdmin":
-        return <DashboardLayoutClient>{children}</DashboardLayoutClient>;
-      case "Designer":
-        return <DashboardLayoutClient>{children}</DashboardLayoutClient>;
-      case "Client":
-        return <DashboardLayoutClient>{children}</DashboardLayoutClient>;
-      default:
-        return <div>Unauthorized</div>;
-    }
-  };
-
   // If no session, send user to login
   if (!session) {
-    redirect("/api/auth/signin"); // or "/auth/signin"
+    redirect("/api/auth/signin");
   }
+
+  // All authenticated roles use the same dashboard layout
+  // Role-specific content is handled by individual pages
+  const validRoles = ["SuperAdmin", "clientAdmin", "Designer", "Client"];
+  if (!role || !validRoles.includes(role)) {
+    return <div>Unauthorized</div>;
+  }
+
   return (
-    <>
-      <SessionProvider session={session}>
-        <ReduxProvider>{getLayout()}</ReduxProvider>
-      </SessionProvider>
-    </>
+    <SessionProvider session={session}>
+      <StoreProvider>
+        <DashboardLayoutClient>{children}</DashboardLayoutClient>
+      </StoreProvider>
+    </SessionProvider>
   );
 }

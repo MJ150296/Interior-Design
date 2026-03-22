@@ -61,6 +61,11 @@ const allMenuItems = [
         path: (role: string) =>
           `/dashboard/pages/${role}/website-content/contact`,
       },
+      {
+        name: "Services",
+        path: (role: string) =>
+          `/dashboard/pages/${role}/website-content/services`,
+      },
     ],
   },
   // {

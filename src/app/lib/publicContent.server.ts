@@ -6,6 +6,7 @@ import ContactPageModel from "@/app/model/website-content/ContactPage.model";
 import AppointmentFormModel from "@/app/model/website-content/AppointmentForm.model";
 import TestimonialPageModel from "@/app/model/website-content/TestimonialPage.model";
 import BlogPageModel from "@/app/model/website-content/BlogPage.model";
+import ServiceModel, { type IService } from "@/app/model/Service.model";
 import type {
   AppointmentFormContent,
   ContactContent,
@@ -13,6 +14,7 @@ import type {
   TestimonialContent,
   BlogContent,
 } from "@/app/types/content/public";
+import type { ServiceContent } from "@/app/types/content/services";
 import type { AboutContent } from "@/app/types/content/about";
 import type { PortfolioContent } from "@/app/types/content/portfolio";
 
@@ -215,6 +217,21 @@ function toPlain<T>(value: unknown): T {
   return JSON.parse(JSON.stringify(value)) as T;
 }
 
+const defaultServices: ServiceContent = {
+  hero: {
+    title: "Our Services",
+    subtitle: "Transforming Spaces with Elegance & Style",
+    backgroundImageUrl: "/Riddhi Interior Design/Services/cover.jpg",
+  },
+  services: [],
+  cta: {
+    title: "Ready to Transform Your Space?",
+    description: "Let's discuss how we can bring your vision to life.",
+    buttonText: "Get Started",
+    buttonLink: "/contact-us",
+  },
+};
+
 const getPublicContentBundleCached = unstable_cache(
   async (): Promise<PublicContentBundle> => {
     try {
@@ -236,6 +253,8 @@ const getPublicContentBundleCached = unstable_cache(
         BlogPageModel.findOne().lean(),
       ]);
 
+      const servicesRaw = await ServiceModel.find().lean();
+
       return {
         about: aboutRaw ? toPlain<AboutContent>(aboutRaw) : defaultAbout,
         portfolio: portfolioRaw
@@ -251,6 +270,9 @@ const getPublicContentBundleCached = unstable_cache(
           ? toPlain<TestimonialContent>(testimonialsRaw)
           : defaultTestimonials,
         blog: blogRaw ? toPlain<BlogContent>(blogRaw) : defaultBlog,
+        services: servicesRaw.length > 0
+          ? { ...defaultServices, services: toPlain<IService[]>(servicesRaw) }
+          : defaultServices,
       };
     } catch (error) {
       console.error("Public content fallback due to data fetch error:", error);
@@ -261,6 +283,7 @@ const getPublicContentBundleCached = unstable_cache(
         appointmentForm: defaultAppointmentForm,
         testimonials: defaultTestimonials,
         blog: defaultBlog,
+        services: defaultServices,
       };
     }
   },

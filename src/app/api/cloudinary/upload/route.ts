@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
 
     console.log("Deleted files:", deleteResult);
 
-    // 2. Upload new file
+    // 2. Upload new file with optimization
     const uploadResult = await cloudinary.uploader.upload(dataURI, {
       folder: folderPath,
       public_id: identifier,
@@ -54,6 +54,21 @@ export async function POST(request: NextRequest) {
       overwrite: true,
       unique_filename: false,
       use_filename: true,
+      // Image optimization transformations
+      transformation: [
+        {
+          quality: "auto:good", // Automatic quality optimization
+          fetch_format: "auto", // Automatic format (WebP, AVIF when supported)
+        },
+      ],
+      // Responsive breakpoints for srcset
+      responsive_breakpoints: {
+        create_derived: true,
+        bytes_step: 20000,
+        min_width: 200,
+        max_width: 1200,
+        max_images: 5,
+      },
     });
 
     return NextResponse.json({

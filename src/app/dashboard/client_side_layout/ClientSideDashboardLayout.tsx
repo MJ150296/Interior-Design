@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "../ui/AppSidebar";
 import LoadingSpinner from "../components/Loading";
+import { DashboardErrorBoundary } from "../components/DashboardErrorBoundary";
 
 export default function DashboardLayoutClient({
   children,
@@ -34,7 +35,9 @@ export default function DashboardLayoutClient({
         <AppSidebar />
         <main className="flex-1 px-1 md:px-2 w-full overflow-auto">
           <SidebarTrigger />
-          {children}
+          <DashboardErrorBoundary>
+            {children}
+          </DashboardErrorBoundary>
         </main>
       </div>
     </SidebarProvider>
